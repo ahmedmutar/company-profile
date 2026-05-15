@@ -1,0 +1,34 @@
+# ── Database credentials ──────────────────────────────────────────────────
+# NEVER commit this file — it contains DB host, username, and password
+api/config.php
+
+# ── Database dumps ────────────────────────────────────────────────────────
+# Contains full schema and possibly real data
+api/database.sql
+*.sql
+
+# ── Environment files ─────────────────────────────────────────────────────
+.env
+.env.local
+.env.production
+.env.*.local
+
+# ── OS & editor junk ──────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── IDE / editor configs ──────────────────────────────────────────────────
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# ── Logs & temp files ─────────────────────────────────────────────────────
+*.log
+/logs/
+/tmp/
+
+# ── PHP session & cache files ─────────────────────────────────────────────
+/cache/
+*.cache

@@ -1,2 +1,11 @@
-Options Indexes FollowSymLinks
+Options -Indexes FollowSymLinks
 Require all granted
+
+# ── Protect admin panel ───────────────────────────────────────────────────
+# Only allow access from whitelisted IP addresses.
+# Anyone else gets 403 Forbidden — even if they know the URL.
+<Files "admin.html">
+  Order Deny,Allow
+  Deny from all
+  Allow from 158.140.180.78
+</Files>
