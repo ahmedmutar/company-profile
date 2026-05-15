@@ -228,7 +228,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:15px
     <div class="topbar">
       <div class="tb-title" id="tb-title">Dashboard</div>
       <div class="tb-actions" id="tb-acts">
-        <a href="scoop-technology.html" target="_blank" class="btn-s">Lihat Website →</a>
+        <a href="index.html" target="_blank" class="btn-s">Lihat Website →</a>
       </div>
     </div>
     <div class="content">
@@ -464,7 +464,7 @@ function showPanel(name,btn){
   const acts=document.getElementById('tb-acts');
   if(name==='cs'){acts.innerHTML=`<button class="btn-p" onclick="openCSMo()"><svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M5.5 1v9M1 5.5h9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg> Add Case Study</button>`;renderCS();}
   else if(name==='blog'){acts.innerHTML=`<button class="btn-p" onclick="openBlogMo()"><svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M5.5 1v9M1 5.5h9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg> Add Article</button>`;renderBlog();}
-  else{acts.innerHTML=`<a href="scoop-technology.html" target="_blank" class="btn-s">Lihat Website →</a>`;}
+  else{acts.innerHTML=`<a href="index.html" target="_blank" class="btn-s">Lihat Website →</a>`;}
   if(name==='dashboard')refreshDashboard();
 }
 
