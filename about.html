@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Meet the team behind Scoop Technology — an AI company that has helped 120+ businesses since 2018. Our vision, values, and journey.">
+<meta name="keywords" content="Scoop Technology, AI company, AI team Jakarta, AI consultant">
+<meta name="author" content="Scoop Technology">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://scooptech.id/about.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="About Us — Scoop Technology">
+<meta property="og:description" content="Meet the team behind Scoop Technology — an AI company that has helped 120+ businesses since 2018. Our vision, values, and journey.">
+<meta property="og:url" content="https://scooptech.id/about.html">
+<meta property="og:image" content="https://scooptech.id/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="Scoop Technology">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="About Us — Scoop Technology">
+<meta name="twitter:description" content="Meet the team behind Scoop Technology — an AI company that has helped 120+ businesses since 2018. Our vision, values, and journey.">
+<meta name="twitter:image" content="https://scooptech.id/og-image.jpg">
+<meta name="twitter:site" content="@scooptech_id">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%233B82F6'/%3E%3Ccircle cx='16' cy='16' r='8' stroke='white' stroke-width='2.5' fill='none'/%3E%3Ccircle cx='16' cy='16' r='3.5' fill='white'/%3E%3C/svg%3E">
+<title>About Us — Scoop Technology</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,80px);align-items:center;}
+.sv-card{background:linear-gradient(155deg,var(--dark),#0F2040);border:1px solid rgba(59,130,246,.14);border-radius:var(--r-lg);padding:clamp(24px,3vw,40px);position:relative;overflow:hidden;}
+.sv-card::before{content:'';position:absolute;top:-80px;right:-80px;width:220px;height:220px;border-radius:50%;background:rgba(59,130,246,.06);filter:blur(40px);}
+.sv-year{font-family:var(--fh);font-size:clamp(52px,7vw,80px);font-weight:800;letter-spacing:-.04em;background:linear-gradient(135deg,var(--blue),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:6px;}
+.sv-lbl{font-size:13px;color:rgba(255,255,255,.38);margin-bottom:28px;}
+.sv-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.sv-stat{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:var(--r);padding:16px;}
+.sv-sv{font-family:var(--fh);font-size:clamp(22px,3vw,28px);font-weight:800;color:#fff;letter-spacing:-.02em;line-height:1;}
+.sv-sv em{color:var(--teal);font-style:normal;}
+.sv-sl{font-size:12px;color:rgba(255,255,255,.35);margin-top:3px;}
+.about-text p{font-size:clamp(14px,1.4vw,16px);color:var(--text-2);line-height:1.82;margin-bottom:14px;}
+.tag{font-family:var(--fb);font-size:13px;font-weight:600;color:var(--text-2);background:var(--bg-2);border:1px solid var(--bdr-2);padding:6px 14px;border-radius:var(--r-p);transition:all .2s;cursor:default;}
+.tag:hover{background:var(--blue-l);border-color:var(--blue);color:var(--blue-d);}
+/* Timeline */
+.timeline{position:relative;max-width:760px;margin:0 auto;}
+.timeline::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--blue-l),var(--teal),var(--blue-l));transform:translateX(-50%);}
+.tl-item{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,48px);margin-bottom:clamp(32px,4vw,56px);position:relative;}
+.tl-item:last-child{margin-bottom:0;}
+.tl-item.right .tl-content{grid-column:2;}
+.tl-item.right .tl-year{grid-column:1;grid-row:1;text-align:right;display:flex;justify-content:flex-end;align-items:flex-start;}
+.tl-dot{position:absolute;left:50%;top:18px;transform:translateX(-50%);width:16px;height:16px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--teal));border:3px solid var(--bg);box-shadow:0 0 0 3px rgba(59,130,246,.2);z-index:1;}
+.tl-year .chip{align-self:flex-start;}
+.tl-content{background:var(--white);border:1px solid var(--bdr);border-radius:var(--r);padding:clamp(16px,2.5vw,24px);transition:all .3s;}
+.tl-content:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:var(--bdr-2);}
+.tl-t{font-family:var(--fh);font-size:clamp(14px,1.5vw,17px);font-weight:700;color:var(--text);margin-bottom:6px;}
+.tl-d{font-size:13px;color:var(--text-2);line-height:1.65;}
+/* Values */
+.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.val-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:var(--r);padding:clamp(20px,2.5vw,34px);transition:all .3s;cursor:default;position:relative;overflow:hidden;}
+.val-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--teal));transform:scaleX(0);transform-origin:left;transition:transform .35s;}
+.val-card:hover{background:rgba(59,130,246,.07);border-color:rgba(59,130,246,.18);transform:translateY(-4px);}
+.val-card:hover::after{transform:scaleX(1);}
+.vi{width:50px;height:50px;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;margin-bottom:18px;}
+.vi1{background:rgba(59,130,246,.15);color:var(--blue-m);}
+.vi2{background:rgba(6,182,212,.15);color:var(--teal);}
+.vi3{background:rgba(139,92,246,.15);color:#A78BFA;}
+.vi4{background:rgba(34,197,94,.15);color:#4ADE80;}
+.vi5{background:rgba(245,158,11,.15);color:#FCD34D;}
+.vi6{background:rgba(236,72,153,.15);color:#F9A8D4;}
+.val-t{font-family:var(--fh);font-size:clamp(14px,1.5vw,17px);font-weight:700;color:#fff;margin-bottom:8px;}
+.val-d{font-size:13px;color:rgba(255,255,255,.4);line-height:1.68;}
+/* Team */
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+.tm-card{background:var(--bg);border:1px solid var(--bdr);border-radius:var(--r);overflow:hidden;transition:all .3s;cursor:default;}
+.tm-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg);border-color:var(--bdr-2);}
+.tm-photo{height:clamp(160px,18vw,200px);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.tp1{background:linear-gradient(155deg,#0A1628,#1E3A5F);}
+.tp2{background:linear-gradient(155deg,#1A0A28,#3D1F6B);}
+.tp3{background:linear-gradient(155deg,#0A2820,#0F5140);}
+.tp4{background:linear-gradient(155deg,#28100A,#6B2010);}
+.tp5{background:linear-gradient(155deg,#0A1A28,#0F3A5F);}
+.tp6{background:linear-gradient(155deg,#1A1A0A,#4A4A10);}
+.tp7{background:linear-gradient(155deg,#1A0A1A,#4A1050);}
+.tp8{background:linear-gradient(155deg,#0A2810,#1A5A20);}
+.tm-glow{position:absolute;inset:0;background:radial-gradient(circle at 50% 60%,rgba(59,130,246,.1),transparent 70%);}
+.tm-init{font-family:var(--fh);font-size:clamp(28px,3.5vw,36px);font-weight:800;color:rgba(255,255,255,.88);position:relative;z-index:1;}
+.tm-info{padding:clamp(14px,2vw,20px);}
+.tm-name{font-family:var(--fh);font-size:clamp(13px,1.3vw,16px);font-weight:700;color:var(--text);margin-bottom:3px;}
+.tm-role{font-size:12px;color:var(--blue-d);font-weight:600;margin-bottom:7px;}
+.tm-desc{font-size:12px;color:var(--text-3);line-height:1.55;}
+/* Culture */
+.culture-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.cul-card{border-radius:var(--r);overflow:hidden;cursor:default;}
+.cul-card.large{grid-row:span 2;}
+.cul-inner{min-height:clamp(200px,22vw,280px);padding:clamp(24px,3vw,40px);display:flex;flex-direction:column;justify-content:flex-end;position:relative;}
+.cul-card.large .cul-inner{min-height:clamp(400px,50vw,580px);}
+.cbg1{background:linear-gradient(155deg,#0A1628,#1E3A8F);}
+.cbg2{background:linear-gradient(135deg,#0A2820,#065F46);}
+.cbg3{background:linear-gradient(135deg,#1A0A28,#4C1D95);}
+.cbg4{background:linear-gradient(135deg,#28100A,#7C2D12);}
+.cul-overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.6) 0%,transparent 60%);}
+.cul-tag{display:inline-flex;font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:rgba(255,255,255,.55);background:rgba(255,255,255,.1);padding:4px 11px;border-radius:var(--r-p);margin-bottom:10px;position:relative;z-index:1;}
+.cul-t{font-family:var(--fh);font-size:clamp(15px,2vw,22px);font-weight:800;color:#fff;line-height:1.2;position:relative;z-index:1;}
+.cul-d{font-size:13px;color:rgba(255,255,255,.55);margin-top:7px;line-height:1.6;position:relative;z-index:1;}
+/* Nums */
+.nums-grid{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--bdr);border-radius:var(--r);overflow:hidden;}
+.num-box{padding:clamp(28px,3.5vw,48px) 20px;text-align:center;border-right:1px solid var(--bdr);transition:background .3s;}
+.num-box:last-child{border-right:none;}
+.num-box:hover{background:var(--blue-l);}
+.nbv{font-family:var(--fh);font-size:clamp(32px,4.5vw,48px);font-weight:800;letter-spacing:-.04em;line-height:1;background:linear-gradient(135deg,var(--blue),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:7px;}
+.nbl{font-size:14px;font-weight:500;color:var(--text-2);line-height:1.4;}
+/* Responsive */
+@media(max-width:960px){
+  .story-grid{grid-template-columns:1fr;}
+  .timeline::before{left:20px;}
+  .tl-item{grid-template-columns:1fr;padding-left:44px;gap:12px;}
+  .tl-item.right .tl-content,.tl-item.right .tl-year{grid-column:1;grid-row:auto;text-align:left;justify-content:flex-start;}
+  .tl-dot{left:20px;}
+  .values-grid{grid-template-columns:1fr 1fr;}
+  .team-grid{grid-template-columns:1fr 1fr;}
+  .culture-grid{grid-template-columns:1fr;}
+  .cul-card.large{grid-row:auto;}
+  .nums-grid{grid-template-columns:1fr 1fr;}
+  .num-box{border-right:none;border-bottom:1px solid var(--bdr);}
+  .num-box:nth-child(2n){border-right:none;}
+  .num-box:nth-last-child(-n+2){border-bottom:none;}
+  .sv-stats{grid-template-columns:1fr 1fr;}
+  .wc-bot{gap:16px;}
+}
+@media(max-width:680px){
+  .values-grid{grid-template-columns:1fr;}
+  .team-grid{grid-template-columns:1fr 1fr;}
+  .tl-item{padding-left:36px;}
+  .cul-inner{padding:20px;}
+  .cul-card.large .cul-inner{min-height:280px;}
+}
+@media(max-width:420px){
+  .team-grid{grid-template-columns:1fr 1fr;}
+  .tm-photo{height:140px;}
+}
+@media(max-width:380px){
+  .team-grid{grid-template-columns:1fr;}
+  .values-grid{grid-template-columns:1fr;}
+  .nums-grid{grid-template-columns:1fr;}
+  .num-box:last-child{border-bottom:none;}
+}
+</style>
+</head>
+<body style="overflow-x:hidden;" style="overflow-x:hidden;">
+<div class="cur" id="cur"></div><div class="cur-ring" id="curRing"></div>
+<nav class="nav">
+  <a href="scoop-technology.html" class="nav-logo"><div class="nav-logo-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="5" stroke="white" stroke-width="1.8"/><circle cx="8" cy="8" r="2" fill="white"/></svg></div>Scoop Technology</a>
+  <ul class="nav-links"><li><a href="scoop-technology.html">Home</a></li><li><a href="about.html" class="active">About Us</a></li><li><a href="case-studies.html">Case Studies</a></li><li><a href="careers.html">Careers</a></li><li><a href="blog.html">Blog</a></li><li><a href="contact.html" class="nav-cta">Contact Us</a></li></ul>
+  <button class="nav-ham" id="ham" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+</nav>
+<div class="nav-drawer" id="drawer"><a href="scoop-technology.html">Home</a><a href="about.html" class="active">About Us</a><a href="case-studies.html">Case Studies</a><a href="careers.html">Careers</a><a href="blog.html">Blog</a><a href="contact.html" class="drawer-cta">Contact Us</a></div>
+
+<section class="hero-page">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-overlay"></div>
+  <div class="hero-inner">
+    <div class="breadcrumb"><a href="scoop-technology.html">Home</a><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>About Us</span></div>
+    <div class="eyebrow eyebrow-dark rv">About Scoop Technology</div>
+    <h1 class="page-title rv d1">We exist because businesses<br>deserve to run <span class="gr">better</span></h1>
+    <p class="page-desc rv d2">Founded by people who believe technology should make life easier — not more complicated.</p>
+  </div>
+</section>
+
+<section class="section section-white" id="story">
+  <div class="story-grid">
+    <div class="about-text rv">
+      <div class="eyebrow eyebrow-blue" style="color:var(--blue-d);">Our Story</div>
+      <h2 class="sec-title" style="margin-bottom:24px;">Born from frustration,<br>turned into a solution</h2>
+      <p>Scoop Technology grew out of our founders' firsthand experience watching businesses struggle with unnecessary manual processes, decisions made without data, and untapped potential that never got realized.</p>
+      <p>We believe artificial intelligence isn't just for giant tech companies. Every business — in any industry, in any city — deserves access to its benefits.</p>
+      <p>Since 2018, we've worked with more than 120 companies. Every project has taught us one thing: technology only truly succeeds when it's built for people, not for technology itself.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:28px;">
+        <span class="tag">AI Strategy</span><span class="tag">MLOps</span><span class="tag">Enterprise Automation</span>
+        <span class="tag">Data Engineering</span><span class="tag">NLP & LLM</span><span class="tag">Computer Vision</span>
+      </div>
+    </div>
+    <div class="rv d2">
+      <div class="sv-card">
+        <div class="sv-year">2018</div>
+        <div class="sv-lbl">Year Scoop Technology was founded</div>
+        <div class="sv-stats">
+          <div class="sv-stat"><div class="sv-sv">120<em>+</em></div><div class="sv-sl">Projects completed</div></div>
+          <div class="sv-stat"><div class="sv-sv">40<em>+</em></div><div class="sv-sl">Specialists</div></div>
+          <div class="sv-stat"><div class="sv-sv">98<em>%</em></div><div class="sv-sl">Satisfied clients</div></div>
+          <div class="sv-stat"><div class="sv-sv">4.9<em>★</em></div><div class="sv-sl">Average rating</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-bg" id="milestones">
+  <div class="sec-h center rv">
+    <div class="eyebrow eyebrow-blue" style="display:inline-flex;">Our Journey</div>
+    <h2 class="sec-title">Seven years building trust<br>one project at a time</h2>
+  </div>
+  <div class="timeline">
+    <div class="tl-item rv"><div class="tl-year"><span class="chip chip-blue">2018</span></div><div class="tl-dot"></div><div class="tl-content"><div class="tl-t">Scoop Technology founded</div><div class="tl-d">Three people with one conviction: AI should be accessible to every business. Our first office was a co-working space in South Jakarta.</div></div></div>
+    <div class="tl-item right rv d1"><div class="tl-year"><span class="chip chip-blue">2019</span></div><div class="tl-dot"></div><div class="tl-content"><div class="tl-t">First project that transformed a client's business</div><div class="tl-d">Our first automation system cut processing time from 4 hours to 12 minutes per day. That moment confirmed we were on the right track.</div></div></div>
+    <div class="tl-item rv d1"><div class="tl-year"><span class="chip chip-blue">2020</span></div><div class="tl-dot"></div><div class="tl-content"><div class="tl-t">Team &amp; service expansion</div><div class="tl-d">The team grew from 3 to 15 people. We began offering data analytics and computer vision for manufacturing clients.</div></div></div>
+    <div class="tl-item right rv d2"><div class="tl-year"><span class="chip chip-blue">2022</span></div><div class="tl-dot"></div><div class="tl-content"><div class="tl-t">50 active clients milestone</div><div class="tl-d">We reached 50 active clients across multiple industries. Our Net Promoter Score hit 78, the highest in our category.</div></div></div>
+    <div class="tl-item rv d2"><div class="tl-year"><span class="chip chip-blue">2023</span></div><div class="tl-dot"></div><div class="tl-content"><div class="tl-t">LLM &amp; Generative AI division</div><div class="tl-d">As LLM technology took off, we formed a dedicated division to help clients integrate large language models safely and at scale.</div></div></div>
+    <div class="tl-item right rv d3"><div class="tl-year"><span class="chip chip-blue">2025</span></div><div class="tl-dot"></div><div class="tl-content"><div class="tl-t">120+ projects, 40+ specialists</div><div class="tl-d">Today we are a team of 40+ people specialized in AI engineering, data science, and business analysis — and we're just getting started on the next chapter.</div></div></div>
+  </div>
+</section>
+
+<section class="section section-dark" id="values" style="position:relative;overflow:hidden;">
+  <canvas class="grid-canvas" id="values-canvas"></canvas>
+  <div style="position:relative;z-index:1;">
+    <div class="sec-h center rv">
+      <div class="eyebrow eyebrow-dark" style="display:inline-flex;">Our Values</div>
+      <h2 class="sec-title sec-title-white">The principles that define<br>how we work</h2>
+    </div>
+    <div class="values-grid">
+      <div class="val-card rv"><div class="vi vi1"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 2L13.5 8H20L15 12L17 18.5L11 15L5 18.5L7 12L2 8H8.5L11 2Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg></div><div class="val-t">Results above all else</div><div class="val-d">We don't consider a project done until the client's business truly feels the change.</div></div>
+      <div class="val-card rv d1"><div class="vi vi2"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3 11h16M11 3v16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="val-t">Honesty without compromise</div><div class="val-d">If AI isn't the right fit for your problem, we'll say so. We'd rather lose a project than deliver the wrong solution.</div></div>
+      <div class="val-card rv d2"><div class="vi vi3"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M11 7v4l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="val-t">Measured speed</div><div class="val-d">We move fast — but not recklessly. Every timeline has a realistic foundation.</div></div>
+      <div class="val-card rv d1"><div class="vi vi4"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M16 6s1 1 1 3-1 3-1 3M17 3c2 1.5 3 3.5 3 5.5S19 12.5 17 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M3 9v4l2 2h2l6-6-2-2H9L3 9z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></div><div class="val-t">Technology for people</div><div class="val-d">Good AI doesn't feel like AI to the person using it — it feels natural and helpful.</div></div>
+      <div class="val-card rv d2"><div class="vi vi5"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 3l2 6h6l-5 3.5 2 6.5L11 15l-5 4 2-6.5L3 9h6L11 3z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg></div><div class="val-t">Security is non-negotiable</div><div class="val-d">Client data is the most valuable asset. Our security standards are never compromised.</div></div>
+      <div class="val-card rv d3"><div class="vi vi6"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M22 12h-4l-3 9L9 3l-3 9H0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="val-t">Always learning, always growing</div><div class="val-d">The AI world changes every month. We stay at the forefront so clients always get the best.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-white" id="team">
+  <div class="sec-h center rv">
+    <div class="eyebrow eyebrow-blue" style="display:inline-flex;">Our Team</div>
+    <h2 class="sec-title">The people behind Scoop</h2>
+    <p class="sec-sub" style="margin:12px auto 0;text-align:center;max-width:min(480px,100%)px;">Engineers, data scientists, and business analysts who believe the best technology is the most useful.</p>
+  </div>
+  <div class="team-grid">
+    <div class="tm-card rv"><div class="tm-photo tp1"><div class="tm-glow"></div><div class="tm-init">RH</div></div><div class="tm-info"><div class="tm-name">Reza Hartono</div><div class="tm-role">Co-Founder & CEO</div><div class="tm-desc">10 years in the technology industry. Previously led the data engineering team at one of Indonesia's unicorns.</div></div></div>
+    <div class="tm-card rv d1"><div class="tm-photo tp2"><div class="tm-glow"></div><div class="tm-init">SA</div></div><div class="tm-info"><div class="tm-name">Sinta Arifin</div><div class="tm-role">Co-Founder & CTO</div><div class="tm-desc">PhD in Computer Science from ITB. Machine learning and computer vision specialist with 15+ publications.</div></div></div>
+    <div class="tm-card rv d2"><div class="tm-photo tp3"><div class="tm-glow"></div><div class="tm-init">BY</div></div><div class="tm-info"><div class="tm-name">Bayu Yudhistira</div><div class="tm-role">Head of Product</div><div class="tm-desc">Former product manager at a fintech company. Ensures every solution addresses a real problem.</div></div></div>
+    <div class="tm-card rv d3"><div class="tm-photo tp4"><div class="tm-glow"></div><div class="tm-init">NP</div></div><div class="tm-info"><div class="tm-name">Nadia Putri</div><div class="tm-role">Head of AI Engineering</div><div class="tm-desc">8 years building production-grade AI systems. Expert in LLM, RAG architecture, and MLOps.</div></div></div>
+    <div class="tm-card rv"><div class="tm-photo tp5"><div class="tm-glow"></div><div class="tm-init">DK</div></div><div class="tm-info"><div class="tm-name">Dimas Kurniawan</div><div class="tm-role">Lead Data Scientist</div><div class="tm-desc">Predictive analytics specialist. Has built models for 30+ clients across multiple industries.</div></div></div>
+    <div class="tm-card rv d1"><div class="tm-photo tp6"><div class="tm-glow"></div><div class="tm-init">FR</div></div><div class="tm-info"><div class="tm-name">Fitri Rahayu</div><div class="tm-role">Head of Client Success</div><div class="tm-desc">Ensures every client gets the promised results and a lasting relationship.</div></div></div>
+    <div class="tm-card rv d2"><div class="tm-photo tp7"><div class="tm-glow"></div><div class="tm-init">AP</div></div><div class="tm-info"><div class="tm-name">Andi Pramono</div><div class="tm-role">Senior AI Engineer</div><div class="tm-desc">Computer vision and edge AI specialist. Leads visual system development for manufacturing clients.</div></div></div>
+    <div class="tm-card rv d3"><div class="tm-photo tp8"><div class="tm-glow"></div><div class="tm-init">LL</div></div><div class="tm-info"><div class="tm-name">Lina Lestari</div><div class="tm-role">Business Analyst Lead</div><div class="tm-desc">Expert at translating complex business problems into concrete, executable steps.</div></div></div>
+  </div>
+</section>
+
+<section class="section section-bg" id="culture">
+  <div class="rv" style="margin-bottom:48px;">
+    <div class="eyebrow eyebrow-blue">Work Culture</div>
+    <h2 class="sec-title rv d1">A place where curiosity<br>is valued as much as results</h2>
+  </div>
+  <div class="culture-grid">
+    <div class="cul-card large rv d1"><div class="cul-inner cbg1"><div class="cul-overlay"></div><div class="cul-tag">Work Environment</div><div class="cul-t">We learn every day — and that's not just a slogan</div><div class="cul-d">Every team member has an annual learning budget and dedicated weekly time to explore new technology.</div></div></div>
+    <div class="cul-card rv d2"><div class="cul-inner cbg2"><div class="cul-overlay"></div><div class="cul-tag">Collaboration</div><div class="cul-t">No hierarchy blocks a good idea</div><div class="cul-d">The best ideas can come from anyone. We build a culture where every voice is heard.</div></div></div>
+    <div class="cul-card rv d3"><div class="cul-inner cbg3"><div class="cul-overlay"></div><div class="cul-tag">Flexibility</div><div class="cul-t">Results are measured, not hours</div><div class="cul-d">Remote-friendly, flexible hours, and full trust in every team member.</div></div></div>
+    <div class="cul-card rv d4"><div class="cul-inner cbg4"><div class="cul-overlay"></div><div class="cul-tag">Impact</div><div class="cul-t">Work that feels meaningful</div><div class="cul-d">Every project has a real impact on businesses and the lives of the people who use them.</div></div></div>
+  </div>
+</section>
+
+<section class="section section-white" id="numbers" style="padding-top:64px;padding-bottom:64px;">
+  <div class="nums-grid">
+    <div class="num-box rv"><div class="nbv" data-t="120" data-s="+">120+</div><div class="nbl">Projects completed</div></div>
+    <div class="num-box rv d1"><div class="nbv" data-t="98" data-s="%">98%</div><div class="nbl">Satisfied clients</div></div>
+    <div class="num-box rv d2"><div class="nbv" data-t="40" data-s="+">40+</div><div class="nbl">Specialists on our team</div></div>
+    <div class="num-box rv d3"><div class="nbv" data-t="7" data-s="+ Yrs">7+ Yrs</div><div class="nbl">Industry experience</div></div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <canvas id="cta-canvas"></canvas>
+  <div class="cta-overlay"></div>
+  <div class="cta-inner">
+    <div class="eyebrow eyebrow-dark rv" style="display:inline-flex;">Join us or work with us</div>
+    <h2 class="cta-title rv d1">Interested in working<br><span class="gr">with us?</span></h2>
+    <p class="cta-sub rv d2">Whether you want to become a client or join our team — we'd love to hear from you.</p>
+    <div class="cta-actions rv d3">
+      <a href="contact.html" class="btn btn-white btn-lg">Contact Us <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2.5 7.5h10M8 3.5l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a href="careers.html" class="btn btn-ghost">View Careers</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="scoop-technology.html" class="footer-brand-logo">
+        <div class="nav-logo-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="4" stroke="white" stroke-width="1.8"/><circle cx="7" cy="7" r="1.5" fill="white"/></svg></div>
+        Scoop Technology
+      </a>
+      <p>Helping businesses worldwide work faster and more efficiently with AI that actually works.</p>
+      <div class="footer-newsletter">
+        <input type="email" placeholder="Your email for weekly AI tips">
+        <button>Subscribe</button>
+      </div>
+      <div class="footer-socials">
+        <a href="#" class="footer-soc" aria-label="LinkedIn"><svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor"><path d="M2.5 5h2v7h-2V5zM3.5 4a1 1 0 100-2 1 1 0 000 2zM6 5h1.9v1h.1C8.4 5.4 9.2 5 10.2 5 12.3 5 13 6.3 13 8.2V12h-2V8.5c0-.7 0-1.7-1-1.7s-1.2.8-1.2 1.6V12H6V5z"/></svg></a>
+        <a href="#" class="footer-soc" aria-label="Instagram"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="12" height="12" rx="3"/><circle cx="8" cy="8" r="3"/><circle cx="11.5" cy="4.5" r=".5" fill="currentColor" stroke="none"/></svg></a>
+        <a href="#" class="footer-soc" aria-label="Twitter / X"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M12.6 2H14.8L10 7.5 15.6 14H11.3L7.9 9.6 4 14H1.8L6.9 8.1 1.5 2H5.9L9 6l3.6-4z"/></svg></a>
+        <a href="https://wa.me/6281200000000" class="footer-soc" aria-label="WhatsApp"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 1.5C4.41 1.5 1.5 4.41 1.5 8c0 1.13.3 2.2.83 3.12L1.5 14.5l3.5-.81A6.48 6.48 0 008 14.5c3.59 0 6.5-2.91 6.5-6.5S11.59 1.5 8 1.5z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M5.8 6.4c.17.78.6 1.5 1.2 2.1s1.32 1.03 2.1 1.2l.55-1.1s.73.24 1.03.33c.3.09.3.3.22.52-.1.22-.52.88-.88.97-.36.08-.66.08-1.18-.14-.52-.22-1.98-.97-2.86-2.64-.44-.84-.35-1.54-.22-1.84.13-.3.44-.57.66-.66.22-.09.44-.09.52.13.09.22.33.81.33.81l-.47.32z" fill="currentColor" stroke="none"/></svg></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Pages</h4>
+      <ul>
+        <li><a href="scoop-technology.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="case-studies.html">Case Studies</a></li>
+        <li><a href="careers.html">Careers</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="scoop-technology.html#services">Process Automation</a></li>
+        <li><a href="scoop-technology.html#services">AI Consulting</a></li>
+        <li><a href="scoop-technology.html#services">Data Analytics</a></li>
+        <li><a href="scoop-technology.html#services">Chatbot & Assistants</a></li>
+        <li><a href="scoop-technology.html#services">Computer Vision</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="mailto:hello@scooptech.id">hello@scooptech.id</a></li>
+        <li><a href="tel:+6221000000">+62 21 000 0000</a></li>
+        <li><a href="https://wa.me/6281200000000">WhatsApp</a></li>
+        <li><a href="contact.html">Jakarta, Indonesia</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-bottom-left">
+      <p>© 2025 <span>Scoop Technology</span>. All rights reserved.</p>
+      <div class="footer-status">
+        <div class="status-dot"></div>
+        All systems operational
+      </div>
+    </div>
+    <div class="footer-bottom-links">
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="#">Terms & Conditions</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const _cur=document.getElementById('cur'),_ring=document.getElementById('curRing');
+if(_cur){let mx=0,my=0,rx=0,ry=0;document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;_cur.style.left=mx-5+'px';_cur.style.top=my-5+'px';});(function t(){rx+=(mx-rx-18)*.11;ry+=(my-ry-18)*.11;_ring.style.left=rx+'px';_ring.style.top=ry+'px';requestAnimationFrame(t);})();document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>{_cur.style.transform='scale(2.5)';_ring.style.transform='scale(1.5)';_ring.style.borderColor='rgba(59,130,246,.65)';});el.addEventListener('mouseleave',()=>{_cur.style.transform='scale(1)';_ring.style.transform='scale(1)';_ring.style.borderColor='rgba(59,130,246,.35)';});});}
+function toggleMenu(){const h=document.getElementById('ham'),d=document.getElementById('drawer');h.classList.toggle('open');d.classList.toggle('open');document.body.style.overflow=d.classList.contains('open')?'hidden':'';}
+document.querySelectorAll('.nav-drawer a').forEach(a=>a.addEventListener('click',()=>{document.getElementById('ham').classList.remove('open');document.getElementById('drawer').classList.remove('open');document.body.style.overflow='';}));
+const _rv=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');_rv.unobserve(x.target);}});},{threshold:.08,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv').forEach(el=>_rv.observe(el));
+document.querySelectorAll('.nbv[data-t],.num-val[data-t]').forEach(el=>{const co=new IntersectionObserver(e=>{e.forEach(x=>{if(!x.isIntersecting)return;const t=parseInt(el.dataset.t),s=el.dataset.s.replace(String(t),''),dur=1400,t0=performance.now();(function tick(now){const p=Math.min((now-t0)/dur,1),ease=1-Math.pow(1-p,3);el.textContent=Math.floor(t*ease)+s;if(p<1)requestAnimationFrame(tick);})(t0);co.unobserve(el);});},{threshold:.5});co.observe(el);});
+(function(){const canvas=document.getElementById('hero-canvas');if(!canvas)return;const ctx=canvas.getContext('2d');let W,H,nodes=[],pulses=[];const C=[{r:59,g:130,b:246},{r:6,g:182,b:212},{r:139,g:92,b:246},{r:96,g:165,b:250}];function resize(){W=canvas.width=canvas.offsetWidth;H=canvas.height=canvas.offsetHeight;nodes=[];const n=Math.floor(W*H/13000);for(let i=0;i<n;i++){const c=C[i%C.length];nodes.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35,r:Math.random()*2+.8,c,p:Math.random()*Math.PI*2});}}function pulse(){if(nodes.length<2||pulses.length>8)return;const a=nodes[Math.floor(Math.random()*nodes.length)],b=nodes[Math.floor(Math.random()*nodes.length)];if(a===b||Math.hypot(a.x-b.x,a.y-b.y)>200)return;pulses.push({ax:a.x,ay:a.y,bx:b.x,by:b.y,t:0,c:a.c});}function draw(){ctx.clearRect(0,0,W,H);for(let i=0;i<nodes.length;i++)for(let j=i+1;j<nodes.length;j++){const a=nodes[i],b=nodes[j],d=Math.hypot(a.x-b.x,a.y-b.y);if(d<155){ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.strokeStyle='rgba(59,130,246,'+(1-d/155)*.13+')';ctx.lineWidth=.7;ctx.stroke();}}pulses=pulses.filter(p=>p.t<1);pulses.forEach(p=>{p.t+=.017;const x=p.ax+(p.bx-p.ax)*p.t,y=p.ay+(p.by-p.ay)*p.t,a=Math.sin(p.t*Math.PI)*.85;ctx.beginPath();ctx.arc(x,y,3,0,Math.PI*2);ctx.fillStyle='rgba('+p.c.r+','+p.c.g+','+p.c.b+','+a+')';ctx.fill();});nodes.forEach(n=>{n.p+=.04;n.x+=n.vx;n.y+=n.vy;if(n.x<0||n.x>W)n.vx*=-1;if(n.y<0||n.y>H)n.vy*=-1;ctx.beginPath();ctx.arc(n.x,n.y,n.r+Math.sin(n.p)*.4,0,Math.PI*2);ctx.fillStyle='rgba('+n.c.r+','+n.c.g+','+n.c.b+',.68)';ctx.fill();});if(Math.random()<.045)pulse();requestAnimationFrame(draw);}window.addEventListener('resize',resize);resize();requestAnimationFrame(draw);})();
+function buildGrid(id,r,g,b){const canvas=document.getElementById(id);if(!canvas)return;const ctx=canvas.getContext('2d');let W,H,scanY=0,streams=[];function resize(){W=canvas.width=canvas.offsetWidth;H=canvas.height=canvas.offsetHeight;streams=[];for(let i=0;i<12;i++)streams.push({x:Math.random()*W,y:Math.random()*H,sp:Math.random()*1.2+.4,len:Math.random()*70+30,a:Math.random()*.4+.1});}function draw(){ctx.clearRect(0,0,W,H);const gs=48;ctx.strokeStyle='rgba('+r+','+g+','+b+',.055)';ctx.lineWidth=1;for(let x=0;x<W;x+=gs){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}for(let y=0;y<H;y+=gs){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}for(let x=0;x<W;x+=gs)for(let y=0;y<H;y+=gs){ctx.beginPath();ctx.arc(x,y,1.5,0,Math.PI*2);ctx.fillStyle='rgba('+r+','+g+','+b+',.17)';ctx.fill();}scanY=(scanY+.85)%H;const sg=ctx.createLinearGradient(0,scanY-70,0,scanY+10);sg.addColorStop(0,'rgba('+r+','+g+','+b+',0)');sg.addColorStop(1,'rgba('+r+','+g+','+b+',.065)');ctx.fillStyle=sg;ctx.fillRect(0,scanY-70,W,80);ctx.beginPath();ctx.moveTo(0,scanY);ctx.lineTo(W,scanY);ctx.strokeStyle='rgba('+r+','+g+','+b+',.15)';ctx.lineWidth=1;ctx.stroke();streams.forEach(s=>{s.y+=s.sp;if(s.y>H){s.y=-s.len;s.x=Math.random()*W;}const g2=ctx.createLinearGradient(s.x,s.y-s.len,s.x,s.y);g2.addColorStop(0,'rgba('+r+','+g+','+b+',0)');g2.addColorStop(1,'rgba('+r+','+g+','+b+','+s.a+')');ctx.strokeStyle=g2;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(s.x,s.y-s.len);ctx.lineTo(s.x,s.y);ctx.stroke();});requestAnimationFrame(draw);}window.addEventListener('resize',resize);resize();requestAnimationFrame(draw);}
+buildGrid('values-canvas',59,130,246);
+buildGrid('cta-canvas',6,182,212);
+</script>
+<a href="https://wa.me/6281200000000?text=Hello%20Scoop%20Technology%2C%20I%20would%20like%20to%20consult%20about%20AI%20solutions%20for%20my%20business." class="wa-btn" target="_blank" rel="noopener" aria-label="Chat WhatsApp"><svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M13 2C7.48 2 3 6.48 3 12c0 1.85.5 3.58 1.38 5.06L3 23l6.12-1.35A10 10 0 0013 22c5.52 0 10-4.48 10-10S18.52 2 13 2z" fill="currentColor"/><path d="M9.5 10.5c.28 1.28.97 2.44 1.97 3.44s2.16 1.69 3.44 1.97l.9-1.8s1.19.4 1.69.54c.5.14.5.5.36.86-.14.36-.86 1.44-1.44 1.58-.58.14-1.08.14-1.94-.22-.86-.36-3.24-1.58-4.68-4.32-.72-1.37-.58-2.52-.36-3.02.22-.5.72-.94 1.08-1.08.36-.14.72-.14.86.22.14.36.54 1.33.54 1.33l-.42.49z" fill="white" stroke="none"/></svg><div class="wa-tooltip">Chat with us</div></a>
+</body>
+</html>

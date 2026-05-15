@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 — Page Not Found | Scoop Technology</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+html,body{height:100%;}
+body{background:var(--dark);color:#fff;display:flex;flex-direction:column;overflow:hidden;}
+#bg-canvas{position:fixed;inset:0;z-index:0;}
+.bg-overlay{position:fixed;inset:0;z-index:1;background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(8,13,26,.75) 0%,transparent 100%);}
+.page-nav{position:relative;z-index:10;padding:20px clamp(20px,5vw,68px);display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.06);}
+.page-nav .nav-logo{color:#fff;text-decoration:none;}
+.back-btn{display:flex;align-items:center;gap:7px;color:rgba(255,255,255,.45);text-decoration:none;font-size:14px;font-weight:600;transition:color .2s;cursor:none;}
+.back-btn:hover{color:rgba(255,255,255,.8);}
+.back-btn:hover svg{transform:translateX(-3px);}
+.back-btn svg{transition:transform .2s;}
+main{flex:1;position:relative;z-index:2;display:flex;align-items:center;justify-content:center;padding:clamp(24px,5vw,48px) clamp(20px,5vw,68px);text-align:center;overflow:hidden;}
+.content{max-width:560px;width:100%;}
+.num-404{font-family:var(--fh);font-size:clamp(100px,18vw,200px);font-weight:800;letter-spacing:-.05em;line-height:1;background:linear-gradient(135deg,var(--blue) 0%,var(--teal) 50%,var(--violet) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;position:relative;z-index:1;animation:fadeDown .8s ease .1s both,glitch 5s ease-in-out 2s infinite;}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-20px);}to{opacity:1;transform:translateY(0);}}
+@keyframes glitch{0%,88%,100%{text-shadow:none;transform:translate(0);}89%{transform:translate(-2px,0);text-shadow:2px 0 var(--teal);}90%{transform:translate(2px,0);text-shadow:-2px 0 var(--violet);}91%{transform:translate(0);}92%{transform:translate(-1px,1px);text-shadow:1px 0 var(--blue);}93%{transform:translate(0);}}
+.err-icon{width:60px;height:60px;border-radius:var(--r);background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.2);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;color:var(--blue-m);animation:fadeUp .7s ease .3s both;}
+.err-title{font-family:var(--fh);font-size:clamp(20px,3vw,30px);font-weight:800;letter-spacing:-.025em;color:#fff;margin-bottom:12px;animation:fadeUp .7s ease .4s both;}
+.err-desc{font-size:clamp(14px,1.5vw,16px);font-weight:400;color:rgba(255,255,255,.45);max-width:420px;margin:0 auto 32px;line-height:1.75;animation:fadeUp .7s ease .5s both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+.err-actions{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;animation:fadeUp .7s ease .6s both;}
+.ql{margin-top:44px;animation:fadeUp .7s ease .75s both;}
+.ql-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.2);margin-bottom:14px;}
+.ql-grid{display:flex;align-items:center;justify-content:center;gap:7px;flex-wrap:wrap;}
+.ql-item{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:var(--r-p);padding:7px 14px;font-size:13px;font-weight:600;color:rgba(255,255,255,.45);text-decoration:none;transition:all .2s;cursor:none;}
+.ql-item:hover{background:rgba(59,130,246,.1);border-color:rgba(59,130,246,.2);color:var(--blue-m);transform:translateY(-2px);}
+.page-footer{position:relative;z-index:2;padding:14px clamp(20px,5vw,68px);border-top:1px solid rgba(255,255,255,.05);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+.page-footer p{font-size:12px;color:rgba(255,255,255,.15);}
+@media(max-width:680px){body{overflow:auto;}.num-404{font-size:clamp(80px,22vw,140px);}}
+</style>
+</head>
+<body>
+<div class="cur" id="cur"></div><div class="cur-ring" id="curRing"></div>
+<canvas id="bg-canvas"></canvas>
+<div class="bg-overlay"></div>
+<nav class="page-nav">
+  <a href="scoop-technology.html" class="nav-logo" style="display:flex;align-items:center;gap:9px;font-family:var(--fh);font-size:18px;font-weight:800;letter-spacing:-.3px;">
+    <div class="nav-logo-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="5" stroke="white" stroke-width="1.8"/><circle cx="8" cy="8" r="2" fill="white"/></svg></div>
+    Scoop Technology
+  </a>
+  <a href="javascript:history.back()" class="back-btn"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 4l-4 4 4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Back</a>
+</nav>
+<main>
+  <div class="content">
+    <div class="num-404">404</div>
+    <div class="err-icon"><svg width="26" height="26" viewBox="0 0 26 26" fill="none"><circle cx="13" cy="13" r="10" stroke="currentColor" stroke-width="1.6"/><path d="M13 9v5M13 16.5v1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+    <div class="err-title">Page not found</div>
+    <p class="err-desc">The page you're looking for has been moved, deleted, or never existed. Don't worry — we know the way out.</p>
+    <div class="err-actions">
+      <a href="scoop-technology.html" class="btn btn-teal">Go Home <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a href="contact.html" class="btn btn-ghost">Contact Us</a>
+    </div>
+    <div class="ql">
+      <div class="ql-label">Or visit another page</div>
+      <div class="ql-grid">
+        <a href="about.html" class="ql-item"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><circle cx="6.5" cy="4.5" r="2" stroke="currentColor" stroke-width="1.2"/><path d="M2 11c0-2.48 2.01-4.5 4.5-4.5S11 8.52 11 11" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>About Us</a>
+        <a href="scoop-technology.html#services" class="ql-item"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><rect x="1" y="1" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.2"/><rect x="7" y="1" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.2"/><rect x="1" y="7" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.2"/><path d="M7 9.5h5M9.5 7v5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>Services</a>
+        <a href="case-studies.html" class="ql-item"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><rect x="1" y="1" width="11" height="11" rx="2" stroke="currentColor" stroke-width="1.2"/><path d="M4 6.5l2 2 3-3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Case Studies</a>
+        <a href="blog.html" class="ql-item"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 4h9M2 7h9M2 10h5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>Blog</a>
+        <a href="contact.html" class="ql-item"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M1.5 3h10a.5.5 0 01.5.5v6a.5.5 0 01-.5.5h-10A.5.5 0 011 9.5v-6A.5.5 0 011.5 3z" stroke="currentColor" stroke-width="1.2"/><path d="M1 4l5.5 4L12 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>Contact</a>
+      </div>
+    </div>
+  </div>
+</main>
+<div class="page-footer"><p>© 2025 Scoop Technology</p><p>Error 404 · Page not found</p></div>
+
+<script>
+(function(){
+  const canvas=document.getElementById('bg-canvas');const ctx=canvas.getContext('2d');let W,H,nodes=[],pulses=[],particles=[];
+  const C=[{r:59,g:130,b:246},{r:6,g:182,b:212},{r:139,g:92,b:246},{r:96,g:165,b:250}];
+  function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;nodes=[];const n=Math.floor(W*H/10000);for(let i=0;i<n;i++){const c=C[i%C.length];nodes.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.4,vy:(Math.random()-.5)*.4,r:Math.random()*2.5+.8,c,p:Math.random()*Math.PI*2});}particles=[];for(let i=0;i<18;i++){const c=C[i%C.length];particles.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.2+.3,vy:-(Math.random()*.8+.2),vx:(Math.random()-.5)*.3,a:Math.random()*.4+.1,c});}}
+  function spawnP(){if(nodes.length<2||pulses.length>10)return;const a=nodes[Math.floor(Math.random()*nodes.length)],b=nodes[Math.floor(Math.random()*nodes.length)];if(a===b||Math.hypot(a.x-b.x,a.y-b.y)>200)return;pulses.push({ax:a.x,ay:a.y,bx:b.x,by:b.y,t:0,c:a.c});}
+  function draw(){ctx.clearRect(0,0,W,H);for(let i=0;i<nodes.length;i++)for(let j=i+1;j<nodes.length;j++){const a=nodes[i],b=nodes[j],d=Math.hypot(a.x-b.x,a.y-b.y);if(d<140){ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.strokeStyle='rgba(59,130,246,'+(1-d/140)*.14+')';ctx.lineWidth=.7;ctx.stroke();}}
+  pulses=pulses.filter(p=>p.t<1);pulses.forEach(p=>{p.t+=.018;const x=p.ax+(p.bx-p.ax)*p.t,y=p.ay+(p.by-p.ay)*p.t,a=Math.sin(p.t*Math.PI)*.85;ctx.beginPath();ctx.arc(x,y,3,0,Math.PI*2);ctx.fillStyle='rgba('+p.c.r+','+p.c.g+','+p.c.b+','+a+')';ctx.fill();});
+  nodes.forEach(n=>{n.p+=.04;n.x+=n.vx;n.y+=n.vy;if(n.x<0||n.x>W)n.vx*=-1;if(n.y<0||n.y>H)n.vy*=-1;ctx.beginPath();ctx.arc(n.x,n.y,n.r+Math.sin(n.p)*.4,0,Math.PI*2);ctx.fillStyle='rgba('+n.c.r+','+n.c.g+','+n.c.b+',.65)';ctx.fill();});
+  particles.forEach(p=>{p.y+=p.vy;p.x+=p.vx;if(p.y<-10){p.y=H+10;p.x=Math.random()*W;}ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle='rgba('+p.c.r+','+p.c.g+','+p.c.b+','+Math.max(.05,Math.min(.45,p.a))+')';ctx.fill();});
+  if(Math.random()<.05)spawnP();requestAnimationFrame(draw);}
+  window.addEventListener('resize',resize);resize();requestAnimationFrame(draw);
+})();
+const _cur=document.getElementById('cur'),_ring=document.getElementById('curRing');
+if(_cur){let mx=0,my=0,rx=0,ry=0;document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;_cur.style.left=mx-5+'px';_cur.style.top=my-5+'px';});(function t(){rx+=(mx-rx-18)*.11;ry+=(my-ry-18)*.11;_ring.style.left=rx+'px';_ring.style.top=ry+'px';requestAnimationFrame(t);})();document.querySelectorAll('a,button,.ql-item').forEach(el=>{el.addEventListener('mouseenter',()=>{_cur.style.transform='scale(2.5)';_ring.style.transform='scale(1.5)';_ring.style.borderColor='rgba(59,130,246,.65)';});el.addEventListener('mouseleave',()=>{_cur.style.transform='scale(1)';_ring.style.transform='scale(1)';_ring.style.borderColor='rgba(59,130,246,.35)';});});}
+</script>
+</body>
+</html>

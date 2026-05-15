@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Scoop Technology helps businesses work faster and more efficiently with AI. Process automation, data analytics, chatbots, and computer vision for every industry.">
+<meta name="keywords" content="AI solutions, business AI, process automation, machine learning, chatbot, computer vision">
+<meta name="author" content="Scoop Technology">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://scooptech.id/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Scoop Technology — AI Solutions for Business Efficiency">
+<meta property="og:description" content="Scoop Technology helps businesses work faster and more efficiently with AI. Process automation, data analytics, chatbots, and computer vision for every industry.">
+<meta property="og:url" content="https://scooptech.id/">
+<meta property="og:image" content="https://scooptech.id/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="Scoop Technology">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Scoop Technology — AI Solutions for Business Efficiency">
+<meta name="twitter:description" content="Scoop Technology helps businesses work faster and more efficiently with AI. Process automation, data analytics, chatbots, and computer vision for every industry.">
+<meta name="twitter:image" content="https://scooptech.id/og-image.jpg">
+<meta name="twitter:site" content="@scooptech_id">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%233B82F6'/%3E%3Ccircle cx='16' cy='16' r='8' stroke='white' stroke-width='2.5' fill='none'/%3E%3Ccircle cx='16' cy='16' r='3.5' fill='white'/%3E%3C/svg%3E">
+<title>Scoop Technology — AI Solutions for Business Efficiency</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+/* ── HERO SPECIFICS ── */
+.hero-dark{display:flex;align-items:center;}
+.hero-orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;}
+.orb-1{width:clamp(280px,40vw,520px);height:clamp(280px,40vw,520px);background:rgba(59,130,246,.11);top:-15%;right:5%;animation:orbF 12s ease-in-out infinite;}
+.orb-2{width:clamp(180px,28vw,360px);height:clamp(180px,28vw,360px);background:rgba(6,182,212,.08);bottom:-10%;left:-4%;animation:orbF 15s ease-in-out infinite reverse;}
+.orb-3{width:clamp(140px,18vw,240px);height:clamp(140px,18vw,240px);background:rgba(139,92,246,.07);top:30%;left:38%;animation:orbF 10s ease-in-out infinite 2s;}
+@keyframes orbF{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(20px,-24px) scale(1.04);}}
+.hero-dots{position:absolute;inset:0;z-index:0;background-image:radial-gradient(circle,rgba(59,130,246,.18) 1px,transparent 1px);background-size:40px 40px;mask-image:radial-gradient(ellipse 90% 80% at 50% 50%,black 10%,transparent 100%);}
+
+/* Two-column hero layout */
+.hero-layout{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,80px);align-items:center;position:relative;z-index:2;width:100%;max-width:var(--max-w);}
+
+/* Left: text */
+.hero-inner{max-width:100%;}
+@keyframes fadeU{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);}}
+@keyframes blink{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(1.7);}}
+
+/* Hero trust */
+.h-trust{display:flex;align-items:center;gap:12px;margin-top:36px;}
+.h-avs{display:flex;}
+.h-av{width:30px;height:30px;border-radius:50%;border:2px solid rgba(255,255,255,.15);margin-left:-7px;display:flex;align-items:center;justify-content:center;font-family:var(--fh);font-size:9px;font-weight:800;flex-shrink:0;}
+.h-av:first-child{margin-left:0;}
+.av1{background:linear-gradient(135deg,#3B82F6,#06B6D4);color:#fff;}
+.av2{background:linear-gradient(135deg,#8B5CF6,#EC4899);color:#fff;}
+.av3{background:linear-gradient(135deg,#F59E0B,#EF4444);color:#fff;}
+.av4{background:linear-gradient(135deg,#10B981,#06B6D4);color:#fff;}
+.h-trust-text{font-size:13px;font-weight:600;color:rgba(255,255,255,.42);}
+.h-trust-text strong{color:var(--blue-m);font-weight:700;}
+
+/* Right: dashboard mockup */
+.hero-visual{position:relative;z-index:2;}
+.hv-window{background:rgba(13,20,38,.92);border:1px solid rgba(59,130,246,.2);border-radius:var(--r-lg);overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.04);animation:hvFloat 8s ease-in-out infinite;}
+@keyframes hvFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);}}
+/* Window titlebar */
+.hv-bar{background:rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.06);padding:11px 16px;display:flex;align-items:center;gap:10px;}
+.hv-dots{display:flex;gap:5px;}
+.hv-dot{width:10px;height:10px;border-radius:50%;}
+.hvd1{background:#FF5F57;}.hvd2{background:#FEBC2E;}.hvd3{background:#28C840;}
+.hv-title{font-size:11px;font-weight:600;color:rgba(255,255,255,.35);margin-left:4px;letter-spacing:.02em;}
+.hv-live{margin-left:auto;display:flex;align-items:center;gap:5px;font-size:10px;font-weight:700;color:#4ADE80;}
+.hv-live-dot{width:6px;height:6px;border-radius:50%;background:#4ADE80;animation:blink 1.6s ease infinite;}
+/* Dashboard body */
+.hv-body{padding:clamp(14px,2vw,20px);}
+/* Stat row */
+.hv-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;}
+.hvs{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:11px 12px;}
+.hvs-val{font-family:var(--fh);font-size:clamp(16px,2vw,20px);font-weight:800;line-height:1;margin-bottom:3px;}
+.hvs-v1{color:var(--blue-m);}
+.hvs-v2{color:var(--teal);}
+.hvs-v3{color:#4ADE80;}
+.hvs-lbl{font-size:10px;color:rgba(255,255,255,.35);font-weight:500;}
+.hvs-delta{font-size:9px;font-weight:700;color:#4ADE80;margin-top:2px;}
+/* Chart area */
+.hv-chart{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);border-radius:10px;padding:12px 14px;margin-bottom:10px;}
+.hvc-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+.hvc-title{font-size:11px;font-weight:700;color:rgba(255,255,255,.55);}
+.hvc-badge{font-size:9px;font-weight:700;background:rgba(34,197,94,.12);color:#4ADE80;border:1px solid rgba(34,197,94,.2);padding:2px 7px;border-radius:100px;}
+.hvc-bars{display:flex;align-items:flex-end;gap:4px;height:52px;}
+.hvc-bar{flex:1;border-radius:3px 3px 0 0;transition:height .3s;}
+.bar-old{background:rgba(59,130,246,.25);}
+.bar-new{background:linear-gradient(180deg,var(--blue),var(--teal));}
+/* Activity feed */
+.hv-feed{display:flex;flex-direction:column;gap:6px;}
+.hvf-item{display:flex;align-items:center;gap:9px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);border-radius:8px;padding:8px 10px;animation:hvfIn .4s ease both;}
+@keyframes hvfIn{from{opacity:0;transform:translateX(8px);}to{opacity:1;transform:translateX(0);}}
+.hvf-icon{width:24px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.hvfi1{background:rgba(59,130,246,.15);color:var(--blue-m);}
+.hvfi2{background:rgba(34,197,94,.12);color:#4ADE80;}
+.hvfi3{background:rgba(6,182,212,.12);color:var(--teal);}
+.hvfi4{background:rgba(139,92,246,.12);color:#A78BFA;}
+.hvf-text{flex:1;min-width:0;}
+.hvf-t{font-size:11px;font-weight:600;color:rgba(255,255,255,.65);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.hvf-s{font-size:9px;color:rgba(255,255,255,.3);margin-top:1px;}
+.hvf-time{font-size:9px;color:rgba(255,255,255,.25);flex-shrink:0;}
+/* Floating badge on visual */
+.hv-badge{position:absolute;bottom:-16px;left:-20px;background:rgba(13,20,38,.95);border:1px solid rgba(59,130,246,.25);border-radius:var(--r);padding:12px 16px;backdrop-filter:blur(12px);box-shadow:0 12px 32px rgba(0,0,0,.4);animation:hvFloat 6s ease-in-out infinite reverse;}
+.hvb-val{font-family:var(--fh);font-size:22px;font-weight:800;color:#fff;line-height:1;}
+.hvb-val em{color:var(--teal);font-style:normal;}
+.hvb-lbl{font-size:11px;color:rgba(255,255,255,.4);margin-top:2px;}
+.hv-badge2{position:absolute;top:-14px;right:-16px;background:rgba(13,20,38,.95);border:1px solid rgba(34,197,94,.25);border-radius:var(--r);padding:10px 14px;backdrop-filter:blur(12px);box-shadow:0 12px 32px rgba(0,0,0,.4);display:flex;align-items:center;gap:8px;animation:hvFloat 7s ease-in-out infinite 1s;}
+.hvb2-dot{width:8px;height:8px;border-radius:50%;background:#4ADE80;animation:blink 1.8s ease infinite;flex-shrink:0;}
+.hvb2-t{font-size:11px;font-weight:700;color:#fff;}
+.hvb2-s{font-size:9px;color:rgba(255,255,255,.38);}
+
+/* Responsive */
+@media(max-width:960px){
+  .hero-layout{grid-template-columns:1fr;gap:36px;}
+  .hero-visual{max-width:520px;margin:0 auto;}
+  .hv-badge{bottom:-12px;left:-10px;}
+  .hv-badge2{top:-10px;right:-10px;}
+}
+@media(max-width:680px){
+  .hero-layout{gap:28px;}
+  .hero-visual{max-width:100%;}
+  .hv-window{font-size:13px;}
+  .hvs-val{font-size:16px !important;}
+  .hv-body{padding:12px;}
+  .hvc-bars{height:40px;}
+  .hv-stats{gap:6px;}
+  .hvs{padding:9px 10px;}
+}
+@media(max-width:580px){
+  .hero-visual{max-width:100%;}
+  .hv-badge,.hv-badge2{display:none;}
+}
+@media(max-width:380px){
+  .hv-chart{display:none;}
+  .hv-stats{grid-template-columns:1fr 1fr;}
+  .hvs:last-child{display:none;}
+}
+
+/* ── NUMBERS STRIP ── */
+.nums-strip{background:var(--white);border-bottom:1px solid var(--bdr);}
+.nums-inner{display:grid;grid-template-columns:repeat(4,1fr);max-width:var(--max-w);margin:0 auto;}
+.num-item{padding:48px 32px;text-align:center;border-right:1px solid var(--bdr);transition:background .3s;}
+.num-item:last-child{border-right:none;}
+.num-item:hover{background:var(--blue-l);}
+.num-val{font-family:var(--fh);font-size:clamp(36px,4.5vw,52px);font-weight:800;letter-spacing:-.04em;line-height:1;background:linear-gradient(135deg,var(--blue),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:7px;}
+.num-lbl{font-size:14px;font-weight:500;color:var(--text-2);line-height:1.4;}
+
+/* ── PROBLEM SECTION ── */
+.prob-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.prob-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px;}
+.prob-stat{background:var(--bg);border:1px solid var(--bdr);border-radius:var(--r-sm);padding:10px 12px;text-align:center;}
+.prob-stat-val{font-family:var(--fh);font-size:clamp(18px,2vw,22px);font-weight:800;letter-spacing:-.03em;background:linear-gradient(135deg,var(--blue),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:3px;}
+.prob-stat-lbl{font-size:11px;color:var(--text-3);font-weight:600;line-height:1.35;}
+.prob-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px;justify-content:center;}
+.prob-tag{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:var(--text-2);background:var(--bg);border:1px solid var(--bdr-2);padding:4px 9px;border-radius:var(--r-p);}
+.prob-tag svg{color:var(--blue);flex-shrink:0;}
+@media(max-width:680px){.prob-stats{grid-template-columns:1fr 1fr;}}
+.prob-card{border-radius:var(--r);padding:14px 16px;border:1px solid var(--bdr);transition:all .3s;cursor:default;position:relative;overflow:hidden;}
+.prob-card.before{background:var(--bg);}
+.prob-card.after{background:linear-gradient(135deg,var(--blue) 0%,var(--blue-d) 100%);border-color:transparent;}
+.prob-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);}
+.prob-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:var(--r-p);margin-bottom:8px;}
+.before .prob-badge{background:var(--bg-2);border:1px solid var(--bdr-2);color:var(--text-3);}
+.after .prob-badge{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.2);color:#fff;}
+.prob-icon{display:none;}
+.prob-h{font-family:var(--fh);font-size:clamp(13px,1.3vw,15px);font-weight:700;margin-bottom:8px;}
+.before .prob-h{color:var(--text);}
+.after .prob-h{color:#fff;}
+.prob-list{list-style:none;display:flex;flex-direction:column;gap:4px;}
+.prob-list li{font-size:12px;font-weight:500;display:flex;align-items:flex-start;gap:7px;line-height:1.45;}
+.before .prob-list li{color:var(--text-2);}
+.after .prob-list li{color:rgba(255,255,255,.82);}
+.prob-list li::before{content:'';width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:5px;}
+.before .prob-list li::before{background:var(--blue);}
+.after .prob-list li::before{background:#fff;}
+
+/* ── SERVICES ── */
+/* Layout: featured large top + 5 cards below */
+.svc-featured{background:linear-gradient(135deg,var(--dark) 0%,#0D1F3C 60%,#091628 100%);border:1px solid rgba(59,130,246,.18);border-radius:var(--r-xl);padding:clamp(36px,5vw,64px);margin-bottom:clamp(16px,2vw,24px);display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,72px);align-items:center;position:relative;overflow:hidden;cursor:default;}
+.svc-featured::before{content:'';position:absolute;top:-80px;right:-80px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(59,130,246,.12) 0%,transparent 70%);pointer-events:none;}
+.svc-featured::after{content:'';position:absolute;bottom:-60px;left:40%;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle,rgba(6,182,212,.07) 0%,transparent 70%);pointer-events:none;}
+.sf-left{position:relative;z-index:1;}
+.sf-icon{width:56px;height:56px;border-radius:var(--r);background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.25);display:flex;align-items:center;justify-content:center;color:var(--blue-m);margin-bottom:24px;}
+.sf-num{font-size:11px;font-weight:700;letter-spacing:.12em;color:rgba(255,255,255,.3);margin-bottom:12px;}
+.sf-name{font-family:var(--fh);font-size:clamp(22px,2.8vw,32px);font-weight:800;letter-spacing:-.03em;color:#fff;line-height:1.15;margin-bottom:14px;}
+.sf-desc{font-size:clamp(14px,1.4vw,16px);color:rgba(255,255,255,.5);line-height:1.75;margin-bottom:28px;}
+.sf-right{position:relative;z-index:1;display:flex;flex-direction:column;gap:12px;}
+.sf-point{display:flex;align-items:flex-start;gap:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:var(--r);padding:16px 18px;transition:all .3s;}
+.sf-point:hover{background:rgba(59,130,246,.08);border-color:rgba(59,130,246,.18);transform:translateX(4px);}
+.sfp-icon{width:34px;height:34px;border-radius:var(--r-sm);background:rgba(59,130,246,.12);color:var(--blue-m);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.sfp-t{font-family:var(--fh);font-size:14px;font-weight:700;color:#fff;margin-bottom:3px;}
+.sfp-d{font-size:13px;color:rgba(255,255,255,.4);line-height:1.5;}
+/* 6-card grid */
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,1.5vw,16px);}
+.svc-card{background:var(--white);border:1px solid var(--bdr);border-radius:var(--r-lg);padding:clamp(22px,2.5vw,32px);position:relative;overflow:hidden;cursor:default;transition:all .35s;display:flex;flex-direction:column;}
+.svc-card::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(59,130,246,.04) 0%,transparent 60%);opacity:0;transition:opacity .35s;}
+.svc-card:hover{transform:translateY(-6px);box-shadow:0 24px 52px rgba(59,130,246,.1);border-color:var(--bdr-2);}
+.svc-card:hover::before{opacity:1;}
+.svc-card:hover .svc-icon{background:var(--blue);color:#fff;transform:scale(1.08);}
+.svc-num{font-size:10px;font-weight:700;letter-spacing:.12em;color:var(--text-3);margin-bottom:clamp(16px,2vw,24px);}
+.svc-icon{width:44px;height:44px;border-radius:var(--r-sm);background:var(--blue-l);color:var(--blue);display:flex;align-items:center;justify-content:center;margin-bottom:clamp(14px,1.8vw,20px);transition:all .35s;flex-shrink:0;}
+.svc-name{font-family:var(--fh);font-size:clamp(13px,1.3vw,16px);font-weight:800;letter-spacing:-.02em;color:var(--text);margin-bottom:8px;line-height:1.25;}
+.svc-desc{font-size:12px;color:var(--text-2);line-height:1.7;flex:1;}
+.svc-link{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;color:var(--blue-d);margin-top:16px;text-decoration:none;transition:gap .2s;}
+.svc-link:hover{gap:8px;}
+/* Responsive */
+@media(max-width:1100px){.svc-grid{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:960px){.svc-featured{grid-template-columns:1fr;gap:28px;}.svc-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:580px){.svc-grid{grid-template-columns:1fr;}}
+
+/* ── HOW IT WORKS ── */
+.steps-wrap{display:grid;grid-template-columns:repeat(4,1fr);position:relative;gap:0;}
+.steps-line{position:absolute;top:38px;left:12.5%;right:12.5%;height:2px;background:linear-gradient(90deg,var(--blue-l),var(--teal),var(--blue-l));z-index:0;}
+.step{padding:0 clamp(8px,2vw,20px);text-align:center;position:relative;z-index:1;}
+.step-num{width:76px;height:76px;border-radius:50%;background:var(--bg);border:2px solid var(--bdr-2);display:flex;align-items:center;justify-content:center;margin:0 auto 24px;font-family:var(--fh);font-size:18px;font-weight:800;color:var(--text-3);transition:all .35s;}
+.step:hover .step-num{background:linear-gradient(135deg,var(--blue),var(--teal));border-color:transparent;color:#fff;box-shadow:0 10px 28px rgba(59,130,246,.35);transform:scale(1.08);}
+.step-t{font-family:var(--fh);font-size:16px;font-weight:700;color:var(--text);margin-bottom:9px;}
+.step-d{font-size:13px;color:var(--text-2);line-height:1.65;}
+
+/* ── RESULTS ── */
+.res-grid{display:grid;grid-template-columns:5fr 4fr;gap:12px;grid-template-rows:auto auto;}
+.rc{background:var(--white);border:1px solid var(--bdr);border-radius:var(--r);padding:clamp(28px,3.5vw,48px);position:relative;overflow:hidden;cursor:default;transition:all .3s;}
+.rc:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:var(--bdr-2);}
+.rc.sp{grid-row:span 2;}
+.rc.dk{background:linear-gradient(155deg,var(--dark),var(--dark-3));border-color:rgba(59,130,246,.14);}
+.rc.dk .rc-title{color:#fff;}
+.rc.dk .rc-desc{color:rgba(255,255,255,.4);}
+.rc.dk .rn-val{color:var(--blue-m);}
+.rc.dk .rn-lbl{color:rgba(255,255,255,.3);}
+.rc.dk .chip{color:var(--blue-m);background:rgba(59,130,246,.1);border-color:rgba(59,130,246,.2);}
+.rc-title{font-family:var(--fh);font-size:clamp(17px,2vw,26px);font-weight:800;letter-spacing:-.02em;color:var(--text);margin-bottom:10px;line-height:1.15;}
+.rc-desc{font-size:14px;color:var(--text-2);line-height:1.7;max-width:400px;margin-bottom:28px;}
+.rc-nums{display:flex;gap:clamp(16px,2.5vw,28px);flex-wrap:wrap;}
+.rn-val{font-family:var(--fh);font-size:clamp(22px,2.5vw,30px);font-weight:800;letter-spacing:-.025em;color:var(--blue);line-height:1;}
+.rn-lbl{font-size:12px;font-weight:500;color:var(--text-3);margin-top:3px;}
+
+/* ── WHY US ── */
+.why-inner{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,80px);align-items:center;}
+.wcard{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:var(--r);padding:clamp(16px,2vw,22px) clamp(16px,2vw,24px);display:flex;align-items:flex-start;gap:14px;transition:all .3s;cursor:default;}
+.wcard:hover{background:rgba(59,130,246,.08);border-color:rgba(59,130,246,.2);transform:translateX(6px);}
+.wi{width:42px;height:42px;border-radius:var(--r-sm);flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+.wi-1{background:rgba(59,130,246,.15);color:var(--blue-m);}
+.wi-2{background:rgba(6,182,212,.15);color:var(--teal);}
+.wi-3{background:rgba(139,92,246,.15);color:#A78BFA;}
+.wi-4{background:rgba(34,197,94,.15);color:#4ADE80;}
+.wcard-t{font-family:var(--fh);font-size:15px;font-weight:700;color:#fff;margin-bottom:4px;}
+.wcard-d{font-size:13px;color:rgba(255,255,255,.38);line-height:1.6;}
+/* Bar chart card */
+.why-chart{background:rgba(255,255,255,.04);border:1px solid rgba(59,130,246,.14);border-radius:var(--r-lg);padding:clamp(24px,3vw,36px);}
+.wc-label{font-size:11px;font-weight:700;color:var(--blue-m);letter-spacing:.1em;text-transform:uppercase;margin-bottom:18px;}
+.wc-items{display:flex;flex-direction:column;gap:14px;}
+.wc-item{display:flex;align-items:center;gap:12px;}
+.wc-name{font-size:13px;font-weight:600;color:rgba(255,255,255,.5);width:clamp(100px,14vw,140px);flex-shrink:0;}
+.wc-wrap{flex:1;height:6px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;}
+.wc-bar{height:100%;border-radius:3px;transition:width 1.6s ease;}
+.wb1{background:linear-gradient(90deg,var(--blue),var(--teal));}
+.wb2{background:linear-gradient(90deg,var(--teal),#10B981);}
+.wb3{background:linear-gradient(90deg,var(--violet),#EC4899);}
+.wb4{background:linear-gradient(90deg,#F59E0B,#EF4444);}
+.wc-pct{font-family:var(--fh);font-size:13px;font-weight:700;color:#fff;width:34px;text-align:right;flex-shrink:0;}
+.wc-bot{margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,.06);display:flex;gap:clamp(16px,2.5vw,24px);flex-wrap:wrap;}
+.wc-sv{font-family:var(--fh);font-size:clamp(20px,2.5vw,26px);font-weight:800;color:#fff;line-height:1;}
+.wc-sl{font-size:11px;color:rgba(255,255,255,.3);margin-top:3px;}
+
+/* ── TESTIMONIALS ── */
+.testi-featured{background:linear-gradient(155deg,var(--dark) 0%,#0F2040 100%);border:1px solid rgba(59,130,246,.16);border-radius:var(--r-xl);padding:clamp(32px,5vw,60px);margin-bottom:20px;position:relative;overflow:hidden;}
+.testi-featured::before{content:'';position:absolute;top:-60px;right:-60px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(59,130,246,.1) 0%,transparent 70%);}
+.tf-quote-icon{width:48px;height:48px;border-radius:var(--r-sm);background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.2);display:flex;align-items:center;justify-content:center;color:var(--blue-m);margin-bottom:24px;}
+.tf-text{font-family:var(--fh);font-size:clamp(18px,2.5vw,26px);font-weight:700;letter-spacing:-.02em;color:#fff;line-height:1.45;margin-bottom:28px;max-width:680px;}
+.tf-text em{color:var(--blue-m);font-style:normal;}
+.tf-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;}
+.tf-author{display:flex;align-items:center;gap:14px;}
+.tf-av{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--fh);font-size:16px;font-weight:800;flex-shrink:0;border:2px solid rgba(255,255,255,.12);}
+.tav1{background:linear-gradient(135deg,#3B82F6,#06B6D4);color:#fff;}
+.tav2{background:linear-gradient(135deg,#8B5CF6,#EC4899);color:#fff;}
+.tav3{background:linear-gradient(135deg,#F59E0B,#EF4444);color:#fff;}
+.tav4{background:linear-gradient(135deg,#10B981,#06B6D4);color:#fff;}
+.tav5{background:linear-gradient(135deg,#F43F5E,#F59E0B);color:#fff;}
+.tf-name{font-family:var(--fh);font-size:15px;font-weight:800;color:#fff;}
+.tf-role{font-size:13px;color:rgba(255,255,255,.45);margin-top:2px;}
+.tf-metric{background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.2);border-radius:var(--r);padding:14px 20px;text-align:center;}
+.tf-mv{font-family:var(--fh);font-size:clamp(22px,3vw,30px);font-weight:800;color:var(--blue-m);letter-spacing:-.03em;line-height:1;}
+.tf-ml{font-size:12px;color:rgba(255,255,255,.4);margin-top:3px;}
+.tf-stars{display:flex;gap:3px;margin-bottom:18px;}
+.tf-stars svg{width:16px;height:16px;}
+.logo-strip{background:var(--bg-2);border:1px solid var(--bdr);border-radius:var(--r);padding:clamp(18px,2.5vw,28px) clamp(20px,3vw,40px);margin-bottom:20px;display:flex;align-items:center;gap:clamp(16px,3vw,40px);flex-wrap:wrap;justify-content:space-between;}
+.ls-label{font-size:11px;font-weight:700;color:var(--text-3);letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;flex-shrink:0;}
+.ls-logos{display:flex;align-items:center;gap:clamp(16px,3vw,36px);flex-wrap:wrap;}
+.ls-logo{display:flex;align-items:center;gap:8px;opacity:.45;transition:opacity .2s;cursor:default;}
+.ls-logo:hover{opacity:.75;}
+.ls-logo-icon{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.ll1{background:linear-gradient(135deg,#1E3A8F,#3B82F6);}
+.ll2{background:linear-gradient(135deg,#064E3B,#10B981);}
+.ll3{background:linear-gradient(135deg,#4C1D95,#8B5CF6);}
+.ll4{background:linear-gradient(135deg,#7C2D12,#F97316);}
+.ll5{background:linear-gradient(135deg,#1E3A5F,#06B6D4);}
+.ls-logo-name{font-family:var(--fh);font-size:13px;font-weight:800;color:var(--text);letter-spacing:-.01em;}
+.tg{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.tc{background:var(--white);border:1px solid var(--bdr);border-radius:var(--r);padding:clamp(18px,2.5vw,26px);transition:all .3s;cursor:default;position:relative;overflow:hidden;}
+.tc::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:var(--r) var(--r) 0 0;}
+.tc.t1::after{background:linear-gradient(90deg,#3B82F6,#06B6D4);}
+.tc.t2::after{background:linear-gradient(90deg,#8B5CF6,#EC4899);}
+.tc.t3::after{background:linear-gradient(90deg,#F59E0B,#EF4444);}
+.tc:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:var(--bdr-2);}
+.tc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.tc-av{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--fh);font-size:12px;font-weight:800;flex-shrink:0;}
+.tc-stars{display:flex;gap:2px;}
+.tc-stars svg{width:12px;height:12px;}
+.tc-text{font-size:14px;color:var(--text);line-height:1.75;margin-bottom:18px;font-style:italic;}
+.tc-bottom{padding-top:14px;border-top:1px solid var(--bdr);}
+.tc-namerow{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;}
+.tc-name{font-family:var(--fh);font-size:13px;font-weight:700;color:var(--text);}
+.tc-role{font-size:11px;color:var(--text-3);margin-top:2px;}
+.tc-metric-pill{background:var(--blue-l);color:var(--blue-d);font-family:var(--fh);font-size:12px;font-weight:800;padding:3px 9px;border-radius:var(--r-p);white-space:nowrap;flex-shrink:0;}
+@media(max-width:960px){.tg{grid-template-columns:1fr 1fr;}.tf-bottom{flex-direction:column;align-items:flex-start;}.logo-strip{flex-direction:column;align-items:flex-start;gap:14px;}}
+@media(max-width:680px){.tg{grid-template-columns:1fr;}.ls-logos{gap:16px;}}
+
+/* ── FAQ ── */
+.faq-wrap{display:grid;grid-template-columns:1fr 1.6fr;gap:clamp(40px,6vw,80px);align-items:start;}
+.fi-list{display:flex;flex-direction:column;gap:2px;}
+.fi{background:var(--white);border:1px solid var(--bdr);border-radius:var(--r-sm);overflow:hidden;transition:all .3s;cursor:default;}
+.fi:hover{border-color:var(--bdr-2);}
+.fi-q{padding:18px 22px;font-size:15px;font-weight:700;color:var(--text);display:flex;justify-content:space-between;align-items:center;gap:14px;user-select:none;cursor:pointer;}
+.fi-ico{width:22px;height:22px;border-radius:50%;background:var(--blue-l);color:var(--blue);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .3s;}
+.fi.open .fi-ico{background:var(--blue);color:#fff;transform:rotate(45deg);}
+.fi-a{max-height:0;overflow:hidden;transition:max-height .4s ease;}
+.fi.open .fi-a{max-height:220px;}
+.fi-ai{padding:0 22px 18px;font-size:14px;color:var(--text-2);line-height:1.75;}
+
+/* ── RESPONSIVE overrides ── */
+@media(max-width:960px){
+  .hero-cards{display:none;}
+  .nums-inner{grid-template-columns:1fr 1fr;}
+  .num-item{border-right:none;border-bottom:1px solid var(--bdr);padding:36px 20px;}
+  .num-item:nth-child(2n){border-right:none;}
+  .num-item:nth-last-child(-n+2){border-bottom:none;}
+  .prob-grid{grid-template-columns:1fr;}
+  .svc-grid{grid-template-columns:1fr 1fr;}
+  .steps-wrap{grid-template-columns:1fr 1fr;gap:32px;}
+  .steps-line{display:none;}
+  .res-grid{grid-template-columns:1fr;}
+  .rc.sp{grid-row:auto;}
+  .why-inner{grid-template-columns:1fr;}
+  .tg{grid-template-columns:1fr 1fr;}
+  .faq-wrap{grid-template-columns:1fr;}
+}
+@media(max-width:680px){
+  .svc-grid{grid-template-columns:1fr;}
+  .tg{grid-template-columns:1fr;}
+  .steps-wrap{grid-template-columns:1fr;}
+  .nums-inner{grid-template-columns:1fr 1fr;}
+  .h-trust{flex-wrap:wrap;}
+}
+@media(max-width:480px){
+  .nums-inner{grid-template-columns:1fr;}
+  .num-item{border-right:none;border-bottom:1px solid var(--bdr);}
+  .num-item:last-child{border-bottom:none;}
+}
+/* ── SERVICE MODAL ── */
+.svc-modal{position:fixed;inset:0;z-index:2000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:all .4s cubic-bezier(.16,1,.3,1);padding:20px;}
+.svc-modal.open{opacity:1;pointer-events:all;}
+.sm-bg{position:absolute;inset:0;background:rgba(10,20,40,.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);}
+.sm-wrap{position:relative;width:100%;max-width:720px;background:var(--white);border-radius:var(--r-xl);overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,.4);transform:translateY(30px) scale(.95);transition:all .5s cubic-bezier(.16,1,.3,1);display:flex;flex-direction:column;max-height:90vh;}
+.svc-modal.open .sm-wrap{transform:translateY(0) scale(1);}
+.sm-header{padding:40px 40px 20px;display:flex;justify-content:space-between;align-items:flex-start;position:relative;}
+.sm-close{width:40px;height:40px;border-radius:50%;background:var(--bg-2);display:flex;align-items:center;justify-content:center;color:var(--text-3);border:none;cursor:pointer;transition:all .2s;}
+.sm-close:hover{background:var(--blue-l);color:var(--blue-d);transform:rotate(90deg);}
+.sm-icon{width:56px;height:56px;border-radius:var(--r);background:var(--blue-l);color:var(--blue);display:flex;align-items:center;justify-content:center;margin-bottom:20px;}
+.sm-title{font-family:var(--fh);font-size:32px;font-weight:800;color:var(--text);line-height:1.2;margin-bottom:12px;}
+.sm-body{padding:0 40px 40px;overflow-y:auto;flex:1;}
+.sm-desc{font-size:16px;color:var(--text-2);line-height:1.75;margin-bottom:28px;}
+.sm-features-h{font-family:var(--fh);font-size:14px;font-weight:800;color:var(--text-3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px;}
+.sm-features{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:32px;}
+.sm-f{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:var(--text);background:var(--bg-2);padding:12px 16px;border-radius:var(--r);}
+.sm-f svg{color:var(--blue-m);flex-shrink:0;}
+.sm-footer{padding:20px 40px 40px;display:flex;gap:14px;background:linear-gradient(to top, var(--blue-l), transparent);}
+@media(max-width:680px){
+  .sm-header{padding:28px 24px 16px;}
+  .sm-body{padding:0 24px 28px;}
+  .sm-features{grid-template-columns:1fr;}
+  .sm-footer{padding:16px 24px 28px;flex-direction:column;}
+  .sm-title{font-size:24px;}
+}
+/* ── SCROLL PROGRESS ── */
+.scroll-progress{position:fixed;top:0;left:0;width:0%;height:3px;background:linear-gradient(90deg,var(--blue),var(--teal),var(--violet));z-index:3000;transition:width .1s ease;}
+</style>
+</head>
+<body style="overflow-x:hidden;">
+<!-- WA Button moved to top for better event isolation -->
+<a href="https://wa.me/6281200000000?text=Hello%20Scoop%20Technology%2C%20I%20would%20like%20to%20consult%20about%20AI%20solutions%20for%20my%20business." class="wa-btn" target="_blank" rel="noopener" aria-label="Chat WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M13 2C7.48 2 3 6.48 3 12c0 1.85.5 3.58 1.38 5.06L3 23l6.12-1.35A10 10 0 0013 22c5.52 0 10-4.48 10-10S18.52 2 13 2z" fill="currentColor"/><path d="M9.5 10.5c.28 1.28.97 2.44 1.97 3.44s2.16 1.69 3.44 1.97l.9-1.8s1.19.4 1.69.54c.5.14.5.5.36.86-.14.36-.86 1.44-1.44 1.58-.58.14-1.08.14-1.94-.22-.86-.36-3.24-1.58-4.68-4.32-.72-1.37-.58-2.52-.36-3.02.22-.5.72-.94 1.08-1.08.36-.14.72-.14.86.22.14.36.54 1.33.54 1.33l-.42.49z" fill="white" stroke="none"/></svg>
+  <div class="wa-tooltip">Chat with us</div>
+</a>
+<div class="scroll-progress" id="scrollBar"></div>
+<div class="cur" id="cur"></div>
+<div class="cur-ring" id="curRing"></div>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="scoop-technology.html" class="nav-logo">
+    <div class="nav-logo-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="5" stroke="white" stroke-width="1.8"/><circle cx="8" cy="8" r="2" fill="white"/></svg></div>
+    Scoop Technology
+  </a>
+  <ul class="nav-links"><li><a href="scoop-technology.html" class="active">Home</a></li><li><a href="about.html">About Us</a></li><li><a href="case-studies.html">Case Studies</a></li><li><a href="careers.html">Careers</a></li><li><a href="blog.html">Blog</a></li><li><a href="contact.html" class="nav-cta">Contact Us</a></li></ul>
+  <button class="nav-ham" id="ham" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+</nav>
+<div class="nav-drawer" id="drawer"><a href="scoop-technology.html" class="active">Home</a><a href="about.html">About Us</a><a href="case-studies.html">Case Studies</a><a href="careers.html">Careers</a><a href="blog.html">Blog</a><a href="contact.html" class="drawer-cta">Contact Us</a></div>
+
+<!-- HERO -->
+<section class="hero-dark">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-overlay"></div>
+  <div class="hero-orb orb-1"></div>
+  <div class="hero-orb orb-2"></div>
+  <div class="hero-orb orb-3"></div>
+  <div class="hero-dots"></div>
+
+  <div class="hero-layout">
+
+    <!-- LEFT: Text -->
+    <div class="hero-inner">
+      <div class="eyebrow eyebrow-dark" style="display:inline-flex;margin-bottom:20px;">
+        <span style="width:6px;height:6px;border-radius:50%;background:var(--teal);animation:blink 2s infinite;display:inline-block;flex-shrink:0;"></span>
+        AI for Business
+      </div>
+      <h1 class="hero-title">
+        Your business can run<br><span class="gr">smarter</span><br>than it does today
+      </h1>
+      <p class="hero-desc">
+        Scoop Technology helps businesses work faster with AI tailored to your operations. You don't need to understand the technology to feel the results.
+      </p>
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+        <a href="contact.html" class="btn btn-teal btn-lg">
+          Free Consultation
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#results" class="btn btn-ghost">See Real Results</a>
+      </div>
+      <div class="h-trust">
+        <div class="h-avs">
+          <div class="h-av av1">AR</div>
+          <div class="h-av av2">DW</div>
+          <div class="h-av av3">HS</div>
+          <div class="h-av av4">MR</div>
+        </div>
+        <div class="h-trust-text">Trusted by <strong>120+ companies</strong> worldwide</div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Dashboard mockup -->
+    <div class="hero-visual">
+      <!-- Floating badge top-right -->
+      <div class="hv-badge2">
+        <div class="hvb2-dot"></div>
+        <div><div class="hvb2-t">System active now</div><div class="hvb2-s">24/7 without intervention</div></div>
+      </div>
+
+      <div class="hv-window">
+        <!-- Title bar -->
+        <div class="hv-bar">
+          <div class="hv-dots">
+            <div class="hv-dot hvd1"></div>
+            <div class="hv-dot hvd2"></div>
+            <div class="hv-dot hvd3"></div>
+          </div>
+          <div class="hv-title">Scoop AI Dashboard</div>
+          <div class="hv-live"><div class="hv-live-dot"></div>Live</div>
+        </div>
+
+        <!-- Body -->
+        <div class="hv-body">
+          <!-- Stats row -->
+          <div class="hv-stats">
+            <div class="hvs">
+              <div class="hvs-val hvs-v1" id="hv-s1">0</div>
+              <div class="hvs-lbl">Automated tasks today</div>
+              <div class="hvs-delta">↑ 12% from yesterday</div>
+            </div>
+            <div class="hvs">
+              <div class="hvs-val hvs-v2" id="hv-s2">0%</div>
+              <div class="hvs-lbl">System accuracy</div>
+              <div class="hvs-delta">↑ stable</div>
+            </div>
+            <div class="hvs">
+              <div class="hvs-val hvs-v3" id="hv-s3">0h</div>
+              <div class="hvs-lbl">Work hours saved</div>
+              <div class="hvs-delta">↑ this week</div>
+            </div>
+          </div>
+
+          <!-- Chart -->
+          <div class="hv-chart">
+            <div class="hvc-header">
+              <div class="hvc-title">Process efficiency — last 7 days</div>
+              <div class="hvc-badge">+68% vs manual</div>
+            </div>
+            <div class="hvc-bars" id="hvc-bars"></div>
+          </div>
+
+          <!-- Activity feed -->
+          <div class="hv-feed" id="hv-feed"></div>
+        </div>
+      </div>
+
+      <!-- Floating badge bottom-left -->
+      <div class="hv-badge">
+        <div class="hvb-val"><em>3.2×</em></div>
+        <div class="hvb-lbl">Faster than before</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <div class="ticker-item"><span class="ticker-dot"></span>Business Automation</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Artificial Intelligence</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Data Analytics</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Operational Efficiency</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Smart Chatbot</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Image Recognition</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Digital Transformation</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Machine Learning</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Business Automation</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Artificial Intelligence</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Data Analytics</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Operational Efficiency</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Smart Chatbot</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Image Recognition</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Digital Transformation</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Machine Learning</div>
+  </div>
+</div>
+
+<!-- NUMBERS -->
+<div class="nums-strip">
+  <div class="nums-inner">
+    <div class="num-item rv-scale"><div class="num-val" data-t="120" data-s="+">120+</div><div class="num-lbl">Projects completed</div></div>
+    <div class="num-item rv-scale d1"><div class="num-val" data-t="98" data-s="%">98%</div><div class="num-lbl">Satisfied clients</div></div>
+    <div class="num-item rv-scale d2"><div class="num-val" data-t="7" data-s="+ Yrs">7+ Yrs</div><div class="num-lbl">Industry experience</div></div>
+    <div class="num-item rv-scale d3"><div class="num-val" data-t="40" data-s="+">40+</div><div class="num-lbl">AI &amp; data specialists</div></div>
+  </div>
+</div>
+
+<!-- PROBLEMS -->
+<section class="section section-white" id="problems" style="padding-top:20px;padding-bottom:20px;">
+  <div class="sec-h center rv">
+    <div class="eyebrow eyebrow-blue" style="display:inline-flex;">Does this sound familiar?</div>
+    <h2 class="sec-title" style="max-width:min(560px,100%);margin:0 auto;">Common challenges businesses face today</h2>
+    <p class="sec-sub" style="margin:6px auto 0;text-align:center;">Many businesses know something can be improved — but don't know where to start.</p>
+  </div>
+  <div class="prob-grid" style="margin-top:12px;">
+    <div class="prob-card before rv-left">
+      <div class="prob-badge">Before Scoop</div>
+      <div class="prob-icon"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M11 7v5M11 14.5v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+      <div class="prob-h">Repetitive work wastes time</div>
+      <ul class="prob-list">
+        <li class="rv d1">Employees spend hours on work that could be automated</li>
+        <li class="rv d2">Data is scattered, reports built manually every week</li>
+        <li class="rv d3">Business decisions based on gut feeling, not data</li>
+        <li class="rv d4">Customer service teams overwhelmed answering the same questions</li>
+        <li class="rv d5">Slow processes cause missed business opportunities</li>
+      </ul>
+    </div>
+    <div class="prob-card after rv-right">
+      <div class="prob-badge">After Scoop</div>
+      <div class="prob-icon"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M4 11l5 5 9-9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="prob-h">Business runs on its own, team focuses on what matters</div>
+      <ul class="prob-list">
+        <li class="rv d1">Repetitive tasks handled automatically by AI, 24 hours a day</li>
+        <li class="rv d2">Reports generated automatically every day, real-time and accurate</li>
+        <li class="rv d3">Clear dashboard shows you the best next step</li>
+        <li class="rv d4">Smart chatbot answers customer questions anytime</li>
+        <li class="rv d5">Processes that used to take days complete in minutes</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Impact stats -->
+  <div class="prob-stats">
+    <div class="prob-stat rv"><div class="prob-stat-val">60%</div><div class="prob-stat-lbl">of employee time spent on repetitive tasks that AI can handle</div></div>
+    <div class="prob-stat rv d1"><div class="prob-stat-val">3×</div><div class="prob-stat-lbl">faster reporting when dashboards replace manual spreadsheets</div></div>
+    <div class="prob-stat rv d2"><div class="prob-stat-val">80%</div><div class="prob-stat-lbl">of customer questions answered by chatbots without human help</div></div>
+    <div class="prob-stat rv d3"><div class="prob-stat-val">2 wks</div><div class="prob-stat-lbl">average time to see measurable results after implementation</div></div>
+  </div>
+
+  <!-- Common challenge tags -->
+  <div class="prob-tags rv d2">
+    <span class="prob-tag"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.3"/><path d="M6 4v2.5L7.5 8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>Manual data entry</span>
+    <span class="prob-tag"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 9l3-3 2 2 3-4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>No real-time reporting</span>
+    <span class="prob-tag"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 2v4l2.5 2.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>Slow approval workflows</span>
+    <span class="prob-tag"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>Disconnected systems</span>
+    <span class="prob-tag"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><rect x="2" y="3" width="8" height="6" rx="1" stroke="currentColor" stroke-width="1.3"/><path d="M4 3V2.5a.5.5 0 011 0V3M7 3V2.5a.5.5 0 011 0V3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>Untracked inventory</span>
+    <span class="prob-tag"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 2C4.34 2 3 3.34 3 5c0 2.63 3 6 3 6s3-3.37 3-6c0-1.66-1.34-3-3-3z" stroke="currentColor" stroke-width="1.3"/></svg>Customer service bottlenecks</span>
+    <span class="prob-tag"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4h8M2 8h5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>Decisions based on gut, not data</span>
+    <span class="prob-tag"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 6a3 3 0 106 0 3 3 0 00-6 0zM9 9l2 2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>No visibility into operations</span>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section section-bg" id="services">
+  <div class="sec-h rv" style="margin-bottom:40px;">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;">
+      <div>
+        <div class="eyebrow eyebrow-blue">Our Services</div>
+        <h2 class="sec-title" style="margin-top:10px;">AI solutions for every<br>business need</h2>
+      </div>
+      <a href="contact.html" class="btn btn-soft rv d2" style="white-space:nowrap;flex-shrink:0;">Ask us more →</a>
+    </div>
+  </div>
+
+  <!-- Featured service -->
+  <div class="svc-featured rv">
+    <div class="sf-left">
+      <div class="sf-num">FEATURED SERVICE · 01</div>
+      <div class="sf-icon"><svg width="26" height="26" viewBox="0 0 26 26" fill="none"><circle cx="13" cy="13" r="10" stroke="currentColor" stroke-width="1.6"/><path d="M13 6v4M13 16v4M6 13h4M16 13h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="13" cy="13" r="3" fill="currentColor"/></svg></div>
+      <div class="sf-name">AI Consulting &amp;<br>Strategy</div>
+      <div class="sf-desc">Not sure where to start? We map the AI potential across your entire business — with savings estimates and a realistic implementation timeline.</div>
+      <a href="contact.html" class="btn btn-teal" style="display:inline-flex;">Start free consultation <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+    <div class="sf-right rv d2">
+      <div class="sf-point">
+        <div class="sfp-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M5 8l2.5 2.5 4-4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div><div class="sfp-t">Full business process audit</div><div class="sfp-d">We study your workflow and identify bottlenecks that can be automated.</div></div>
+      </div>
+      <div class="sf-point">
+        <div class="sfp-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 12L6 8l3 3 4-6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><rect x="1" y="1" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.3"/></svg></div>
+        <div><div class="sfp-t">Calculate ROI &amp; savings estimate</div><div class="sfp-d">Concrete numbers — how much can be saved and when the investment pays off.</div></div>
+      </div>
+      <div class="sf-point">
+        <div class="sfp-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v4M12 4l-3 3M14 8h-4M12 12l-3-3M8 14v-4M4 12l3-3M2 8h4M4 4l3 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+        <div><div class="sfp-t">A realistic implementation roadmap</div><div class="sfp-d">Not an empty presentation — a plan with milestones, timeline, and success metrics.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6 supporting services -->
+  <div class="svc-grid">
+    <div class="svc-card rv d1">
+      <div class="svc-num">02</div>
+      <div class="svc-icon float-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 22V12h6v10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="svc-name">Web Design &amp; Revamp</div>
+      <div class="svc-desc">Transform your old website into a premium, responsive, conversion-driven site built to modern design standards.</div>
+      <a href="javascript:void(0)" onclick="openSvcModal('web')" class="svc-link">Learn more <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+    <div class="svc-card rv d2">
+      <div class="svc-num">03</div>
+      <div class="svc-icon float-icon-slow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="5" y="2" width="14" height="20" rx="2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 18h.01" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="svc-name">Mobile Apps Development</div>
+      <div class="svc-desc">Build smooth Android &amp; iOS apps for customer-facing services or internal team operations.</div>
+      <a href="javascript:void(0)" onclick="openSvcModal('mobile')" class="svc-link">Learn more <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+    <div class="svc-card rv d3">
+      <div class="svc-num">04</div>
+      <div class="svc-icon float-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 3v18h18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M18 9l-5 5-2-2-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="svc-name">Dashboard &amp; Analytics System</div>
+      <div class="svc-desc">Monitor business performance in real time with a custom dashboard that's easy to read and accurate.</div>
+      <a href="javascript:void(0)" onclick="openSvcModal('dashboard')" class="svc-link">Learn more <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+    <div class="svc-card rv d4">
+      <div class="svc-num">05</div>
+      <div class="svc-icon float-icon-slow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="svc-name">Process Automation (AI)</div>
+      <div class="svc-desc">Let AI handle routine tasks like data entry and document sorting automatically, 24/7.</div>
+      <a href="javascript:void(0)" onclick="openSvcModal('automation')" class="svc-link">Learn more <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+    <div class="svc-card rv d5">
+      <div class="svc-num">06</div>
+      <div class="svc-icon float-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="svc-name">Chatbot &amp; Virtual Assistants</div>
+      <div class="svc-desc">Customer service that's always on, answering questions anytime in natural language.</div>
+      <a href="javascript:void(0)" onclick="openSvcModal('chatbot')" class="svc-link">Learn more <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+    <div class="svc-card rv d6">
+      <div class="svc-num">07</div>
+      <div class="svc-icon float-icon-slow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 8v4l3 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="svc-name">Computer Vision / AI Visual</div>
+      <div class="svc-desc">Use cameras + AI for automated product quality checks or object recognition.</div>
+      <a href="javascript:void(0)" onclick="openSvcModal('vision')" class="svc-link">Learn more <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+  </div>
+</section>
+
+
+<!-- HOW IT WORKS -->
+<section class="section section-white" id="how">
+  <div class="sec-h center rv">
+    <div class="eyebrow eyebrow-blue" style="display:inline-flex;">How We Work</div>
+    <h2 class="sec-title">From the first conversation<br>to a better-running business</h2>
+    <p class="sec-sub" style="margin:12px auto 0;text-align:center;">Just tell us your business challenge — we'll help map the way forward.</p>
+  </div>
+  <div class="steps-wrap">
+    <div class="steps-line"></div>
+    <div class="step rv"><div class="step-num">01</div><div class="step-t">First Conversation</div><div class="step-d">We listen to your business story — what's working well and where time is being wasted.</div></div>
+    <div class="step rv d1"><div class="step-num">02</div><div class="step-t">We Map the Solution</div><div class="step-d">Our team shows you concretely which areas can be improved with AI, plus savings estimates.</div></div>
+    <div class="step rv d2"><div class="step-num">03</div><div class="step-t">We Build Together</div><div class="step-d">Fast iterations with measurable milestones. Every week there's progress you can see and feel.</div></div>
+    <div class="step rv d3"><div class="step-num">04</div><div class="step-t">Launch &amp; Grow</div><div class="step-d">System goes live, business runs more efficiently. We stay by your side to ensure everything keeps improving.</div></div>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<section class="section section-bg" id="results">
+  <div class="sec-h rv">
+    <div class="eyebrow eyebrow-blue">Real Results</div>
+    <h2 class="sec-title">Not stories —<br>this is what actually happened</h2>
+  </div>
+  <div class="res-grid">
+    <div class="rc sp dk rv">
+      <div class="chip chip-dark" style="margin-bottom:18px;">Manufacturing · Visual Inspection</div>
+      <div class="rc-title">Electronics Manufacturer: Product Defects Detected Automatically</div>
+      <div class="rc-desc">An AI-powered camera system that inspects every product in real time — more precise than the human eye, and never tires.</div>
+      <div class="rc-nums"><div><div class="rn-val">99.2%</div><div class="rn-lbl">Defect detection accuracy</div></div><div><div class="rn-val">68%</div><div class="rn-lbl">QC cost savings</div></div><div><div class="rn-val">3×</div><div class="rn-lbl">Capacity increase</div></div></div>
+    </div>
+    <div class="rc rv d1">
+      <div class="chip chip-blue" style="margin-bottom:18px;">Retail · Stock Prediction</div>
+      <div class="rc-title">Retail Chain 200+ Outlets: Never Wrong on Stock Again</div>
+      <div class="rc-desc">AI predicts demand at every outlet with high accuracy — no more overstock or out-of-stock situations.</div>
+      <div class="rc-nums"><div><div class="rn-val">43%</div><div class="rn-lbl">Overstock reduction</div></div><div><div class="rn-val">Rp 8M</div><div class="rn-lbl">Saved per quarter</div></div></div>
+    </div>
+    <div class="rc rv d2">
+      <div class="chip chip-blue" style="margin-bottom:18px;">Insurance · Documents</div>
+      <div class="rc-title">Insurance Claims: From 3 Days to 4 Minutes</div>
+      <div class="rc-desc">AI reads, verifies, and processes claim documents automatically — what used to take 3 days now takes minutes.</div>
+      <div class="rc-nums"><div><div class="rn-val">98%</div><div class="rn-lbl">Processing time reduced</div></div><div><div class="rn-val">12×</div><div class="rn-lbl">Claim capacity increase</div></div></div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:40px;" class="rv">
+    <a href="case-studies.html" class="btn btn-soft">View all case studies →</a>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="section section-dark" id="why" style="position:relative;overflow:hidden;">
+  <canvas class="grid-canvas" id="why-canvas"></canvas>
+  <div class="why-inner" style="position:relative;z-index:1;">
+    <div>
+      <div class="eyebrow eyebrow-dark rv">Why Scoop?</div>
+      <h2 class="sec-title sec-title-white rv d1">We don't just<br>build technology.<br>We make sure it works.</h2>
+      <p class="sec-sub sec-sub-white rv d2">Our focus is one thing: is your business better after working with us?</p>
+      <div style="display:flex;flex-direction:column;gap:12px;margin-top:36px;">
+        <div class="wcard rv d1"><div class="wi wi-1"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 9l4 4 8-8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="wcard-t">We speak business, not tech</div><div class="wcard-d">You don't need to understand AI. We explain everything clearly.</div></div></div>
+        <div class="wcard rv d2"><div class="wi wi-2"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M9 5.5v3.5l2.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div><div><div class="wcard-t">Results in weeks, not years</div><div class="wcard-d">An MVP can be running in 4–6 weeks.</div></div></div>
+        <div class="wcard rv d3"><div class="wi wi-3"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2L11 7.5H17L12.5 11L14.5 17L9 13.5L3.5 17L5.5 11L1 7.5H7L9 2Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg></div><div><div class="wcard-t">Custom solutions, not templates</div><div class="wcard-d">Every solution is built from scratch to fit your needs.</div></div></div>
+        <div class="wcard rv d4"><div class="wi wi-4"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 9h12M9 3l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="wcard-t">We stay with you after the project ends</div><div class="wcard-d">We monitor and improve the system continuously.</div></div></div>
+      </div>
+    </div>
+    <div class="rv d2">
+      <div class="why-chart">
+        <div class="wc-label">Average improvement for our clients</div>
+        <div class="wc-items">
+          <div class="wc-item"><div class="wc-name">Time efficiency</div><div class="wc-wrap"><div class="wc-bar wb1" data-w="82" style="width:0%"></div></div><div class="wc-pct">82%</div></div>
+          <div class="wc-item"><div class="wc-name">Cost savings</div><div class="wc-wrap"><div class="wc-bar wb2" data-w="67" style="width:0%"></div></div><div class="wc-pct">67%</div></div>
+          <div class="wc-item"><div class="wc-name">Decision accuracy</div><div class="wc-wrap"><div class="wc-bar wb3" data-w="91" style="width:0%"></div></div><div class="wc-pct">91%</div></div>
+          <div class="wc-item"><div class="wc-name">Customer satisfaction</div><div class="wc-wrap"><div class="wc-bar wb4" data-w="74" style="width:0%"></div></div><div class="wc-pct">74%</div></div>
+        </div>
+        <div class="wc-bot">
+          <div><div class="wc-sv">120+</div><div class="wc-sl">Active clients</div></div>
+          <div><div class="wc-sv">4.9 ★</div><div class="wc-sl">Satisfaction rating</div></div>
+          <div><div class="wc-sv">7 Thn</div><div class="wc-sl">Experience</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section section-white" id="testimonials">
+  <div class="sec-h center rv">
+    <div class="eyebrow eyebrow-blue" style="display:inline-flex;">What Our Clients Say</div>
+    <h2 class="sec-title">Not our words —<br>the words of those who've experienced it</h2>
+    <p class="sec-sub" style="margin:12px auto 0;text-align:center;">From 120+ projects, here are some of the most memorable.</p>
+  </div>
+
+  <!-- Logo strip -->
+  <div class="logo-strip rv">
+    <div class="ls-label">Trusted by</div>
+    <div class="ls-logos">
+      <div class="ls-logo"><div class="ls-logo-icon ll1"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 10V4l5 3 5-3v6" stroke="white" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="ls-logo-name">PT Cahaya Elektronik</div></div>
+      <div class="ls-logo"><div class="ls-logo-icon ll2"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2" y="5" width="10" height="7" rx="1" stroke="white" stroke-width="1.3"/><path d="M5 5V3.5a2 2 0 014 0V5" stroke="white" stroke-width="1.3"/></svg></div><div class="ls-logo-name">Mandala Retail Group</div></div>
+      <div class="ls-logo"><div class="ls-logo-icon ll3"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="white" stroke-width="1.3"/><path d="M7 4.5v2.5l2 1.5" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg></div><div class="ls-logo-name">Asuransi Prima</div></div>
+      <div class="ls-logo"><div class="ls-logo-icon ll4"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 10l3-4 2 2 3-4 2 2" stroke="white" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="ls-logo-name">PT Nusantara Logistik</div></div>
+      <div class="ls-logo"><div class="ls-logo-icon ll5"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 4h10a1 1 0 011 1v5a1 1 0 01-1 1H2a1 1 0 01-1-1V5a1 1 0 011-1z" stroke="white" stroke-width="1.3"/><path d="M1 5.5l6 3.5 6-3.5" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg></div><div class="ls-logo-name">Kopi Nusantara</div></div>
+    </div>
+  </div>
+
+  <!-- Featured quote -->
+  <div class="testi-featured rv">
+    <div class="tf-stars"><svg viewBox="0 0 14 14" fill="#F59E0B"><path d="M7 1l1.8 3.6 4 .6-2.9 2.8.7 3.9L7 10l-3.6 1.9.7-3.9L1.2 5.2l4-.6z"/></svg><svg viewBox="0 0 14 14" fill="#F59E0B"><path d="M7 1l1.8 3.6 4 .6-2.9 2.8.7 3.9L7 10l-3.6 1.9.7-3.9L1.2 5.2l4-.6z"/></svg><svg viewBox="0 0 14 14" fill="#F59E0B"><path d="M7 1l1.8 3.6 4 .6-2.9 2.8.7 3.9L7 10l-3.6 1.9.7-3.9L1.2 5.2l4-.6z"/></svg><svg viewBox="0 0 14 14" fill="#F59E0B"><path d="M7 1l1.8 3.6 4 .6-2.9 2.8.7 3.9L7 10l-3.6 1.9.7-3.9L1.2 5.2l4-.6z"/></svg><svg viewBox="0 0 14 14" fill="#F59E0B"><path d="M7 1l1.8 3.6 4 .6-2.9 2.8.7 3.9L7 10l-3.6 1.9.7-3.9L1.2 5.2l4-.6z"/></svg></div>
+    <div class="tf-quote-icon"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M4 13c0-3.31 2.69-6 6-6v2c-2.21 0-4 1.79-4 4v5H4v-5zm9 0c0-3.31 2.69-6 6-6v2c-2.21 0-4 1.79-4 4v5h-2v-5z" fill="currentColor"/></svg></div>
+    <div class="tf-text">In the <em>first 3 months</em>, fuel savings from the route optimization system covered the entire project cost. From the fourth month onward, it was <em>pure additional profit</em> for us.</div>
+    <div class="tf-bottom">
+      <div class="tf-author">
+        <div class="tf-av tav1">AR</div>
+        <div><div class="tf-name">Arief Rachman</div><div class="tf-role">COO, PT Nusantara Logistik · 380 fleet vehicles</div></div>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;">
+        <div class="tf-metric"><div class="tf-mv">31%</div><div class="tf-ml">Distance reduced</div></div>
+        <div class="tf-metric"><div class="tf-mv">Rp 2.1M</div><div class="tf-ml">Fuel saved/month</div></div>
+        <div class="tf-metric"><div class="tf-mv">94%</div><div class="tf-ml">On-time delivery</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3 smaller cards -->
+  <div class="tg">
+    <div class="tc t1 rv">
+      <div class="tc-top">
+        <div class="tc-av tav2">DW</div>
+        <div class="tc-stars"><svg viewBox="0 0 14 14" fill="#F59E0B"><path d="M7 1l1.8 3.6 4 .6-2.9 2.8.7 3.9L7 10l-3.6 1.9.7-3.9L1.2 5.2l4-.6z"/></svg><svg viewBox="0 0 14 14" fill="#F59E0B"><path d="M7 1l1.8 3.6 4 .6-2.9 2.8.7 3.9L7 10l-3.6 1.9.7-3.9L1.2 5.2l4-.6z"/></svg><svg viewBox="0 0 14 14" fill="#F59E0B"><path d="M7 1l1.8 3.6 4 .6-2.9 2.8.7 3.9L7 10l-3.6 1.9.7-3.9L1.2 5.2l4-.6z"/></svg><svg viewBox="0 0 14 14" fill="#F59E0B"><path d="M7 1l1.8 3.6 4 .6-2.9 2.8.7 3.9L7 10l-3.6 1.9.7-3.9L1.2 5.2l4-.6z"/></svg><svg viewBox="0 0 14 14" fill="#F59E0B"><path d="M7 1l1.8 3.6 4 .6-2.9 2.8.7 3.9L7 10l-3.6 1.9.7-3.9L1.2 5.2l4-.6z"/></svg></div>
+      </div>
+      <p class="tc-text">"Scoop never made me feel stupid for not understanding technology. They came, listened, and explained everything in language I could understand."</p>
+      <div class="tc-bottom">
+        <div class="tc-namerow">
+          <div><div class="tc-name">Diana Wijaya</div><div class="tc-role">VP Digital, Mandala Retail Group</div></div>
+          <div class="tc-metric-pill">−43% overstock</div>
+        </div>
+      </div>
+    </div>
+    <div class="tc t2 rv d1">
+      <div class="tc-top">
+        <div class="tc-av tav3">HS</div>
+        <div class="tc-stars"><svg viewBox="0 0 14 14" fill="#F59E0B"><path d="M7 1l1.8 3.6 4 .6-2.9 2.8.7 3.9L7 10l-3.6 1.9.7-3.9L1.2 5.2l4-.6z"/></svg><svg viewBox="0 0 14 14" fill="#F59E0B"><path d="M7 1l1.8 3.6 4 .6-2.9 2.8.7 3.9L7 10l-3.6 1.9.7-3.9L1.2 5.2l4-.6z"/></svg><svg viewBox="0 0 14 14" fill="#F59E0B"><path d="M7 1l1.8 3.6 4 .6-2.9 2.8.7 3.9L7 10l-3.6 1.9.7-3.9L1.2 5.2l4-.6z"/></svg><svg viewBox="0 0 14 14" fill="#F59E0B"><path d="M7 1l1.8 3.6 4 .6-2.9 2.8.7 3.9L7 10l-3.6 1.9.7-3.9L1.2 5.2l4-.6z"/></svg><svg viewBox="0 0 14 14" fill="#F59E0B"><path d="M7 1l1.8 3.6 4 .6-2.9 2.8.7 3.9L7 10l-3.6 1.9.7-3.9L1.2 5.2l4-.6z"/></svg></div>
+      </div>
+      <p class="tc-text">"Claims that used to take 3 days now complete in 4 minutes. My team didn't believe it until they saw it themselves."</p>
+      <div class="tc-bottom">
+        <div class="tc-namerow">
+          <div><div class="tc-name">Hendry Santoso</div><div class="tc-role">CTO, Asuransi Prima</div></div>
+          <div class="tc-metric-pill">−98% waktu proses</div>
+        </div>
+      </div>
+    </div>
+    <div class="tc t3 rv d2">
+      <div class="tc-top">
+        <div class="tc-av tav4">BP</div>
+        <div class="tc-stars"><svg viewBox="0 0 14 14" fill="#F59E0B"><path d="M7 1l1.8 3.6 4 .6-2.9 2.8.7 3.9L7 10l-3.6 1.9.7-3.9L1.2 5.2l4-.6z"/></svg><svg viewBox="0 0 14 14" fill="#F59E0B"><path d="M7 1l1.8 3.6 4 .6-2.9 2.8.7 3.9L7 10l-3.6 1.9.7-3.9L1.2 5.2l4-.6z"/></svg><svg viewBox="0 0 14 14" fill="#F59E0B"><path d="M7 1l1.8 3.6 4 .6-2.9 2.8.7 3.9L7 10l-3.6 1.9.7-3.9L1.2 5.2l4-.6z"/></svg><svg viewBox="0 0 14 14" fill="#F59E0B"><path d="M7 1l1.8 3.6 4 .6-2.9 2.8.7 3.9L7 10l-3.6 1.9.7-3.9L1.2 5.2l4-.6z"/></svg><svg viewBox="0 0 14 14" fill="#F59E0B"><path d="M7 1l1.8 3.6 4 .6-2.9 2.8.7 3.9L7 10l-3.6 1.9.7-3.9L1.2 5.2l4-.6z"/></svg></div>
+      </div>
+      <p class="tc-text">"Customers don't know they're chatting with AI. What they know is that we always reply within seconds — even at 2am."</p>
+      <div class="tc-bottom">
+        <div class="tc-namerow">
+          <div><div class="tc-name">Budi Prasetyo</div><div class="tc-role">CEO, Kopi Nusantara (85 gerai)</div></div>
+          <div class="tc-metric-pill">80% auto-handled</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section section-bg" id="faq">
+  <div class="faq-wrap">
+    <div>
+      <div class="eyebrow eyebrow-blue rv">Common Questions</div>
+      <h2 class="sec-title rv d1">Have questions?<br>We answer them here.</h2>
+      <p class="sec-sub rv d2">Still have something to ask? Contact us directly.</p>
+      <div style="margin-top:24px;" class="rv d3">
+        <a href="contact.html" class="btn btn-primary">Contact Us <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+    </div>
+    <div class="fi-list">
+      <div class="fi rv"><div class="fi-q">Does my business need to be large before using AI?<div class="fi-ico"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 2v6M2 5h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div></div><div class="fi-a"><div class="fi-ai">No. In fact, mid-size and growing businesses often get the biggest benefit from AI. We have packages suited for different scales.</div></div></div>
+      <div class="fi rv d1"><div class="fi-q">How long before we can see results?<div class="fi-ico"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 2v6M2 5h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div></div><div class="fi-a"><div class="fi-ai">Most clients see real change within 4–8 weeks. We work iteratively — there are small wins you can feel from the start.</div></div></div>
+      <div class="fi rv d2"><div class="fi-q">Is our business data safe?<div class="fi-ico"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 2v6M2 5h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div></div><div class="fi-a"><div class="fi-ai">Data security is our top priority. We use industry-standard encryption and all agreements include strict NDAs.</div></div></div>
+      <div class="fi rv d3"><div class="fi-q">We don't have an IT team. Is that okay?<div class="fi-ico"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 2v6M2 5h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div></div><div class="fi-a"><div class="fi-ai">Yes. We often work with clients who have no technical team at all. We handle everything from start to finish.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="cta">
+  <canvas id="cta-canvas"></canvas>
+  <div class="cta-overlay"></div>
+  <div class="cta-inner">
+    <div class="eyebrow eyebrow-dark rv" style="display:inline-flex;">Start Now — Free</div>
+    <h2 class="cta-title rv d1">Your business can be<br>far more <span class="gr">efficient</span> today</h2>
+    <p class="cta-sub rv d2">Tell us your business challenge. In 30 minutes, we'll show you where AI can make the biggest difference — no cost, no commitment.</p>
+    <div class="cta-actions rv d3">
+      <a href="contact.html" class="btn btn-white btn-lg">Schedule Free Consultation <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2.5 7.5h10M8 3.5l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a href="tel:+6221000000" class="btn btn-ghost">Or call us</a>
+    </div>
+    <p class="cta-note rv d4">✓ 30-minute consultation &nbsp;·&nbsp; ✓ No pressure &nbsp;·&nbsp; ✓ Response within 1 business day</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<!-- SERVICE MODAL -->
+<div class="svc-modal" id="svcModal">
+  <div class="sm-bg" onclick="closeSvcModal()"></div>
+  <div class="sm-wrap">
+    <div class="sm-header">
+      <div class="sm-icon" id="smIcon"></div>
+      <button class="sm-close" onclick="closeSvcModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+    </div>
+    <div class="sm-body">
+      <h2 class="sm-title" id="smTitle">Service Name</h2>
+      <p class="sm-desc" id="smDesc">Description goes here.</p>
+      <div class="sm-features-h">What You Get:</div>
+      <div class="sm-features" id="smFeatures"></div>
+    </div>
+    <div class="sm-footer">
+      <a href="contact.html" class="btn btn-teal">Consult on This Service <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <button class="btn btn-ghost" onclick="closeSvcModal()">Close</button>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="scoop-technology.html" class="footer-brand-logo">
+        <div class="nav-logo-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="4" stroke="white" stroke-width="1.8"/><circle cx="7" cy="7" r="1.5" fill="white"/></svg></div>
+        Scoop Technology
+      </a>
+      <p>Helping businesses worldwide work faster and more efficiently with AI that actually works.</p>
+      <div class="footer-newsletter">
+        <input type="email" placeholder="Your email for weekly AI tips">
+        <button>Subscribe</button>
+      </div>
+      <div class="footer-socials">
+        <a href="#" class="footer-soc" aria-label="LinkedIn"><svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor"><path d="M2.5 5h2v7h-2V5zM3.5 4a1 1 0 100-2 1 1 0 000 2zM6 5h1.9v1h.1C8.4 5.4 9.2 5 10.2 5 12.3 5 13 6.3 13 8.2V12h-2V8.5c0-.7 0-1.7-1-1.7s-1.2.8-1.2 1.6V12H6V5z"/></svg></a>
+        <a href="#" class="footer-soc" aria-label="Instagram"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="12" height="12" rx="3"/><circle cx="8" cy="8" r="3"/><circle cx="11.5" cy="4.5" r=".5" fill="currentColor" stroke="none"/></svg></a>
+        <a href="#" class="footer-soc" aria-label="Twitter / X"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M12.6 2H14.8L10 7.5 15.6 14H11.3L7.9 9.6 4 14H1.8L6.9 8.1 1.5 2H5.9L9 6l3.6-4z"/></svg></a>
+        <a href="https://wa.me/6281200000000" class="footer-soc" aria-label="WhatsApp"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 1.5C4.41 1.5 1.5 4.41 1.5 8c0 1.13.3 2.2.83 3.12L1.5 14.5l3.5-.81A6.48 6.48 0 008 14.5c3.59 0 6.5-2.91 6.5-6.5S11.59 1.5 8 1.5z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M5.8 6.4c.17.78.6 1.5 1.2 2.1s1.32 1.03 2.1 1.2l.55-1.1s.73.24 1.03.33c.3.09.3.3.22.52-.1.22-.52.88-.88.97-.36.08-.66.08-1.18-.14-.52-.22-1.98-.97-2.86-2.64-.44-.84-.35-1.54-.22-1.84.13-.3.44-.57.66-.66.22-.09.44-.09.52.13.09.22.33.81.33.81l-.47.32z" fill="currentColor" stroke="none"/></svg></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Pages</h4>
+      <ul>
+        <li><a href="scoop-technology.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="case-studies.html">Case Studies</a></li>
+        <li><a href="careers.html">Careers</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="scoop-technology.html#services">Process Automation</a></li>
+        <li><a href="scoop-technology.html#services">AI Consulting</a></li>
+        <li><a href="scoop-technology.html#services">Data Analytics</a></li>
+        <li><a href="scoop-technology.html#services">Chatbot & Assistants</a></li>
+        <li><a href="scoop-technology.html#services">Computer Vision</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="mailto:hello@scooptech.id">hello@scooptech.id</a></li>
+        <li><a href="tel:+6221000000">+62 21 000 0000</a></li>
+        <li><a href="https://wa.me/6281200000000">WhatsApp</a></li>
+        <li><a href="contact.html">Jakarta, Indonesia</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-bottom-left">
+      <p>© 2025 <span>Scoop Technology</span>. All rights reserved.</p>
+      <div class="footer-status">
+        <div class="status-dot"></div>
+        All systems operational
+      </div>
+    </div>
+    <div class="footer-bottom-links">
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="#">Terms & Conditions</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Cursor
+const _cur=document.getElementById('cur'),_ring=document.getElementById('curRing');
+if(_cur){let mx=0,my=0,rx=0,ry=0;document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;_cur.style.left=mx-5+'px';_cur.style.top=my-5+'px';});(function t(){rx+=(mx-rx-18)*.11;ry+=(my-ry-18)*.11;_ring.style.left=rx+'px';_ring.style.top=ry+'px';requestAnimationFrame(t);})();document.querySelectorAll('a,button,[data-hover]').forEach(el=>{el.addEventListener('mouseenter',()=>{_cur.style.transform='scale(2.5)';_ring.style.transform='scale(1.5)';_ring.style.borderColor='rgba(59,130,246,.65)';});el.addEventListener('mouseleave',()=>{_cur.style.transform='scale(1)';_ring.style.transform='scale(1)';_ring.style.borderColor='rgba(59,130,246,.35)';});});}
+// Mobile menu
+function toggleMenu(){const h=document.getElementById('ham'),d=document.getElementById('drawer');h.classList.toggle('open');d.classList.toggle('open');document.body.style.overflow=d.classList.contains('open')?'hidden':'';}
+document.querySelectorAll('.nav-drawer a').forEach(a=>a.addEventListener('click',()=>{document.getElementById('ham').classList.remove('open');document.getElementById('drawer').classList.remove('open');document.body.style.overflow='';}));
+// Scroll reveal
+const _rv=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');_rv.unobserve(x.target);}});},{threshold:.08,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv').forEach(el=>_rv.observe(el));
+// FAQ
+document.querySelectorAll('.fi-q').forEach(q=>{q.addEventListener('click',()=>{const f=q.closest('.fi'),o=f.classList.contains('open');document.querySelectorAll('.fi.open').forEach(x=>x.classList.remove('open'));if(!o)f.classList.add('open');});});
+// Counter
+document.querySelectorAll('.num-val[data-t]').forEach(el=>{const co=new IntersectionObserver(e=>{e.forEach(x=>{if(!x.isIntersecting)return;const t=parseInt(el.dataset.t),s=el.dataset.s.replace(String(t),''),dur=1500,t0=performance.now();(function tick(now){const p=Math.min((now-t0)/dur,1),ease=1-Math.pow(1-p,3);el.textContent=Math.floor(t*ease)+s;if(p<1)requestAnimationFrame(tick);})(t0);co.unobserve(el);});},{threshold:.5});co.observe(el);});
+// Bar chart
+document.querySelectorAll('.wc-bar[data-w]').forEach(b=>{const bo=new IntersectionObserver(e=>{e.forEach(x=>{if(!x.isIntersecting)return;b.style.width=b.dataset.w+'%';bo.unobserve(b);});},{threshold:.3});bo.observe(b);});
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}});});
+// Neural canvas
+(function(){const canvas=document.getElementById('hero-canvas');if(!canvas)return;const ctx=canvas.getContext('2d');let W,H,nodes=[],pulses=[];const C=[{r:59,g:130,b:246},{r:6,g:182,b:212},{r:139,g:92,b:246},{r:96,g:165,b:250}];function resize(){W=canvas.width=canvas.offsetWidth;H=canvas.height=canvas.offsetHeight;nodes=[];const n=Math.floor(W*H/13000);for(let i=0;i<n;i++){const c=C[i%C.length];nodes.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35,r:Math.random()*2+.8,c,p:Math.random()*Math.PI*2});}}function pulse(){if(nodes.length<2||pulses.length>8)return;const a=nodes[Math.floor(Math.random()*nodes.length)],b=nodes[Math.floor(Math.random()*nodes.length)];if(a===b||Math.hypot(a.x-b.x,a.y-b.y)>200)return;pulses.push({ax:a.x,ay:a.y,bx:b.x,by:b.y,t:0,c:a.c});}function draw(){ctx.clearRect(0,0,W,H);for(let i=0;i<nodes.length;i++)for(let j=i+1;j<nodes.length;j++){const a=nodes[i],b=nodes[j],d=Math.hypot(a.x-b.x,a.y-b.y);if(d<155){ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.strokeStyle='rgba(59,130,246,'+(1-d/155)*.13+')';ctx.lineWidth=.7;ctx.stroke();}}pulses=pulses.filter(p=>p.t<1);pulses.forEach(p=>{p.t+=.017;const x=p.ax+(p.bx-p.ax)*p.t,y=p.ay+(p.by-p.ay)*p.t,a=Math.sin(p.t*Math.PI)*.85;ctx.beginPath();ctx.arc(x,y,3,0,Math.PI*2);ctx.fillStyle='rgba('+p.c.r+','+p.c.g+','+p.c.b+','+a+')';ctx.fill();});nodes.forEach(n=>{n.p+=.04;n.x+=n.vx;n.y+=n.vy;if(n.x<0||n.x>W)n.vx*=-1;if(n.y<0||n.y>H)n.vy*=-1;ctx.beginPath();ctx.arc(n.x,n.y,n.r+Math.sin(n.p)*.4,0,Math.PI*2);ctx.fillStyle='rgba('+n.c.r+','+n.c.g+','+n.c.b+',.68)';ctx.fill();});if(Math.random()<.045)pulse();requestAnimationFrame(draw);}window.addEventListener('resize',resize);resize();requestAnimationFrame(draw);})();
+// Grid canvas
+function buildGrid(id,r,g,b){const canvas=document.getElementById(id);if(!canvas)return;const ctx=canvas.getContext('2d');let W,H,scanY=0,streams=[];function resize(){W=canvas.width=canvas.offsetWidth;H=canvas.height=canvas.offsetHeight;streams=[];for(let i=0;i<12;i++)streams.push({x:Math.random()*W,y:Math.random()*H,sp:Math.random()*1.2+.4,len:Math.random()*70+30,a:Math.random()*.4+.1});}function draw(){ctx.clearRect(0,0,W,H);const gs=48;ctx.strokeStyle='rgba('+r+','+g+','+b+',.055)';ctx.lineWidth=1;for(let x=0;x<W;x+=gs){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}for(let y=0;y<H;y+=gs){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}for(let x=0;x<W;x+=gs)for(let y=0;y<H;y+=gs){ctx.beginPath();ctx.arc(x,y,1.5,0,Math.PI*2);ctx.fillStyle='rgba('+r+','+g+','+b+',.17)';ctx.fill();}scanY=(scanY+.85)%H;const sg=ctx.createLinearGradient(0,scanY-70,0,scanY+10);sg.addColorStop(0,'rgba('+r+','+g+','+b+',0)');sg.addColorStop(1,'rgba('+r+','+g+','+b+',.065)');ctx.fillStyle=sg;ctx.fillRect(0,scanY-70,W,80);ctx.beginPath();ctx.moveTo(0,scanY);ctx.lineTo(W,scanY);ctx.strokeStyle='rgba('+r+','+g+','+b+',.15)';ctx.lineWidth=1;ctx.stroke();streams.forEach(s=>{s.y+=s.sp;if(s.y>H){s.y=-s.len;s.x=Math.random()*W;}const g2=ctx.createLinearGradient(s.x,s.y-s.len,s.x,s.y);g2.addColorStop(0,'rgba('+r+','+g+','+b+',0)');g2.addColorStop(1,'rgba('+r+','+g+','+b+','+s.a+')');ctx.strokeStyle=g2;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(s.x,s.y-s.len);ctx.lineTo(s.x,s.y);ctx.stroke();});requestAnimationFrame(draw);}window.addEventListener('resize',resize);resize();requestAnimationFrame(draw);}
+buildGrid('why-canvas',59,130,246);
+buildGrid('cta-canvas',6,182,212);
+
+// ── DASHBOARD MOCKUP ANIMATION ──
+(function(){
+  // Counter animation
+  function countUp(el, target, suffix, dur) {
+    const t0 = performance.now();
+    (function tick(now) {
+      const p = Math.min((now - t0) / dur, 1);
+      const ease = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.floor(target * ease) + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+    })(t0);
+  }
+
+  // Trigger when hero is visible
+  setTimeout(() => {
+    const s1 = document.getElementById('hv-s1');
+    const s2 = document.getElementById('hv-s2');
+    const s3 = document.getElementById('hv-s3');
+    if (s1) countUp(s1, 1247, '', 2000);
+    if (s2) countUp(s2, 99, '%', 2200);
+    if (s3) countUp(s3, 148, 'h', 1800);
+  }, 600);
+
+  // Build chart bars
+  const barsEl = document.getElementById('hvc-bars');
+  if (barsEl) {
+    const oldH = [32, 40, 28, 45, 36, 42, 38];
+    const newH = [72, 85, 78, 90, 82, 88, 95];
+    oldH.forEach((h, i) => {
+      const pair = document.createElement('div');
+      pair.style.cssText = 'flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;height:100%;justify-content:flex-end;';
+      pair.innerHTML = `
+        <div class="hvc-bar bar-new" style="width:100%;height:0%;border-radius:3px 3px 0 0;transition:height 1s ease ${i*0.08}s;"></div>
+        <div class="hvc-bar bar-old" style="width:100%;height:0%;opacity:.5;border-radius:3px 3px 0 0;transition:height 1s ease ${i*0.08+0.15}s;"></div>
+      `;
+      barsEl.appendChild(pair);
+      setTimeout(() => {
+        pair.querySelectorAll('.hvc-bar')[0].style.height = newH[i] + '%';
+        pair.querySelectorAll('.hvc-bar')[1].style.height = oldH[i] + '%';
+      }, 800 + i * 80);
+    });
+  }
+
+  // Activity feed — auto-updating
+  const activities = [
+    { icon: `<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l2.5 2.5 5.5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`, cls: 'hvfi2', t: 'Monthly report generated automatically', s: 'PT Cahaya Elektronik', time: 'just now' },
+    { icon: `<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 2v4l3 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="6" cy="6" r="4.5" stroke="currentColor" stroke-width="1.3"/></svg>`, cls: 'hvfi3', t: '847 data entries processed by AI', s: 'Mandala Retail Group', time: '2 min ago' },
+    { icon: `<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><rect x="1" y="2" width="10" height="8" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M1 4.5l5 3 5-3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>`, cls: 'hvfi1', t: '23 insurance claims verified', s: 'Asuransi Prima', time: '5 min ago' },
+    { icon: `<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 9l2.5-3 2 2 3-4 2.5 2.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>`, cls: 'hvfi4', t: 'Routes for 380 fleet vehicles optimized', s: 'PT Nusantara Logistik', time: '12 min ago' },
+  ];
+
+  const feedEl = document.getElementById('hv-feed');
+  if (feedEl) {
+    let shown = 0;
+    function addActivity() {
+      const a = activities[shown % activities.length];
+      const el = document.createElement('div');
+      el.className = 'hvf-item';
+      el.style.animationDelay = '0s';
+      el.innerHTML = `
+        <div class="hvf-icon ${a.cls}">${a.icon}</div>
+        <div class="hvf-text">
+          <div class="hvf-t">${a.t}</div>
+          <div class="hvf-s">${a.s}</div>
+        </div>
+        <div class="hvf-time">${a.time}</div>
+      `;
+      feedEl.insertBefore(el, feedEl.firstChild);
+      if (feedEl.children.length > 3) feedEl.removeChild(feedEl.lastChild);
+      shown++;
+    }
+    // Show first 3 immediately
+    [0,1,2].forEach(i => {
+      setTimeout(() => addActivity(), 900 + i * 300);
+    });
+    // Then cycle every 4 seconds
+    setTimeout(() => {
+      setInterval(addActivity, 4000);
+    }, 3500);
+  }
+})();
+const svcData = {
+  web: {
+    title: "Web Design & Revamp",
+    desc: "We transform your old website into a powerful digital asset. Focus on high performance, visually striking design, and user experience that turns visitors into customers.",
+    icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9Z" stroke="currentColor" stroke-width="2"/></svg>`,
+    features: ["Modern & Premium UI/UX", "Speed Optimization (Lighthouse 90+)", "Responsive on All Devices", "SEO-Friendly Architecture"]
+  },
+  mobile: {
+    title: "Mobile App Development",
+    desc: "Build native or hybrid mobile apps (React Native/Flutter) that deliver a smooth experience for your users. Ideal for internal team apps or B2C services.",
+    icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none"><rect x="5" y="2" width="14" height="20" rx="2" stroke="currentColor" stroke-width="2"/><path d="M12 18h.01" stroke="currentColor" stroke-width="2"/></svg>`,
+    features: ["Android & iOS Support", "Push Notifications", "Complex API Integration", "Regular Maintenance"]
+  },
+  dashboard: {
+    title: "Dashboard & Analytics System",
+    desc: "Turn raw data into smart business decisions. We build custom dashboard systems integrated with your database for real-time monitoring.",
+    icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none"><path d="M3 3v18h18" stroke="currentColor" stroke-width="2"/><path d="M18 9l-5 5-2-2-4 4" stroke="currentColor" stroke-width="2"/></svg>`,
+    features: ["Real-time Data Sync", "Interactive Chart Visualization", "Automatic Report Export", "Multi-level Access Control"]
+  },
+  automation: {
+    title: "Process Automation (AI)",
+    desc: "Eliminate tedious manual work. Our AI can handle automatic data entry, document sorting, and smart email dispatch based on specific triggers.",
+    icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" stroke="currentColor" stroke-width="2"/></svg>`,
+    features: ["Data Entry Automation", "Document Parsing", "Smart Workflow", "Cost Reduction up to 70%"]
+  },
+  chatbot: {
+    title: "Chatbot & Assistants Virtual",
+    desc: "Deliver 24/7 service to your customers. LLM-based chatbots (like GPT) trained specifically on your business data to answer both technical and general questions.",
+    icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="currentColor" stroke-width="2"/></svg>`,
+    features: ["Multi-language Support", "WhatsApp/Telegram Integration", "Private Data Training", "Human Handoff System"]
+  },
+  vision: {
+    title: "Computer Vision / AI Visual",
+    desc: "Use cameras as smart sensors. From automatic stock counting in warehouses to production defect detection in factories with high accuracy.",
+    icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M12 8v4l3 3" stroke="currentColor" stroke-width="2"/></svg>`,
+    features: ["Quality Control Automation", "Object Counting", "Security Analytics", "Industrial IoT Ready"]
+  }
+};
+
+function openSvcModal(id) {
+  const data = svcData[id];
+  if (!data) return;
+  
+  document.getElementById('smTitle').textContent = data.title;
+  document.getElementById('smDesc').textContent = data.desc;
+  document.getElementById('smIcon').innerHTML = data.icon;
+  
+  const fWrap = document.getElementById('smFeatures');
+  fWrap.innerHTML = '';
+  data.features.forEach(f => {
+    fWrap.innerHTML += `<div class="sm-f"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg> ${f}</div>`;
+  });
+  
+  document.getElementById('svcModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeSvcModal() {
+  document.getElementById('svcModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// Close on Esc
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeSvcModal();
+});
+
+// Scroll Progress
+window.addEventListener('scroll', () => {
+  const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const scrolled = (winScroll / height) * 100;
+  document.getElementById("scrollBar").style.width = scrolled + "%";
+});
+
+</script>
+</body>
+</html>
