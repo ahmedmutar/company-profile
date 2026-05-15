@@ -293,6 +293,60 @@
   .comp-table th,.comp-table td{padding:10px 12px;}
 }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://scooptechcorp.com/#organization",
+      "name": "Scoop Technology",
+      "url": "https://scooptechcorp.com/"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://scooptechcorp.com/web-design.html#webpage",
+      "url": "https://scooptechcorp.com/web-design.html",
+      "name": "Web Design & Revamp — Scoop Technology",
+      "description": "Professional web design and revamp service by Scoop Technology. Full UI/UX design and development for corporate websites, e-commerce, and SaaS products in Indonesia.",
+      "about": { "@id": "https://scooptechcorp.com/#organization" }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://scooptechcorp.com/web-design.html#service",
+      "name": "Web Design & Revamp",
+      "description": "Full UI/UX design and development service — from discovery and wireframes through to launch. Built with React, Next.js, Vue.js, TypeScript, Tailwind CSS, WordPress, or Webflow depending on your needs.",
+      "provider": { "@id": "https://scooptechcorp.com/#organization" },
+      "url": "https://scooptechcorp.com/web-design.html",
+      "areaServed": {
+        "@type": "Country",
+        "name": "Indonesia"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Web Design Packages",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "name": "Corporate Website Design",
+            "description": "Professional multi-page corporate website with modern UI/UX, mobile-responsive, and SEO-ready."
+          },
+          {
+            "@type": "Offer",
+            "name": "E-Commerce Website",
+            "description": "Full e-commerce website with product catalog, cart, checkout, and payment gateway integration."
+          },
+          {
+            "@type": "Offer",
+            "name": "SaaS Dashboard & Landing Page",
+            "description": "Clean, conversion-focused SaaS landing pages and web app dashboards."
+          }
+        ]
+      }
+    }
+  ]
+}
+</script>
 </head>
 
 <body style="overflow-x:hidden;">

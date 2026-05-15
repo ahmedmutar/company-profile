@@ -144,8 +144,43 @@
   .num-box:last-child{border-bottom:none;}
 }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://scooptechcorp.com/#organization",
+      "name": "Scoop Technology",
+      "url": "https://scooptechcorp.com/",
+      "description": "Indonesian AI solutions company helping businesses work faster and more efficiently with process automation, data analytics, AI chatbots, computer vision, and web design.",
+      "email": "hello@scooptech.id",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Jl. Jend. Sudirman No. 88",
+        "addressLocality": "Jakarta Selatan",
+        "addressRegion": "DKI Jakarta",
+        "postalCode": "12190",
+        "addressCountry": "ID"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/company/scooptechnology",
+        "https://twitter.com/scooptech_id"
+      ]
+    },
+    {
+      "@type": "AboutPage",
+      "@id": "https://scooptechcorp.com/about.html#webpage",
+      "url": "https://scooptechcorp.com/about.html",
+      "name": "About Us — Scoop Technology",
+      "description": "Learn about Scoop Technology — our mission, team, values, and the story behind Indonesia's AI solutions company.",
+      "about": { "@id": "https://scooptechcorp.com/#organization" }
+    }
+  ]
+}
+</script>
 </head>
-<body style="overflow-x:hidden;" style="overflow-x:hidden;">
+<body style="overflow-x:hidden;">
 <div class="cur" id="cur"></div><div class="cur-ring" id="curRing"></div>
 <nav class="nav">
   <a href="index.html" class="nav-logo"><div class="nav-logo-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="5" stroke="white" stroke-width="1.8"/><circle cx="8" cy="8" r="2" fill="white"/></svg></div>Scoop Technology</a>
