@@ -13,12 +13,12 @@
 ## Key pages
 
 - Homepage: https://scooptechcorp.com/
-- About Us: https://scooptechcorp.com/about.html
-- Case Studies: https://scooptechcorp.com/case-studies.html
-- Web Design Service: https://scooptechcorp.com/web-design.html
-- Careers: https://scooptechcorp.com/careers.html
-- Blog: https://scooptechcorp.com/blog.html
-- Contact: https://scooptechcorp.com/contact.html
+- About Us: https://scooptechcorp.com/about
+- Case Studies: https://scooptechcorp.com/case-studies
+- Web Design Service: https://scooptechcorp.com/web-design
+- Careers: https://scooptechcorp.com/careers
+- Blog: https://scooptechcorp.com/blog
+- Contact: https://scooptechcorp.com/contact
 
 ## Contact
 

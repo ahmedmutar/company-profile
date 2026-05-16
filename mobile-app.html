@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Scoop Technology builds Android & iOS mobile apps and PWA using React Native and Flutter. For UMKM, e-commerce, enterprise, and SaaS startups in Indonesia.">
+<meta name="keywords" content="mobile app development Indonesia, Android iOS app, React Native Flutter, aplikasi mobile UMKM, PWA, custom enterprise app">
+<meta name="author" content="Scoop Technology">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://scooptechcorp.com/mobile-app">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mobile App Development — Scoop Technology">
+<meta property="og:description" content="Android, iOS & PWA apps built with React Native and Flutter. For UMKM, e-commerce, enterprise, and SaaS startups across Indonesia.">
+<meta property="og:url" content="https://scooptechcorp.com/mobile-app">
+<meta property="og:image" content="https://scooptechcorp.com/og-image.jpg">
+<meta property="og:site_name" content="Scoop Technology">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Mobile App Development — Scoop Technology">
+<meta name="twitter:description" content="Android, iOS & PWA apps built with React Native and Flutter.">
+<meta name="twitter:image" content="https://scooptechcorp.com/og-image.jpg">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%233B82F6'/%3E%3Ccircle cx='16' cy='16' r='8' stroke='white' stroke-width='2.5' fill='none'/%3E%3Ccircle cx='16' cy='16' r='3.5' fill='white'/%3E%3C/svg%3E">
+<title>Mobile App Development — Scoop Technology</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://scooptechcorp.com/#organization",
+      "name": "Scoop Technology",
+      "url": "https://scooptechcorp.com/"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://scooptechcorp.com/mobile-app#webpage",
+      "url": "https://scooptechcorp.com/mobile-app",
+      "name": "Mobile App Development — Scoop Technology",
+      "description": "Android, iOS & PWA apps built with React Native and Flutter for UMKM, e-commerce, enterprise, and SaaS startups in Indonesia.",
+      "about": { "@id": "https://scooptechcorp.com/#organization" }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://scooptechcorp.com/mobile-app#service",
+      "name": "Mobile App Development",
+      "description": "Cross-platform Android & iOS mobile app development using React Native and Flutter, plus PWA. Covers UMKM apps, e-commerce, internal enterprise tools, and SaaS products.",
+      "provider": { "@id": "https://scooptechcorp.com/#organization" },
+      "url": "https://scooptechcorp.com/mobile-app",
+      "areaServed": { "@type": "Country", "name": "Indonesia" }
+    }
+  ]
+}
+</script>
+<style>
+/* ── PHONE MOCKUP ── */
+.phone-mockup {
+  width: 200px;
+  height: 400px;
+  border-radius: 32px;
+  border: 2px solid rgba(255,255,255,.12);
+  background: #0d1117;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 32px 80px rgba(0,0,0,.5), inset 0 0 0 1px rgba(255,255,255,.06);
+  flex-shrink: 0;
+}
+.phone-mockup::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 6px;
+  background: rgba(255,255,255,.15);
+  border-radius: 99px;
+  z-index: 10;
+}
+.phone-screen {
+  position: absolute;
+  inset: 0;
+  padding: 28px 12px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow: hidden;
+}
+/* E-commerce app */
+.phone-ecom { background: linear-gradient(160deg, #0f172a, #1e1b4b); }
+.phone-ecom .ph-topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
+.phone-ecom .ph-logo { width: 50px; height: 8px; background: linear-gradient(90deg, #818cf8, #c084fc); border-radius: 4px; }
+.phone-ecom .ph-cart { width: 20px; height: 20px; border-radius: 6px; background: rgba(129,140,248,.2); }
+.ph-banner { width: 100%; height: 70px; border-radius: 10px; background: linear-gradient(135deg, #4f46e5, #7c3aed); display: flex; align-items: flex-end; padding: 8px; }
+.ph-banner-label { height: 7px; width: 55%; background: rgba(255,255,255,.4); border-radius: 3px; }
+.ph-cats { display: flex; gap: 5px; }
+.ph-cat { flex: 1; height: 32px; border-radius: 8px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08); }
+.ph-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; flex: 1; }
+.ph-prod { border-radius: 8px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.07); padding: 7px; }
+.ph-prod-img { width: 100%; height: 42px; border-radius: 6px; margin-bottom: 5px; }
+.ph-prod:nth-child(1) .ph-prod-img { background: linear-gradient(135deg, #6366f1, #8b5cf6); }
+.ph-prod:nth-child(2) .ph-prod-img { background: linear-gradient(135deg, #ec4899, #f43f5e); }
+.ph-prod:nth-child(3) .ph-prod-img { background: linear-gradient(135deg, #0ea5e9, #6366f1); }
+.ph-prod:nth-child(4) .ph-prod-img { background: linear-gradient(135deg, #f59e0b, #ef4444); }
+.ph-prod-line { height: 5px; background: rgba(255,255,255,.15); border-radius: 3px; margin-bottom: 3px; }
+.ph-prod-line.short { width: 60%; background: rgba(129,140,248,.4); }
+.ph-navbar { display: flex; justify-content: space-around; padding: 8px 0 0; border-top: 1px solid rgba(255,255,255,.06); }
+.ph-nav-dot { width: 18px; height: 18px; border-radius: 5px; background: rgba(255,255,255,.08); }
+.ph-nav-dot.active { background: rgba(99,102,241,.5); }
+
+/* UMKM / POS app */
+.phone-pos { background: linear-gradient(160deg, #0a1628, #0f2744); }
+.ph-pos-header { background: rgba(59,130,246,.15); border-radius: 10px; padding: 10px; margin-bottom: 4px; }
+.ph-pos-title { height: 7px; width: 50%; background: rgba(59,130,246,.6); border-radius: 3px; margin-bottom: 5px; }
+.ph-pos-amount { height: 18px; width: 70%; background: rgba(255,255,255,.2); border-radius: 4px; }
+.ph-items { display: flex; flex-direction: column; gap: 5px; flex: 1; }
+.ph-item { display: flex; align-items: center; gap: 7px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.07); border-radius: 8px; padding: 7px 8px; }
+.ph-item-dot { width: 26px; height: 26px; border-radius: 6px; flex-shrink: 0; }
+.ph-item:nth-child(1) .ph-item-dot { background: rgba(59,130,246,.4); }
+.ph-item:nth-child(2) .ph-item-dot { background: rgba(20,184,166,.4); }
+.ph-item:nth-child(3) .ph-item-dot { background: rgba(168,85,247,.4); }
+.ph-item-info { flex: 1; }
+.ph-item-line { height: 5px; background: rgba(255,255,255,.15); border-radius: 3px; margin-bottom: 3px; }
+.ph-item-line.val { width: 45%; background: rgba(59,130,246,.4); }
+.ph-pay-btn { background: linear-gradient(90deg, #2563eb, #3b82f6); border-radius: 10px; padding: 10px; text-align: center; }
+.ph-pay-text { height: 8px; width: 50%; background: rgba(255,255,255,.6); border-radius: 4px; margin: 0 auto; }
+
+/* Enterprise / dashboard app */
+.phone-ent { background: linear-gradient(160deg, #0a0f1e, #111827); }
+.ph-ent-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+.ph-ent-title { height: 7px; width: 45%; background: rgba(255,255,255,.2); border-radius: 3px; }
+.ph-ent-avatar { width: 22px; height: 22px; border-radius: 50%; background: linear-gradient(135deg, #6366f1, #8b5cf6); }
+.ph-chart-wrap { background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.07); border-radius: 10px; padding: 10px; margin-bottom: 6px; }
+.ph-chart-label { height: 5px; width: 40%; background: rgba(255,255,255,.15); border-radius: 3px; margin-bottom: 8px; }
+.ph-bars { display: flex; align-items: flex-end; gap: 5px; height: 48px; }
+.ph-bar { flex: 1; border-radius: 4px 4px 0 0; }
+.ph-bar:nth-child(1) { height: 60%; background: rgba(99,102,241,.4); }
+.ph-bar:nth-child(2) { height: 85%; background: rgba(99,102,241,.7); }
+.ph-bar:nth-child(3) { height: 45%; background: rgba(99,102,241,.4); }
+.ph-bar:nth-child(4) { height: 95%; background: linear-gradient(0deg,#6366f1,#a78bfa); }
+.ph-bar:nth-child(5) { height: 70%; background: rgba(99,102,241,.5); }
+.ph-bar:nth-child(6) { height: 55%; background: rgba(99,102,241,.4); }
+.ph-stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin-bottom: 6px; }
+.ph-stat { background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.07); border-radius: 8px; padding: 8px; }
+.ph-stat-val { height: 10px; width: 55%; border-radius: 3px; margin-bottom: 4px; }
+.ph-stat:nth-child(1) .ph-stat-val { background: rgba(99,102,241,.5); }
+.ph-stat:nth-child(2) .ph-stat-val { background: rgba(20,184,166,.5); }
+.ph-list-row { display: flex; flex-direction: column; gap: 4px; }
+.ph-list-item { display: flex; align-items: center; gap: 6px; background: rgba(255,255,255,.03); border-radius: 6px; padding: 6px 8px; }
+.ph-list-dot { width: 6px; height: 6px; border-radius: 50%; }
+.ph-list-dot.blue { background: #6366f1; }
+.ph-list-dot.teal { background: #14b8a6; }
+.ph-list-dot.purple { background: #a78bfa; }
+.ph-list-line { height: 5px; flex: 1; background: rgba(255,255,255,.1); border-radius: 3px; }
+
+/* SaaS app */
+.phone-saas { background: linear-gradient(160deg, #0f0a1e, #1a0a2e); }
+.ph-saas-top { background: linear-gradient(135deg, rgba(139,92,246,.2), rgba(236,72,153,.1)); border-radius: 10px; padding: 10px; margin-bottom: 6px; }
+.ph-saas-label { height: 5px; width: 35%; background: rgba(255,255,255,.2); border-radius: 3px; margin-bottom: 5px; }
+.ph-saas-val { height: 14px; width: 55%; background: rgba(167,139,250,.5); border-radius: 4px; margin-bottom: 6px; }
+.ph-saas-chips { display: flex; gap: 4px; }
+.ph-saas-chip { height: 12px; border-radius: 6px; }
+.ph-saas-chip:nth-child(1) { width: 40px; background: rgba(139,92,246,.4); }
+.ph-saas-chip:nth-child(2) { width: 28px; background: rgba(236,72,153,.3); }
+.ph-saas-chip:nth-child(3) { width: 34px; background: rgba(99,102,241,.3); }
+.ph-feed { display: flex; flex-direction: column; gap: 5px; flex: 1; }
+.ph-feed-item { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.07); border-radius: 8px; padding: 8px; }
+.ph-feed-head { display: flex; align-items: center; gap: 6px; margin-bottom: 5px; }
+.ph-feed-av { width: 16px; height: 16px; border-radius: 50%; }
+.ph-feed-av:nth-of-type(1) { background: linear-gradient(135deg, #8b5cf6, #ec4899); }
+.ph-feed-name { height: 5px; width: 40%; background: rgba(255,255,255,.15); border-radius: 3px; }
+.ph-feed-body { height: 5px; background: rgba(255,255,255,.08); border-radius: 3px; margin-bottom: 3px; }
+.ph-feed-body.short { width: 75%; }
+
+/* ── LAYOUT ── */
+.phones-showcase {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: flex-end;
+  padding: 40px 0 20px;
+  flex-wrap: wrap;
+}
+.phone-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.phone-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(255,255,255,.4);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.phone-mockup.featured { transform: scale(1.08); }
+
+/* ── SEGMENT GRID ── */
+.segment-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.seg-card {
+  background: var(--white);
+  border: 1px solid var(--bdr);
+  border-radius: var(--r);
+  padding: clamp(18px, 2.5vw, 28px);
+  transition: all .3s;
+}
+.seg-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--bdr-2); }
+.seg-icon {
+  width: 46px; height: 46px;
+  border-radius: var(--r-sm);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 14px;
+  color: var(--blue);
+}
+.seg-title { font-family: var(--fh); font-size: 15px; font-weight: 800; color: var(--text); margin-bottom: 7px; }
+.seg-desc { font-size: 13px; color: var(--text-2); line-height: 1.7; }
+
+/* ── INCLUDED LIST ── */
+.incl-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.incl-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: var(--white);
+  border: 1px solid var(--bdr);
+  border-radius: var(--r);
+  padding: 16px 18px;
+}
+.incl-check {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: var(--blue-l);
+  color: var(--blue);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.incl-text b { display: block; font-family: var(--fh); font-size: 14px; font-weight: 800; color: var(--text); margin-bottom: 3px; }
+.incl-text span { font-size: 13px; color: var(--text-2); line-height: 1.65; }
+
+/* ── PROCESS TIMELINE ── */
+.timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 28px;
+  top: 28px;
+  bottom: 28px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--blue), var(--teal), var(--violet));
+}
+.tl-step {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  padding: 24px 0;
+  position: relative;
+}
+.tl-num {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 2px solid var(--bdr-2);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--fh); font-size: 16px; font-weight: 800;
+  color: var(--blue-d);
+  flex-shrink: 0;
+  position: relative; z-index: 1;
+}
+.tl-body { padding-top: 12px; }
+.tl-title { font-family: var(--fh); font-size: 18px; font-weight: 800; color: var(--text); margin-bottom: 6px; }
+.tl-desc { font-size: 14px; color: var(--text-2); line-height: 1.75; max-width: 560px; }
+.tl-tag { display: inline-block; font-size: 11px; font-weight: 700; color: var(--blue-d); background: var(--blue-l); border-radius: 99px; padding: 3px 10px; margin-bottom: 8px; }
+
+/* ── TECH STACK ── */
+.tech-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.tech-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--white);
+  border: 1px solid var(--bdr);
+  border-radius: var(--r-sm);
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  transition: all .2s;
+}
+.tech-chip:hover { border-color: var(--bdr-2); box-shadow: var(--shadow-sm); }
+.tech-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+/* ── COMPARE TABLE ── */
+.comp-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  background: var(--white);
+  border-radius: var(--r);
+  overflow: hidden;
+  border: 1px solid var(--bdr);
+}
+.comp-table th {
+  padding: 14px 20px;
+  font-family: var(--fh);
+  font-size: 13px;
+  font-weight: 800;
+  text-align: left;
+  background: var(--bg);
+  border-bottom: 1px solid var(--bdr);
+  color: var(--text);
+}
+.comp-table th.hl { background: var(--blue-l); color: var(--blue-d); }
+.comp-table td {
+  padding: 13px 20px;
+  border-bottom: 1px solid var(--bdr);
+  color: var(--text-2);
+  vertical-align: middle;
+}
+.comp-table tr:last-child td { border-bottom: none; }
+.comp-table td.hl { background: rgba(59,130,246,.04); font-weight: 700; color: var(--text); }
+.check-yes { color: #22c55e; font-size: 18px; }
+.check-no { color: #94a3b8; font-size: 18px; }
+.check-part { color: #f59e0b; font-size: 18px; }
+
+/* ── TESTIMONIAL ── */
+.testi-card {
+  background: var(--white);
+  border: 1px solid var(--bdr);
+  border-radius: var(--r-lg);
+  padding: clamp(24px, 3vw, 40px);
+  max-width: 760px;
+  margin: 0 auto;
+}
+.testi-quote { font-size: clamp(16px, 1.8vw, 20px); color: var(--text); line-height: 1.72; font-weight: 600; margin-bottom: 20px; }
+.testi-author { display: flex; align-items: center; gap: 14px; }
+.testi-av {
+  width: 48px; height: 48px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--blue), var(--violet));
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--fh); font-size: 16px; font-weight: 800; color: #fff;
+}
+.testi-name { font-family: var(--fh); font-size: 15px; font-weight: 800; color: var(--text); }
+.testi-role { font-size: 13px; color: var(--text-2); }
+
+/* ── STAT ROW ── */
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--bdr);
+  border: 1px solid var(--bdr);
+  border-radius: var(--r);
+  overflow: hidden;
+}
+.stat-box {
+  background: var(--white);
+  padding: clamp(20px, 3vw, 36px) 20px;
+  text-align: center;
+}
+.stat-val {
+  font-family: var(--fh);
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 900;
+  color: var(--blue-d);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.stat-lbl { font-size: 13px; color: var(--text-2); font-weight: 600; }
+
+/* ── PLATFORM BADGES ── */
+.platform-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+.platform-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg);
+  border: 1px solid var(--bdr-2);
+  border-radius: var(--r-sm);
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width: 1024px) {
+  .segment-grid { grid-template-columns: 1fr 1fr; }
+  .stat-row { grid-template-columns: 1fr 1fr; }
+}
+@media(max-width: 768px) {
+  .incl-grid { grid-template-columns: 1fr; }
+  .phones-showcase { gap: 12px; }
+  .phone-mockup { width: 160px; height: 320px; }
+  .phone-mockup.featured { transform: none; }
+  .comp-table { font-size: 12px; }
+  .comp-table th, .comp-table td { padding: 10px 12px; }
+}
+@media(max-width: 580px) {
+  .segment-grid { grid-template-columns: 1fr; }
+  .stat-row { grid-template-columns: 1fr 1fr; }
+  .phones-showcase { gap: 8px; }
+  .phone-mockup { width: 140px; height: 285px; border-radius: 24px; }
+}
+</style>
+</head>
+
+<body style="overflow-x:hidden;">
+<div class="cur" id="cur"></div>
+<div class="cur-ring" id="curRing"></div>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-icon">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="5" stroke="white" stroke-width="1.8"/><circle cx="8" cy="8" r="2" fill="white"/></svg>
+    </div>Scoop Technology
+  </a>
+  <ul class="nav-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/about">About Us</a></li>
+    <li><a href="/case-studies">Case Studies</a></li>
+    <li><a href="/careers">Careers</a></li>
+    <li><a href="/blog">Blog</a></li>
+    <li><a href="/contact" class="nav-cta">Contact Us</a></li>
+  </ul>
+  <button class="nav-ham" id="ham" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+</nav>
+<div class="nav-drawer" id="drawer">
+  <a href="/">Home</a>
+  <a href="/about">About Us</a>
+  <a href="/case-studies">Case Studies</a>
+  <a href="/careers">Careers</a>
+  <a href="/blog">Blog</a>
+  <a href="/contact" class="drawer-cta">Contact Us</a>
+</div>
+
+<!-- HERO -->
+<section class="hero-page">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-overlay"></div>
+  <div class="hero-inner">
+    <div class="breadcrumb">
+      <a href="/">Home</a>
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Mobile App Development</span>
+    </div>
+    <div class="eyebrow eyebrow-dark rv">Mobile App Development</div>
+    <h1 class="page-title rv d1" data-i18n-html="ma-hero-title">Apps that work for<br><span class="gr">your business, not against it</span></h1>
+    <p class="page-desc rv d2">Android, iOS & PWA — built with React Native and Flutter. From UMKM cashier apps to enterprise dashboards to SaaS products.</p>
+    <div class="platform-row rv d3">
+      <div class="platform-badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="5" y="2" width="14" height="20" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M12 18h.01" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        Android & iOS
+      </div>
+      <div class="platform-badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M12 3v18M3 12h18M5 6.5C7 8 9.5 9 12 9s5-1 7-2.5M5 17.5C7 16 9.5 15 12 15s5 1 7 2.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        PWA
+      </div>
+      <div class="platform-badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        React Native & Flutter
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT STATS -->
+<section class="section section-white">
+  <div class="stat-row rv">
+    <div class="stat-box">
+      <div class="stat-val">28</div>
+      <div class="stat-lbl">days average delivery</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-val">2×</div>
+      <div class="stat-lbl">platforms, one codebase</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-val">99%</div>
+      <div class="stat-lbl">crash-free sessions target</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-val">∞</div>
+      <div class="stat-lbl">scalable from day one</div>
+    </div>
+  </div>
+</section>
+
+<!-- PHONE SHOWCASE -->
+<section class="section section-bg">
+  <div class="sec-label rv">App showcase</div>
+  <h2 class="sec-title rv d1">One team, every segment</h2>
+  <p class="sec-sub rv d2">We build apps for all kinds of businesses — from single-outlet UMKM to multi-division enterprises.</p>
+
+  <div class="phones-showcase rv d3">
+
+    <!-- E-commerce -->
+    <div class="phone-group">
+      <div class="phone-mockup phone-ecom">
+        <div class="phone-screen">
+          <div class="ph-topbar">
+            <div class="ph-logo"></div>
+            <div class="ph-cart"></div>
+          </div>
+          <div class="ph-banner"><div class="ph-banner-label"></div></div>
+          <div class="ph-cats">
+            <div class="ph-cat"></div><div class="ph-cat"></div><div class="ph-cat"></div>
+          </div>
+          <div class="ph-grid">
+            <div class="ph-prod"><div class="ph-prod-img"></div><div class="ph-prod-line"></div><div class="ph-prod-line short"></div></div>
+            <div class="ph-prod"><div class="ph-prod-img"></div><div class="ph-prod-line"></div><div class="ph-prod-line short"></div></div>
+            <div class="ph-prod"><div class="ph-prod-img"></div><div class="ph-prod-line"></div><div class="ph-prod-line short"></div></div>
+            <div class="ph-prod"><div class="ph-prod-img"></div><div class="ph-prod-line"></div><div class="ph-prod-line short"></div></div>
+          </div>
+          <div class="ph-navbar">
+            <div class="ph-nav-dot active"></div><div class="ph-nav-dot"></div><div class="ph-nav-dot"></div><div class="ph-nav-dot"></div>
+          </div>
+        </div>
+      </div>
+      <div class="phone-label">E-commerce</div>
+    </div>
+
+    <!-- UMKM / POS — featured -->
+    <div class="phone-group">
+      <div class="phone-mockup phone-pos featured">
+        <div class="phone-screen">
+          <div class="ph-pos-header">
+            <div class="ph-pos-title"></div>
+            <div class="ph-pos-amount"></div>
+          </div>
+          <div class="ph-items">
+            <div class="ph-item"><div class="ph-item-dot"></div><div class="ph-item-info"><div class="ph-item-line"></div><div class="ph-item-line val"></div></div></div>
+            <div class="ph-item"><div class="ph-item-dot"></div><div class="ph-item-info"><div class="ph-item-line"></div><div class="ph-item-line val"></div></div></div>
+            <div class="ph-item"><div class="ph-item-dot"></div><div class="ph-item-info"><div class="ph-item-line"></div><div class="ph-item-line val"></div></div></div>
+          </div>
+          <div class="ph-pay-btn"><div class="ph-pay-text"></div></div>
+        </div>
+      </div>
+      <div class="phone-label">UMKM / POS</div>
+    </div>
+
+    <!-- Enterprise dashboard -->
+    <div class="phone-group">
+      <div class="phone-mockup phone-ent">
+        <div class="phone-screen">
+          <div class="ph-ent-header">
+            <div class="ph-ent-title"></div>
+            <div class="ph-ent-avatar"></div>
+          </div>
+          <div class="ph-chart-wrap">
+            <div class="ph-chart-label"></div>
+            <div class="ph-bars">
+              <div class="ph-bar"></div><div class="ph-bar"></div><div class="ph-bar"></div>
+              <div class="ph-bar"></div><div class="ph-bar"></div><div class="ph-bar"></div>
+            </div>
+          </div>
+          <div class="ph-stat-row">
+            <div class="ph-stat"><div class="ph-stat-val"></div></div>
+            <div class="ph-stat"><div class="ph-stat-val"></div></div>
+          </div>
+          <div class="ph-list-row">
+            <div class="ph-list-item"><div class="ph-list-dot blue"></div><div class="ph-list-line"></div></div>
+            <div class="ph-list-item"><div class="ph-list-dot teal"></div><div class="ph-list-line"></div></div>
+            <div class="ph-list-item"><div class="ph-list-dot purple"></div><div class="ph-list-line"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="phone-label">Enterprise</div>
+    </div>
+
+    <!-- SaaS -->
+    <div class="phone-group">
+      <div class="phone-mockup phone-saas">
+        <div class="phone-screen">
+          <div class="ph-saas-top">
+            <div class="ph-saas-label"></div>
+            <div class="ph-saas-val"></div>
+            <div class="ph-saas-chips">
+              <div class="ph-saas-chip"></div><div class="ph-saas-chip"></div><div class="ph-saas-chip"></div>
+            </div>
+          </div>
+          <div class="ph-feed">
+            <div class="ph-feed-item">
+              <div class="ph-feed-head"><div class="ph-feed-av"></div><div class="ph-feed-name"></div></div>
+              <div class="ph-feed-body"></div><div class="ph-feed-body short"></div>
+            </div>
+            <div class="ph-feed-item">
+              <div class="ph-feed-head"><div class="ph-feed-av"></div><div class="ph-feed-name"></div></div>
+              <div class="ph-feed-body"></div><div class="ph-feed-body short"></div>
+            </div>
+            <div class="ph-feed-item">
+              <div class="ph-feed-head"><div class="ph-feed-av"></div><div class="ph-feed-name"></div></div>
+              <div class="ph-feed-body"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="phone-label">SaaS / Startup</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SEGMENTS -->
+<section class="section section-white">
+  <div class="sec-label rv">Who we build for</div>
+  <h2 class="sec-title rv d1">Built for every business type</h2>
+  <p class="sec-sub rv d2">Whether you're a warung going digital or a company rolling out an internal tool for 500 staff — the approach fits.</p>
+
+  <div class="segment-grid rv d2">
+    <div class="seg-card">
+      <div class="seg-icon" style="background:rgba(59,130,246,.1);">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 22V12h6v10" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="seg-title">UMKM & Small Business</div>
+      <div class="seg-desc">Digital cashier, inventory management, online ordering, and daily reports — all in one lightweight app that's easy to use.</div>
+    </div>
+    <div class="seg-card">
+      <div class="seg-icon" style="background:rgba(168,85,247,.1); color:var(--violet);">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><line x1="3" y1="6" x2="21" y2="6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M16 10a4 4 0 01-8 0" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="seg-title">E-Commerce</div>
+      <div class="seg-desc">Product catalog, shopping cart, checkout, payment gateway, and push notifications. A shopping experience that feels native on Android & iOS.</div>
+    </div>
+    <div class="seg-card">
+      <div class="seg-icon" style="background:rgba(20,184,166,.1); color:var(--teal);">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="2" y="3" width="20" height="14" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+      </div>
+      <div class="seg-title">Custom Enterprise</div>
+      <div class="seg-desc">Internal apps for field teams, approval systems, operational dashboards, or a replacement for manual processes that eat up time.</div>
+    </div>
+    <div class="seg-card">
+      <div class="seg-icon" style="background:rgba(239,68,68,.1); color:#ef4444;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="seg-title">SaaS & Startup</div>
+      <div class="seg-desc">MVP in 4 weeks. Scalable architecture, smooth onboarding, and UI that keeps user retention high.</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT'S INCLUDED -->
+<section class="section section-bg">
+  <div class="sec-label rv">Scope of work</div>
+  <h2 class="sec-title rv d1">What's included</h2>
+  <p class="sec-sub rv d2">No hidden fees. Here's what you get from day one.</p>
+
+  <div class="incl-grid rv d2">
+    <div class="incl-item">
+      <div class="incl-check"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="incl-text"><b>UI/UX Design</b><span>Wireframe, mockup, and interactive prototype in Figma before a single line of code is written.</span></div>
+    </div>
+    <div class="incl-item">
+      <div class="incl-check"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="incl-text"><b>Android & iOS build</b><span>One React Native or Flutter codebase that runs on both platforms. No need to pay for two teams.</span></div>
+    </div>
+    <div class="incl-item">
+      <div class="incl-check"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="incl-text"><b>API & backend integration</b><span>Connection to REST APIs, databases, existing systems, or third-party services (payment, maps, notifications).</span></div>
+    </div>
+    <div class="incl-item">
+      <div class="incl-check"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="incl-text"><b>Push Notifications</b><span>Firebase Cloud Messaging for order notifications, reminders, updates, or other important messages.</span></div>
+    </div>
+    <div class="incl-item">
+      <div class="incl-check"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="incl-text"><b>Auth & user management</b><span>Email/password login, Google Sign-In, WhatsApp OTP, and role-based access control.</span></div>
+    </div>
+    <div class="incl-item">
+      <div class="incl-check"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="incl-text"><b>Offline support</b><span>App keeps working when the signal is weak. Data syncs automatically when the connection returns.</span></div>
+    </div>
+    <div class="incl-item">
+      <div class="incl-check"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="incl-text"><b>App Store & Play Store submission</b><span>We handle the publishing process to Google Play and Apple App Store — including screenshots, descriptions, and review.</span></div>
+    </div>
+    <div class="incl-item">
+      <div class="incl-check"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="incl-text"><b>3 months post-launch support</b><span>Bug fixes, minor updates, and technical consultation after the app goes live at no extra charge.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="section section-white">
+  <div class="sec-label rv">How it works</div>
+  <h2 class="sec-title rv d1">From idea to store in 5 steps</h2>
+  <p class="sec-sub rv d2">A process you can follow from day one, without confusing technical jargon.</p>
+
+  <div class="timeline rv d2">
+    <div class="tl-step">
+      <div class="tl-num">01</div>
+      <div class="tl-body">
+        <div class="tl-tag">Day 1 — 30 min call</div>
+        <div class="tl-title">Discovery & scoping</div>
+        <div class="tl-desc">We discuss requirements, who the users are, which features matter most, and which platform to prioritize. Output: scope document + timeline + cost estimate.</div>
+      </div>
+    </div>
+    <div class="tl-step">
+      <div class="tl-num">02</div>
+      <div class="tl-body">
+        <div class="tl-tag">Days 3–7</div>
+        <div class="tl-title">Wireframe & UI Design</div>
+        <div class="tl-desc">The design team creates user flow wireframes then develops them into high-fidelity UI in Figma. You review and give feedback before development begins.</div>
+      </div>
+    </div>
+    <div class="tl-step">
+      <div class="tl-num">03</div>
+      <div class="tl-body">
+        <div class="tl-tag">Days 7–21</div>
+        <div class="tl-title">Development</div>
+        <div class="tl-desc">Development runs in two-week sprints. You can see progress via internal builds (TestFlight for iOS, APK for Android) and weekly team updates.</div>
+      </div>
+    </div>
+    <div class="tl-step">
+      <div class="tl-num">04</div>
+      <div class="tl-body">
+        <div class="tl-tag">Days 21–26</div>
+        <div class="tl-title">QA & testing</div>
+        <div class="tl-desc">Testing on real devices: various screen sizes, OS versions, poor network conditions, and the most likely edge cases in the field.</div>
+      </div>
+    </div>
+    <div class="tl-step">
+      <div class="tl-num">05</div>
+      <div class="tl-body">
+        <div class="tl-tag">Day 28</div>
+        <div class="tl-title">Launch & handover</div>
+        <div class="tl-desc">Submit to Google Play & App Store. After approval, you receive the source code, technical documentation, and access to all accounts. 3-month support starts here.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON TABLE -->
+<section class="section section-bg">
+  <div class="sec-label rv">Why custom</div>
+  <h2 class="sec-title rv d1">Custom app vs template solution</h2>
+  <p class="sec-sub rv d2">Template and no-code tools are fast for prototypes, but not for businesses that grow.</p>
+
+  <div class="rv d2" style="overflow-x:auto;">
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>Criteria</th>
+          <th class="hl">Scoop Technology</th>
+          <th>Template / No-code</th>
+          <th>Native (separate)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Android & iOS from one codebase</td>
+          <td class="hl"><span class="check-yes">✓</span></td>
+          <td><span class="check-part">~</span></td>
+          <td><span class="check-no">✗</span></td>
+        </tr>
+        <tr>
+          <td>Custom brand design</td>
+          <td class="hl"><span class="check-yes">✓</span></td>
+          <td><span class="check-no">✗</span></td>
+          <td><span class="check-yes">✓</span></td>
+        </tr>
+        <tr>
+          <td>API & existing system integration</td>
+          <td class="hl"><span class="check-yes">✓</span></td>
+          <td><span class="check-part">~</span></td>
+          <td><span class="check-yes">✓</span></td>
+        </tr>
+        <tr>
+          <td>Offline mode</td>
+          <td class="hl"><span class="check-yes">✓</span></td>
+          <td><span class="check-no">✗</span></td>
+          <td><span class="check-yes">✓</span></td>
+        </tr>
+        <tr>
+          <td>Development cost</td>
+          <td class="hl">Efficient (one team)</td>
+          <td>Cheap upfront</td>
+          <td>2× more expensive</td>
+        </tr>
+        <tr>
+          <td>Long-term scalability</td>
+          <td class="hl"><span class="check-yes">✓</span></td>
+          <td><span class="check-no">✗</span></td>
+          <td><span class="check-yes">✓</span></td>
+        </tr>
+        <tr>
+          <td>Client-owned source code</td>
+          <td class="hl"><span class="check-yes">✓</span></td>
+          <td><span class="check-no">✗</span></td>
+          <td><span class="check-yes">✓</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- TECH STACK -->
+<section class="section section-white">
+  <div class="sec-label rv">Technology</div>
+  <h2 class="sec-title rv d1">Tech stack</h2>
+  <p class="sec-sub rv d2">Proven tools — chosen based on project requirements, not trends.</p>
+
+  <div class="tech-grid rv d2">
+    <div class="tech-chip"><div class="tech-dot" style="background:#61DAFB;"></div>React Native</div>
+    <div class="tech-chip"><div class="tech-dot" style="background:#54C5F8;"></div>Flutter</div>
+    <div class="tech-chip"><div class="tech-dot" style="background:#FF6B6B;"></div>Expo</div>
+    <div class="tech-chip"><div class="tech-dot" style="background:#3178C6;"></div>TypeScript</div>
+    <div class="tech-chip"><div class="tech-dot" style="background:#FF9500;"></div>Firebase</div>
+    <div class="tech-chip"><div class="tech-dot" style="background:#47A248;"></div>Node.js</div>
+    <div class="tech-chip"><div class="tech-dot" style="background:#CC2927;"></div>Laravel / PHP</div>
+    <div class="tech-chip"><div class="tech-dot" style="background:#F7DF1E;"></div>Supabase</div>
+    <div class="tech-chip"><div class="tech-dot" style="background:#a78bfa;"></div>Figma</div>
+    <div class="tech-chip"><div class="tech-dot" style="background:#34A853;"></div>Google Play</div>
+    <div class="tech-chip"><div class="tech-dot" style="background:#555;"></div>App Store</div>
+    <div class="tech-chip"><div class="tech-dot" style="background:#FFA500;"></div>TestFlight</div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="section section-bg">
+  <div class="testi-card rv">
+    <div class="testi-quote">"We used to handle all field orders through WhatsApp. Now we have our own app — the sales team can enter orders, check stock, and receive confirmation in seconds. Revenue went up 40% in the first 3 months."</div>
+    <div class="testi-author">
+      <div class="testi-av">AR</div>
+      <div>
+        <div class="testi-name">Ahmad Rizky</div>
+        <div class="testi-role">Operations Director, PT Distribusi Nusantara</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <canvas id="cta-canvas"></canvas>
+  <div class="cta-overlay"></div>
+  <div class="cta-inner">
+    <div class="eyebrow eyebrow-dark rv">Start building</div>
+    <h2 class="cta-title rv d1" data-i18n-html="ma-cta-title">Got an app idea?<br><span class="gr">Let's build it.</span></h2>
+    <p class="cta-sub rv d2">Free 30-minute consultation. Tell us what you need and we'll estimate scope, timeline, and cost with no commitment.</p>
+    <div class="cta-actions rv d3">
+      <a href="https://wa.me/6281200000000?text=Halo%20Scoop%20Technology%2C%20saya%20ingin%20konsultasi%20pembuatan%20aplikasi%20mobile." class="btn btn-white btn-lg" target="_blank" rel="noopener">
+        Start free consultation
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2.5 7.5h10M8 3.5l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="/case-studies" class="btn btn-ghost">See case studies</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="/" class="footer-brand-logo">
+        <div class="nav-logo-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="4" stroke="white" stroke-width="1.8"/><circle cx="7" cy="7" r="1.5" fill="white"/></svg></div>
+        Scoop Technology
+      </a>
+      <p>AI & mobile solutions for businesses that want to move faster.</p>
+      <div class="footer-socials">
+        <a href="https://linkedin.com/company/scooptechnology" class="footer-soc" aria-label="LinkedIn"><svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor"><path d="M2.5 5h2v7h-2V5zM3.5 4a1 1 0 100-2 1 1 0 000 2zM6 5h1.9v1h.1C8.4 5.4 9.2 5 10.2 5 12.3 5 13 6.3 13 8.2V12h-2V8.5c0-.7 0-1.7-1-1.7s-1.2.8-1.6V12H6V5z"/></svg></a>
+        <a href="https://twitter.com/scooptech_id" class="footer-soc" aria-label="Twitter / X"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M12.6 2H14.8L10 7.5 15.6 14H11.3L7.9 9.6 4 14H1.8L6.9 8.1 1.5 2H5.9L9 6l3.6-4z"/></svg></a>
+        <a href="https://wa.me/6281200000000" class="footer-soc" aria-label="WhatsApp"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 1.5C4.41 1.5 1.5 4.41 1.5 8c0 1.13.3 2.2.83 3.12L1.5 14.5l3.5-.81A6.48 6.48 0 008 14.5c3.59 0 6.5-2.91 6.5-6.5S11.59 1.5 8 1.5z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M5.8 6.4c.17.78.6 1.5 1.2 2.1s1.32 1.03 2.1 1.2l.55-1.1s.73.24 1.03.33c.3.09.3.3.22.52-.1.22-.52.88-.88.97-.36.08-.66.08-1.18-.14-.52-.22-1.98-.97-2.86-2.64-.44-.84-.35-1.54-.22-1.84.13-.3.44-.57.66-.66.22-.09.44-.09.52.13.09.22.33.81.33.81l-.47.32z" fill="currentColor" stroke="none"/></svg></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Pages</h4>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About Us</a></li>
+        <li><a href="/case-studies">Case Studies</a></li>
+        <li><a href="/careers">Careers</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="/web-design">Web Design & Revamp</a></li>
+        <li><a href="/mobile-app">Mobile App Development</a></li>
+        <li><a href="/#services">Process Automation</a></li>
+        <li><a href="/#services">AI Chatbot</a></li>
+        <li><a href="/#services">Computer Vision</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="mailto:hello@scooptech.id">hello@scooptech.id</a></li>
+        <li><a href="https://wa.me/6281200000000">WhatsApp</a></li>
+        <li><a href="/contact">Jakarta, Indonesia</a></li>
+        <li><a href="/privacy-policy">Privacy Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-bottom-left">
+      <p>© 2026 <span>Scoop Technology</span>. All rights reserved.</p>
+      <div class="footer-status"><div class="status-dot"></div>All systems operational</div>
+    </div>
+    <div class="footer-bottom-links">
+      <a href="/privacy-policy">Privacy Policy</a>
+      <a href="#">Terms & Conditions</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const _cur=document.getElementById('cur'),_ring=document.getElementById('curRing');
+if(_cur){let mx=0,my=0,rx=0,ry=0;document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;_cur.style.left=mx-5+'px';_cur.style.top=my-5+'px';});(function t(){rx+=(mx-rx-18)*.11;ry+=(my-ry-18)*.11;_ring.style.left=rx+'px';_ring.style.top=ry+'px';requestAnimationFrame(t);})();document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>{_cur.style.transform='scale(2.5)';_ring.style.transform='scale(1.5)';_ring.style.borderColor='rgba(59,130,246,.65)';});el.addEventListener('mouseleave',()=>{_cur.style.transform='scale(1)';_ring.style.transform='scale(1)';_ring.style.borderColor='rgba(59,130,246,.35)';});});}
+function toggleMenu(){const h=document.getElementById('ham'),d=document.getElementById('drawer');h.classList.toggle('open');d.classList.toggle('open');document.body.style.overflow=d.classList.contains('open')?'hidden':'';}
+document.querySelectorAll('.nav-drawer a').forEach(a=>a.addEventListener('click',()=>{document.getElementById('ham').classList.remove('open');document.getElementById('drawer').classList.remove('open');document.body.style.overflow='';}));
+const _rv=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');_rv.unobserve(x.target);}});},{threshold:.08,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv').forEach(el=>_rv.observe(el));
+// Neural canvas hero
+(function(){const canvas=document.getElementById('hero-canvas');if(!canvas)return;const ctx=canvas.getContext('2d');let W,H,nodes=[],pulses=[];const C=[{r:59,g:130,b:246},{r:6,g:182,b:212},{r:139,g:92,b:246},{r:96,g:165,b:250}];function resize(){W=canvas.width=canvas.offsetWidth;H=canvas.height=canvas.offsetHeight;nodes=[];const n=Math.floor(W*H/13000);for(let i=0;i<n;i++){const c=C[i%C.length];nodes.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35,r:Math.random()*2+.8,c,p:Math.random()*Math.PI*2});}}function pulse(){if(nodes.length<2||pulses.length>8)return;const a=nodes[Math.floor(Math.random()*nodes.length)],b=nodes[Math.floor(Math.random()*nodes.length)];if(a===b||Math.hypot(a.x-b.x,a.y-b.y)>200)return;pulses.push({ax:a.x,ay:a.y,bx:b.x,by:b.y,t:0,c:a.c});}function draw(){ctx.clearRect(0,0,W,H);for(let i=0;i<nodes.length;i++)for(let j=i+1;j<nodes.length;j++){const a=nodes[i],b=nodes[j],d=Math.hypot(a.x-b.x,a.y-b.y);if(d<155){ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.strokeStyle='rgba(59,130,246,'+(1-d/155)*.13+')';ctx.lineWidth=.7;ctx.stroke();}}pulses=pulses.filter(p=>p.t<1);pulses.forEach(p=>{p.t+=.017;const x=p.ax+(p.bx-p.ax)*p.t,y=p.ay+(p.by-p.ay)*p.t,a=Math.sin(p.t*Math.PI)*.85;ctx.beginPath();ctx.arc(x,y,3,0,Math.PI*2);ctx.fillStyle='rgba('+p.c.r+','+p.c.g+','+p.c.b+','+a+')';ctx.fill();});nodes.forEach(n=>{n.p+=.04;n.x+=n.vx;n.y+=n.vy;if(n.x<0||n.x>W)n.vx*=-1;if(n.y<0||n.y>H)n.vy*=-1;ctx.beginPath();ctx.arc(n.x,n.y,n.r+Math.sin(n.p)*.4,0,Math.PI*2);ctx.fillStyle='rgba('+n.c.r+','+n.c.g+','+n.c.b+',.68)';ctx.fill();});if(Math.random()<.045)pulse();requestAnimationFrame(draw);}window.addEventListener('resize',resize);resize();requestAnimationFrame(draw);})();
+// CTA grid canvas
+function buildGrid(id,r,g,b){const canvas=document.getElementById(id);if(!canvas)return;const ctx=canvas.getContext('2d');let W,H,scanY=0,streams=[];function resize(){W=canvas.width=canvas.offsetWidth;H=canvas.height=canvas.offsetHeight;streams=[];for(let i=0;i<12;i++)streams.push({x:Math.random()*W,y:Math.random()*H,sp:Math.random()*1.2+.4,len:Math.random()*70+30,a:Math.random()*.4+.1});}function draw(){ctx.clearRect(0,0,W,H);const gs=48;ctx.strokeStyle='rgba('+r+','+g+','+b+',.055)';ctx.lineWidth=1;for(let x=0;x<W;x+=gs){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}for(let y=0;y<H;y+=gs){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}for(let x=0;x<W;x+=gs)for(let y=0;y<H;y+=gs){ctx.beginPath();ctx.arc(x,y,1.5,0,Math.PI*2);ctx.fillStyle='rgba('+r+','+g+','+b+',.17)';ctx.fill();}scanY=(scanY+.85)%H;const sg=ctx.createLinearGradient(0,scanY-70,0,scanY+10);sg.addColorStop(0,'rgba('+r+','+g+','+b+',0)');sg.addColorStop(1,'rgba('+r+','+g+','+b+',.065)');ctx.fillStyle=sg;ctx.fillRect(0,scanY-70,W,80);ctx.beginPath();ctx.moveTo(0,scanY);ctx.lineTo(W,scanY);ctx.strokeStyle='rgba('+r+','+g+','+b+',.15)';ctx.lineWidth=1;ctx.stroke();streams.forEach(s=>{s.y+=s.sp;if(s.y>H){s.y=-s.len;s.x=Math.random()*W;}const g2=ctx.createLinearGradient(s.x,s.y-s.len,s.x,s.y);g2.addColorStop(0,'rgba('+r+','+g+','+b+',0)');g2.addColorStop(1,'rgba('+r+','+g+','+b+','+s.a+')');ctx.strokeStyle=g2;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(s.x,s.y-s.len);ctx.lineTo(s.x,s.y);ctx.stroke();});requestAnimationFrame(draw);}window.addEventListener('resize',resize);resize();requestAnimationFrame(draw);}
+buildGrid('cta-canvas',139,92,246);
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}});});
+</script>
+<script src="lang.js"></script>
+<a href="https://wa.me/6281200000000?text=Halo%20Scoop%20Technology%2C%20saya%20ingin%20konsultasi%20pembuatan%20aplikasi%20mobile." class="wa-btn" target="_blank" rel="noopener" aria-label="Chat WhatsApp"><svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M13 2C7.48 2 3 6.48 3 12c0 1.85.5 3.58 1.38 5.06L3 23l6.12-1.35A10 10 0 0013 22c5.52 0 10-4.48 10-10S18.52 2 13 2z" fill="currentColor"/><path d="M9.5 10.5c.28 1.28.97 2.44 1.97 3.44s2.16 1.69 3.44 1.97l.9-1.8s1.19.4 1.69.54c.3.09.3.3.22.52-.1.22-.52.88-.88.97-.36.08-.66.08-1.18-.14-.52-.22-1.98-.97-2.86-2.64-.44-.84-.35-1.54-.22-1.84.13-.3.44-.57.66-.66.22-.09.44-.09.52.13.09.22.33.81.33.81l-.47.32z" fill="white" stroke="none"/></svg><div class="wa-tooltip">Chat with us</div></a>
+</body>
+</html>
