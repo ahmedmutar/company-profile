@@ -1,5 +1,5 @@
 <?php
-require 'config.php';
+require __DIR__ . '/config.php';
 checkAuth();
 
 $data = json_decode(file_get_contents("php://input"), true);
