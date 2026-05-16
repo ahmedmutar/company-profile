@@ -204,6 +204,13 @@
 .pf4-mi-t{height:5px;background:#292524;border-radius:20px;width:80%;margin-bottom:3px;}
 .pf4-mi-p{height:5px;background:linear-gradient(90deg,#f97316,#dc2626);border-radius:20px;width:50%;}
 
+/* Iframe portfolio cards */
+.pfb-url-text{flex:1;background:rgba(255,255,255,.08);border-radius:4px;padding:3px 8px;font-size:10px;color:rgba(255,255,255,.38);font-family:monospace;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-left:4px;}
+.pf-iframe{width:1440px;height:900px;border:none;transform-origin:top left;pointer-events:none;display:block;overflow:hidden;}
+.pf-live-link{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;color:var(--blue-d);margin-top:12px;text-decoration:none;transition:color .2s;}
+.pf-live-link:hover{color:var(--blue);}
+.pf-live-link svg{width:11px;height:11px;}
+
 /* ── FEATURES GRID ── */
 .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,20px);}
 .feat-card{background:var(--white);border:1px solid var(--bdr);border-radius:var(--r);padding:clamp(24px,2.5vw,32px);transition:all .3s;cursor:default;position:relative;overflow:hidden;}
@@ -509,145 +516,84 @@
   </div>
   <div class="portfolio-grid">
 
-    <!-- E-commerce -->
+    <!-- Maeven Atelier – Luxury Fashion -->
     <div class="pf-card rv">
       <div class="pf-screen">
         <div class="pfb">
           <div class="pfb-bar pf1-bar">
             <div class="pfb-dot bd1"></div><div class="pfb-dot bd2"></div><div class="pfb-dot bd3"></div>
+            <div class="pfb-url-text">maeven-atelier.com</div>
           </div>
-          <div class="pfb-body pf1-body">
-            <div class="pf1-topbar">
-              <div class="pf1-logo"></div>
-              <div class="pf1-search"></div>
-              <div class="pf1-cart"></div>
-            </div>
-            <div class="pf1-hero">
-              <div class="pf1-h-txt">
-                <div class="pf1-h1"></div>
-                <div class="pf1-h2"></div>
-                <div class="pf1-sub"></div>
-                <div class="pf1-ctas"><div class="pf1-cta1"></div><div class="pf1-cta2"></div></div>
-              </div>
-              <div class="pf1-img">
-                <div class="pf1-prod"></div><div class="pf1-prod"></div>
-                <div class="pf1-prod"></div><div class="pf1-prod"></div>
-              </div>
-            </div>
-            <div class="pf1-prods">
-              <div class="pf1-pc"><div class="pf1-pc-img"></div><div class="pf1-pc-t"></div><div class="pf1-pc-p"></div></div>
-              <div class="pf1-pc"><div class="pf1-pc-img"></div><div class="pf1-pc-t"></div><div class="pf1-pc-p"></div></div>
-              <div class="pf1-pc"><div class="pf1-pc-img"></div><div class="pf1-pc-t"></div><div class="pf1-pc-p"></div></div>
-            </div>
+          <div class="pfb-body">
+            <iframe class="pf-iframe" src="/portfolio/maeven-atelier" title="Maeven Atelier" loading="lazy" scrolling="no" sandbox="allow-same-origin allow-scripts"></iframe>
           </div>
         </div>
       </div>
       <div class="pf-info">
-        <div class="pf-tag">E-Commerce & Retail</div>
-        <div class="pf-name">Fashion & Lifestyle Store</div>
-        <div class="pf-desc">Full catalog with cart, checkout, and product filtering. Designed to maximize average order value and reduce drop-off at checkout.</div>
+        <div class="pf-tag">Luxury Fashion & Retail</div>
+        <div class="pf-name">Maeven Atelier</div>
+        <div class="pf-desc">Premium fashion brand site with editorial layout, lookbook gallery, and bespoke styling — built around a dark, refined aesthetic that reflects the brand.</div>
         <div class="pf-pills">
-          <span class="pf-pill">Product catalog</span>
-          <span class="pf-pill">Shopping cart</span>
-          <span class="pf-pill">Payment gateway</span>
-          <span class="pf-pill">Mobile-first</span>
+          <span class="pf-pill">Editorial layout</span>
+          <span class="pf-pill">Lookbook gallery</span>
+          <span class="pf-pill">Dark luxury UI</span>
+          <span class="pf-pill">E-commerce ready</span>
         </div>
+        <a href="/portfolio/maeven-atelier" class="pf-live-link" target="_blank" rel="noopener">View full design <svg viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H5M10 2v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
       </div>
     </div>
 
-    <!-- Corporate -->
+    <!-- Eclat Paris – Luxury Beauty -->
     <div class="pf-card rv d1">
       <div class="pf-screen">
         <div class="pfb">
           <div class="pfb-bar pf2-bar">
             <div class="pfb-dot bd1"></div><div class="pfb-dot bd2"></div><div class="pfb-dot bd3"></div>
+            <div class="pfb-url-text">eclat-paris.com</div>
           </div>
-          <div class="pfb-body pf2-body">
-            <div class="pf2-nav">
-              <div class="pf2-logo"><div class="pf2-logo-icon"></div><div class="pf2-logo-text"></div></div>
-              <div class="pf2-links"><div class="pf2-link"></div><div class="pf2-link"></div><div class="pf2-link"></div></div>
-              <div class="pf2-navbtn"></div>
-            </div>
-            <div class="pf2-hero">
-              <div class="pf2-htxt">
-                <div class="pf2-h1a"></div>
-                <div class="pf2-h1b"></div>
-                <div class="pf2-hsub"></div>
-                <div class="pf2-hbtns"><div class="pf2-hb1"></div><div class="pf2-hb2"></div></div>
-              </div>
-              <div class="pf2-himg">
-                <div class="pf2-himg-inner">
-                  <div class="pf2-himg-cell"></div><div class="pf2-himg-cell"></div>
-                  <div class="pf2-himg-cell"></div><div class="pf2-himg-cell"></div>
-                </div>
-              </div>
-            </div>
-            <div class="pf2-stats">
-              <div class="pf2-s"><div class="pf2-sv"></div><div class="pf2-sl"></div></div>
-              <div class="pf2-s"><div class="pf2-sv" style="background:linear-gradient(90deg,#06b6d4,#8b5cf6)"></div><div class="pf2-sl"></div></div>
-              <div class="pf2-s"><div class="pf2-sv" style="background:linear-gradient(90deg,#8b5cf6,#ec4899)"></div><div class="pf2-sl"></div></div>
-            </div>
+          <div class="pfb-body">
+            <iframe class="pf-iframe" src="/portfolio/eclat-paris" title="Éclat Paris" loading="lazy" scrolling="no" sandbox="allow-same-origin allow-scripts"></iframe>
           </div>
         </div>
       </div>
       <div class="pf-info">
-        <div class="pf-tag">Corporate & B2B</div>
-        <div class="pf-name">Professional Services Company Profile</div>
-        <div class="pf-desc">Clean, trust-building corporate profile with case studies, team bios, and a lead-capture form that converts cold visitors into warm inquiries.</div>
+        <div class="pf-tag">Luxury Beauty & Lifestyle</div>
+        <div class="pf-name">Éclat Paris</div>
+        <div class="pf-desc">Premium beauty brand with an immersive dark-violet aesthetic, cinematic hero sections, and curated product collections — designed for high-end shoppers.</div>
         <div class="pf-pills">
-          <span class="pf-pill">Company profile</span>
-          <span class="pf-pill">Lead forms</span>
-          <span class="pf-pill">CMS integration</span>
-          <span class="pf-pill">Multilingual</span>
+          <span class="pf-pill">Immersive design</span>
+          <span class="pf-pill">Product collections</span>
+          <span class="pf-pill">Dark violet UI</span>
+          <span class="pf-pill">Luxury branding</span>
         </div>
+        <a href="/portfolio/eclat-paris" class="pf-live-link" target="_blank" rel="noopener">View full design <svg viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H5M10 2v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
       </div>
     </div>
 
-    <!-- SaaS -->
+    <!-- Sehatenow – Healthcare -->
     <div class="pf-card rv d2">
       <div class="pf-screen">
         <div class="pfb">
           <div class="pfb-bar pf3-bar">
             <div class="pfb-dot bd1"></div><div class="pfb-dot bd2"></div><div class="pfb-dot bd3"></div>
+            <div class="pfb-url-text">sehatenow.id</div>
           </div>
-          <div class="pfb-body pf3-body">
-            <div class="pf3-nav">
-              <div class="pf3-logo"><div class="pf3-logo-ic"></div><div class="pf3-logo-t"></div></div>
-              <div class="pf3-links"><div class="pf3-link"></div><div class="pf3-link"></div><div class="pf3-link"></div></div>
-              <div class="pf3-pill"></div>
-            </div>
-            <div class="pf3-hero">
-              <div class="pf3-badge"></div>
-              <div class="pf3-h1a"></div>
-              <div class="pf3-h1b"></div>
-              <div class="pf3-desc-lines"><div class="pf3-dl" style="width:95%"></div><div class="pf3-dl" style="width:80%"></div></div>
-              <div class="pf3-ctas"><div class="pf3-cta1"></div><div class="pf3-cta2"></div></div>
-              <div class="pf3-dash">
-                <div class="pf3-dash-head">
-                  <div class="pf3-tab active-tab" style="width:30px"></div>
-                  <div class="pf3-tab" style="width:25px"></div>
-                  <div class="pf3-tab" style="width:28px"></div>
-                </div>
-                <div class="pf3-metrics">
-                  <div class="pf3-m"><div class="pf3-mv"></div><div class="pf3-ml"></div></div>
-                  <div class="pf3-m"><div class="pf3-mv" style="width:55%"></div><div class="pf3-ml"></div></div>
-                  <div class="pf3-m"><div class="pf3-mv" style="width:85%"></div><div class="pf3-ml"></div></div>
-                </div>
-              </div>
-            </div>
+          <div class="pfb-body">
+            <iframe class="pf-iframe" src="/portfolio/sehatenow" title="Sehatenow" loading="lazy" scrolling="no" sandbox="allow-same-origin allow-scripts"></iframe>
           </div>
         </div>
       </div>
       <div class="pf-info">
-        <div class="pf-tag">SaaS & Tech Product</div>
-        <div class="pf-name">Software Product Landing Page</div>
-        <div class="pf-desc">Conversion-focused landing page with live product demo mockups, feature comparison, and social proof sections built to drive sign-ups.</div>
+        <div class="pf-tag">Healthcare & Digital Health</div>
+        <div class="pf-name">Sehatenow</div>
+        <div class="pf-desc">Digital health platform for the Indonesian market — clean teal-navy UI, patient-first flow, and feature sections covering teleconsultation and lab booking.</div>
         <div class="pf-pills">
-          <span class="pf-pill">Product demo</span>
-          <span class="pf-pill">Feature comparison</span>
-          <span class="pf-pill">Pricing table</span>
-          <span class="pf-pill">Dark mode UI</span>
+          <span class="pf-pill">Digital health</span>
+          <span class="pf-pill">Patient-first UX</span>
+          <span class="pf-pill">Teleconsultation</span>
+          <span class="pf-pill">Indonesian market</span>
         </div>
+        <a href="/portfolio/sehatenow" class="pf-live-link" target="_blank" rel="noopener">View full design <svg viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H5M10 2v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
       </div>
     </div>
 
@@ -982,6 +928,11 @@ document.querySelectorAll('[data-t]').forEach(el=>{const co=new IntersectionObse
 function buildGrid(id,r,g,b){const canvas=document.getElementById(id);if(!canvas)return;const ctx=canvas.getContext('2d');let W,H,scanY=0,streams=[];function resize(){W=canvas.width=canvas.offsetWidth;H=canvas.height=canvas.offsetHeight;streams=[];for(let i=0;i<12;i++)streams.push({x:Math.random()*W,y:Math.random()*H,sp:Math.random()*1.2+.4,len:Math.random()*70+30,a:Math.random()*.4+.1});}function draw(){ctx.clearRect(0,0,W,H);const gs=48;ctx.strokeStyle='rgba('+r+','+g+','+b+',.055)';ctx.lineWidth=1;for(let x=0;x<W;x+=gs){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}for(let y=0;y<H;y+=gs){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}for(let x=0;x<W;x+=gs)for(let y=0;y<H;y+=gs){ctx.beginPath();ctx.arc(x,y,1.5,0,Math.PI*2);ctx.fillStyle='rgba('+r+','+g+','+b+',.17)';ctx.fill();}scanY=(scanY+.85)%H;const sg=ctx.createLinearGradient(0,scanY-70,0,scanY+10);sg.addColorStop(0,'rgba('+r+','+g+','+b+',0)');sg.addColorStop(1,'rgba('+r+','+g+','+b+',.065)');ctx.fillStyle=sg;ctx.fillRect(0,scanY-70,W,80);ctx.beginPath();ctx.moveTo(0,scanY);ctx.lineTo(W,scanY);ctx.strokeStyle='rgba('+r+','+g+','+b+',.15)';ctx.lineWidth=1;ctx.stroke();streams.forEach(s=>{s.y+=s.sp;if(s.y>H){s.y=-s.len;s.x=Math.random()*W;}const g2=ctx.createLinearGradient(s.x,s.y-s.len,s.x,s.y);g2.addColorStop(0,'rgba('+r+','+g+','+b+',0)');g2.addColorStop(1,'rgba('+r+','+g+','+b+','+s.a+')');ctx.strokeStyle=g2;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(s.x,s.y-s.len);ctx.lineTo(s.x,s.y);ctx.stroke();});requestAnimationFrame(draw);}window.addEventListener('resize',resize);resize();requestAnimationFrame(draw);}
 buildGrid('cta-canvas',6,182,212);
 document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}});});
+// Scale portfolio iframes to fit card width
+function scalePfIframes(){document.querySelectorAll('.pf-iframe').forEach(function(f){var b=f.parentElement;if(!b)return;var w=b.offsetWidth;if(!w)return;var s=w/1440;f.style.transform='scale('+s+')';});}
+scalePfIframes();
+window.addEventListener('resize',scalePfIframes);
+document.querySelectorAll('.pf-iframe').forEach(function(f){f.addEventListener('load',scalePfIframes);});
 </script>
 <script src="lang.js"></script>
 <a href="https://wa.me/6281200000000?text=Hello%20Scoop%20Technology%2C%20I%20would%20like%20to%20consult%20about%20Web%20Design%20%26%20Revamp." class="wa-btn" target="_blank" rel="noopener" aria-label="Chat WhatsApp"><svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M13 2C7.48 2 3 6.48 3 12c0 1.85.5 3.58 1.38 5.06L3 23l6.12-1.35A10 10 0 0013 22c5.52 0 10-4.48 10-10S18.52 2 13 2z" fill="currentColor"/><path d="M9.5 10.5c.28 1.28.97 2.44 1.97 3.44s2.16 1.69 3.44 1.97l.9-1.8s1.19.4 1.69.54c.3.09.3.3.22.52-.1.22-.52.88-.88.97-.36.08-.66.08-1.18-.14-.52-.22-1.98-.97-2.86-2.64-.44-.84-.35-1.54-.22-1.84.13-.3.44-.57.66-.66.22-.09.44-.09.52.13.09.22.33.81.33.81l-.47.32z" fill="white" stroke="none"/></svg><div class="wa-tooltip">Chat with us</div></a>
