@@ -1,4 +1,3 @@
-Options -Indexes FollowSymLinks
 RewriteEngine On
 
 # ── Clean URLs: hide .html extension from browser bar ────────────────────
