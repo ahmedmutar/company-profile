@@ -784,3 +784,8 @@ const LANG = (() => {
   // ── Public API ────────────────────────────────────────────────────────────
   return { toggle, apply, current: () => current, activitiesID, svcDataID };
 })();
+
+// ── Dynamic copyright year ────────────────────────────────────────────────
+document.querySelectorAll('.copy-year').forEach(el => {
+  el.textContent = new Date().getFullYear();
+});
