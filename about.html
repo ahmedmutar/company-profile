@@ -45,8 +45,12 @@
 .timeline::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--blue-l),var(--teal),var(--blue-l));transform:translateX(-50%);}
 .tl-item{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,48px);margin-bottom:clamp(32px,4vw,56px);position:relative;}
 .tl-item:last-child{margin-bottom:0;}
-.tl-item.right .tl-content{grid-column:2;}
-.tl-item.right .tl-year{grid-column:1;grid-row:1;text-align:right;display:flex;justify-content:flex-end;align-items:flex-start;}
+/* Default (left) items: year right-aligned in col1, content in col2 */
+.tl-year{display:flex;justify-content:flex-end;align-items:flex-start;}
+.tl-content{grid-column:2;grid-row:1;}
+/* Right items: content in col1, year right side col2 */
+.tl-item.right .tl-content{grid-column:1;grid-row:1;}
+.tl-item.right .tl-year{grid-column:2;grid-row:1;justify-content:flex-start;}
 .tl-dot{position:absolute;left:50%;top:18px;transform:translateX(-50%);width:16px;height:16px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--teal));border:3px solid var(--bg);box-shadow:0 0 0 3px rgba(59,130,246,.2);z-index:1;}
 .tl-year .chip{align-self:flex-start;}
 .tl-content{background:var(--white);border:1px solid var(--bdr);border-radius:var(--r);padding:clamp(16px,2.5vw,24px);transition:all .3s;}
@@ -113,10 +117,11 @@
   .story-grid{grid-template-columns:1fr;}
   .timeline::before{left:20px;}
   .tl-item{grid-template-columns:1fr;padding-left:44px;gap:12px;}
-  .tl-item.right .tl-content,.tl-item.right .tl-year{grid-column:1;grid-row:auto;text-align:left;justify-content:flex-start;}
+  .tl-item .tl-year,.tl-item.right .tl-year{grid-column:1;grid-row:auto;justify-content:flex-start;}
+  .tl-item .tl-content,.tl-item.right .tl-content{grid-column:1;grid-row:auto;}
   .tl-dot{left:20px;}
   .values-grid{grid-template-columns:1fr 1fr;}
-  .team-grid{grid-template-columns:1fr 1fr;}
+  .team-grid{grid-template-columns:repeat(3,1fr)!important;}
   .culture-grid{grid-template-columns:1fr;}
   .cul-card.large{grid-row:auto;}
   .nums-grid{grid-template-columns:1fr 1fr;}
@@ -128,7 +133,7 @@
 }
 @media(max-width:680px){
   .values-grid{grid-template-columns:1fr;}
-  .team-grid{grid-template-columns:1fr 1fr;}
+  .team-grid{grid-template-columns:1fr!important;}
   .tl-item{padding-left:36px;}
   .cul-inner{padding:20px;}
   .cul-card.large .cul-inner{min-height:280px;}
@@ -265,17 +270,12 @@
   <div class="sec-h center rv">
     <div class="eyebrow eyebrow-blue" style="display:inline-flex;">Our Team</div>
     <h2 class="sec-title">The people behind Scoop</h2>
-    <p class="sec-sub" style="margin:12px auto 0;text-align:center;max-width:min(480px,100%)px;">Engineers, data scientists, and business analysts who believe the best technology is the most useful.</p>
+    <p class="sec-sub" style="margin:12px auto 0;text-align:center;max-width:min(480px,100%);">Three founders who believe every business deserves access to technology that actually works.</p>
   </div>
-  <div class="team-grid">
-    <div class="tm-card rv"><div class="tm-photo tp1"><div class="tm-glow"></div><div class="tm-init">RH</div></div><div class="tm-info"><div class="tm-name">Reza Hartono</div><div class="tm-role">Co-Founder & CEO</div><div class="tm-desc">10 years in the technology industry. Previously led the data engineering team at one of Indonesia's unicorns.</div></div></div>
-    <div class="tm-card rv d1"><div class="tm-photo tp2"><div class="tm-glow"></div><div class="tm-init">SA</div></div><div class="tm-info"><div class="tm-name">Sinta Arifin</div><div class="tm-role">Co-Founder & CTO</div><div class="tm-desc">PhD in Computer Science from ITB. Machine learning and computer vision specialist with 15+ publications.</div></div></div>
-    <div class="tm-card rv d2"><div class="tm-photo tp3"><div class="tm-glow"></div><div class="tm-init">BY</div></div><div class="tm-info"><div class="tm-name">Bayu Yudhistira</div><div class="tm-role">Head of Product</div><div class="tm-desc">Former product manager at a fintech company. Ensures every solution addresses a real problem.</div></div></div>
-    <div class="tm-card rv d3"><div class="tm-photo tp4"><div class="tm-glow"></div><div class="tm-init">NP</div></div><div class="tm-info"><div class="tm-name">Nadia Putri</div><div class="tm-role">Head of AI Engineering</div><div class="tm-desc">8 years building production-grade AI systems. Expert in LLM, RAG architecture, and MLOps.</div></div></div>
-    <div class="tm-card rv"><div class="tm-photo tp5"><div class="tm-glow"></div><div class="tm-init">DK</div></div><div class="tm-info"><div class="tm-name">Dimas Kurniawan</div><div class="tm-role">Lead Data Scientist</div><div class="tm-desc">Predictive analytics specialist. Has built models for 30+ clients across multiple industries.</div></div></div>
-    <div class="tm-card rv d1"><div class="tm-photo tp6"><div class="tm-glow"></div><div class="tm-init">FR</div></div><div class="tm-info"><div class="tm-name">Fitri Rahayu</div><div class="tm-role">Head of Client Success</div><div class="tm-desc">Ensures every client gets the promised results and a lasting relationship.</div></div></div>
-    <div class="tm-card rv d2"><div class="tm-photo tp7"><div class="tm-glow"></div><div class="tm-init">AP</div></div><div class="tm-info"><div class="tm-name">Andi Pramono</div><div class="tm-role">Senior AI Engineer</div><div class="tm-desc">Computer vision and edge AI specialist. Leads visual system development for manufacturing clients.</div></div></div>
-    <div class="tm-card rv d3"><div class="tm-photo tp8"><div class="tm-glow"></div><div class="tm-init">LL</div></div><div class="tm-info"><div class="tm-name">Lina Lestari</div><div class="tm-role">Business Analyst Lead</div><div class="tm-desc">Expert at translating complex business problems into concrete, executable steps.</div></div></div>
+  <div class="team-grid" style="grid-template-columns:repeat(3,1fr);max-width:860px;margin:0 auto;">
+    <div class="tm-card rv"><div class="tm-photo tp1"><div class="tm-glow"></div><div class="tm-init">AM</div></div><div class="tm-info"><div class="tm-name">Ahmad Mukhtar</div><div class="tm-role">Co-Founder & CEO</div><div class="tm-desc">Leads company vision and growth strategy, ensuring every client gets measurable results from AI.</div></div></div>
+    <div class="tm-card rv d1"><div class="tm-photo tp2"><div class="tm-glow"></div><div class="tm-init">AD</div></div><div class="tm-info"><div class="tm-name">Adiyansyah Dwi Putra</div><div class="tm-role">Co-Founder & CTO</div><div class="tm-desc">Drives technical architecture and engineering execution across all AI and data projects.</div></div></div>
+    <div class="tm-card rv d2"><div class="tm-photo tp3"><div class="tm-glow"></div><div class="tm-init">SO</div></div><div class="tm-info"><div class="tm-name">Shandy Oktavian</div><div class="tm-role">Co-Founder & Head of Product</div><div class="tm-desc">Shapes product direction and ensures every solution is built around real user needs.</div></div></div>
   </div>
 </section>
 
@@ -285,10 +285,10 @@
     <h2 class="sec-title rv d1">A place where curiosity<br>is valued as much as results</h2>
   </div>
   <div class="culture-grid">
-    <div class="cul-card large rv d1"><div class="cul-inner cbg1"><div class="cul-overlay"></div><div class="cul-tag">Work Environment</div><div class="cul-t">We learn every day — and that's not just a slogan</div><div class="cul-d">Every team member has an annual learning budget and dedicated weekly time to explore new technology.</div></div></div>
-    <div class="cul-card rv d2"><div class="cul-inner cbg2"><div class="cul-overlay"></div><div class="cul-tag">Collaboration</div><div class="cul-t">No hierarchy blocks a good idea</div><div class="cul-d">The best ideas can come from anyone. We build a culture where every voice is heard.</div></div></div>
-    <div class="cul-card rv d3"><div class="cul-inner cbg3"><div class="cul-overlay"></div><div class="cul-tag">Flexibility</div><div class="cul-t">Results are measured, not hours</div><div class="cul-d">Remote-friendly, flexible hours, and full trust in every team member.</div></div></div>
-    <div class="cul-card rv d4"><div class="cul-inner cbg4"><div class="cul-overlay"></div><div class="cul-tag">Impact</div><div class="cul-t">Work that feels meaningful</div><div class="cul-d">Every project has a real impact on businesses and the lives of the people who use them.</div></div></div>
+    <div class="cul-card large rv d1"><div class="cul-inner" style="background-image:url('https://images.unsplash.com/photo-1522202195465-df8a5f26fa15?w=900&q=75&auto=format&fit=crop');background-size:cover;background-position:center top;"><div class="cul-overlay" style="background:linear-gradient(180deg,rgba(0,0,0,.3) 0%,rgba(0,0,0,.78) 100%);"></div><div class="cul-tag">Work Environment</div><div class="cul-t">We learn every day — and that's not just a slogan</div><div class="cul-d">Every team member has an annual learning budget and dedicated weekly time to explore new technology.</div></div></div>
+    <div class="cul-card rv d2"><div class="cul-inner" style="background-image:url('https://images.unsplash.com/photo-1758691736934-e5d6d0c7f875?w=700&q=75&auto=format&fit=crop');background-size:cover;background-position:center;"><div class="cul-overlay" style="background:linear-gradient(180deg,rgba(0,0,0,.3) 0%,rgba(0,0,0,.78) 100%);"></div><div class="cul-tag">Collaboration</div><div class="cul-t">No hierarchy blocks a good idea</div><div class="cul-d">The best ideas can come from anyone. We build a culture where every voice is heard.</div></div></div>
+    <div class="cul-card rv d3"><div class="cul-inner" style="background-image:url('https://images.unsplash.com/photo-1649060718881-236572de3c7f?w=700&q=75&auto=format&fit=crop');background-size:cover;background-position:center;"><div class="cul-overlay" style="background:linear-gradient(180deg,rgba(0,0,0,.3) 0%,rgba(0,0,0,.78) 100%);"></div><div class="cul-tag">Flexibility</div><div class="cul-t">Results are measured, not hours</div><div class="cul-d">Remote-friendly, flexible hours, and full trust in every team member.</div></div></div>
+    <div class="cul-card rv d4"><div class="cul-inner" style="background-image:url('https://images.unsplash.com/photo-1758599669317-efd787d954ef?w=700&q=75&auto=format&fit=crop');background-size:cover;background-position:center;"><div class="cul-overlay" style="background:linear-gradient(180deg,rgba(0,0,0,.3) 0%,rgba(0,0,0,.78) 100%);"></div><div class="cul-tag">Impact</div><div class="cul-t">Work that feels meaningful</div><div class="cul-d">Every project has a real impact on businesses and the lives of the people who use them.</div></div></div>
   </div>
 </section>
 
