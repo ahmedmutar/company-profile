@@ -426,26 +426,23 @@ html,body{width:390px;min-height:844px;font-family:'Plus Jakarta Sans',sans-seri
 
 <!-- BOTTOM NAV -->
 <div class="bnav">
-  <div class="bn on" data-tab="home"><div class="bn-i">&#127968;</div><span>Home</span><div class="bn-pip"></div></div>
-  <div class="bn" data-tab="search"><div class="bn-i">&#128269;</div><span>Search</span></div>
-  <div class="bn" data-tab="orders"><div class="bn-i">&#128230;</div><span>Orders</span></div>
-  <div class="bn" data-tab="saved"><div class="bn-i">&#10084;</div><span>Saved</span></div>
-  <div class="bn" data-tab="profile"><div class="bn-i">&#128100;</div><span>Profile</span></div>
+  <div class="bn on" data-tab="home" onclick="switchTab('home')"><div class="bn-i">&#127968;</div><span>Home</span><div class="bn-pip"></div></div>
+  <div class="bn" data-tab="search" onclick="switchTab('search')"><div class="bn-i">&#128269;</div><span>Search</span></div>
+  <div class="bn" data-tab="orders" onclick="switchTab('orders')"><div class="bn-i">&#128230;</div><span>Orders</span></div>
+  <div class="bn" data-tab="saved" onclick="switchTab('saved')"><div class="bn-i">&#10084;</div><span>Saved</span></div>
+  <div class="bn" data-tab="profile" onclick="switchTab('profile')"><div class="bn-i">&#128100;</div><span>Profile</span></div>
 </div>
 
 <script>
 function switchTab(tab){
   document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
-  document.getElementById('s-'+tab).classList.add('active');
-  document.querySelectorAll('[data-tab]').forEach(function(b){b.classList.remove('on');b.querySelector('.bn-pip')&&(b.querySelector('.bn-pip').style.display='none');});
-  var active=document.querySelector('[data-tab="'+tab+'"]');
-  if(active){active.classList.add('on');var pip=active.querySelector('.bn-pip');if(pip)pip.style.display='';}
+  var scr=document.getElementById('s-'+tab);
+  if(scr)scr.classList.add('active');
+  document.querySelectorAll('.bn').forEach(function(b){b.classList.remove('on');var p=b.querySelector('.bn-pip');if(p)p.style.display='none';});
+  var nav=document.querySelector('.bn[data-tab="'+tab+'"]');
+  if(nav){nav.classList.add('on');var pip=nav.querySelector('.bn-pip');if(pip)pip.style.display='';}
   window.scrollTo(0,0);
 }
-document.querySelectorAll('[data-tab]').forEach(function(btn){
-  btn.addEventListener('click',function(){switchTab(this.dataset.tab);});
-});
-document.querySelector('.srch').addEventListener('click',function(){switchTab('search');});
 </script>
 </body>
 </html>
