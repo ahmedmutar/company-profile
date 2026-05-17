@@ -4,201 +4,268 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=390, initial-scale=1.0">
 <title>Dompet — Digital Wallet</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-:root{--bg:#0E0A1A;--card:#18122E;--card2:#201840;--violet:#7B5CF5;--violet2:#9D85FF;--accent:#C4A9FF;--text:#F0EEFF;--muted:#7A6EA0;--muted2:#2E2650;}
+:root{--bg:#0E0A1A;--card:#18122E;--card2:#201840;--violet:#7B5CF5;--v2:#9D85FF;--text:#F0EEFF;--muted:#7A6EA0;--m2:#2E2650;--green:#52E0A0;}
 html,body{width:390px;min-height:844px;background:var(--bg);font-family:'DM Sans',sans-serif;color:var(--text);overflow-x:hidden;}
-.sb{display:flex;align-items:center;justify-content:space-between;padding:14px 20px 10px;font-size:12px;font-weight:600;}
-.sb-time{font-size:15px;font-weight:700;}
-.sb-icons{display:flex;align-items:center;gap:6px;}
+.screen{display:none;padding-bottom:90px;}
+.screen.active{display:block;}
+.sb{display:flex;align-items:center;justify-content:space-between;padding:14px 20px 10px;font-size:12px;font-weight:600;background:var(--bg);position:sticky;top:0;z-index:100;}
+.bottom-nav{position:fixed;bottom:0;left:0;width:390px;background:rgba(14,10,26,.97);backdrop-filter:blur(20px);border-top:1px solid rgba(123,92,245,.12);padding:12px 0 28px;display:flex;justify-content:space-around;z-index:200;}
+.nav-item{display:flex;flex-direction:column;align-items:center;gap:5px;min-width:60px;cursor:pointer;}
+.nav-item svg{width:22px;height:22px;stroke:var(--muted);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transition:stroke .2s;}
+.nav-item.active svg{stroke:var(--v2);}
+.nav-label{font-size:10px;color:var(--muted);font-weight:600;letter-spacing:.3px;transition:color .2s;}
+.nav-item.active .nav-label{color:var(--v2);}
+/* SHARED */
+.pg-hdr{display:flex;align-items:center;justify-content:space-between;padding:10px 20px 6px;}
+.pg-title{font-size:18px;font-weight:700;}
+.sec-head{display:flex;align-items:center;justify-content:space-between;padding:0 20px 14px;}
+.sec-title{font-size:16px;font-weight:700;}
+.sec-link{font-size:13px;color:var(--v2);font-weight:600;cursor:pointer;}
+/* HOME SCREEN */
 .header{padding:6px 20px 20px;display:flex;align-items:center;justify-content:space-between;}
-.header-title{font-size:20px;font-weight:700;}
 .icon-btn{width:40px;height:40px;background:var(--card);border-radius:12px;display:flex;align-items:center;justify-content:center;}
 .icon-btn svg{width:18px;height:18px;stroke:var(--text);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
 .balance-wrap{padding:0 20px 22px;}
-.balance-card{background:linear-gradient(135deg,#4A2FC0 0%,#7B5CF5 50%,#9D50E8 100%);border-radius:24px;padding:24px;position:relative;overflow:hidden;}
-.balance-card::before{content:'';position:absolute;right:-40px;top:-40px;width:200px;height:200px;background:rgba(255,255,255,.06);border-radius:50%;}
-.balance-card::after{content:'';position:absolute;left:-30px;bottom:-50px;width:180px;height:180px;background:rgba(0,0,0,.12);border-radius:50%;}
-.balance-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;}
-.balance-label{font-size:12px;color:rgba(255,255,255,.6);font-weight:500;letter-spacing:.6px;text-transform:uppercase;}
-.card-chip{width:32px;height:24px;background:rgba(255,255,255,.25);border-radius:5px;position:relative;z-index:1;}
-.balance-amount{font-size:38px;font-weight:700;margin:4px 0 2px;position:relative;z-index:1;}
-.balance-sub{font-size:12px;color:rgba(255,255,255,.55);font-weight:500;}
-.balance-bottom{display:flex;justify-content:space-between;align-items:flex-end;margin-top:22px;position:relative;z-index:1;}
-.balance-card-num{font-size:13px;color:rgba(255,255,255,.6);letter-spacing:2px;font-weight:500;}
-.balance-card-exp{font-size:11px;color:rgba(255,255,255,.5);}
+.bal-card{background:linear-gradient(135deg,#4A2FC0,#7B5CF5 50%,#9D50E8);border-radius:24px;padding:24px;position:relative;overflow:hidden;}
+.bal-card::before{content:'';position:absolute;right:-40px;top:-40px;width:200px;height:200px;background:rgba(255,255,255,.06);border-radius:50%;}
+.bal-card::after{content:'';position:absolute;left:-30px;bottom:-50px;width:180px;height:180px;background:rgba(0,0,0,.12);border-radius:50%;}
+.bal-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;}
+.bal-label{font-size:12px;color:rgba(255,255,255,.6);font-weight:500;letter-spacing:.6px;text-transform:uppercase;}
+.bal-chip{width:32px;height:24px;background:rgba(255,255,255,.25);border-radius:5px;position:relative;z-index:1;}
+.bal-amount{font-size:38px;font-weight:700;margin:4px 0 2px;position:relative;z-index:1;}
+.bal-sub{font-size:12px;color:rgba(255,255,255,.55);font-weight:500;}
+.bal-bottom{display:flex;justify-content:space-between;align-items:flex-end;margin-top:22px;position:relative;z-index:1;}
+.bal-num{font-size:13px;color:rgba(255,255,255,.6);letter-spacing:2px;font-weight:500;}
+.bal-exp{font-size:11px;color:rgba(255,255,255,.5);}
 .actions{display:flex;justify-content:space-around;padding:4px 20px 24px;}
-.action-item{display:flex;flex-direction:column;align-items:center;gap:8px;}
-.action-btn{width:54px;height:54px;background:var(--card);border-radius:16px;display:flex;align-items:center;justify-content:center;}
-.action-btn svg{width:20px;height:20px;stroke:var(--violet2);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.action-item{display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;}
+.action-btn{width:54px;height:54px;background:var(--card);border-radius:16px;display:flex;align-items:center;justify-content:center;transition:transform .15s;}
+.action-btn:active{transform:scale(.9);}
+.action-btn svg{width:20px;height:20px;stroke:var(--v2);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
 .action-btn.primary{background:var(--violet);}
 .action-btn.primary svg{stroke:#fff;}
 .action-label{font-size:11px;color:var(--muted);font-weight:600;}
-.sec-head{display:flex;align-items:center;justify-content:space-between;padding:0 20px 14px;}
-.sec-title{font-size:16px;font-weight:700;}
-.sec-link{font-size:13px;color:var(--violet2);font-weight:600;}
 .cards-scroll{display:flex;gap:12px;padding:0 20px 22px;overflow-x:auto;}
 .cards-scroll::-webkit-scrollbar{display:none;}
-.mini-card{min-width:140px;height:80px;border-radius:16px;padding:14px;display:flex;flex-direction:column;justify-content:space-between;flex-shrink:0;}
+.mini-card{min-width:140px;height:80px;border-radius:16px;padding:14px;display:flex;flex-direction:column;justify-content:space-between;flex-shrink:0;cursor:pointer;}
 .mini-card.c1{background:linear-gradient(135deg,#2D6A4F,#52B788);}
 .mini-card.c2{background:linear-gradient(135deg,#C0392B,#E74C3C);}
-.mini-card.c3{background:linear-gradient(135deg,#1A1A2E,#16213E);border:1px solid var(--muted2);}
-.mini-card-top{display:flex;justify-content:space-between;align-items:center;}
-.mini-card-type{font-size:10px;color:rgba(255,255,255,.7);font-weight:600;letter-spacing:.5px;text-transform:uppercase;}
-.mini-card-dot{width:6px;height:6px;background:rgba(255,255,255,.5);border-radius:50%;}
-.mini-card-num{font-size:12px;color:rgba(255,255,255,.8);letter-spacing:1.5px;font-weight:500;}
+.mini-card.c3{background:linear-gradient(135deg,#1A1A2E,#16213E);border:1px solid var(--m2);}
+.mc-top{display:flex;justify-content:space-between;align-items:center;}
+.mc-type{font-size:10px;color:rgba(255,255,255,.7);font-weight:600;letter-spacing:.5px;text-transform:uppercase;}
+.mc-dot{width:6px;height:6px;background:rgba(255,255,255,.5);border-radius:50%;}
+.mc-num{font-size:12px;color:rgba(255,255,255,.8);letter-spacing:1.5px;font-weight:500;}
 .tx-list{padding:0 20px;display:flex;flex-direction:column;gap:2px;}
-.tx-item{display:flex;align-items:center;gap:14px;padding:13px 0;border-bottom:1px solid var(--muted2);}
+.tx-item{display:flex;align-items:center;gap:14px;padding:13px 0;border-bottom:1px solid var(--m2);cursor:pointer;}
 .tx-item:last-child{border-bottom:none;}
 .tx-icon{width:44px;height:44px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
-.tx-icon.shop{background:rgba(123,92,245,.15);}
-.tx-icon.food{background:rgba(255,135,0,.15);}
-.tx-icon.trans{background:rgba(0,200,130,.15);}
-.tx-icon.sub{background:rgba(255,59,91,.15);}
 .tx-info{flex:1;}
 .tx-name{font-size:14px;font-weight:600;}
-.tx-date{font-size:12px;color:var(--muted);margin-top:2px;font-weight:400;}
+.tx-date{font-size:12px;color:var(--muted);margin-top:2px;}
 .tx-amount{font-size:15px;font-weight:700;}
 .tx-amount.out{color:var(--text);}
-.tx-amount.in{color:#52E0A0;}
-.spend-wrap{padding:20px 20px 24px;}
-.spend-card{background:var(--card);border-radius:20px;padding:20px;}
-.spend-title{font-size:15px;font-weight:700;margin-bottom:16px;}
-.spend-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
-.spend-row:last-child{margin-bottom:0;}
+.tx-amount.in{color:var(--green);}
+/* ANALYTICS SCREEN */
+.anal-card{background:var(--card);border-radius:20px;margin:4px 20px 20px;padding:20px;}
+.anal-bars{display:flex;align-items:flex-end;gap:8px;height:100px;margin-bottom:12px;}
+.ab-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;}
+.ab-fill{width:100%;border-radius:5px 5px 0 0;background:var(--m2);}
+.ab-fill.hi{background:var(--violet);}
+.ab-lbl{font-size:9px;color:var(--muted);font-weight:600;}
+.spend-rows{display:flex;flex-direction:column;gap:12px;padding:0 20px 20px;}
+.spend-row{display:flex;align-items:center;justify-content:space-between;}
 .spend-cat{display:flex;align-items:center;gap:10px;}
 .spend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
-.spend-cat-name{font-size:13px;font-weight:500;}
-.spend-bar-wrap{flex:1;margin:0 12px;height:5px;background:var(--muted2);border-radius:3px;overflow:hidden;}
+.spend-name{font-size:13px;font-weight:500;}
+.spend-bar-wrap{flex:1;margin:0 12px;height:5px;background:var(--m2);border-radius:3px;overflow:hidden;}
 .spend-bar-fill{height:100%;border-radius:3px;}
-.spend-pct{font-size:12px;color:var(--muted);font-weight:600;min-width:28px;text-align:right;}
-.bottom-nav{position:fixed;bottom:0;left:0;width:390px;background:rgba(14,10,26,.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid rgba(123,92,245,.12);padding:12px 0 28px;display:flex;justify-content:space-around;}
-.nav-item{display:flex;flex-direction:column;align-items:center;gap:5px;min-width:60px;}
-.nav-item svg{width:22px;height:22px;stroke:var(--muted);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
-.nav-item.active svg{stroke:var(--violet2);}
-.nav-label{font-size:10px;color:var(--muted);font-weight:600;letter-spacing:.3px;}
-.nav-item.active .nav-label{color:var(--violet2);}
-.spacer{height:100px;}
+.spend-pct{font-size:12px;color:var(--muted);font-weight:600;min-width:30px;text-align:right;}
+.income-card{background:linear-gradient(135deg,#4A2FC0,#7B5CF5);border-radius:18px;margin:0 20px 12px;padding:18px 20px;display:flex;align-items:center;justify-content:space-between;}
+.income-label{font-size:12px;color:rgba(255,255,255,.6);}
+.income-val{font-size:22px;font-weight:700;}
+.income-sub{font-size:11px;color:rgba(255,255,255,.55);margin-top:2px;}
+.expense-card{background:var(--card);border-radius:18px;margin:0 20px 20px;padding:18px 20px;display:flex;align-items:center;justify-content:space-between;}
+/* CARDS SCREEN */
+.full-card{margin:4px 20px 16px;border-radius:24px;padding:28px 24px;position:relative;overflow:hidden;min-height:160px;}
+.full-card.active-c{background:linear-gradient(135deg,#4A2FC0,#7B5CF5 50%,#9D50E8);}
+.full-card.green-c{background:linear-gradient(135deg,#0D4F3C,#52B788);}
+.fc-label{font-size:11px;color:rgba(255,255,255,.6);font-weight:500;letter-spacing:.5px;text-transform:uppercase;}
+.fc-num{font-size:18px;color:rgba(255,255,255,.9);letter-spacing:3px;font-weight:600;margin:16px 0 8px;}
+.fc-bottom{display:flex;justify-content:space-between;align-items:flex-end;}
+.fc-name{font-size:13px;color:rgba(255,255,255,.7);}
+.fc-exp{font-size:12px;color:rgba(255,255,255,.55);}
+.add-card-btn{margin:4px 20px;background:var(--card);border:2px dashed var(--m2);border-radius:20px;padding:20px;display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;color:var(--muted);font-size:14px;font-weight:600;}
+/* PROFILE SCREEN */
+.prof-top{display:flex;flex-direction:column;align-items:center;padding:24px 20px 16px;}
+.prof-av{width:80px;height:80px;border-radius:24px;background:linear-gradient(135deg,var(--violet),#9D50E8);display:flex;align-items:center;justify-content:center;font-size:36px;margin-bottom:12px;}
+.prof-name{font-size:20px;font-weight:700;}
+.prof-email{font-size:12px;color:var(--muted);margin-top:3px;}
+.prof-stats{display:flex;margin:16px 20px;background:var(--card);border:1px solid var(--m2);border-radius:16px;overflow:hidden;}
+.pst{flex:1;display:flex;flex-direction:column;align-items:center;padding:14px 0;border-right:1px solid var(--m2);}
+.pst:last-child{border-right:none;}
+.pst-v{font-size:20px;font-weight:700;color:var(--v2);}
+.pst-l{font-size:10px;color:var(--muted);font-weight:600;margin-top:2px;}
+.menu-wrap{padding:0 20px;}
+.menu-item{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--m2);cursor:pointer;}
+.menu-item:last-child{border-bottom:none;}
+.mi-icon{width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;}
+.mi-txt{flex:1;font-size:14px;font-weight:600;}
+.mi-arr{font-size:16px;color:var(--muted);}
 </style>
 </head>
 <body>
+
 <div class="sb">
-  <span class="sb-time">9:41</span>
-  <div class="sb-icons">
+  <span style="font-size:15px;font-weight:700;">9:41</span>
+  <div style="display:flex;gap:6px;align-items:center;">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M1 6l5.5 5.5L12 6l5.5 5.5L23 6"/></svg>
     <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><rect x="2" y="7" width="16" height="10" rx="2"/></svg>
   </div>
 </div>
-<div class="header">
-  <div class="header-title">My Wallet</div>
-  <div class="icon-btn"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
-</div>
-<div class="balance-wrap">
-  <div class="balance-card">
-    <div class="balance-top">
-      <div class="balance-label">Total Balance</div>
-      <div class="card-chip"></div>
-    </div>
-    <div class="balance-amount">$4,820.50</div>
-    <div class="balance-sub">&#8593; +$240 this month</div>
-    <div class="balance-bottom">
-      <div class="balance-card-num">&bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull; 4821</div>
-      <div class="balance-card-exp">05/27</div>
-    </div>
+
+<!-- HOME -->
+<div id="s-home" class="screen active">
+  <div class="header">
+    <div style="font-size:20px;font-weight:700;">My Wallet</div>
+    <div class="icon-btn"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
   </div>
-</div>
-<div class="actions">
-  <div class="action-item">
-    <div class="action-btn"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
-    <div class="action-label">Top Up</div>
-  </div>
-  <div class="action-item">
-    <div class="action-btn primary"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></div>
-    <div class="action-label">Send</div>
-  </div>
-  <div class="action-item">
-    <div class="action-btn"><svg viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 014-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg></div>
-    <div class="action-label">Transfer</div>
-  </div>
-  <div class="action-item">
-    <div class="action-btn"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/></svg></div>
-    <div class="action-label">History</div>
-  </div>
-</div>
-<div class="sec-head"><div class="sec-title">My Cards</div><div class="sec-link">Add new</div></div>
-<div class="cards-scroll">
-  <div class="mini-card c1"><div class="mini-card-top"><div class="mini-card-type">Savings</div><div class="mini-card-dot"></div></div><div class="mini-card-num">&bull;&bull;&bull;&bull; 1204</div></div>
-  <div class="mini-card c2"><div class="mini-card-top"><div class="mini-card-type">Credit</div><div class="mini-card-dot"></div></div><div class="mini-card-num">&bull;&bull;&bull;&bull; 7731</div></div>
-  <div class="mini-card c3"><div class="mini-card-top"><div class="mini-card-type">Virtual</div><div class="mini-card-dot"></div></div><div class="mini-card-num">&bull;&bull;&bull;&bull; 9900</div></div>
-</div>
-<div class="sec-head"><div class="sec-title">Recent Transactions</div><div class="sec-link">See all</div></div>
-<div class="tx-list">
-  <div class="tx-item">
-    <div class="tx-icon shop">&#128717;</div>
-    <div class="tx-info"><div class="tx-name">Zara Online Store</div><div class="tx-date">Today, 10:24 AM</div></div>
-    <div class="tx-amount out">-$89.00</div>
-  </div>
-  <div class="tx-item">
-    <div class="tx-icon trans">&#128184;</div>
-    <div class="tx-info"><div class="tx-name">Salary Deposit</div><div class="tx-date">Yesterday, 9:00 AM</div></div>
-    <div class="tx-amount in">+$3,200</div>
-  </div>
-  <div class="tx-item">
-    <div class="tx-icon food">&#127828;</div>
-    <div class="tx-info"><div class="tx-name">Grab Food</div><div class="tx-date">May 14, 7:45 PM</div></div>
-    <div class="tx-amount out">-$18.50</div>
-  </div>
-  <div class="tx-item">
-    <div class="tx-icon sub">&#127916;</div>
-    <div class="tx-info"><div class="tx-name">Netflix Premium</div><div class="tx-date">May 13, 12:00 AM</div></div>
-    <div class="tx-amount out">-$15.99</div>
-  </div>
-</div>
-<div class="spend-wrap">
-  <div class="spend-card">
-    <div class="spend-title">Spending Breakdown</div>
-    <div class="spend-row">
-      <div class="spend-cat"><div class="spend-dot" style="background:#7B5CF5;"></div><div class="spend-cat-name">Shopping</div></div>
-      <div class="spend-bar-wrap"><div class="spend-bar-fill" style="width:60%;background:#7B5CF5;"></div></div>
-      <div class="spend-pct">42%</div>
-    </div>
-    <div class="spend-row">
-      <div class="spend-cat"><div class="spend-dot" style="background:#FF8700;"></div><div class="spend-cat-name">Food</div></div>
-      <div class="spend-bar-wrap"><div class="spend-bar-fill" style="width:38%;background:#FF8700;"></div></div>
-      <div class="spend-pct">28%</div>
-    </div>
-    <div class="spend-row">
-      <div class="spend-cat"><div class="spend-dot" style="background:#52E0A0;"></div><div class="spend-cat-name">Transport</div></div>
-      <div class="spend-bar-wrap"><div class="spend-bar-fill" style="width:20%;background:#52E0A0;"></div></div>
-      <div class="spend-pct">18%</div>
-    </div>
-    <div class="spend-row">
-      <div class="spend-cat"><div class="spend-dot" style="background:#FF3B5B;"></div><div class="spend-cat-name">Subscriptions</div></div>
-      <div class="spend-bar-wrap"><div class="spend-bar-fill" style="width:16%;background:#FF3B5B;"></div></div>
-      <div class="spend-pct">12%</div>
+  <div class="balance-wrap">
+    <div class="bal-card">
+      <div class="bal-top"><div class="bal-label">Total Balance</div><div class="bal-chip"></div></div>
+      <div class="bal-amount">$4,820.50</div>
+      <div class="bal-sub">&#8593; +$240 this month</div>
+      <div class="bal-bottom">
+        <div class="bal-num">&bull;&bull;&bull;&bull; 4821</div>
+        <div class="bal-exp">05/27</div>
+      </div>
     </div>
   </div>
+  <div class="actions">
+    <div class="action-item"><div class="action-btn"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="action-label">Top Up</div></div>
+    <div class="action-item"><div class="action-btn primary"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></div><div class="action-label">Send</div></div>
+    <div class="action-item"><div class="action-btn"><svg viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 014-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg></div><div class="action-label">Transfer</div></div>
+    <div class="action-item"><div class="action-btn" onclick="switchTab('analytics')"><svg viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg></div><div class="action-label">Stats</div></div>
+  </div>
+  <div class="sec-head"><div class="sec-title">My Cards</div><div class="sec-link" onclick="switchTab('cards')">Manage</div></div>
+  <div class="cards-scroll">
+    <div class="mini-card c1"><div class="mc-top"><div class="mc-type">Savings</div><div class="mc-dot"></div></div><div class="mc-num">&bull;&bull;&bull;&bull; 1204</div></div>
+    <div class="mini-card c2"><div class="mc-top"><div class="mc-type">Credit</div><div class="mc-dot"></div></div><div class="mc-num">&bull;&bull;&bull;&bull; 7731</div></div>
+    <div class="mini-card c3"><div class="mc-top"><div class="mc-type">Virtual</div><div class="mc-dot"></div></div><div class="mc-num">&bull;&bull;&bull;&bull; 9900</div></div>
+  </div>
+  <div class="sec-head"><div class="sec-title">Recent Transactions</div><div class="sec-link">See all</div></div>
+  <div class="tx-list">
+    <div class="tx-item"><div class="tx-icon" style="background:rgba(123,92,245,.15);">&#128717;</div><div class="tx-info"><div class="tx-name">Zara Online Store</div><div class="tx-date">Today, 10:24 AM</div></div><div class="tx-amount out">-$89.00</div></div>
+    <div class="tx-item"><div class="tx-icon" style="background:rgba(0,200,130,.15);">&#128184;</div><div class="tx-info"><div class="tx-name">Salary Deposit</div><div class="tx-date">Yesterday, 9:00 AM</div></div><div class="tx-amount in">+$3,200</div></div>
+    <div class="tx-item"><div class="tx-icon" style="background:rgba(255,135,0,.15);">&#127828;</div><div class="tx-info"><div class="tx-name">Grab Food</div><div class="tx-date">May 14, 7:45 PM</div></div><div class="tx-amount out">-$18.50</div></div>
+    <div class="tx-item"><div class="tx-icon" style="background:rgba(255,59,91,.15);">&#127916;</div><div class="tx-info"><div class="tx-name">Netflix Premium</div><div class="tx-date">May 13, 12:00 AM</div></div><div class="tx-amount out">-$15.99</div></div>
+  </div>
 </div>
-<div class="spacer"></div>
+
+<!-- ANALYTICS -->
+<div id="s-analytics" class="screen">
+  <div class="pg-hdr"><div class="pg-title">Analytics</div></div>
+  <div class="income-card">
+    <div><div class="income-label">Income</div><div class="income-val">+$3,200</div><div class="income-sub">This month</div></div>
+    <div style="text-align:right;"><div class="income-label">Expenses</div><div style="font-size:22px;font-weight:700;">-$1,840</div><div class="income-sub" style="color:rgba(255,255,255,.5);">This month</div></div>
+  </div>
+  <div class="expense-card">
+    <div><div style="font-size:12px;color:var(--muted);">Net Savings</div><div style="font-size:22px;font-weight:700;color:var(--green);">+$1,360</div><div style="font-size:11px;color:var(--muted);margin-top:2px;">&#8593; 12% vs last month</div></div>
+  </div>
+  <div class="anal-card">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;"><div style="font-size:15px;font-weight:700;">Spending</div><div style="font-size:12px;color:var(--muted);">Last 7 days</div></div>
+    <div class="anal-bars">
+      <div class="ab-col"><div class="ab-fill" style="height:40%;"></div><div class="ab-lbl">Mon</div></div>
+      <div class="ab-col"><div class="ab-fill hi" style="height:75%;"></div><div class="ab-lbl">Tue</div></div>
+      <div class="ab-col"><div class="ab-fill" style="height:30%;"></div><div class="ab-lbl">Wed</div></div>
+      <div class="ab-col"><div class="ab-fill" style="height:55%;"></div><div class="ab-lbl">Thu</div></div>
+      <div class="ab-col"><div class="ab-fill hi" style="height:90%;"></div><div class="ab-lbl">Fri</div></div>
+      <div class="ab-col"><div class="ab-fill" style="height:65%;"></div><div class="ab-lbl">Sat</div></div>
+      <div class="ab-col"><div class="ab-fill" style="height:20%;"></div><div class="ab-lbl">Sun</div></div>
+    </div>
+  </div>
+  <div style="padding:0 20px 14px;font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.06em;">BREAKDOWN BY CATEGORY</div>
+  <div class="spend-rows">
+    <div class="spend-row"><div class="spend-cat"><div class="spend-dot" style="background:#7B5CF5;"></div><div class="spend-name">Shopping</div></div><div class="spend-bar-wrap"><div class="spend-bar-fill" style="width:62%;background:#7B5CF5;"></div></div><div class="spend-pct">42%</div></div>
+    <div class="spend-row"><div class="spend-cat"><div class="spend-dot" style="background:#FF8700;"></div><div class="spend-name">Food</div></div><div class="spend-bar-wrap"><div class="spend-bar-fill" style="width:40%;background:#FF8700;"></div></div><div class="spend-pct">28%</div></div>
+    <div class="spend-row"><div class="spend-cat"><div class="spend-dot" style="background:#52E0A0;"></div><div class="spend-name">Transport</div></div><div class="spend-bar-wrap"><div class="spend-bar-fill" style="width:26%;background:#52E0A0;"></div></div><div class="spend-pct">18%</div></div>
+    <div class="spend-row"><div class="spend-cat"><div class="spend-dot" style="background:#FF3B5B;"></div><div class="spend-name">Entertainment</div></div><div class="spend-bar-wrap"><div class="spend-bar-fill" style="width:17%;background:#FF3B5B;"></div></div><div class="spend-pct">12%</div></div>
+  </div>
+</div>
+
+<!-- CARDS -->
+<div id="s-cards" class="screen">
+  <div class="pg-hdr"><div class="pg-title">My Cards</div></div>
+  <div style="height:10px;"></div>
+  <div class="full-card active-c">
+    <div class="fc-label">Savings Account</div>
+    <div class="fc-num">&bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull; 1204</div>
+    <div class="fc-bottom"><div class="fc-name">Ahmad Rivera</div><div class="fc-exp">08/26</div></div>
+    <div style="position:absolute;right:-30px;top:-30px;width:120px;height:120px;background:rgba(255,255,255,.06);border-radius:50%;"></div>
+  </div>
+  <div class="full-card green-c">
+    <div class="fc-label">Credit Card</div>
+    <div class="fc-num">&bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull; 7731</div>
+    <div class="fc-bottom"><div class="fc-name">Ahmad Rivera</div><div class="fc-exp">05/27</div></div>
+    <div style="position:absolute;right:-30px;top:-30px;width:120px;height:120px;background:rgba(255,255,255,.06);border-radius:50%;"></div>
+  </div>
+  <div class="add-card-btn">&#43; Add New Card</div>
+</div>
+
+<!-- PROFILE -->
+<div id="s-profile" class="screen">
+  <div class="prof-top">
+    <div class="prof-av">&#128100;</div>
+    <div class="prof-name">Ahmad Rivera</div>
+    <div class="prof-email">ahmad@email.com</div>
+  </div>
+  <div class="prof-stats">
+    <div class="pst"><div class="pst-v">3</div><div class="pst-l">Cards</div></div>
+    <div class="pst"><div class="pst-v">48</div><div class="pst-l">Transfers</div></div>
+    <div class="pst"><div class="pst-v">$4.8K</div><div class="pst-l">Balance</div></div>
+  </div>
+  <div class="menu-wrap">
+    <div class="menu-item"><div class="mi-icon" style="background:rgba(123,92,245,.12);">&#128179;</div><div class="mi-txt">Payment Methods</div><div class="mi-arr">&#8250;</div></div>
+    <div class="menu-item"><div class="mi-icon" style="background:rgba(82,224,160,.12);">&#128274;</div><div class="mi-txt">Security &amp; Privacy</div><div class="mi-arr">&#8250;</div></div>
+    <div class="menu-item"><div class="mi-icon" style="background:rgba(255,215,0,.12);">&#128276;</div><div class="mi-txt">Notifications</div><div class="mi-arr">&#8250;</div></div>
+    <div class="menu-item"><div class="mi-icon" style="background:rgba(59,130,246,.12);">&#127760;</div><div class="mi-txt">Language &amp; Region</div><div class="mi-arr">&#8250;</div></div>
+    <div class="menu-item"><div class="mi-icon" style="background:rgba(239,68,68,.12);">&#128682;</div><div class="mi-txt">Sign Out</div><div class="mi-arr" style="color:#EF4444;">&#8250;</div></div>
+  </div>
+</div>
+
+<!-- BOTTOM NAV -->
 <div class="bottom-nav">
-  <div class="nav-item active">
+  <div class="nav-item active" data-tab="home">
     <svg viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
     <span class="nav-label">Home</span>
   </div>
-  <div class="nav-item">
+  <div class="nav-item" data-tab="analytics">
     <svg viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
     <span class="nav-label">Analytics</span>
   </div>
-  <div class="nav-item">
+  <div class="nav-item" data-tab="cards">
     <svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
     <span class="nav-label">Cards</span>
   </div>
-  <div class="nav-item">
+  <div class="nav-item" data-tab="profile">
     <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
     <span class="nav-label">Profile</span>
   </div>
 </div>
+
+<script>
+function switchTab(tab){
+  document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
+  document.getElementById('s-'+tab).classList.add('active');
+  document.querySelectorAll('[data-tab]').forEach(function(b){b.classList.remove('active');});
+  document.querySelectorAll('[data-tab="'+tab+'"]').forEach(function(b){b.classList.add('active');});
+  window.scrollTo(0,0);
+}
+document.querySelectorAll('[data-tab]').forEach(function(btn){
+  btn.addEventListener('click',function(){switchTab(this.dataset.tab);});
+});
+</script>
 </body>
 </html>

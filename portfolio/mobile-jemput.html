@@ -4,16 +4,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=390, initial-scale=1.0">
 <title>Jemput — Ride Booking</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-:root{--bg:#080E1A;--card:#0F1929;--card2:#14223A;--cyan:#00D4FF;--cyan2:#00EEFF;--text:#EEF4FF;--muted:#4A6080;--muted2:#152035;--green:#00E676;}
+:root{--bg:#080E1A;--card:#0F1929;--card2:#14223A;--cyan:#00D4FF;--text:#EEF4FF;--muted:#4A6080;--m2:#152035;--green:#00E676;}
 html,body{width:390px;min-height:844px;background:var(--bg);font-family:'Inter',sans-serif;color:var(--text);overflow-x:hidden;}
-.sb{display:flex;align-items:center;justify-content:space-between;padding:14px 20px 10px;font-size:12px;font-weight:600;}
-.sb-time{font-size:15px;font-weight:700;}
-.sb-icons{display:flex;align-items:center;gap:6px;}
-.map-area{position:relative;height:240px;background:var(--card);overflow:hidden;}
+.screen{display:none;padding-bottom:90px;}
+.screen.active{display:block;}
+.sb{display:flex;align-items:center;justify-content:space-between;padding:14px 20px 10px;font-size:12px;font-weight:600;background:var(--bg);position:sticky;top:0;z-index:100;}
+/* BOTTOM NAV */
+.bottom-nav{position:fixed;bottom:0;left:0;width:390px;background:rgba(8,14,26,.97);backdrop-filter:blur(20px);border-top:1px solid rgba(0,212,255,.08);padding:12px 0 28px;display:flex;justify-content:space-around;z-index:200;}
+.nav-item{display:flex;flex-direction:column;align-items:center;gap:5px;min-width:60px;cursor:pointer;}
+.nav-item svg{width:22px;height:22px;stroke:var(--muted);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transition:stroke .2s;}
+.nav-item.active svg{stroke:var(--cyan);}
+.nav-label{font-size:10px;color:var(--muted);font-weight:600;letter-spacing:.3px;transition:color .2s;}
+.nav-item.active .nav-label{color:var(--cyan);}
+/* MAP AREA */
+.map-area{position:relative;height:240px;background:var(--card);overflow:hidden;flex-shrink:0;}
 .map-bg{position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(0,212,255,.04) 40px),repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(0,212,255,.04) 40px);background-size:40px 40px;}
 .map-road-h{position:absolute;top:50%;left:0;width:100%;height:24px;background:var(--card2);transform:translateY(-50%);}
 .map-road-v{position:absolute;left:40%;top:0;width:18px;height:100%;background:var(--card2);}
@@ -24,170 +31,341 @@ html,body{width:390px;min-height:844px;background:var(--bg);font-family:'Inter',
 .map-pin{width:14px;height:14px;border-radius:50%;border:3px solid var(--bg);}
 .map-pin.pickup{background:var(--cyan);}
 .map-pin.dropoff{background:var(--green);}
-.map-route{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;}
-.map-car{position:absolute;left:55%;top:52%;transform:translate(-50%,-50%);font-size:22px;}
+.map-car{position:absolute;left:55%;top:52%;transform:translate(-50%,-50%);font-size:20px;}
 .map-overlay-top{position:absolute;top:0;left:0;width:100%;padding:14px 16px;display:flex;gap:10px;align-items:center;}
-.map-search-bar{flex:1;background:rgba(8,14,26,.85);backdrop-filter:blur(10px);border:1px solid rgba(0,212,255,.15);border-radius:12px;padding:11px 14px;display:flex;align-items:center;gap:8px;}
-.map-search-bar svg{width:16px;height:16px;stroke:var(--muted);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;}
+.map-search-bar{flex:1;background:rgba(8,14,26,.88);backdrop-filter:blur(10px);border:1px solid rgba(0,212,255,.15);border-radius:12px;padding:11px 14px;display:flex;align-items:center;gap:8px;}
 .map-search-text{font-size:13px;color:var(--muted);font-weight:500;}
-.map-profile{width:40px;height:40px;border-radius:12px;background:var(--cyan);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;color:var(--bg);flex-shrink:0;}
+.map-profile{width:40px;height:40px;border-radius:12px;background:var(--cyan);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;color:var(--bg);flex-shrink:0;cursor:pointer;}
+/* SHEET */
 .sheet{background:var(--card);border-radius:28px 28px 0 0;margin-top:-20px;position:relative;z-index:10;padding:16px 20px 0;}
-.sheet-handle{width:40px;height:4px;background:var(--muted2);border-radius:2px;margin:0 auto 20px;}
-.route-info{display:flex;align-items:center;gap:0;margin-bottom:16px;background:var(--muted2);border-radius:16px;padding:14px 16px;position:relative;}
-.route-dot-col{display:flex;flex-direction:column;align-items:center;gap:4px;margin-right:14px;}
+.sheet-handle{width:40px;height:4px;background:var(--m2);border-radius:2px;margin:0 auto 18px;}
+.route-box{display:flex;align-items:center;margin-bottom:14px;background:var(--m2);border-radius:16px;padding:14px 16px;}
+.route-dots{display:flex;flex-direction:column;align-items:center;gap:4px;margin-right:14px;}
 .route-dot{width:10px;height:10px;border-radius:50%;}
 .route-dot.a{background:var(--cyan);}
 .route-dot.b{background:var(--green);}
-.route-line-seg{width:2px;height:20px;background:var(--muted);opacity:.3;}
-.route-texts{flex:1;display:flex;flex-direction:column;gap:8px;}
-.route-point{}
-.route-label{font-size:10px;color:var(--muted);font-weight:600;letter-spacing:.5px;text-transform:uppercase;}
+.route-line{width:2px;height:18px;background:var(--muted);opacity:.3;}
+.route-texts{flex:1;}
+.route-lbl{font-size:10px;color:var(--muted);font-weight:600;letter-spacing:.4px;text-transform:uppercase;}
 .route-addr{font-size:13px;font-weight:600;margin-top:1px;}
-.route-divider{width:100%;height:1px;background:var(--bg);margin:8px 0;}
-.route-meta-row{display:flex;gap:16px;align-items:center;margin-left:24px;margin-bottom:20px;}
-.route-meta-item{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--muted);font-weight:500;}
-.route-meta-item svg{width:13px;height:13px;stroke:var(--cyan);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
-.ride-types-title{font-size:14px;font-weight:700;margin-bottom:12px;}
-.ride-types{display:flex;gap:10px;margin-bottom:20px;}
-.ride-type{flex:1;background:var(--muted2);border-radius:14px;padding:12px 10px;text-align:center;border:1.5px solid transparent;}
-.ride-type.active{background:rgba(0,212,255,.08);border-color:var(--cyan);}
-.ride-type-icon{font-size:22px;margin-bottom:5px;}
-.ride-type-name{font-size:11px;font-weight:700;color:var(--text);}
-.ride-type-price{font-size:13px;font-weight:800;color:var(--cyan);margin-top:2px;}
-.ride-type-eta{font-size:10px;color:var(--muted);font-weight:500;}
-.promo-bar{display:flex;align-items:center;gap:10px;background:rgba(0,212,255,.06);border:1px solid rgba(0,212,255,.15);border-radius:12px;padding:11px 14px;margin-bottom:20px;}
-.promo-icon{font-size:18px;}
-.promo-text{font-size:13px;font-weight:600;flex:1;}
-.promo-text span{color:var(--cyan);}
-.book-btn{width:100%;background:var(--cyan);color:var(--bg);font-size:16px;font-weight:800;border:none;border-radius:16px;padding:16px;cursor:pointer;letter-spacing:.3px;margin-bottom:12px;display:block;text-align:center;}
-.book-meta{display:flex;justify-content:center;gap:16px;margin-bottom:20px;}
-.book-meta-item{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--muted);font-weight:500;}
-.book-meta-item svg{width:14px;height:14px;stroke:var(--muted);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
-.sec-head{display:flex;align-items:center;justify-content:space-between;padding:0 0 14px;}
-.sec-title{font-size:15px;font-weight:700;}
-.sec-link{font-size:13px;color:var(--cyan);font-weight:600;}
-.driver-list{display:flex;flex-direction:column;gap:10px;margin-bottom:28px;}
-.driver-card{display:flex;align-items:center;gap:14px;background:var(--muted2);border-radius:14px;padding:13px 14px;}
-.driver-avatar{width:44px;height:44px;border-radius:12px;background:var(--card2);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
-.driver-info{flex:1;}
-.driver-name{font-size:14px;font-weight:700;}
-.driver-vehicle{font-size:12px;color:var(--muted);font-weight:500;margin-top:2px;}
-.driver-right{text-align:right;}
-.driver-rating{display:flex;align-items:center;gap:3px;font-size:13px;font-weight:700;color:var(--text);}
-.driver-rating svg{width:13px;height:13px;fill:#FFD700;stroke:none;}
-.driver-dist{font-size:11px;color:var(--cyan);font-weight:600;margin-top:3px;}
-.bottom-nav{position:fixed;bottom:0;left:0;width:390px;background:rgba(8,14,26,.96);backdrop-filter:blur(20px);border-top:1px solid rgba(0,212,255,.08);padding:12px 0 28px;display:flex;justify-content:space-around;}
-.nav-item{display:flex;flex-direction:column;align-items:center;gap:5px;min-width:60px;}
-.nav-item svg{width:22px;height:22px;stroke:var(--muted);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
-.nav-item.active svg{stroke:var(--cyan);}
-.nav-label{font-size:10px;color:var(--muted);font-weight:600;letter-spacing:.3px;}
-.nav-item.active .nav-label{color:var(--cyan);}
-.spacer{height:100px;}
+.route-div{height:1px;background:var(--bg);margin:8px 0;}
+.route-meta{display:flex;gap:16px;margin-bottom:16px;}
+.rmeta-item{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--muted);}
+.rmeta-item svg{width:13px;height:13px;stroke:var(--cyan);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+/* RIDE TYPES */
+.ride-title{font-size:14px;font-weight:700;margin-bottom:12px;}
+.ride-types{display:flex;gap:10px;margin-bottom:18px;}
+.rt{flex:1;background:var(--m2);border-radius:14px;padding:12px 8px;text-align:center;border:1.5px solid transparent;cursor:pointer;transition:all .2s;}
+.rt.on{background:rgba(0,212,255,.08);border-color:var(--cyan);}
+.rt-icon{font-size:20px;margin-bottom:4px;}
+.rt-name{font-size:11px;font-weight:700;}
+.rt-price{font-size:13px;font-weight:800;color:var(--cyan);margin-top:2px;}
+.rt-eta{font-size:10px;color:var(--muted);}
+.promo-bar{display:flex;align-items:center;gap:10px;background:rgba(0,212,255,.06);border:1px solid rgba(0,212,255,.14);border-radius:12px;padding:11px 14px;margin-bottom:16px;cursor:pointer;}
+.promo-txt{font-size:13px;font-weight:600;flex:1;}
+.promo-txt span{color:var(--cyan);}
+.book-btn{width:100%;background:var(--cyan);color:var(--bg);font-size:16px;font-weight:800;border:none;border-radius:16px;padding:16px;cursor:pointer;margin-bottom:10px;transition:transform .15s,opacity .2s;}
+.book-btn:active{transform:scale(.97);}
+.book-btn.booked{background:#00E676;}
+.book-meta{display:flex;justify-content:center;gap:18px;margin-bottom:18px;}
+.bm-item{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--muted);}
+.bm-item svg{width:14px;height:14px;stroke:var(--muted);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.drivers-title{font-size:14px;font-weight:700;margin-bottom:12px;}
+.driver-card{display:flex;align-items:center;gap:14px;background:var(--m2);border-radius:14px;padding:13px 14px;margin-bottom:10px;cursor:pointer;}
+.d-av{width:44px;height:44px;border-radius:12px;background:var(--card2);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.d-info{flex:1;}
+.d-name{font-size:14px;font-weight:700;}
+.d-vehicle{font-size:12px;color:var(--muted);margin-top:2px;}
+.d-right{text-align:right;}
+.d-rating{display:flex;align-items:center;gap:3px;font-size:13px;font-weight:700;}
+.d-rating svg{width:13px;height:13px;fill:#FFD700;stroke:none;}
+.d-dist{font-size:11px;color:var(--cyan);font-weight:600;margin-top:3px;}
+/* ACTIVITY SCREEN */
+.pg-hdr{display:flex;align-items:center;justify-content:space-between;padding:14px 20px 6px;}
+.pg-title{font-size:18px;font-weight:700;}
+.trip-tabs{display:flex;gap:0;margin:8px 20px 16px;background:var(--card);border-radius:14px;padding:4px;}
+.trip-tab{flex:1;text-align:center;padding:8px 0;font-size:12px;font-weight:700;color:var(--muted);border-radius:10px;cursor:pointer;transition:all .2s;}
+.trip-tab.on{background:var(--cyan);color:var(--bg);}
+.trip-list{padding:0 20px;}
+.trip-item{background:var(--card);border-radius:16px;padding:16px;margin-bottom:12px;cursor:pointer;}
+.trip-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.trip-date{font-size:12px;color:var(--muted);}
+.trip-status{font-size:11px;font-weight:700;color:var(--green);background:rgba(0,230,118,.1);padding:3px 9px;border-radius:20px;}
+.trip-route{display:flex;gap:10px;align-items:flex-start;margin-bottom:12px;}
+.trip-dots{display:flex;flex-direction:column;align-items:center;gap:3px;margin-top:2px;}
+.trip-dot{width:8px;height:8px;border-radius:50%;}
+.trip-dot.a{background:var(--cyan);}
+.trip-dot.b{background:var(--green);}
+.trip-seg{width:2px;height:16px;background:var(--muted);opacity:.3;}
+.trip-addrs{flex:1;display:flex;flex-direction:column;gap:8px;}
+.trip-addr{font-size:13px;font-weight:600;}
+.trip-sub{font-size:11px;color:var(--muted);}
+.trip-footer{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--m2);padding-top:12px;}
+.trip-price{font-size:15px;font-weight:700;}
+.trip-type{font-size:11px;color:var(--muted);}
+.rebooking-btn{font-size:11px;font-weight:700;color:var(--cyan);border:1px solid rgba(0,212,255,.3);padding:5px 12px;border-radius:20px;}
+/* MAP SCREEN */
+.full-map{position:relative;height:420px;background:var(--card);overflow:hidden;}
+.fm-bg{position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 29px,rgba(0,212,255,.05) 30px),repeating-linear-gradient(90deg,transparent,transparent 29px,rgba(0,212,255,.05) 30px);background-size:30px 30px;}
+.fm-road-h{position:absolute;top:45%;left:0;width:100%;height:28px;background:var(--card2);transform:translateY(-50%);}
+.fm-road-v{position:absolute;left:35%;top:0;width:22px;height:100%;background:var(--card2);}
+.fm-road-h2{position:absolute;top:70%;left:0;width:100%;height:16px;background:var(--card2);}
+.fm-road-v2{position:absolute;left:65%;top:0;width:14px;height:100%;background:var(--card2);}
+.fm-pin-a{position:absolute;left:35%;top:32%;transform:translate(-50%,-50%);}
+.fm-pin-b{position:absolute;left:67%;top:68%;transform:translate(-50%,-50%);}
+.fm-car{position:absolute;left:50%;top:48%;transform:translate(-50%,-50%);font-size:26px;}
+.fm-overlay{position:absolute;bottom:0;left:0;width:100%;padding:14px 16px;background:linear-gradient(transparent,rgba(8,14,26,.9));}
+.fm-eta-card{background:rgba(8,14,26,.92);backdrop-filter:blur(12px);border:1px solid rgba(0,212,255,.15);border-radius:16px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;}
+.fm-eta-label{font-size:11px;color:var(--muted);}
+.fm-eta-val{font-size:20px;font-weight:800;color:var(--cyan);}
+.fm-eta-sub{font-size:11px;color:var(--muted);}
+.map-controls{display:flex;gap:10px;padding:16px 20px 8px;}
+.map-ctrl-btn{flex:1;background:var(--card);border-radius:12px;padding:12px;display:flex;align-items:center;justify-content:center;gap:8px;font-size:13px;font-weight:600;cursor:pointer;}
+.map-ctrl-btn svg{width:16px;height:16px;stroke:var(--cyan);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+/* PROFILE SCREEN */
+.prof-hero{display:flex;flex-direction:column;align-items:center;padding:24px 20px 16px;}
+.prof-av{width:80px;height:80px;border-radius:24px;background:linear-gradient(135deg,var(--cyan),#0080A0);display:flex;align-items:center;justify-content:center;font-size:36px;margin-bottom:12px;}
+.prof-name{font-size:20px;font-weight:700;}
+.prof-sub{font-size:12px;color:var(--muted);margin-top:4px;}
+.prof-stats{display:flex;margin:16px 20px;background:var(--card);border:1px solid var(--m2);border-radius:16px;overflow:hidden;}
+.pst{flex:1;display:flex;flex-direction:column;align-items:center;padding:14px 0;border-right:1px solid var(--m2);}
+.pst:last-child{border-right:none;}
+.pst-v{font-size:20px;font-weight:700;color:var(--cyan);}
+.pst-l{font-size:10px;color:var(--muted);font-weight:600;margin-top:2px;}
+.menu-wrap{padding:0 20px;}
+.menu-item{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--m2);cursor:pointer;}
+.menu-item:last-child{border-bottom:none;}
+.mi-icon{width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;}
+.mi-txt{flex:1;font-size:14px;font-weight:600;}
+.mi-arr{font-size:16px;color:var(--muted);}
 </style>
 </head>
 <body>
+
 <div class="sb">
-  <span class="sb-time">9:41</span>
-  <div class="sb-icons">
+  <span style="font-size:15px;font-weight:700;">9:41</span>
+  <div style="display:flex;gap:6px;align-items:center;">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M1 6l5.5 5.5L12 6l5.5 5.5L23 6"/></svg>
     <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><rect x="2" y="7" width="16" height="10" rx="2"/></svg>
   </div>
 </div>
-<div class="map-area">
-  <div class="map-bg"></div>
-  <div class="map-road-h"></div>
-  <div class="map-road-v"></div>
-  <div class="map-road-h2"></div>
-  <div class="map-road-v2"></div>
-  <svg class="map-route" viewBox="0 0 390 240" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M 156 84 Q 156 120 270 156" stroke="url(#routeGrad)" stroke-width="3" stroke-dasharray="6 4" fill="none"/>
-    <defs><linearGradient id="routeGrad" x1="156" y1="84" x2="270" y2="156" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#00D4FF"/><stop offset="100%" stop-color="#00E676"/></linearGradient></defs>
-  </svg>
-  <div class="map-pin-a"><div class="map-pin pickup"></div></div>
-  <div class="map-pin-b"><div class="map-pin dropoff"></div></div>
-  <div class="map-car">&#128663;</div>
-  <div class="map-overlay-top">
-    <div class="map-search-bar">
-      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <div class="map-search-text">Where are you going?</div>
-    </div>
-    <div class="map-profile">A</div>
-  </div>
-</div>
-<div class="sheet">
-  <div class="sheet-handle"></div>
-  <div class="route-info">
-    <div class="route-dot-col">
-      <div class="route-dot a"></div>
-      <div class="route-line-seg"></div>
-      <div class="route-dot b"></div>
-    </div>
-    <div class="route-texts">
-      <div class="route-point"><div class="route-label">Pickup</div><div class="route-addr">Sudirman Central Business</div></div>
-      <div class="route-divider"></div>
-      <div class="route-point"><div class="route-label">Drop-off</div><div class="route-addr">Senayan City Mall</div></div>
+
+<!-- HOME -->
+<div id="s-home" class="screen active">
+  <div class="map-area">
+    <div class="map-bg"></div>
+    <div class="map-road-h"></div><div class="map-road-v"></div>
+    <div class="map-road-h2"></div><div class="map-road-v2"></div>
+    <svg style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;" viewBox="0 0 390 240" fill="none">
+      <path d="M 156 84 Q 156 124 270 156" stroke="url(#rg)" stroke-width="3" stroke-dasharray="6 4"/>
+      <defs><linearGradient id="rg" x1="156" y1="84" x2="270" y2="156" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#00D4FF"/><stop offset="100%" stop-color="#00E676"/></linearGradient></defs>
+    </svg>
+    <div class="map-pin-a"><div class="map-pin pickup"></div></div>
+    <div class="map-pin-b"><div class="map-pin dropoff"></div></div>
+    <div class="map-car">&#128663;</div>
+    <div class="map-overlay-top">
+      <div class="map-search-bar">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4A6080" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <div class="map-search-text">Where are you going?</div>
+      </div>
+      <div class="map-profile" id="go-profile">A</div>
     </div>
   </div>
-  <div class="route-meta-row">
-    <div class="route-meta-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>8 min drive</div>
-    <div class="route-meta-item"><svg viewBox="0 0 24 24"><path d="M3 12h18M12 3l9 9-9 9"/></svg>4.2 km</div>
-  </div>
-  <div class="ride-types-title">Choose a ride</div>
-  <div class="ride-types">
-    <div class="ride-type"><div class="ride-type-icon">&#128693;</div><div class="ride-type-name">Bike</div><div class="ride-type-price">$1.20</div><div class="ride-type-eta">3 min</div></div>
-    <div class="ride-type active"><div class="ride-type-icon">&#128663;</div><div class="ride-type-name">Car</div><div class="ride-type-price">$3.80</div><div class="ride-type-eta">5 min</div></div>
-    <div class="ride-type"><div class="ride-type-icon">&#128656;</div><div class="ride-type-name">XL</div><div class="ride-type-price">$5.50</div><div class="ride-type-eta">8 min</div></div>
-    <div class="ride-type"><div class="ride-type-icon">&#11088;</div><div class="ride-type-name">Premium</div><div class="ride-type-price">$8.00</div><div class="ride-type-eta">10 min</div></div>
-  </div>
-  <div class="promo-bar">
-    <div class="promo-icon">&#127903;</div>
-    <div class="promo-text">Use code <span>JEMPUT20</span> for 20% off</div>
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4A6080" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-  </div>
-  <div class="book-btn">Book Car &middot; $3.80</div>
-  <div class="book-meta">
-    <div class="book-meta-item"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>Cash</div>
-    <div class="book-meta-item"><svg viewBox="0 0 24 24"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/></svg>Share trip</div>
-    <div class="book-meta-item"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 14 19.79 19.79 0 0 1 1.61 5.5 2 2 0 0 1 3.6 3h3a2 2 0 0 1 2 1.72"/></svg>SOS</div>
-  </div>
-  <div class="sec-head"><div class="sec-title">Nearby Drivers</div><div class="sec-link">Map view</div></div>
-  <div class="driver-list">
-    <div class="driver-card">
-      <div class="driver-avatar">&#129489;</div>
-      <div class="driver-info"><div class="driver-name">Budi Santoso</div><div class="driver-vehicle">Honda Jazz &middot; B 4412 XY</div></div>
-      <div class="driver-right">
-        <div class="driver-rating"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>4.9</div>
-        <div class="driver-dist">0.8 km away</div>
+  <div class="sheet">
+    <div class="sheet-handle"></div>
+    <div class="route-box">
+      <div class="route-dots">
+        <div class="route-dot a"></div>
+        <div class="route-line"></div>
+        <div class="route-dot b"></div>
+      </div>
+      <div class="route-texts">
+        <div><div class="route-lbl">Pickup</div><div class="route-addr">Sudirman Central Business</div></div>
+        <div class="route-div"></div>
+        <div><div class="route-lbl">Drop-off</div><div class="route-addr">Senayan City Mall</div></div>
       </div>
     </div>
-    <div class="driver-card">
-      <div class="driver-avatar">&#128113;</div>
-      <div class="driver-info"><div class="driver-name">Rizky Pratama</div><div class="driver-vehicle">Toyota Yaris &middot; B 7799 ZZ</div></div>
-      <div class="driver-right">
-        <div class="driver-rating"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>4.7</div>
-        <div class="driver-dist">1.4 km away</div>
+    <div class="route-meta">
+      <div class="rmeta-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>8 min drive</div>
+      <div class="rmeta-item"><svg viewBox="0 0 24 24"><path d="M3 12h18"/><path d="M12 3l9 9-9 9"/></svg>4.2 km</div>
+    </div>
+    <div class="ride-title">Choose a ride</div>
+    <div class="ride-types" id="ride-types">
+      <div class="rt" data-price="$1.20" data-label="Bike"><div class="rt-icon">&#128693;</div><div class="rt-name">Bike</div><div class="rt-price">$1.20</div><div class="rt-eta">3 min</div></div>
+      <div class="rt on" data-price="$3.80" data-label="Car"><div class="rt-icon">&#128663;</div><div class="rt-name">Car</div><div class="rt-price">$3.80</div><div class="rt-eta">5 min</div></div>
+      <div class="rt" data-price="$5.50" data-label="XL"><div class="rt-icon">&#128656;</div><div class="rt-name">XL</div><div class="rt-price">$5.50</div><div class="rt-eta">8 min</div></div>
+      <div class="rt" data-price="$8.00" data-label="Premium"><div class="rt-icon">&#11088;</div><div class="rt-name">Premium</div><div class="rt-price">$8.00</div><div class="rt-eta">10 min</div></div>
+    </div>
+    <div class="promo-bar">
+      <span style="font-size:18px;">&#127903;</span>
+      <div class="promo-txt">Use code <span>JEMPUT20</span> for 20% off</div>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4A6080" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </div>
+    <button class="book-btn" id="book-btn">Book Car &middot; $3.80</button>
+    <div class="book-meta">
+      <div class="bm-item"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>Cash</div>
+      <div class="bm-item"><svg viewBox="0 0 24 24"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/></svg>Share trip</div>
+      <div class="bm-item"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 14 19.79 19.79 0 0 1 1.61 5.5 2 2 0 0 1 3.6 3h3a2 2 0 0 1 2 1.72"/></svg>SOS</div>
+    </div>
+    <div class="drivers-title">Nearby Drivers</div>
+    <div class="driver-card"><div class="d-av">&#129489;</div><div class="d-info"><div class="d-name">Budi Santoso</div><div class="d-vehicle">Honda Jazz &middot; B 4412 XY</div></div><div class="d-right"><div class="d-rating"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>4.9</div><div class="d-dist">0.8 km away</div></div></div>
+    <div class="driver-card"><div class="d-av">&#128113;</div><div class="d-info"><div class="d-name">Rizky Pratama</div><div class="d-vehicle">Toyota Yaris &middot; B 7799 ZZ</div></div><div class="d-right"><div class="d-rating"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>4.7</div><div class="d-dist">1.4 km away</div></div></div>
+  </div>
+</div>
+
+<!-- ACTIVITY -->
+<div id="s-activity" class="screen">
+  <div class="pg-hdr"><div class="pg-title">Trip Activity</div></div>
+  <div class="trip-tabs">
+    <div class="trip-tab on">Completed</div>
+    <div class="trip-tab">Cancelled</div>
+  </div>
+  <div class="trip-list">
+    <div class="trip-item">
+      <div class="trip-top"><div class="trip-date">Today, 08:22 AM</div><div class="trip-status">Completed</div></div>
+      <div class="trip-route">
+        <div class="trip-dots"><div class="trip-dot a"></div><div class="trip-seg"></div><div class="trip-dot b"></div></div>
+        <div class="trip-addrs"><div class="trip-addr">Sudirman Central Business</div><div class="trip-addr">Senayan City Mall</div></div>
       </div>
+      <div class="trip-footer"><div><div class="trip-price">$3.80</div><div class="trip-type">Car &middot; 4.2 km</div></div><div class="rebooking-btn">Book Again</div></div>
+    </div>
+    <div class="trip-item">
+      <div class="trip-top"><div class="trip-date">May 15, 07:45 PM</div><div class="trip-status">Completed</div></div>
+      <div class="trip-route">
+        <div class="trip-dots"><div class="trip-dot a"></div><div class="trip-seg"></div><div class="trip-dot b"></div></div>
+        <div class="trip-addrs"><div class="trip-addr">Grand Indonesia Mall</div><div class="trip-addr">Kemang Raya No. 12</div></div>
+      </div>
+      <div class="trip-footer"><div><div class="trip-price">$5.20</div><div class="trip-type">Car &middot; 6.1 km</div></div><div class="rebooking-btn">Book Again</div></div>
+    </div>
+    <div class="trip-item">
+      <div class="trip-top"><div class="trip-date">May 14, 12:10 PM</div><div class="trip-status">Completed</div></div>
+      <div class="trip-route">
+        <div class="trip-dots"><div class="trip-dot a"></div><div class="trip-seg"></div><div class="trip-dot b"></div></div>
+        <div class="trip-addrs"><div class="trip-addr">Kuningan City Office</div><div class="trip-addr">Plaza Indonesia</div></div>
+      </div>
+      <div class="trip-footer"><div><div class="trip-price">$1.40</div><div class="trip-type">Bike &middot; 2.3 km</div></div><div class="rebooking-btn">Book Again</div></div>
     </div>
   </div>
 </div>
-<div class="spacer"></div>
+
+<!-- MAP -->
+<div id="s-map" class="screen">
+  <div class="full-map">
+    <div class="fm-bg"></div>
+    <div class="fm-road-h"></div><div class="fm-road-v"></div>
+    <div class="fm-road-h2"></div><div class="fm-road-v2"></div>
+    <svg style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;" viewBox="0 0 390 420" fill="none">
+      <path d="M 136 134 Q 150 200 261 285" stroke="url(#rg2)" stroke-width="4" stroke-dasharray="8 5"/>
+      <defs><linearGradient id="rg2" x1="136" y1="134" x2="261" y2="285" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#00D4FF"/><stop offset="100%" stop-color="#00E676"/></linearGradient></defs>
+    </svg>
+    <div class="fm-pin-a"><div class="map-pin pickup"></div></div>
+    <div class="fm-pin-b"><div class="map-pin dropoff"></div></div>
+    <div class="fm-car">&#128663;</div>
+    <div class="fm-overlay">
+      <div class="fm-eta-card">
+        <div><div class="fm-eta-label">Driver arriving in</div><div class="fm-eta-val">8 min</div></div>
+        <div style="text-align:right;"><div class="fm-eta-label">Distance</div><div style="font-size:18px;font-weight:700;">4.2 km</div><div class="fm-eta-sub">to drop-off</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="map-controls">
+    <div class="map-ctrl-btn"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Center Map</div>
+    <div class="map-ctrl-btn"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07"/><path d="M11 5H6a2 2 0 0 0-2 2v14l4-2 4 2 4-2 4 2V7a2 2 0 0 0-2-2h-5z"/></svg>Share Route</div>
+  </div>
+  <div style="padding:4px 20px;">
+    <div class="driver-card"><div class="d-av">&#129489;</div><div class="d-info"><div class="d-name">Budi Santoso &middot; B 4412 XY</div><div class="d-vehicle">Honda Jazz Hitam &middot; &#9733; 4.9</div></div><div><div style="font-size:11px;font-weight:700;color:var(--cyan);border:1px solid rgba(0,212,255,.3);padding:5px 12px;border-radius:20px;cursor:pointer;">Call</div></div></div>
+  </div>
+</div>
+
+<!-- PROFILE -->
+<div id="s-profile" class="screen">
+  <div class="prof-hero">
+    <div class="prof-av">&#128100;</div>
+    <div class="prof-name">Ahmad Rivera</div>
+    <div class="prof-sub">Member since 2023 &middot; &#11088; 4.92 rating</div>
+  </div>
+  <div class="prof-stats">
+    <div class="pst"><div class="pst-v">87</div><div class="pst-l">Trips</div></div>
+    <div class="pst"><div class="pst-v">4.92</div><div class="pst-l">Rating</div></div>
+    <div class="pst"><div class="pst-v">142km</div><div class="pst-l">Total</div></div>
+  </div>
+  <div class="menu-wrap">
+    <div class="menu-item"><div class="mi-icon" style="background:rgba(0,212,255,.1);">&#128179;</div><div class="mi-txt">Payment Methods</div><div class="mi-arr">&#8250;</div></div>
+    <div class="menu-item"><div class="mi-icon" style="background:rgba(0,230,118,.1);">&#128275;</div><div class="mi-txt">Safety &amp; Privacy</div><div class="mi-arr">&#8250;</div></div>
+    <div class="menu-item"><div class="mi-icon" style="background:rgba(255,215,0,.1);">&#127894;</div><div class="mi-txt">Promo Codes</div><div class="mi-arr">&#8250;</div></div>
+    <div class="menu-item"><div class="mi-icon" style="background:rgba(139,92,246,.1);">&#128276;</div><div class="mi-txt">Notifications</div><div class="mi-arr">&#8250;</div></div>
+    <div class="menu-item"><div class="mi-icon" style="background:rgba(239,68,68,.1);">&#128682;</div><div class="mi-txt">Sign Out</div><div class="mi-arr" style="color:#EF4444;">&#8250;</div></div>
+  </div>
+</div>
+
+<!-- BOTTOM NAV -->
 <div class="bottom-nav">
-  <div class="nav-item active">
+  <div class="nav-item active" data-tab="home">
     <svg viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
     <span class="nav-label">Home</span>
   </div>
-  <div class="nav-item">
+  <div class="nav-item" data-tab="activity">
     <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
     <span class="nav-label">Activity</span>
   </div>
-  <div class="nav-item">
+  <div class="nav-item" data-tab="map">
     <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
     <span class="nav-label">Map</span>
   </div>
-  <div class="nav-item">
+  <div class="nav-item" data-tab="profile">
     <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
     <span class="nav-label">Profile</span>
   </div>
 </div>
+
+<script>
+(function(){
+  // TAB SWITCHING
+  function go(tab){
+    document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
+    var screen=document.getElementById('s-'+tab);
+    if(screen) screen.classList.add('active');
+    document.querySelectorAll('.nav-item').forEach(function(n){n.classList.remove('active');});
+    var navItem=document.querySelector('.nav-item[data-tab="'+tab+'"]');
+    if(navItem) navItem.classList.add('active');
+    window.scrollTo(0,0);
+  }
+  document.querySelectorAll('.nav-item[data-tab]').forEach(function(n){
+    n.addEventListener('click',function(){go(this.dataset.tab);});
+  });
+  document.getElementById('go-profile').addEventListener('click',function(){go('profile');});
+
+  // RIDE TYPE SELECTOR
+  var rideTypes=document.querySelectorAll('.rt');
+  var bookBtn=document.getElementById('book-btn');
+  rideTypes.forEach(function(rt){
+    rt.addEventListener('click',function(){
+      rideTypes.forEach(function(r){r.classList.remove('on');});
+      this.classList.add('on');
+      var label=this.dataset.label;
+      var price=this.dataset.price;
+      bookBtn.textContent='Book '+label+' · '+price;
+      bookBtn.classList.remove('booked');
+    });
+  });
+
+  // BOOK BUTTON
+  bookBtn.addEventListener('click',function(){
+    if(this.classList.contains('booked')){go('map');return;}
+    this.textContent='&#10003; Booking confirmed!';
+    this.classList.add('booked');
+    var self=this;
+    setTimeout(function(){go('map');},900);
+  });
+
+  // TRIP TABS
+  document.querySelectorAll('.trip-tab').forEach(function(t){
+    t.addEventListener('click',function(){
+      document.querySelectorAll('.trip-tab').forEach(function(x){x.classList.remove('on');});
+      this.classList.add('on');
+    });
+  });
+})();
+</script>
 </body>
 </html>

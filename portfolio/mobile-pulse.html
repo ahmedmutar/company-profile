@@ -4,18 +4,30 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=390, initial-scale=1.0">
 <title>Pulse — Fitness Tracker</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-:root{--bg:#0A0A0A;--card:#141414;--card2:#1A1A1A;--lime:#A3FF47;--lime2:#C8FF6E;--text:#F5F5F5;--muted:#6B6B6B;--muted2:#3A3A3A;}
+:root{--bg:#0A0A0A;--card:#141414;--card2:#1A1A1A;--lime:#A3FF47;--text:#F5F5F5;--muted:#6B6B6B;--muted2:#2A2A2A;}
 html,body{width:390px;min-height:844px;background:var(--bg);font-family:'Space Grotesk',sans-serif;color:var(--text);overflow-x:hidden;}
-.sb{display:flex;align-items:center;justify-content:space-between;padding:14px 20px 10px;font-size:12px;font-weight:600;}
-.sb-time{font-size:15px;font-weight:700;}
-.sb-icons{display:flex;align-items:center;gap:6px;}
+.screen{display:none;padding-bottom:90px;}
+.screen.active{display:block;}
+.sb{display:flex;align-items:center;justify-content:space-between;padding:14px 20px 10px;font-size:12px;font-weight:600;background:var(--bg);position:sticky;top:0;z-index:100;}
+.bottom-nav{position:fixed;bottom:0;left:0;width:390px;background:rgba(10,10,10,.96);backdrop-filter:blur(20px);border-top:1px solid rgba(255,255,255,.06);padding:12px 0 28px;display:flex;justify-content:space-around;z-index:200;}
+.nav-item{display:flex;flex-direction:column;align-items:center;gap:5px;min-width:60px;cursor:pointer;}
+.nav-item svg{width:22px;height:22px;stroke:var(--muted);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transition:stroke .2s;}
+.nav-item.active svg{stroke:var(--lime);}
+.nav-label{font-size:10px;color:var(--muted);font-weight:600;letter-spacing:.3px;transition:color .2s;}
+.nav-item.active .nav-label{color:var(--lime);}
+.nav-center-btn{width:52px;height:52px;background:var(--lime);border-radius:18px;display:flex;align-items:center;justify-content:center;margin-top:-20px;box-shadow:0 8px 24px rgba(163,255,71,.35);}
+.nav-center-btn svg{width:24px;height:24px;stroke:#0A0A0A;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;}
+/* SHARED */
+.pg-hdr{display:flex;align-items:center;justify-content:space-between;padding:6px 20px 18px;}
+.pg-title{font-size:20px;font-weight:700;}
+.sec-head{display:flex;align-items:center;justify-content:space-between;padding:0 20px 14px;}
+.sec-title{font-size:16px;font-weight:700;}
+.sec-link{font-size:13px;color:var(--lime);font-weight:600;cursor:pointer;}
+/* HOME SCREEN */
 .header{padding:6px 20px 18px;display:flex;align-items:center;justify-content:space-between;}
-.header-greeting{font-size:13px;color:var(--muted);font-weight:500;}
-.header-name{font-size:22px;font-weight:700;margin-top:1px;}
 .header-right{display:flex;gap:10px;align-items:center;}
 .icon-btn{width:40px;height:40px;background:var(--card2);border-radius:12px;display:flex;align-items:center;justify-content:center;}
 .icon-btn svg{width:18px;height:18px;stroke:var(--text);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
@@ -23,27 +35,20 @@ html,body{width:390px;min-height:844px;background:var(--bg);font-family:'Space G
 .today-wrap{padding:0 20px 20px;}
 .today-card{background:var(--lime);border-radius:24px;padding:22px 24px;position:relative;overflow:hidden;}
 .today-card::after{content:'';position:absolute;right:-30px;top:-30px;width:160px;height:160px;background:rgba(255,255,255,.15);border-radius:50%;}
-.today-card::before{content:'';position:absolute;right:20px;bottom:-40px;width:120px;height:120px;background:rgba(0,0,0,.06);border-radius:50%;}
 .today-label{font-size:12px;font-weight:600;color:rgba(10,10,10,.6);letter-spacing:.8px;text-transform:uppercase;}
 .today-main{display:flex;align-items:flex-end;gap:6px;margin:8px 0 4px;}
 .today-num{font-size:52px;font-weight:700;color:#0A0A0A;line-height:1;}
 .today-unit{font-size:16px;font-weight:600;color:rgba(10,10,10,.6);margin-bottom:8px;}
 .today-sub{font-size:13px;color:rgba(10,10,10,.55);font-weight:500;}
-.today-progress-wrap{margin-top:16px;}
-.today-progress-bar{height:6px;background:rgba(0,0,0,.15);border-radius:3px;overflow:hidden;}
-.today-progress-fill{height:100%;width:68%;background:#0A0A0A;border-radius:3px;}
-.today-progress-labels{display:flex;justify-content:space-between;margin-top:6px;font-size:11px;color:rgba(10,10,10,.55);font-weight:600;}
+.today-bar-wrap{margin-top:16px;}
+.today-bar{height:6px;background:rgba(0,0,0,.15);border-radius:3px;overflow:hidden;}
+.today-fill{height:100%;width:68%;background:#0A0A0A;border-radius:3px;}
+.today-labels{display:flex;justify-content:space-between;margin-top:6px;font-size:11px;color:rgba(10,10,10,.55);font-weight:600;}
 .stats-row{display:flex;gap:12px;padding:0 20px 20px;}
 .stat-card{flex:1;background:var(--card);border-radius:18px;padding:16px;}
 .stat-icon{width:32px;height:32px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:10px;font-size:16px;}
-.stat-icon.fire{background:rgba(255,85,0,.15);}
-.stat-icon.heart{background:rgba(255,59,59,.15);}
-.stat-icon.drop{background:rgba(0,162,255,.15);}
 .stat-val{font-size:20px;font-weight:700;line-height:1;}
 .stat-label{font-size:11px;color:var(--muted);font-weight:500;margin-top:3px;}
-.sec-head{display:flex;align-items:center;justify-content:space-between;padding:0 20px 14px;}
-.sec-title{font-size:16px;font-weight:700;}
-.sec-link{font-size:13px;color:var(--lime);font-weight:600;}
 .chart-wrap{padding:0 20px 24px;}
 .chart-card{background:var(--card);border-radius:20px;padding:20px;}
 .chart-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;}
@@ -53,127 +58,247 @@ html,body{width:390px;min-height:844px;background:var(--bg);font-family:'Space G
 .chart-bars{display:flex;align-items:flex-end;gap:8px;height:80px;}
 .bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;}
 .bar-fill{width:100%;border-radius:4px 4px 0 0;background:var(--muted2);}
-.bar-fill.active{background:var(--lime);}
+.bar-fill.hi{background:var(--lime);}
 .bar-day{font-size:10px;color:var(--muted);font-weight:600;letter-spacing:.3px;}
 .workout-list{padding:0 20px;display:flex;flex-direction:column;gap:12px;}
-.workout-card{background:var(--card);border-radius:18px;padding:16px 18px;display:flex;align-items:center;gap:14px;}
-.workout-icon{width:46px;height:46px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
-.workout-icon.run{background:rgba(163,255,71,.12);}
-.workout-icon.bike{background:rgba(255,196,0,.12);}
-.workout-icon.swim{background:rgba(0,162,255,.12);}
-.workout-info{flex:1;}
-.workout-name{font-size:14px;font-weight:600;}
-.workout-meta{font-size:12px;color:var(--muted);margin-top:3px;font-weight:500;}
-.workout-right{text-align:right;}
-.workout-cals{font-size:14px;font-weight:700;color:var(--lime);}
-.workout-dur{font-size:11px;color:var(--muted);margin-top:2px;font-weight:500;}
-.bottom-nav{position:fixed;bottom:0;left:0;width:390px;background:rgba(10,10,10,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid rgba(255,255,255,.06);padding:12px 0 28px;display:flex;justify-content:space-around;}
-.nav-item{display:flex;flex-direction:column;align-items:center;gap:5px;min-width:60px;}
-.nav-item svg{width:22px;height:22px;stroke:var(--muted);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
-.nav-item.active svg{stroke:var(--lime);}
-.nav-label{font-size:10px;color:var(--muted);font-weight:600;letter-spacing:.3px;}
-.nav-item.active .nav-label{color:var(--lime);}
-.nav-center-btn{width:52px;height:52px;background:var(--lime);border-radius:18px;display:flex;align-items:center;justify-content:center;margin-top:-20px;box-shadow:0 8px 24px rgba(163,255,71,.35);}
-.nav-center-btn svg{width:24px;height:24px;stroke:#0A0A0A;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;}
-.spacer{height:100px;}
+.workout-card{background:var(--card);border-radius:18px;padding:16px 18px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:transform .15s;}
+.workout-card:active{transform:scale(.98);}
+.w-icon{width:46px;height:46px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+.w-icon.run{background:rgba(163,255,71,.12);}
+.w-icon.bike{background:rgba(255,196,0,.12);}
+.w-icon.swim{background:rgba(0,162,255,.12);}
+.w-info{flex:1;}
+.w-name{font-size:14px;font-weight:600;}
+.w-meta{font-size:12px;color:var(--muted);margin-top:3px;font-weight:500;}
+.w-right{text-align:right;}
+.w-cal{font-size:14px;font-weight:700;color:var(--lime);}
+.w-dur{font-size:11px;color:var(--muted);margin-top:2px;font-weight:500;}
+/* STATS SCREEN */
+.period-tabs{display:flex;gap:0;margin:0 20px 20px;background:var(--card);border-radius:14px;padding:4px;}
+.period-tab{flex:1;text-align:center;padding:8px 0;font-size:12px;font-weight:700;color:var(--muted);border-radius:10px;cursor:pointer;transition:all .2s;}
+.period-tab.on{background:var(--lime);color:#0A0A0A;}
+.big-chart{background:var(--card);border-radius:20px;margin:0 20px 20px;padding:20px;}
+.big-bars{display:flex;align-items:flex-end;gap:6px;height:120px;margin-bottom:10px;}
+.b-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;}
+.b-fill{width:100%;border-radius:5px 5px 0 0;background:var(--muted2);}
+.b-fill.hi{background:var(--lime);}
+.b-lbl{font-size:9px;color:var(--muted);font-weight:600;}
+.metrics-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 20px 20px;}
+.metric-card{background:var(--card);border-radius:18px;padding:16px;}
+.metric-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+.metric-label{font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.5px;}
+.metric-icon{font-size:18px;}
+.metric-val{font-size:24px;font-weight:700;}
+.metric-sub{font-size:11px;color:var(--lime);font-weight:600;margin-top:2px;}
+/* SOCIAL SCREEN */
+.social-card{display:flex;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid rgba(255,255,255,.06);cursor:pointer;}
+.friend-av{width:44px;height:44px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+.friend-info{flex:1;}
+.friend-name{font-size:14px;font-weight:600;}
+.friend-act{font-size:12px;color:var(--muted);margin-top:2px;}
+.friend-steps{font-size:14px;font-weight:700;color:var(--lime);}
+.leaderboard{margin:4px 20px 20px;background:var(--card);border-radius:20px;overflow:hidden;}
+.lb-row{display:flex;align-items:center;gap:14px;padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.05);}
+.lb-row:last-child{border-bottom:none;}
+.lb-rank{width:24px;font-size:13px;font-weight:800;text-align:center;color:var(--muted);}
+.lb-rank.gold{color:#FFD700;}
+.lb-rank.silver{color:#C0C0C0;}
+.lb-rank.bronze{color:#CD7F32;}
+.lb-av{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.lb-info{flex:1;}
+.lb-name{font-size:13px;font-weight:600;}
+.lb-steps{font-size:11px;color:var(--muted);}
+.lb-val{font-size:14px;font-weight:700;color:var(--lime);}
+/* PROFILE SCREEN */
+.prof-hero{display:flex;flex-direction:column;align-items:center;padding:24px 20px 16px;}
+.prof-av-big{width:80px;height:80px;border-radius:24px;background:linear-gradient(135deg,var(--lime),#5bff00);display:flex;align-items:center;justify-content:center;font-size:36px;font-weight:700;color:#0A0A0A;margin-bottom:12px;}
+.prof-name{font-size:20px;font-weight:700;}
+.prof-sub{font-size:12px;color:var(--muted);margin-top:4px;}
+.goal-card{margin:0 20px 20px;background:var(--lime);border-radius:20px;padding:18px 20px;}
+.goal-label{font-size:11px;font-weight:700;color:rgba(10,10,10,.6);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;}
+.goal-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+.goal-name{font-size:14px;font-weight:700;color:#0A0A0A;}
+.goal-val{font-size:14px;font-weight:800;color:#0A0A0A;}
+.goal-bar{height:6px;background:rgba(0,0,0,.15);border-radius:3px;overflow:hidden;}
+.goal-fill{height:100%;border-radius:3px;background:#0A0A0A;}
+.achiev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:0 20px 20px;}
+.achiev{background:var(--card);border-radius:16px;padding:14px 10px;text-align:center;}
+.achiev-icon{font-size:28px;margin-bottom:6px;}
+.achiev-name{font-size:10px;font-weight:600;color:var(--muted);line-height:1.3;}
+.achiev.earned .achiev-name{color:var(--lime);}
 </style>
 </head>
 <body>
+
 <div class="sb">
-  <span class="sb-time">9:41</span>
-  <div class="sb-icons">
+  <span style="font-size:15px;font-weight:700;">9:41</span>
+  <div style="display:flex;gap:6px;align-items:center;">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M1 6l5.5 5.5L12 6l5.5 5.5L23 6"/></svg>
     <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><rect x="2" y="7" width="16" height="10" rx="2"/></svg>
   </div>
 </div>
-<div class="header">
-  <div>
-    <div class="header-greeting">Good morning &#128170;</div>
-    <div class="header-name">Alex Rivera</div>
-  </div>
-  <div class="header-right">
-    <div class="icon-btn"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></div>
-    <div class="avatar">A</div>
-  </div>
-</div>
-<div class="today-wrap">
-  <div class="today-card">
-    <div class="today-label">Today's Steps</div>
-    <div class="today-main">
-      <div class="today-num">8,427</div>
-      <div class="today-unit">steps</div>
-    </div>
-    <div class="today-sub">Goal: 12,000 steps &middot; 68% complete</div>
-    <div class="today-progress-wrap">
-      <div class="today-progress-bar"><div class="today-progress-fill"></div></div>
-      <div class="today-progress-labels"><span>0</span><span>12,000</span></div>
+
+<!-- HOME -->
+<div id="s-home" class="screen active">
+  <div class="header">
+    <div><div style="font-size:13px;color:var(--muted);font-weight:500;">Good morning &#128170;</div><div style="font-size:22px;font-weight:700;margin-top:1px;">Alex Rivera</div></div>
+    <div class="header-right">
+      <div class="icon-btn"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></div>
+      <div class="avatar" data-tab="profile" style="cursor:pointer;">A</div>
     </div>
   </div>
-</div>
-<div class="stats-row">
-  <div class="stat-card"><div class="stat-icon fire">&#128293;</div><div class="stat-val">612</div><div class="stat-label">Calories</div></div>
-  <div class="stat-card"><div class="stat-icon heart">&#10084;</div><div class="stat-val">74</div><div class="stat-label">BPM</div></div>
-  <div class="stat-card"><div class="stat-icon drop">&#128167;</div><div class="stat-val">1.8L</div><div class="stat-label">Water</div></div>
-</div>
-<div class="chart-wrap">
-  <div class="chart-card">
-    <div class="chart-header">
-      <div class="chart-title">Weekly Activity</div>
-      <div class="chart-avg">Avg: <span>9,240</span> steps</div>
-    </div>
-    <div class="chart-bars">
-      <div class="bar-col"><div class="bar-fill" style="height:55%"></div><div class="bar-day">MON</div></div>
-      <div class="bar-col"><div class="bar-fill" style="height:80%"></div><div class="bar-day">TUE</div></div>
-      <div class="bar-col"><div class="bar-fill" style="height:45%"></div><div class="bar-day">WED</div></div>
-      <div class="bar-col"><div class="bar-fill" style="height:90%"></div><div class="bar-day">THU</div></div>
-      <div class="bar-col"><div class="bar-fill" style="height:60%"></div><div class="bar-day">FRI</div></div>
-      <div class="bar-col"><div class="bar-fill active" style="height:70%"></div><div class="bar-day">SAT</div></div>
-      <div class="bar-col"><div class="bar-fill" style="height:30%"></div><div class="bar-day">SUN</div></div>
+  <div class="today-wrap">
+    <div class="today-card">
+      <div class="today-label">Today's Steps</div>
+      <div class="today-main"><div class="today-num">8,427</div><div class="today-unit">steps</div></div>
+      <div class="today-sub">Goal: 12,000 &middot; 68% complete</div>
+      <div class="today-bar-wrap"><div class="today-bar"><div class="today-fill"></div></div><div class="today-labels"><span>0</span><span>12,000</span></div></div>
     </div>
   </div>
-</div>
-<div class="sec-head">
-  <div class="sec-title">Today's Workouts</div>
-  <div class="sec-link">See all</div>
-</div>
-<div class="workout-list">
-  <div class="workout-card">
-    <div class="workout-icon run">&#127939;</div>
-    <div class="workout-info"><div class="workout-name">Morning Run</div><div class="workout-meta">6:30 AM &middot; Outdoor</div></div>
-    <div class="workout-right"><div class="workout-cals">320 cal</div><div class="workout-dur">38 min</div></div>
+  <div class="stats-row">
+    <div class="stat-card"><div class="stat-icon" style="background:rgba(255,85,0,.15);">&#128293;</div><div class="stat-val">612</div><div class="stat-label">Calories</div></div>
+    <div class="stat-card"><div class="stat-icon" style="background:rgba(255,59,59,.15);">&#10084;</div><div class="stat-val">74</div><div class="stat-label">BPM</div></div>
+    <div class="stat-card"><div class="stat-icon" style="background:rgba(0,162,255,.15);">&#128167;</div><div class="stat-val">1.8L</div><div class="stat-label">Water</div></div>
   </div>
-  <div class="workout-card">
-    <div class="workout-icon bike">&#128692;</div>
-    <div class="workout-info"><div class="workout-name">Cycling Session</div><div class="workout-meta">12:00 PM &middot; Indoor</div></div>
-    <div class="workout-right"><div class="workout-cals">185 cal</div><div class="workout-dur">22 min</div></div>
+  <div class="chart-wrap">
+    <div class="chart-card">
+      <div class="chart-header"><div class="chart-title">Weekly Activity</div><div class="chart-avg">Avg: <span>9,240</span></div></div>
+      <div class="chart-bars">
+        <div class="bar-col"><div class="bar-fill" style="height:55%"></div><div class="bar-day">M</div></div>
+        <div class="bar-col"><div class="bar-fill" style="height:80%"></div><div class="bar-day">T</div></div>
+        <div class="bar-col"><div class="bar-fill" style="height:45%"></div><div class="bar-day">W</div></div>
+        <div class="bar-col"><div class="bar-fill" style="height:90%"></div><div class="bar-day">T</div></div>
+        <div class="bar-col"><div class="bar-fill" style="height:60%"></div><div class="bar-day">F</div></div>
+        <div class="bar-col"><div class="bar-fill hi" style="height:70%"></div><div class="bar-day">S</div></div>
+        <div class="bar-col"><div class="bar-fill" style="height:30%"></div><div class="bar-day">S</div></div>
+      </div>
+    </div>
   </div>
-  <div class="workout-card">
-    <div class="workout-icon swim">&#127944;</div>
-    <div class="workout-info"><div class="workout-name">Swim Laps</div><div class="workout-meta">5:30 PM &middot; Pool</div></div>
-    <div class="workout-right"><div class="workout-cals">107 cal</div><div class="workout-dur">20 min</div></div>
+  <div class="sec-head"><div class="sec-title">Today's Workouts</div><div class="sec-link" data-tab="stats">See all</div></div>
+  <div class="workout-list">
+    <div class="workout-card"><div class="w-icon run">&#127939;</div><div class="w-info"><div class="w-name">Morning Run</div><div class="w-meta">6:30 AM &middot; Outdoor</div></div><div class="w-right"><div class="w-cal">320 cal</div><div class="w-dur">38 min</div></div></div>
+    <div class="workout-card"><div class="w-icon bike">&#128692;</div><div class="w-info"><div class="w-name">Cycling Session</div><div class="w-meta">12:00 PM &middot; Indoor</div></div><div class="w-right"><div class="w-cal">185 cal</div><div class="w-dur">22 min</div></div></div>
+    <div class="workout-card"><div class="w-icon swim">&#127944;</div><div class="w-info"><div class="w-name">Swim Laps</div><div class="w-meta">5:30 PM &middot; Pool</div></div><div class="w-right"><div class="w-cal">107 cal</div><div class="w-dur">20 min</div></div></div>
   </div>
 </div>
-<div class="spacer"></div>
+
+<!-- STATS -->
+<div id="s-stats" class="screen">
+  <div class="pg-hdr"><div class="pg-title">My Stats</div></div>
+  <div class="period-tabs">
+    <div class="period-tab on">Week</div>
+    <div class="period-tab">Month</div>
+    <div class="period-tab">Year</div>
+  </div>
+  <div class="big-chart">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;"><div style="font-size:15px;font-weight:700;">Steps</div><div style="font-size:12px;color:var(--muted);">Avg <span style="color:var(--lime);font-weight:700;">9,240</span></div></div>
+    <div class="big-bars">
+      <div class="b-col"><div class="b-fill" style="height:55%;"></div><div class="b-lbl">Mon</div></div>
+      <div class="b-col"><div class="b-fill" style="height:80%;"></div><div class="b-lbl">Tue</div></div>
+      <div class="b-col"><div class="b-fill" style="height:45%;"></div><div class="b-lbl">Wed</div></div>
+      <div class="b-col"><div class="b-fill hi" style="height:95%;"></div><div class="b-lbl">Thu</div></div>
+      <div class="b-col"><div class="b-fill" style="height:60%;"></div><div class="b-lbl">Fri</div></div>
+      <div class="b-col"><div class="b-fill hi" style="height:70%;"></div><div class="b-lbl">Sat</div></div>
+      <div class="b-col"><div class="b-fill" style="height:30%;"></div><div class="b-lbl">Sun</div></div>
+    </div>
+  </div>
+  <div class="metrics-grid">
+    <div class="metric-card"><div class="metric-top"><div class="metric-label">Distance</div><div class="metric-icon">&#127939;</div></div><div class="metric-val">34.2</div><div class="metric-sub">km this week &#8593;12%</div></div>
+    <div class="metric-card"><div class="metric-top"><div class="metric-label">Calories</div><div class="metric-icon">&#128293;</div></div><div class="metric-val">3,840</div><div class="metric-sub">kcal burned &#8593;8%</div></div>
+    <div class="metric-card"><div class="metric-top"><div class="metric-label">Active Days</div><div class="metric-icon">&#128197;</div></div><div class="metric-val">6/7</div><div class="metric-sub">Best streak: 14d</div></div>
+    <div class="metric-card"><div class="metric-top"><div class="metric-label">Avg Heart</div><div class="metric-icon">&#10084;</div></div><div class="metric-val">72</div><div class="metric-sub">BPM resting</div></div>
+  </div>
+</div>
+
+<!-- SOCIAL -->
+<div id="s-social" class="screen">
+  <div class="pg-hdr"><div class="pg-title">Friends</div></div>
+  <div style="padding:0 20px 14px;font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.06em;">LEADERBOARD — THIS WEEK</div>
+  <div class="leaderboard">
+    <div class="lb-row"><div class="lb-rank gold">1</div><div class="lb-av" style="background:rgba(255,215,0,.12);">&#128113;</div><div class="lb-info"><div class="lb-name">Sarah K.</div><div class="lb-steps">Running &middot; 5.2km today</div></div><div class="lb-val">14,820</div></div>
+    <div class="lb-row" style="background:rgba(163,255,71,.04);"><div class="lb-rank silver">2</div><div class="lb-av" style="background:rgba(163,255,71,.15);">&#128100;</div><div class="lb-info"><div class="lb-name">You</div><div class="lb-steps">Morning run today</div></div><div class="lb-val">8,427</div></div>
+    <div class="lb-row"><div class="lb-rank bronze">3</div><div class="lb-av" style="background:rgba(255,100,0,.12);">&#129489;</div><div class="lb-info"><div class="lb-name">Marcus T.</div><div class="lb-steps">Cycling &middot; 12km</div></div><div class="lb-val">7,940</div></div>
+    <div class="lb-row"><div class="lb-rank" style="color:var(--muted);">4</div><div class="lb-av" style="background:rgba(139,92,246,.12);">&#128105;</div><div class="lb-info"><div class="lb-name">Priya M.</div><div class="lb-steps">Yoga &middot; 45 min</div></div><div class="lb-val">6,200</div></div>
+    <div class="lb-row"><div class="lb-rank" style="color:var(--muted);">5</div><div class="lb-av" style="background:rgba(236,72,153,.12);">&#128112;</div><div class="lb-info"><div class="lb-name">Jake L.</div><div class="lb-steps">Rest day</div></div><div class="lb-val">4,100</div></div>
+  </div>
+  <div style="padding:0 20px 14px;font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.06em;">RECENT ACTIVITY</div>
+  <div class="social-card"><div class="friend-av" style="background:rgba(255,215,0,.12);">&#128113;</div><div class="friend-info"><div class="friend-name">Sarah K.</div><div class="friend-act">Completed 5km run &middot; 2h ago</div></div><div class="friend-steps">+450 cal</div></div>
+  <div class="social-card"><div class="friend-av" style="background:rgba(255,100,0,.12);">&#129489;</div><div class="friend-info"><div class="friend-name">Marcus T.</div><div class="friend-act">Hit 30-day streak &#128293; &middot; 4h ago</div></div><div class="friend-steps">&#127942;</div></div>
+</div>
+
+<!-- PROFILE -->
+<div id="s-profile" class="screen">
+  <div class="prof-hero">
+    <div class="prof-av-big">A</div>
+    <div class="prof-name">Alex Rivera</div>
+    <div class="prof-sub">Member since Jan 2024 &middot; &#127942; 14-day streak</div>
+  </div>
+  <div class="goal-card">
+    <div class="goal-label">Current Goals</div>
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <div><div class="goal-row"><div class="goal-name">Daily Steps</div><div class="goal-val">8,427 / 12,000</div></div><div class="goal-bar"><div class="goal-fill" style="width:70%;"></div></div></div>
+      <div><div class="goal-row"><div class="goal-name">Weekly Workouts</div><div class="goal-val">4 / 5</div></div><div class="goal-bar"><div class="goal-fill" style="width:80%;"></div></div></div>
+      <div><div class="goal-row"><div class="goal-name">Water Intake</div><div class="goal-val">1.8L / 2.5L</div></div><div class="goal-bar"><div class="goal-fill" style="width:72%;"></div></div></div>
+    </div>
+  </div>
+  <div style="padding:0 20px 14px;font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.06em;">ACHIEVEMENTS</div>
+  <div class="achiev-grid">
+    <div class="achiev earned"><div class="achiev-icon">&#127939;</div><div class="achiev-name">First 5K</div></div>
+    <div class="achiev earned"><div class="achiev-icon">&#128293;</div><div class="achiev-name">7-Day Streak</div></div>
+    <div class="achiev earned"><div class="achiev-icon">&#128692;</div><div class="achiev-name">Cyclist</div></div>
+    <div class="achiev"><div class="achiev-icon" style="opacity:.3;">&#127945;</div><div class="achiev-name">Marathon</div></div>
+    <div class="achiev"><div class="achiev-icon" style="opacity:.3;">&#128167;</div><div class="achiev-name">Hydration</div></div>
+    <div class="achiev"><div class="achiev-icon" style="opacity:.3;">&#128170;</div><div class="achiev-name">Iron Will</div></div>
+  </div>
+</div>
+
+<!-- BOTTOM NAV -->
 <div class="bottom-nav">
-  <div class="nav-item active">
+  <div class="nav-item active" data-tab="home">
     <svg viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
     <span class="nav-label">Home</span>
   </div>
-  <div class="nav-item">
+  <div class="nav-item" data-tab="stats">
     <svg viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
     <span class="nav-label">Stats</span>
   </div>
-  <div class="nav-item">
+  <div class="nav-item" data-tab="home" id="start-btn">
     <div class="nav-center-btn"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
   </div>
-  <div class="nav-item">
+  <div class="nav-item" data-tab="social">
     <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
     <span class="nav-label">Social</span>
   </div>
-  <div class="nav-item">
+  <div class="nav-item" data-tab="profile">
     <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
     <span class="nav-label">Profile</span>
   </div>
 </div>
+
+<script>
+function switchTab(tab){
+  document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
+  document.getElementById('s-'+tab).classList.add('active');
+  document.querySelectorAll('[data-tab]').forEach(function(b){b.classList.remove('active');});
+  document.querySelectorAll('[data-tab="'+tab+'"]').forEach(function(b){b.classList.add('active');});
+  window.scrollTo(0,0);
+}
+document.querySelectorAll('[data-tab]').forEach(function(btn){
+  btn.addEventListener('click',function(e){
+    var tab=this.dataset.tab;
+    if(this.id==='start-btn'){
+      // + button: could show modal, for now just go home
+      switchTab('home');return;
+    }
+    switchTab(tab);
+  });
+});
+document.querySelectorAll('.period-tab').forEach(function(t){
+  t.addEventListener('click',function(){
+    document.querySelectorAll('.period-tab').forEach(function(x){x.classList.remove('on');});
+    this.classList.add('on');
+  });
+});
+</script>
 </body>
 </html>

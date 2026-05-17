@@ -2,31 +2,38 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=390, initial-scale=1.0">
 <title>NomNom — Food Delivery</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#130C06;--s1:#221507;--s2:#2E1A08;--ac:#FF6B2B;--ac2:#FF3D00;--tx:#FAF0E6;--mu:rgba(250,240,230,.45);--bd:rgba(255,255,255,.08);}
 *{box-sizing:border-box;margin:0;padding:0;}
 html,body{width:390px;min-height:844px;font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--tx);overflow-x:hidden;}
-a{color:inherit;text-decoration:none;}
-.sb{display:flex;justify-content:space-between;align-items:center;padding:14px 22px 4px;font-size:12px;font-weight:600;}
+.screen{display:none;padding-bottom:90px;}
+.screen.active{display:block;}
+.sb{display:flex;justify-content:space-between;align-items:center;padding:14px 22px 4px;font-size:12px;font-weight:600;background:var(--bg);position:sticky;top:0;z-index:100;}
 .sb-r{display:flex;align-items:center;gap:6px;}
+.bnav{position:fixed;bottom:0;left:0;width:390px;background:var(--s1);border-top:1px solid var(--bd);display:flex;padding:10px 0 26px;z-index:200;}
+.bn{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:10px;font-weight:600;color:var(--mu);cursor:pointer;position:relative;transition:color .2s;}
+.bn.on{color:var(--ac);}
+.bn-i{font-size:20px;line-height:1;}
+.bn-pip{position:absolute;bottom:-6px;width:4px;height:4px;border-radius:50%;background:var(--ac);}
+
+/* HOME */
 .hdr{display:flex;align-items:center;padding:10px 22px 8px;gap:10px;}
 .hdr-loc{flex:1;}
 .hdr-sup{font-size:11px;color:var(--mu);font-weight:500;margin-bottom:2px;}
 .hdr-val{font-size:15px;font-weight:800;display:flex;align-items:center;gap:5px;}
-.hdr-arr{color:var(--ac);font-size:12px;}
-.hdr-av{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--ac),var(--ac2));display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
-.hdr-bell{width:40px;height:40px;border-radius:13px;background:var(--s1);border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;font-size:17px;position:relative;flex-shrink:0;}
+.hdr-arr{color:var(--ac);}
+.hdr-bell{width:40px;height:40px;border-radius:13px;background:var(--s1);border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;font-size:17px;position:relative;cursor:pointer;}
 .bell-dot{position:absolute;top:9px;right:9px;width:7px;height:7px;border-radius:50%;background:var(--ac);border:1.5px solid var(--bg);}
-.srch{margin:6px 22px 4px;background:var(--s1);border:1px solid var(--bd);border-radius:16px;display:flex;align-items:center;gap:10px;padding:13px 14px;}
+.hdr-av{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--ac),var(--ac2));display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;cursor:pointer;}
+.srch{margin:6px 22px 4px;background:var(--s1);border:1px solid var(--bd);border-radius:16px;display:flex;align-items:center;gap:10px;padding:13px 14px;cursor:pointer;}
 .srch-ph{flex:1;font-size:14px;color:var(--mu);}
 .srch-flt{width:34px;height:34px;border-radius:10px;background:var(--ac);display:flex;align-items:center;justify-content:center;font-size:14px;}
-.promo{margin:10px 22px;height:136px;border-radius:20px;background:linear-gradient(135deg,#FF6B2B 0%,#FF2D55 100%);padding:20px;position:relative;overflow:hidden;}
+.promo{margin:10px 22px;height:136px;border-radius:20px;background:linear-gradient(135deg,#FF6B2B,#FF2D55);padding:20px;position:relative;overflow:hidden;cursor:pointer;}
 .promo::before{content:'';position:absolute;top:-40px;right:-40px;width:140px;height:140px;border-radius:50%;background:rgba(255,255,255,.1);}
-.promo::after{content:'';position:absolute;bottom:-30px;right:30px;width:100px;height:100px;border-radius:50%;background:rgba(255,255,255,.06);}
-.promo-badge{background:rgba(255,255,255,.25);border-radius:20px;padding:4px 10px;font-size:10px;font-weight:700;letter-spacing:.06em;display:inline-block;margin-bottom:8px;}
+.promo-badge{background:rgba(255,255,255,.25);border-radius:20px;padding:4px 10px;font-size:10px;font-weight:700;display:inline-block;margin-bottom:8px;}
 .promo-h{font-size:24px;font-weight:800;line-height:1.15;margin-bottom:4px;}
 .promo-s{font-size:12px;opacity:.8;margin-bottom:12px;}
 .promo-btn{background:#fff;color:#FF3D00;font-size:12px;font-weight:700;padding:8px 18px;border-radius:22px;display:inline-block;}
@@ -35,11 +42,12 @@ a{color:inherit;text-decoration:none;}
 .pdot.on{background:#fff;width:18px;border-radius:3px;}
 .sec-hdr{display:flex;justify-content:space-between;align-items:center;padding:14px 22px 10px;}
 .sec-t{font-size:15px;font-weight:700;}
-.sec-a{font-size:12px;color:var(--ac);font-weight:600;}
+.sec-a{font-size:12px;color:var(--ac);font-weight:600;cursor:pointer;}
 .cats{display:flex;gap:12px;padding:0 22px;overflow-x:auto;}
 .cats::-webkit-scrollbar{display:none;}
-.cat{display:flex;flex-direction:column;align-items:center;gap:6px;flex-shrink:0;}
-.cat-ic{width:56px;height:56px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:24px;}
+.cat{display:flex;flex-direction:column;align-items:center;gap:6px;flex-shrink:0;cursor:pointer;}
+.cat-ic{width:56px;height:56px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:24px;transition:transform .15s;}
+.cat:active .cat-ic{transform:scale(.9);}
 .c1{background:rgba(255,107,43,.15);border:1px solid rgba(255,107,43,.28);}
 .c2{background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.22);}
 .c3{background:rgba(234,179,8,.12);border:1px solid rgba(234,179,8,.2);}
@@ -48,10 +56,11 @@ a{color:inherit;text-decoration:none;}
 .c6{background:rgba(236,72,153,.12);border:1px solid rgba(236,72,153,.2);}
 .cat-l{font-size:11px;font-weight:600;color:var(--mu);}
 .rlist{display:flex;flex-direction:column;gap:14px;padding:4px 22px;}
-.rcard{background:var(--s1);border:1px solid var(--bd);border-radius:18px;overflow:hidden;}
+.rcard{background:var(--s1);border:1px solid var(--bd);border-radius:18px;overflow:hidden;cursor:pointer;transition:transform .15s;}
+.rcard:active{transform:scale(.98);}
 .rimg{width:100%;height:140px;position:relative;}
 .rbadge{position:absolute;top:10px;left:10px;background:var(--ac);color:#fff;font-size:10px;font-weight:700;padding:4px 10px;border-radius:20px;}
-.rfav{position:absolute;top:10px;right:10px;width:30px;height:30px;border-radius:50%;background:rgba(0,0,0,.45);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;font-size:14px;}
+.rfav{position:absolute;top:10px;right:10px;width:30px;height:30px;border-radius:50%;background:rgba(0,0,0,.45);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;}
 .rdis{position:absolute;bottom:10px;right:10px;background:rgba(0,0,0,.55);backdrop-filter:blur(8px);border-radius:20px;padding:4px 9px;font-size:10px;font-weight:600;}
 .rinfo{padding:13px 15px;}
 .rname{font-size:16px;font-weight:800;margin-bottom:5px;}
@@ -60,83 +69,383 @@ a{color:inherit;text-decoration:none;}
 .rsep{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.2);}
 .rtags{display:flex;gap:6px;flex-wrap:wrap;}
 .rtag{font-size:11px;font-weight:600;background:var(--s2);border:1px solid var(--bd);padding:3px 9px;border-radius:20px;color:var(--mu);}
-.bnav{position:fixed;bottom:0;left:0;right:0;width:390px;background:var(--s1);border-top:1px solid var(--bd);display:flex;padding:10px 0 26px;}
-.bn{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:10px;font-weight:600;color:var(--mu);position:relative;}
-.bn.on{color:var(--ac);}
-.bn-i{font-size:20px;line-height:1;}
-.bn-pip{position:absolute;bottom:-6px;width:4px;height:4px;border-radius:50%;background:var(--ac);}
+
+/* SEARCH SCREEN */
+.search-top{display:flex;align-items:center;padding:10px 22px;gap:10px;}
+.search-wrap{flex:1;background:var(--s1);border:1.5px solid var(--ac);border-radius:14px;display:flex;align-items:center;gap:8px;padding:11px 14px;}
+.search-q{font-size:14px;font-weight:600;}
+.blink{display:inline-block;width:2px;height:14px;background:var(--ac);border-radius:1px;vertical-align:middle;margin-left:2px;animation:blink 1s step-end infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
+.cancel{font-size:13px;font-weight:700;color:var(--ac);cursor:pointer;white-space:nowrap;}
+.chips{display:flex;gap:8px;padding:4px 22px 14px;overflow-x:auto;}
+.chips::-webkit-scrollbar{display:none;}
+.chip{font-size:12px;font-weight:600;padding:7px 14px;border-radius:22px;cursor:pointer;border:1px solid var(--bd);background:var(--s1);color:var(--mu);white-space:nowrap;transition:all .2s;}
+.chip.on{background:var(--ac);color:#fff;border-color:var(--ac);}
+.result-item{display:flex;align-items:center;gap:12px;padding:12px 22px;border-bottom:1px solid var(--bd);cursor:pointer;}
+.result-img{width:52px;height:52px;border-radius:14px;flex-shrink:0;}
+.result-info{flex:1;}
+.result-name{font-size:14px;font-weight:700;}
+.result-meta{font-size:12px;color:var(--mu);margin-top:2px;}
+.result-tag{font-size:11px;font-weight:600;color:var(--ac);margin-top:2px;}
+
+/* ORDERS SCREEN */
+.pg-hdr{display:flex;align-items:center;padding:14px 22px 8px;gap:10px;}
+.pg-title{font-size:18px;font-weight:800;flex:1;}
+.active-box{margin:4px 22px 6px;background:var(--s1);border:1px solid rgba(255,107,43,.35);border-radius:18px;overflow:hidden;}
+.active-img{height:90px;background:linear-gradient(135deg,#7B1E00,#C0392B);display:flex;align-items:flex-end;padding:12px;position:relative;}
+.active-badge{position:absolute;top:10px;right:10px;background:var(--ac);color:#fff;font-size:10px;font-weight:700;padding:4px 10px;border-radius:20px;}
+.active-rname{font-size:14px;font-weight:800;}
+.active-rsub{font-size:11px;opacity:.65;margin-top:2px;}
+.track{display:flex;align-items:center;padding:16px 18px;}
+.t-step{display:flex;flex-direction:column;align-items:center;gap:5px;}
+.t-dot{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;background:var(--s2);border:2px solid var(--bd);color:var(--mu);}
+.t-dot.done{background:var(--ac);border-color:var(--ac);color:#fff;}
+.t-dot.curr{background:var(--ac);border-color:var(--ac);color:#fff;box-shadow:0 0 0 5px rgba(255,107,43,.2);}
+.t-lbl{font-size:9px;font-weight:600;color:var(--mu);text-align:center;max-width:50px;line-height:1.3;}
+.t-line{flex:1;height:2px;background:var(--bd);margin-bottom:20px;}
+.t-line.done{background:var(--ac);}
+.active-bottom{display:flex;justify-content:space-between;align-items:center;padding:0 16px 14px;}
+.active-eta{font-size:12px;color:var(--mu);}
+.active-eta strong{color:var(--ac);font-size:14px;}
+.active-call{background:var(--ac);color:#fff;font-size:12px;font-weight:700;padding:8px 16px;border-radius:22px;cursor:pointer;}
+.section-lbl{padding:16px 22px 8px;font-size:11px;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:.08em;}
+.past-item{display:flex;align-items:center;gap:12px;padding:12px 22px;border-bottom:1px solid var(--bd);cursor:pointer;}
+.past-img{width:52px;height:52px;border-radius:14px;flex-shrink:0;}
+.past-info{flex:1;}
+.past-name{font-size:13px;font-weight:700;}
+.past-sub{font-size:11px;color:var(--mu);margin-top:2px;}
+.reorder-btn{font-size:11px;font-weight:700;color:var(--ac);border:1px solid rgba(255,107,43,.4);padding:6px 12px;border-radius:20px;cursor:pointer;white-space:nowrap;}
+
+/* SAVED SCREEN */
+.saved-item{display:flex;align-items:center;gap:14px;padding:14px 22px;border-bottom:1px solid var(--bd);cursor:pointer;}
+.saved-img{width:60px;height:60px;border-radius:14px;flex-shrink:0;}
+.saved-info{flex:1;}
+.saved-name{font-size:14px;font-weight:700;}
+.saved-meta{font-size:12px;color:var(--mu);margin-top:3px;}
+.saved-heart{font-size:22px;cursor:pointer;}
+
+/* PROFILE SCREEN */
+.prof-top{display:flex;flex-direction:column;align-items:center;padding:24px 22px 8px;}
+.prof-av{width:80px;height:80px;border-radius:24px;background:linear-gradient(135deg,var(--ac),var(--ac2));display:flex;align-items:center;justify-content:center;font-size:38px;margin-bottom:12px;}
+.prof-name{font-size:20px;font-weight:800;}
+.prof-email{font-size:12px;color:var(--mu);margin-top:3px;}
+.prof-stats{display:flex;margin:16px 22px;background:var(--s1);border:1px solid var(--bd);border-radius:16px;overflow:hidden;}
+.pst{flex:1;display:flex;flex-direction:column;align-items:center;padding:14px 0;border-right:1px solid var(--bd);}
+.pst:last-child{border-right:none;}
+.pst-v{font-size:20px;font-weight:800;color:var(--ac);}
+.pst-l{font-size:10px;color:var(--mu);font-weight:600;margin-top:2px;}
+.menu-wrap{padding:0 22px;}
+.menu-item{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--bd);cursor:pointer;}
+.menu-item:last-child{border-bottom:none;}
+.mi-icon{width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;}
+.mi-txt{flex:1;font-size:14px;font-weight:600;}
+.mi-badge{background:var(--ac);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px;}
+.mi-arr{font-size:16px;color:var(--mu);}
 </style>
 </head>
 <body>
-<div class="sb"><span>9:41</span><div class="sb-r"><svg width="16" height="11" viewBox="0 0 16 11" fill="white"><rect x="0" y="4" width="3" height="7" rx="1" opacity=".4"/><rect x="4.5" y="2.5" width="3" height="8.5" rx="1" opacity=".6"/><rect x="9" y="1" width="3" height="10" rx="1" opacity=".85"/><rect x="13.5" y="0" width="2.5" height="11" rx="1"/></svg><svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0" y="1" width="22" height="10" rx="3" stroke="white" stroke-width="1.2" opacity=".5"/><rect x="1.5" y="2.5" width="17" height="7" rx="2" fill="white"/><path d="M23 4.5v3c.8-.4 1.3-1 1.3-1.5s-.5-1.1-1.3-1.5z" fill="white" opacity=".4"/></svg></div></div>
-<div class="hdr">
-  <div class="hdr-loc"><div class="hdr-sup">Deliver to</div><div class="hdr-val">Menteng, Jakarta <span class="hdr-arr">&#9662;</span></div></div>
-  <div class="hdr-bell"><span>&#128276;</span><div class="bell-dot"></div></div>
-  <div class="hdr-av">&#128522;</div>
-</div>
-<div class="srch"><span style="font-size:16px;color:var(--mu);">&#128269;</span><span class="srch-ph">Search restaurants or food&hellip;</span><div class="srch-flt">&#9881;</div></div>
-<div class="promo">
-  <div class="promo-badge">TODAY ONLY</div>
-  <div class="promo-h">50% Off<br>First Order</div>
-  <div class="promo-s">Min. order Rp 50.000</div>
-  <div class="promo-btn">Order Now &rarr;</div>
-  <div class="promo-dots"><div class="pdot on"></div><div class="pdot"></div><div class="pdot"></div></div>
-</div>
-<div class="sec-hdr"><div class="sec-t">Categories</div><div class="sec-a">See all</div></div>
-<div class="cats">
-  <div class="cat"><div class="cat-ic c1">&#127828;</div><div class="cat-l">Burgers</div></div>
-  <div class="cat"><div class="cat-ic c2">&#127829;</div><div class="cat-l">Pizza</div></div>
-  <div class="cat"><div class="cat-ic c3">&#127836;</div><div class="cat-l">Noodles</div></div>
-  <div class="cat"><div class="cat-ic c4">&#129367;</div><div class="cat-l">Healthy</div></div>
-  <div class="cat"><div class="cat-ic c5">&#9749;</div><div class="cat-l">Coffee</div></div>
-  <div class="cat"><div class="cat-ic c6">&#127857;</div><div class="cat-l">Rice Box</div></div>
-</div>
-<div class="sec-hdr"><div class="sec-t">Popular Near You</div><div class="sec-a">See all</div></div>
-<div class="rlist">
-  <div class="rcard">
-    <div class="rimg" style="background:linear-gradient(135deg,#7B1E00,#C0392B);">
-      <div class="rbadge">Bestseller</div>
-      <div class="rfav">&#129293;</div>
-      <div class="rdis">2.1 km</div>
-    </div>
-    <div class="rinfo">
-      <div class="rname">Burger Bros Jakarta</div>
-      <div class="rmeta"><span class="rstar">&#9733; 4.9</span><div class="rsep"></div><span>20&ndash;30 min</span><div class="rsep"></div><span>Rp 5.000</span></div>
-      <div class="rtags"><div class="rtag">Burgers</div><div class="rtag">Fries</div><div class="rtag">Milkshakes</div></div>
-    </div>
-  </div>
-  <div class="rcard">
-    <div class="rimg" style="background:linear-gradient(135deg,#0D4F3C,#1A7A5E);">
-      <div class="rbadge">Healthy</div>
-      <div class="rfav">&#10084;</div>
-      <div class="rdis">0.8 km</div>
-    </div>
-    <div class="rinfo">
-      <div class="rname">Greens &amp; Grains Bowl</div>
-      <div class="rmeta"><span class="rstar">&#9733; 4.7</span><div class="rsep"></div><span>15&ndash;25 min</span><div class="rsep"></div><span>Free</span></div>
-      <div class="rtags"><div class="rtag">Salad</div><div class="rtag">Bowls</div><div class="rtag">Vegan</div></div>
-    </div>
-  </div>
-  <div class="rcard">
-    <div class="rimg" style="background:linear-gradient(135deg,#2C1654,#6B21A8);">
-      <div class="rbadge">Fast Order</div>
-      <div class="rfav">&#129293;</div>
-      <div class="rdis">1.4 km</div>
-    </div>
-    <div class="rinfo">
-      <div class="rname">Kopi Kita Specialty</div>
-      <div class="rmeta"><span class="rstar">&#9733; 4.8</span><div class="rsep"></div><span>10&ndash;20 min</span><div class="rsep"></div><span>Free</span></div>
-      <div class="rtags"><div class="rtag">Coffee</div><div class="rtag">Pastry</div><div class="rtag">Brunch</div></div>
-    </div>
+
+<!-- STATUS BAR (always visible) -->
+<div class="sb">
+  <span style="font-size:15px;font-weight:700;">9:41</span>
+  <div class="sb-r">
+    <svg width="16" height="11" viewBox="0 0 16 11" fill="white"><rect x="0" y="4" width="3" height="7" rx="1" opacity=".4"/><rect x="4.5" y="2.5" width="3" height="8.5" rx="1" opacity=".6"/><rect x="9" y="1" width="3" height="10" rx="1" opacity=".85"/><rect x="13.5" y="0" width="2.5" height="11" rx="1"/></svg>
+    <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0" y="1" width="22" height="10" rx="3" stroke="white" stroke-width="1.2" opacity=".5"/><rect x="1.5" y="2.5" width="17" height="7" rx="2" fill="white"/><path d="M23 4.5v3c.8-.4 1.3-1 1.3-1.5s-.5-1.1-1.3-1.5z" fill="white" opacity=".4"/></svg>
   </div>
 </div>
-<div style="height:88px;"></div>
+
+<!-- HOME SCREEN -->
+<div id="s-home" class="screen active">
+  <div class="hdr">
+    <div class="hdr-loc">
+      <div class="hdr-sup">Deliver to</div>
+      <div class="hdr-val">Menteng, Jakarta <span class="hdr-arr">&#9662;</span></div>
+    </div>
+    <div class="hdr-bell">&#128276;<div class="bell-dot"></div></div>
+    <div class="hdr-av" data-tab="profile">&#128522;</div>
+  </div>
+  <div class="srch" onclick="switchTab('search')">
+    <span style="font-size:16px;color:var(--mu);">&#128269;</span>
+    <span class="srch-ph">Search restaurants or food&hellip;</span>
+    <div class="srch-flt">&#9881;</div>
+  </div>
+  <div class="promo">
+    <div class="promo-badge">TODAY ONLY</div>
+    <div class="promo-h">50% Off<br>First Order</div>
+    <div class="promo-s">Min. order Rp 50.000</div>
+    <div class="promo-btn">Order Now &rarr;</div>
+    <div class="promo-dots"><div class="pdot on"></div><div class="pdot"></div><div class="pdot"></div></div>
+  </div>
+  <div class="sec-hdr"><div class="sec-t">Categories</div><div class="sec-a" onclick="switchTab('search')">See all</div></div>
+  <div class="cats">
+    <div class="cat"><div class="cat-ic c1">&#127828;</div><div class="cat-l">Burgers</div></div>
+    <div class="cat"><div class="cat-ic c2">&#127829;</div><div class="cat-l">Pizza</div></div>
+    <div class="cat"><div class="cat-ic c3">&#127836;</div><div class="cat-l">Noodles</div></div>
+    <div class="cat"><div class="cat-ic c4">&#129367;</div><div class="cat-l">Healthy</div></div>
+    <div class="cat"><div class="cat-ic c5">&#9749;</div><div class="cat-l">Coffee</div></div>
+    <div class="cat"><div class="cat-ic c6">&#127857;</div><div class="cat-l">Rice Box</div></div>
+  </div>
+  <div class="sec-hdr"><div class="sec-t">Popular Near You</div><div class="sec-a">See all</div></div>
+  <div class="rlist">
+    <div class="rcard">
+      <div class="rimg" style="background:linear-gradient(135deg,#7B1E00,#C0392B);">
+        <div class="rbadge">Bestseller</div>
+        <div class="rfav">&#129293;</div>
+        <div class="rdis">2.1 km</div>
+      </div>
+      <div class="rinfo">
+        <div class="rname">Burger Bros Jakarta</div>
+        <div class="rmeta"><span class="rstar">&#9733; 4.9</span><div class="rsep"></div><span>20&ndash;30 min</span><div class="rsep"></div><span>Rp 5.000</span></div>
+        <div class="rtags"><div class="rtag">Burgers</div><div class="rtag">Fries</div><div class="rtag">Milkshakes</div></div>
+      </div>
+    </div>
+    <div class="rcard">
+      <div class="rimg" style="background:linear-gradient(135deg,#0D4F3C,#1A7A5E);">
+        <div class="rbadge">Healthy</div>
+        <div class="rfav">&#10084;</div>
+        <div class="rdis">0.8 km</div>
+      </div>
+      <div class="rinfo">
+        <div class="rname">Greens &amp; Grains Bowl</div>
+        <div class="rmeta"><span class="rstar">&#9733; 4.7</span><div class="rsep"></div><span>15&ndash;25 min</span><div class="rsep"></div><span>Free</span></div>
+        <div class="rtags"><div class="rtag">Salad</div><div class="rtag">Bowls</div><div class="rtag">Vegan</div></div>
+      </div>
+    </div>
+    <div class="rcard">
+      <div class="rimg" style="background:linear-gradient(135deg,#2C1654,#6B21A8);">
+        <div class="rbadge">Fast Order</div>
+        <div class="rfav">&#129293;</div>
+        <div class="rdis">1.4 km</div>
+      </div>
+      <div class="rinfo">
+        <div class="rname">Kopi Kita Specialty</div>
+        <div class="rmeta"><span class="rstar">&#9733; 4.8</span><div class="rsep"></div><span>10&ndash;20 min</span><div class="rsep"></div><span>Free</span></div>
+        <div class="rtags"><div class="rtag">Coffee</div><div class="rtag">Pastry</div><div class="rtag">Brunch</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SEARCH SCREEN -->
+<div id="s-search" class="screen">
+  <div class="search-top">
+    <div class="search-wrap">
+      <span style="font-size:15px;color:var(--mu);">&#128269;</span>
+      <span class="search-q">pizza</span><span class="blink"></span>
+    </div>
+    <div class="cancel" onclick="switchTab('home')">Cancel</div>
+  </div>
+  <div class="chips">
+    <div class="chip on">All</div>
+    <div class="chip">Pizza</div>
+    <div class="chip">Fast Food</div>
+    <div class="chip">Healthy</div>
+    <div class="chip">Desserts</div>
+  </div>
+  <div style="padding:0 22px 10px;font-size:11px;font-weight:700;color:var(--mu);letter-spacing:.06em;">4 RESULTS</div>
+  <div class="result-item">
+    <div class="result-img" style="background:linear-gradient(135deg,#8B0000,#DC143C);border-radius:14px;"></div>
+    <div class="result-info">
+      <div class="result-name">Napoletana Pizza Co.</div>
+      <div class="result-meta">&#9733; 4.8 &middot; 20&ndash;30 min &middot; 1.2 km</div>
+      <div class="result-tag">Pizza &middot; Italian</div>
+    </div>
+  </div>
+  <div class="result-item">
+    <div class="result-img" style="background:linear-gradient(135deg,#1A3A1A,#2D6A2D);border-radius:14px;"></div>
+    <div class="result-info">
+      <div class="result-name">Pizza Garden Organics</div>
+      <div class="result-meta">&#9733; 4.5 &middot; 25&ndash;35 min &middot; 2.0 km</div>
+      <div class="result-tag">Pizza &middot; Healthy</div>
+    </div>
+  </div>
+  <div class="result-item">
+    <div class="result-img" style="background:linear-gradient(135deg,#3D1A00,#7B3200);border-radius:14px;"></div>
+    <div class="result-info">
+      <div class="result-name">Slice &amp; Dice Jakarta</div>
+      <div class="result-meta">&#9733; 4.6 &middot; 15&ndash;25 min &middot; 0.5 km</div>
+      <div class="result-tag">Pizza &middot; Calzone</div>
+    </div>
+  </div>
+  <div class="result-item">
+    <div class="result-img" style="background:linear-gradient(135deg,#1A0A3A,#3D1A7A);border-radius:14px;"></div>
+    <div class="result-info">
+      <div class="result-name">NomNom Kitchen Truck</div>
+      <div class="result-meta">&#9733; 4.3 &middot; 30&ndash;45 min &middot; 3.1 km</div>
+      <div class="result-tag">Street Food &middot; Pizza</div>
+    </div>
+  </div>
+</div>
+
+<!-- ORDERS SCREEN -->
+<div id="s-orders" class="screen">
+  <div class="pg-hdr"><div class="pg-title">My Orders</div></div>
+  <div style="padding:4px 22px 8px;font-size:11px;font-weight:700;color:var(--mu);letter-spacing:.06em;">ACTIVE ORDER</div>
+  <div class="active-box">
+    <div class="active-img">
+      <div class="active-badge">On the Way</div>
+      <div><div class="active-rname">Burger Bros Jakarta</div><div class="active-rsub">2 items &middot; Rp 89.000</div></div>
+    </div>
+    <div class="track">
+      <div class="t-step">
+        <div class="t-dot done">&#10003;</div>
+        <div class="t-lbl">Order<br>Placed</div>
+      </div>
+      <div class="t-line done"></div>
+      <div class="t-step">
+        <div class="t-dot done">&#10003;</div>
+        <div class="t-lbl">Preparing</div>
+      </div>
+      <div class="t-line done"></div>
+      <div class="t-step">
+        <div class="t-dot curr">&#128663;</div>
+        <div class="t-lbl">On the<br>Way</div>
+      </div>
+      <div class="t-line"></div>
+      <div class="t-step">
+        <div class="t-dot">&#127968;</div>
+        <div class="t-lbl">Delivered</div>
+      </div>
+    </div>
+    <div class="active-bottom">
+      <div class="active-eta">ETA <strong>12 min</strong></div>
+      <div class="active-call">&#128222; Call Driver</div>
+    </div>
+  </div>
+  <div class="section-lbl">PAST ORDERS</div>
+  <div class="past-item">
+    <div class="past-img" style="background:linear-gradient(135deg,#0D4F3C,#1A7A5E);border-radius:14px;"></div>
+    <div class="past-info">
+      <div class="past-name">Greens &amp; Grains Bowl</div>
+      <div class="past-sub">May 14 &middot; 3 items &middot; Rp 67.000</div>
+    </div>
+    <div class="reorder-btn">Reorder</div>
+  </div>
+  <div class="past-item">
+    <div class="past-img" style="background:linear-gradient(135deg,#2C1654,#6B21A8);border-radius:14px;"></div>
+    <div class="past-info">
+      <div class="past-name">Kopi Kita Specialty</div>
+      <div class="past-sub">May 12 &middot; 2 items &middot; Rp 42.000</div>
+    </div>
+    <div class="reorder-btn">Reorder</div>
+  </div>
+  <div class="past-item">
+    <div class="past-img" style="background:linear-gradient(135deg,#8B0000,#DC143C);border-radius:14px;"></div>
+    <div class="past-info">
+      <div class="past-name">Napoletana Pizza Co.</div>
+      <div class="past-sub">May 10 &middot; 1 item &middot; Rp 95.000</div>
+    </div>
+    <div class="reorder-btn">Reorder</div>
+  </div>
+</div>
+
+<!-- SAVED SCREEN -->
+<div id="s-saved" class="screen">
+  <div class="pg-hdr"><div class="pg-title">Saved Places</div></div>
+  <div style="padding:4px 0 6px;">
+    <div class="saved-item">
+      <div class="saved-img" style="background:linear-gradient(135deg,#7B1E00,#C0392B);border-radius:14px;"></div>
+      <div class="saved-info">
+        <div class="saved-name">Burger Bros Jakarta</div>
+        <div class="saved-meta">&#9733; 4.9 &middot; 20&ndash;30 min</div>
+      </div>
+      <div class="saved-heart">&#10084;</div>
+    </div>
+    <div class="saved-item">
+      <div class="saved-img" style="background:linear-gradient(135deg,#0D4F3C,#1A7A5E);border-radius:14px;"></div>
+      <div class="saved-info">
+        <div class="saved-name">Greens &amp; Grains Bowl</div>
+        <div class="saved-meta">&#9733; 4.7 &middot; 15&ndash;25 min</div>
+      </div>
+      <div class="saved-heart">&#10084;</div>
+    </div>
+    <div class="saved-item">
+      <div class="saved-img" style="background:linear-gradient(135deg,#8B0000,#DC143C);border-radius:14px;"></div>
+      <div class="saved-info">
+        <div class="saved-name">Napoletana Pizza Co.</div>
+        <div class="saved-meta">&#9733; 4.8 &middot; 20&ndash;30 min</div>
+      </div>
+      <div class="saved-heart">&#10084;</div>
+    </div>
+    <div class="saved-item">
+      <div class="saved-img" style="background:linear-gradient(135deg,#2C1654,#6B21A8);border-radius:14px;"></div>
+      <div class="saved-info">
+        <div class="saved-name">Kopi Kita Specialty</div>
+        <div class="saved-meta">&#9733; 4.8 &middot; 10&ndash;20 min</div>
+      </div>
+      <div class="saved-heart">&#10084;</div>
+    </div>
+  </div>
+</div>
+
+<!-- PROFILE SCREEN -->
+<div id="s-profile" class="screen">
+  <div class="prof-top">
+    <div class="prof-av">&#128522;</div>
+    <div class="prof-name">Ahmad Rivera</div>
+    <div class="prof-email">ahmad@email.com</div>
+  </div>
+  <div class="prof-stats">
+    <div class="pst"><div class="pst-v">48</div><div class="pst-l">Orders</div></div>
+    <div class="pst"><div class="pst-v">12</div><div class="pst-l">Reviews</div></div>
+    <div class="pst"><div class="pst-v">2,840</div><div class="pst-l">Points</div></div>
+  </div>
+  <div class="menu-wrap">
+    <div class="menu-item">
+      <div class="mi-icon" style="background:rgba(255,107,43,.12);">&#128230;</div>
+      <div class="mi-txt">My Orders</div>
+      <div class="mi-badge">1 Active</div>
+    </div>
+    <div class="menu-item">
+      <div class="mi-icon" style="background:rgba(255,215,0,.12);">&#127775;</div>
+      <div class="mi-txt">NomNom Points</div>
+      <div class="mi-arr">&#8250;</div>
+    </div>
+    <div class="menu-item">
+      <div class="mi-icon" style="background:rgba(99,102,241,.12);">&#128179;</div>
+      <div class="mi-txt">Payment Methods</div>
+      <div class="mi-arr">&#8250;</div>
+    </div>
+    <div class="menu-item">
+      <div class="mi-icon" style="background:rgba(16,185,129,.12);">&#128205;</div>
+      <div class="mi-txt">My Addresses</div>
+      <div class="mi-arr">&#8250;</div>
+    </div>
+    <div class="menu-item">
+      <div class="mi-icon" style="background:rgba(59,130,246,.12);">&#128276;</div>
+      <div class="mi-txt">Notifications</div>
+      <div class="mi-arr">&#8250;</div>
+    </div>
+    <div class="menu-item">
+      <div class="mi-icon" style="background:rgba(239,68,68,.12);">&#128682;</div>
+      <div class="mi-txt">Sign Out</div>
+      <div class="mi-arr" style="color:#EF4444;">&#8250;</div>
+    </div>
+  </div>
+</div>
+
+<!-- BOTTOM NAV -->
 <div class="bnav">
-  <div class="bn on"><div class="bn-i">&#127968;</div><span>Home</span><div class="bn-pip"></div></div>
-  <div class="bn"><div class="bn-i">&#128269;</div><span>Search</span></div>
-  <div class="bn"><div class="bn-i">&#128230;</div><span>Orders</span></div>
-  <div class="bn"><div class="bn-i">&#10084;</div><span>Saved</span></div>
-  <div class="bn"><div class="bn-i">&#128100;</div><span>Profile</span></div>
+  <div class="bn on" data-tab="home"><div class="bn-i">&#127968;</div><span>Home</span><div class="bn-pip"></div></div>
+  <div class="bn" data-tab="search"><div class="bn-i">&#128269;</div><span>Search</span></div>
+  <div class="bn" data-tab="orders"><div class="bn-i">&#128230;</div><span>Orders</span></div>
+  <div class="bn" data-tab="saved"><div class="bn-i">&#10084;</div><span>Saved</span></div>
+  <div class="bn" data-tab="profile"><div class="bn-i">&#128100;</div><span>Profile</span></div>
 </div>
+
+<script>
+function switchTab(tab){
+  document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
+  document.getElementById('s-'+tab).classList.add('active');
+  document.querySelectorAll('[data-tab]').forEach(function(b){b.classList.remove('on');b.querySelector('.bn-pip')&&(b.querySelector('.bn-pip').style.display='none');});
+  var active=document.querySelector('[data-tab="'+tab+'"]');
+  if(active){active.classList.add('on');var pip=active.querySelector('.bn-pip');if(pip)pip.style.display='';}
+  window.scrollTo(0,0);
+}
+document.querySelectorAll('[data-tab]').forEach(function(btn){
+  btn.addEventListener('click',function(){switchTab(this.dataset.tab);});
+});
+document.querySelector('.srch').addEventListener('click',function(){switchTab('search');});
+</script>
 </body>
 </html>
