@@ -407,6 +407,160 @@
   color: var(--text);
 }
 
+/* ── APP PORTFOLIO ── */
+.app-portfolio-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2vw,24px);}
+.app-card{border-radius:var(--r-lg);overflow:hidden;background:var(--white);border:1px solid var(--bdr);transition:all .35s;cursor:default;}
+.app-card:hover{transform:translateY(-6px);box-shadow:0 24px 56px rgba(59,130,246,.12);border-color:var(--bdr-2);}
+.app-frame-wrap{background:linear-gradient(160deg,#0d1117,#161b27);padding:36px;display:flex;justify-content:center;align-items:center;min-height:340px;}
+.app-frame{width:180px;height:360px;border-radius:34px;border:2px solid rgba(255,255,255,.13);position:relative;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.55),inset 0 0 0 1px rgba(255,255,255,.06);}
+.app-frame::before{content:'';position:absolute;top:10px;left:50%;transform:translateX(-50%);width:70px;height:18px;background:#000;border-radius:12px;z-index:20;}
+.app-screen{position:absolute;inset:0;overflow:hidden;display:flex;flex-direction:column;}
+
+/* ── App 1: Food Delivery ── */
+.ap1{background:linear-gradient(170deg,#1a0f08,#2d1a0d);}
+.ap1-header{padding:36px 12px 8px;display:flex;align-items:center;gap:6px;}
+.ap1-av{width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#ff7a3d,#ff4500);flex-shrink:0;}
+.ap1-greet{display:flex;flex-direction:column;gap:2px;flex:1;}
+.ap1-g1{height:5px;width:50px;background:rgba(255,255,255,.2);border-radius:3px;}
+.ap1-g2{height:7px;width:70px;background:rgba(255,255,255,.55);border-radius:3px;}
+.ap1-bell{width:18px;height:18px;border-radius:6px;background:rgba(255,122,61,.18);border:1px solid rgba(255,122,61,.3);}
+.ap1-search{margin:6px 12px;height:26px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:10px;display:flex;align-items:center;padding:0 8px;gap:5px;}
+.ap1-search-ic{width:10px;height:10px;border-radius:50%;border:1.5px solid rgba(255,255,255,.25);}
+.ap1-search-ph{height:5px;width:70px;background:rgba(255,255,255,.15);border-radius:3px;}
+.ap1-banner{margin:6px 12px;height:68px;border-radius:12px;background:linear-gradient(135deg,#ff7a3d,#ff4500);padding:10px;display:flex;flex-direction:column;justify-content:flex-end;gap:4px;position:relative;overflow:hidden;}
+.ap1-banner::before{content:'';position:absolute;top:-10px;right:-10px;width:60px;height:60px;border-radius:50%;background:rgba(255,255,255,.1);}
+.ap1-bl{height:7px;width:80px;background:rgba(255,255,255,.85);border-radius:3px;}
+.ap1-bs{height:5px;width:55px;background:rgba(255,255,255,.45);border-radius:3px;}
+.ap1-cats{display:flex;gap:6px;padding:8px 12px;}
+.ap1-cat{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.09);border-radius:10px;padding:7px 4px;display:flex;flex-direction:column;align-items:center;gap:3px;}
+.ap1-ci{font-size:11px;line-height:1;}
+.ap1-cl{height:4px;width:20px;background:rgba(255,255,255,.2);border-radius:2px;}
+.ap1-section-lbl{height:6px;width:70px;background:rgba(255,255,255,.25);border-radius:3px;margin:4px 12px;}
+.ap1-cards{display:flex;gap:6px;padding:4px 12px;flex:1;}
+.ap1-rc{flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:10px;overflow:hidden;}
+.ap1-ri{width:100%;height:40px;}
+.ap1-rc:nth-child(1) .ap1-ri{background:linear-gradient(135deg,#f97316,#dc2626);}
+.ap1-rc:nth-child(2) .ap1-ri{background:linear-gradient(135deg,#a16207,#ca8a04);}
+.ap1-rn{height:5px;background:rgba(255,255,255,.25);border-radius:3px;margin:5px 6px 2px;}
+.ap1-rm{height:4px;width:55%;background:rgba(255,122,61,.4);border-radius:3px;margin:0 6px;}
+.ap1-nav{display:flex;padding:7px 0 4px;border-top:1px solid rgba(255,255,255,.07);margin-top:auto;}
+.ap1-nb{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;}
+.ap1-nbi{width:14px;height:14px;border-radius:4px;background:rgba(255,255,255,.1);}
+.ap1-nbi.active{background:rgba(255,122,61,.5);}
+.ap1-nbl{height:3px;width:16px;background:rgba(255,255,255,.12);border-radius:2px;}
+
+/* ── App 2: Fitness Tracker ── */
+.ap2{background:#000;}
+.ap2-header{padding:36px 12px 8px;display:flex;align-items:center;justify-content:space-between;}
+.ap2-title{height:7px;width:60px;background:#fff;border-radius:3px;}
+.ap2-streak{background:rgba(163,255,71,.15);border:1px solid rgba(163,255,71,.3);border-radius:6px;padding:3px 6px;display:flex;align-items:center;gap:3px;}
+.ap2-sf{font-size:8px;color:#a3ff47;font-weight:700;line-height:1;}
+.ap2-ring-wrap{display:flex;justify-content:center;padding:6px 0;}
+.ap2-ring{width:90px;height:90px;border-radius:50%;position:relative;display:flex;align-items:center;justify-content:center;background:conic-gradient(#a3ff47 0%,#00e5ff 75%,rgba(255,255,255,.08) 75%);box-shadow:0 0 20px rgba(163,255,71,.2);}
+.ap2-ring-inner{width:70px;height:70px;border-radius:50%;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;}
+.ap2-rv{height:10px;width:36px;background:#a3ff47;border-radius:3px;}
+.ap2-rl{height:5px;width:28px;background:rgba(255,255,255,.2);border-radius:3px;}
+.ap2-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;padding:0 12px 6px;}
+.ap2-s{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:7px;text-align:center;}
+.ap2-sv{height:7px;border-radius:3px;margin:0 auto 3px;}
+.ap2-sl{height:4px;width:70%;background:rgba(255,255,255,.12);border-radius:2px;margin:0 auto;}
+.ap2-s:nth-child(1) .ap2-sv{width:60%;background:#a3ff47;}
+.ap2-s:nth-child(2) .ap2-sv{width:50%;background:#00e5ff;}
+.ap2-s:nth-child(3) .ap2-sv{width:65%;background:#ff4757;}
+.ap2-cards{display:flex;flex-direction:column;gap:5px;padding:0 12px;flex:1;}
+.ap2-wcard{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:9px;display:flex;align-items:center;gap:8px;}
+.ap2-wic{width:28px;height:28px;border-radius:8px;flex-shrink:0;}
+.ap2-wcard:nth-child(1) .ap2-wic{background:linear-gradient(135deg,#a3ff47,#00e5ff);}
+.ap2-wcard:nth-child(2) .ap2-wic{background:linear-gradient(135deg,#ff4757,#ff6b81);}
+.ap2-winfo{flex:1;}
+.ap2-wt{height:6px;width:70%;background:rgba(255,255,255,.3);border-radius:3px;margin-bottom:4px;}
+.ap2-ws{height:4px;width:50%;background:rgba(255,255,255,.12);border-radius:2px;}
+.ap2-wpill{height:14px;width:36px;border-radius:6px;background:rgba(163,255,71,.2);border:1px solid rgba(163,255,71,.3);}
+.ap2-nav{display:flex;padding:7px 0 4px;border-top:1px solid rgba(255,255,255,.07);margin-top:auto;}
+.ap2-nb{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;}
+.ap2-nbi{width:14px;height:14px;border-radius:4px;background:rgba(255,255,255,.1);}
+.ap2-nbi.active{background:rgba(163,255,71,.4);}
+.ap2-nbl{height:3px;width:16px;background:rgba(255,255,255,.08);border-radius:2px;}
+
+/* ── App 3: Digital Wallet ── */
+.ap3{background:linear-gradient(170deg,#06020f,#0e0520);}
+.ap3-header{padding:36px 12px 8px;display:flex;align-items:center;justify-content:space-between;}
+.ap3-title{height:7px;width:55px;background:rgba(255,255,255,.5);border-radius:3px;}
+.ap3-av{width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#9333ea,#c084fc);}
+.ap3-card{margin:6px 12px;height:80px;border-radius:14px;background:linear-gradient(135deg,#4c1d95,#6d28d9);padding:10px;position:relative;overflow:hidden;}
+.ap3-card::before{content:'';position:absolute;top:-20px;right:-20px;width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,.06);}
+.ap3-card::after{content:'';position:absolute;bottom:-15px;left:10px;width:60px;height:60px;border-radius:50%;background:rgba(192,132,252,.12);}
+.ap3-cl{height:5px;width:50px;background:rgba(255,255,255,.35);border-radius:3px;margin-bottom:6px;}
+.ap3-bal{height:12px;width:80px;background:rgba(255,255,255,.8);border-radius:4px;margin-bottom:8px;}
+.ap3-chip{height:10px;width:30px;background:rgba(255,255,255,.2);border-radius:4px;}
+.ap3-actions{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;padding:8px 12px;}
+.ap3-act{display:flex;flex-direction:column;align-items:center;gap:4px;}
+.ap3-aic{width:26px;height:26px;border-radius:8px;background:rgba(147,51,234,.2);border:1px solid rgba(147,51,234,.3);}
+.ap3-al{height:4px;width:24px;background:rgba(255,255,255,.18);border-radius:2px;}
+.ap3-history-lbl{height:6px;width:65px;background:rgba(255,255,255,.25);border-radius:3px;margin:4px 12px;}
+.ap3-txns{display:flex;flex-direction:column;gap:4px;padding:0 12px;flex:1;}
+.ap3-txn{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:8px;display:flex;align-items:center;gap:7px;}
+.ap3-tic{width:24px;height:24px;border-radius:7px;flex-shrink:0;}
+.ap3-txn:nth-child(1) .ap3-tic{background:linear-gradient(135deg,#7c3aed,#a855f7);}
+.ap3-txn:nth-child(2) .ap3-tic{background:linear-gradient(135deg,#0ea5e9,#38bdf8);}
+.ap3-txn:nth-child(3) .ap3-tic{background:linear-gradient(135deg,#059669,#10b981);}
+.ap3-tinfo{flex:1;}
+.ap3-tn{height:5px;width:60%;background:rgba(255,255,255,.25);border-radius:3px;margin-bottom:3px;}
+.ap3-ts{height:4px;width:40%;background:rgba(255,255,255,.1);border-radius:2px;}
+.ap3-ta{display:flex;flex-direction:column;align-items:flex-end;gap:3px;}
+.ap3-tam{height:6px;width:32px;background:rgba(167,139,250,.55);border-radius:3px;}
+.ap3-tat{height:4px;width:22px;background:rgba(255,255,255,.1);border-radius:2px;}
+.ap3-nav{display:flex;padding:7px 0 4px;border-top:1px solid rgba(255,255,255,.07);margin-top:auto;}
+.ap3-nb{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;}
+.ap3-nbi{width:14px;height:14px;border-radius:4px;background:rgba(255,255,255,.1);}
+.ap3-nbi.active{background:rgba(147,51,234,.45);}
+.ap3-nbl{height:3px;width:16px;background:rgba(255,255,255,.08);border-radius:2px;}
+
+/* ── App 4: Ride Booking ── */
+.ap4{background:linear-gradient(170deg,#020b14,#041830);}
+.ap4-header{padding:36px 12px 8px;display:flex;align-items:center;gap:6px;}
+.ap4-loc{height:6px;width:80px;background:rgba(14,165,233,.6);border-radius:3px;}
+.ap4-avt{width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#0ea5e9,#38bdf8);margin-left:auto;}
+.ap4-dest{margin:6px 12px;background:rgba(255,255,255,.06);border:1px solid rgba(14,165,233,.2);border-radius:10px;padding:8px 10px;display:flex;align-items:center;gap:7px;}
+.ap4-pin{width:10px;height:10px;border-radius:50%;background:#0ea5e9;box-shadow:0 0 6px rgba(14,165,233,.5);flex-shrink:0;}
+.ap4-dph{height:5px;width:80px;background:rgba(255,255,255,.18);border-radius:3px;}
+.ap4-map{margin:6px 12px;height:100px;border-radius:12px;overflow:hidden;position:relative;background:linear-gradient(135deg,#0a1628,#0f2240);}
+.ap4-map-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(14,165,233,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(14,165,233,.08) 1px,transparent 1px);background-size:14px 14px;}
+.ap4-map-road{position:absolute;top:50%;left:0;right:0;height:8px;background:rgba(14,165,233,.12);transform:translateY(-50%);}
+.ap4-map-road2{position:absolute;top:0;bottom:0;left:40%;width:8px;background:rgba(14,165,233,.12);}
+.ap4-map-dot{position:absolute;width:10px;height:10px;border-radius:50%;background:#0ea5e9;top:50%;left:50%;transform:translate(-50%,-50%);box-shadow:0 0 12px rgba(14,165,233,.6);}
+.ap4-services{display:flex;gap:6px;padding:6px 12px;}
+.ap4-svc{flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(14,165,233,.15);border-radius:10px;padding:8px;display:flex;flex-direction:column;align-items:center;gap:4px;transition:.2s;}
+.ap4-svc.active{background:rgba(14,165,233,.12);border-color:rgba(14,165,233,.4);}
+.ap4-si{font-size:13px;}
+.ap4-sl{height:4px;width:28px;border-radius:2px;}
+.ap4-svc:nth-child(1) .ap4-sl{background:rgba(14,165,233,.5);}
+.ap4-svc:nth-child(2) .ap4-sl{background:rgba(255,255,255,.15);}
+.ap4-svc:nth-child(3) .ap4-sl{background:rgba(255,255,255,.15);}
+.ap4-drivers{display:flex;flex-direction:column;gap:4px;padding:0 12px;flex:1;}
+.ap4-driver{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:8px;display:flex;align-items:center;gap:7px;}
+.ap4-dav{width:24px;height:24px;border-radius:50%;flex-shrink:0;}
+.ap4-driver:nth-child(1) .ap4-dav{background:linear-gradient(135deg,#0ea5e9,#38bdf8);}
+.ap4-driver:nth-child(2) .ap4-dav{background:linear-gradient(135deg,#06b6d4,#0ea5e9);}
+.ap4-dinfo{flex:1;}
+.ap4-dn{height:5px;width:55%;background:rgba(255,255,255,.25);border-radius:3px;margin-bottom:3px;}
+.ap4-ds{height:4px;width:40%;background:rgba(255,255,255,.1);border-radius:2px;}
+.ap4-dpill{height:14px;width:28px;border-radius:5px;background:rgba(14,165,233,.2);border:1px solid rgba(14,165,233,.3);}
+.ap4-book{margin:6px 12px;height:30px;border-radius:10px;background:linear-gradient(90deg,#0ea5e9,#38bdf8);display:flex;align-items:center;justify-content:center;}
+.ap4-bt{height:7px;width:60px;background:rgba(255,255,255,.7);border-radius:3px;}
+
+/* App portfolio info */
+.app-pf-info{padding:18px 20px;}
+.app-pf-tag{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--blue-d);background:var(--blue-l);border:1px solid rgba(59,130,246,.18);padding:3px 9px;border-radius:var(--r-p);display:inline-block;margin-bottom:10px;}
+.app-pf-name{font-family:var(--fh);font-size:16px;font-weight:800;color:var(--text);margin-bottom:5px;}
+.app-pf-desc{font-size:13px;color:var(--text-2);line-height:1.6;}
+.app-pf-pills{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px;}
+.app-pf-pill{font-size:10px;font-weight:600;color:var(--text-3);background:var(--bg);border:1px solid var(--bdr-2);padding:3px 8px;border-radius:var(--r-p);}
+.app-pf-link{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;color:var(--blue-d);margin-top:12px;text-decoration:none;transition:color .2s;}
+.app-pf-link:hover{color:var(--blue);}
+.app-pf-link svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;}
+.mobile-iframe{position:absolute;top:0;left:0;width:390px;height:780px;border:none;transform-origin:top left;pointer-events:none;display:block;}
+
 /* ── RESPONSIVE ── */
 @media(max-width: 1024px) {
   .segment-grid { grid-template-columns: 1fr 1fr; }
@@ -419,6 +573,7 @@
   .phone-mockup.featured { transform: none; }
   .comp-table { font-size: 12px; }
   .comp-table th, .comp-table td { padding: 10px 12px; }
+  .app-portfolio-grid { grid-template-columns: 1fr; }
 }
 @media(max-width: 580px) {
   .segment-grid { grid-template-columns: 1fr; }
@@ -621,6 +776,102 @@
         </div>
       </div>
       <div class="phone-label">SaaS / Startup</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- APP PORTFOLIO -->
+<section class="section section-white" id="portfolio">
+  <div class="sec-h rv">
+    <div class="eyebrow eyebrow-blue" style="display:inline-flex;">App Portfolio</div>
+    <h2 class="sec-title rv d1">Apps built across every category</h2>
+    <p class="sec-sub rv d2" style="max-width:480px;">From consumer super-apps to B2B tools — every screen is designed for the real user, not a demo.</p>
+  </div>
+  <div class="app-portfolio-grid rv d3">
+
+    <!-- Food Delivery -->
+    <div class="app-card">
+      <div class="app-frame-wrap">
+        <div class="app-frame">
+          <iframe class="mobile-iframe" src="/portfolio/mobile-nomnom" title="NomNom Food Delivery App" loading="lazy" scrolling="no" sandbox="allow-same-origin allow-scripts"></iframe>
+        </div>
+      </div>
+      <div class="app-pf-info">
+        <div class="app-pf-tag">Food & Delivery</div>
+        <div class="app-pf-name">Food Delivery App</div>
+        <div class="app-pf-desc">Consumer-facing delivery app with real-time order tracking, restaurant discovery, and loyalty rewards — designed for daily repeat use.</div>
+        <div class="app-pf-pills">
+          <span class="app-pf-pill">Live tracking</span>
+          <span class="app-pf-pill">Push notifications</span>
+          <span class="app-pf-pill">Payment gateway</span>
+          <span class="app-pf-pill">React Native</span>
+        </div>
+        <a href="/portfolio/mobile-nomnom" target="_blank" class="app-pf-link">View full design <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+      </div>
+    </div>
+
+    <!-- Fitness Tracker -->
+    <div class="app-card">
+      <div class="app-frame-wrap">
+        <div class="app-frame">
+          <iframe class="mobile-iframe" src="/portfolio/mobile-pulse" title="Pulse Fitness Tracker App" loading="lazy" scrolling="no" sandbox="allow-same-origin allow-scripts"></iframe>
+        </div>
+      </div>
+      <div class="app-pf-info">
+        <div class="app-pf-tag">Health & Fitness</div>
+        <div class="app-pf-name">Fitness Tracker App</div>
+        <div class="app-pf-desc">Workout tracking with wearable sync, AI-generated plans, and progress rings — built to keep users coming back daily.</div>
+        <div class="app-pf-pills">
+          <span class="app-pf-pill">Wearable sync</span>
+          <span class="app-pf-pill">AI workout plans</span>
+          <span class="app-pf-pill">Dark UI</span>
+          <span class="app-pf-pill">Flutter</span>
+        </div>
+        <a href="/portfolio/mobile-pulse" target="_blank" class="app-pf-link">View full design <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+      </div>
+    </div>
+
+    <!-- Digital Wallet -->
+    <div class="app-card">
+      <div class="app-frame-wrap">
+        <div class="app-frame">
+          <iframe class="mobile-iframe" src="/portfolio/mobile-dompet" title="Dompet Digital Wallet App" loading="lazy" scrolling="no" sandbox="allow-same-origin allow-scripts"></iframe>
+        </div>
+      </div>
+      <div class="app-pf-info">
+        <div class="app-pf-tag">Fintech & Payments</div>
+        <div class="app-pf-name">Digital Wallet App</div>
+        <div class="app-pf-desc">Peer-to-peer transfer, top-up, bill payment, and spending history in one secure app — compliant with Bank Indonesia regulations.</div>
+        <div class="app-pf-pills">
+          <span class="app-pf-pill">P2P transfer</span>
+          <span class="app-pf-pill">BI-compliant</span>
+          <span class="app-pf-pill">Biometric auth</span>
+          <span class="app-pf-pill">React Native</span>
+        </div>
+        <a href="/portfolio/mobile-dompet" target="_blank" class="app-pf-link">View full design <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+      </div>
+    </div>
+
+    <!-- Ride Booking -->
+    <div class="app-card">
+      <div class="app-frame-wrap">
+        <div class="app-frame">
+          <iframe class="mobile-iframe" src="/portfolio/mobile-jemput" title="Jemput Ride Booking App" loading="lazy" scrolling="no" sandbox="allow-same-origin allow-scripts"></iframe>
+        </div>
+      </div>
+      <div class="app-pf-info">
+        <div class="app-pf-tag">Transportation & Logistics</div>
+        <div class="app-pf-name">Ride Booking App</div>
+        <div class="app-pf-desc">On-demand transport with real-time driver matching, live map tracking, and multi-service switching — motor, car, and cargo in one app.</div>
+        <div class="app-pf-pills">
+          <span class="app-pf-pill">Live map</span>
+          <span class="app-pf-pill">Driver matching</span>
+          <span class="app-pf-pill">Multi-service</span>
+          <span class="app-pf-pill">Flutter</span>
+        </div>
+        <a href="/portfolio/mobile-jemput" target="_blank" class="app-pf-link">View full design <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+      </div>
     </div>
 
   </div>
@@ -945,6 +1196,10 @@ document.querySelectorAll('.rv').forEach(el=>_rv.observe(el));
 function buildGrid(id,r,g,b){const canvas=document.getElementById(id);if(!canvas)return;const ctx=canvas.getContext('2d');let W,H,scanY=0,streams=[];function resize(){W=canvas.width=canvas.offsetWidth;H=canvas.height=canvas.offsetHeight;streams=[];for(let i=0;i<12;i++)streams.push({x:Math.random()*W,y:Math.random()*H,sp:Math.random()*1.2+.4,len:Math.random()*70+30,a:Math.random()*.4+.1});}function draw(){ctx.clearRect(0,0,W,H);const gs=48;ctx.strokeStyle='rgba('+r+','+g+','+b+',.055)';ctx.lineWidth=1;for(let x=0;x<W;x+=gs){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}for(let y=0;y<H;y+=gs){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}for(let x=0;x<W;x+=gs)for(let y=0;y<H;y+=gs){ctx.beginPath();ctx.arc(x,y,1.5,0,Math.PI*2);ctx.fillStyle='rgba('+r+','+g+','+b+',.17)';ctx.fill();}scanY=(scanY+.85)%H;const sg=ctx.createLinearGradient(0,scanY-70,0,scanY+10);sg.addColorStop(0,'rgba('+r+','+g+','+b+',0)');sg.addColorStop(1,'rgba('+r+','+g+','+b+',.065)');ctx.fillStyle=sg;ctx.fillRect(0,scanY-70,W,80);ctx.beginPath();ctx.moveTo(0,scanY);ctx.lineTo(W,scanY);ctx.strokeStyle='rgba('+r+','+g+','+b+',.15)';ctx.lineWidth=1;ctx.stroke();streams.forEach(s=>{s.y+=s.sp;if(s.y>H){s.y=-s.len;s.x=Math.random()*W;}const g2=ctx.createLinearGradient(s.x,s.y-s.len,s.x,s.y);g2.addColorStop(0,'rgba('+r+','+g+','+b+',0)');g2.addColorStop(1,'rgba('+r+','+g+','+b+','+s.a+')');ctx.strokeStyle=g2;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(s.x,s.y-s.len);ctx.lineTo(s.x,s.y);ctx.stroke();});requestAnimationFrame(draw);}window.addEventListener('resize',resize);resize();requestAnimationFrame(draw);}
 buildGrid('cta-canvas',139,92,246);
 document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}});});
+function scaleMobileIframes(){document.querySelectorAll('.mobile-iframe').forEach(function(f){var frame=f.closest('.app-frame');if(!frame)return;var w=frame.offsetWidth,h=frame.offsetHeight;if(!w)return;var s=w/390;f.style.transform='scale('+s+')';f.style.height=(h/s)+'px';});}
+scaleMobileIframes();
+window.addEventListener('resize',scaleMobileIframes);
+document.querySelectorAll('.mobile-iframe').forEach(function(f){f.addEventListener('load',scaleMobileIframes);});
 </script>
 <script src="lang.js"></script>
 <a href="https://wa.me/6281200000000?text=Halo%20Scoop%20Technology%2C%20saya%20ingin%20konsultasi%20pembuatan%20aplikasi%20mobile." class="wa-btn" target="_blank" rel="noopener" aria-label="Chat WhatsApp"><svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M13 2C7.48 2 3 6.48 3 12c0 1.85.5 3.58 1.38 5.06L3 23l6.12-1.35A10 10 0 0013 22c5.52 0 10-4.48 10-10S18.52 2 13 2z" fill="currentColor"/><path d="M9.5 10.5c.28 1.28.97 2.44 1.97 3.44s2.16 1.69 3.44 1.97l.9-1.8s1.19.4 1.69.54c.3.09.3.3.22.52-.1.22-.52.88-.88.97-.36.08-.66.08-1.18-.14-.52-.22-1.98-.97-2.86-2.64-.44-.84-.35-1.54-.22-1.84.13-.3.44-.57.66-.66.22-.09.44-.09.52.13.09.22.33.81.33.81l-.47.32z" fill="white" stroke="none"/></svg><div class="wa-tooltip">Chat with us</div></a>

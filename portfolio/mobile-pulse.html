@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=390, initial-scale=1.0">
+<title>Pulse — Fitness Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--bg:#0A0A0A;--card:#141414;--card2:#1A1A1A;--lime:#A3FF47;--lime2:#C8FF6E;--text:#F5F5F5;--muted:#6B6B6B;--muted2:#3A3A3A;}
+html,body{width:390px;min-height:844px;background:var(--bg);font-family:'Space Grotesk',sans-serif;color:var(--text);overflow-x:hidden;}
+.sb{display:flex;align-items:center;justify-content:space-between;padding:14px 20px 10px;font-size:12px;font-weight:600;}
+.sb-time{font-size:15px;font-weight:700;}
+.sb-icons{display:flex;align-items:center;gap:6px;}
+.header{padding:6px 20px 18px;display:flex;align-items:center;justify-content:space-between;}
+.header-greeting{font-size:13px;color:var(--muted);font-weight:500;}
+.header-name{font-size:22px;font-weight:700;margin-top:1px;}
+.header-right{display:flex;gap:10px;align-items:center;}
+.icon-btn{width:40px;height:40px;background:var(--card2);border-radius:12px;display:flex;align-items:center;justify-content:center;}
+.icon-btn svg{width:18px;height:18px;stroke:var(--text);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.avatar{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--lime),#5bff00);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#0A0A0A;}
+.today-wrap{padding:0 20px 20px;}
+.today-card{background:var(--lime);border-radius:24px;padding:22px 24px;position:relative;overflow:hidden;}
+.today-card::after{content:'';position:absolute;right:-30px;top:-30px;width:160px;height:160px;background:rgba(255,255,255,.15);border-radius:50%;}
+.today-card::before{content:'';position:absolute;right:20px;bottom:-40px;width:120px;height:120px;background:rgba(0,0,0,.06);border-radius:50%;}
+.today-label{font-size:12px;font-weight:600;color:rgba(10,10,10,.6);letter-spacing:.8px;text-transform:uppercase;}
+.today-main{display:flex;align-items:flex-end;gap:6px;margin:8px 0 4px;}
+.today-num{font-size:52px;font-weight:700;color:#0A0A0A;line-height:1;}
+.today-unit{font-size:16px;font-weight:600;color:rgba(10,10,10,.6);margin-bottom:8px;}
+.today-sub{font-size:13px;color:rgba(10,10,10,.55);font-weight:500;}
+.today-progress-wrap{margin-top:16px;}
+.today-progress-bar{height:6px;background:rgba(0,0,0,.15);border-radius:3px;overflow:hidden;}
+.today-progress-fill{height:100%;width:68%;background:#0A0A0A;border-radius:3px;}
+.today-progress-labels{display:flex;justify-content:space-between;margin-top:6px;font-size:11px;color:rgba(10,10,10,.55);font-weight:600;}
+.stats-row{display:flex;gap:12px;padding:0 20px 20px;}
+.stat-card{flex:1;background:var(--card);border-radius:18px;padding:16px;}
+.stat-icon{width:32px;height:32px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:10px;font-size:16px;}
+.stat-icon.fire{background:rgba(255,85,0,.15);}
+.stat-icon.heart{background:rgba(255,59,59,.15);}
+.stat-icon.drop{background:rgba(0,162,255,.15);}
+.stat-val{font-size:20px;font-weight:700;line-height:1;}
+.stat-label{font-size:11px;color:var(--muted);font-weight:500;margin-top:3px;}
+.sec-head{display:flex;align-items:center;justify-content:space-between;padding:0 20px 14px;}
+.sec-title{font-size:16px;font-weight:700;}
+.sec-link{font-size:13px;color:var(--lime);font-weight:600;}
+.chart-wrap{padding:0 20px 24px;}
+.chart-card{background:var(--card);border-radius:20px;padding:20px;}
+.chart-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;}
+.chart-title{font-size:15px;font-weight:700;}
+.chart-avg{font-size:12px;color:var(--muted);font-weight:500;}
+.chart-avg span{color:var(--lime);font-weight:700;}
+.chart-bars{display:flex;align-items:flex-end;gap:8px;height:80px;}
+.bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;}
+.bar-fill{width:100%;border-radius:4px 4px 0 0;background:var(--muted2);}
+.bar-fill.active{background:var(--lime);}
+.bar-day{font-size:10px;color:var(--muted);font-weight:600;letter-spacing:.3px;}
+.workout-list{padding:0 20px;display:flex;flex-direction:column;gap:12px;}
+.workout-card{background:var(--card);border-radius:18px;padding:16px 18px;display:flex;align-items:center;gap:14px;}
+.workout-icon{width:46px;height:46px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+.workout-icon.run{background:rgba(163,255,71,.12);}
+.workout-icon.bike{background:rgba(255,196,0,.12);}
+.workout-icon.swim{background:rgba(0,162,255,.12);}
+.workout-info{flex:1;}
+.workout-name{font-size:14px;font-weight:600;}
+.workout-meta{font-size:12px;color:var(--muted);margin-top:3px;font-weight:500;}
+.workout-right{text-align:right;}
+.workout-cals{font-size:14px;font-weight:700;color:var(--lime);}
+.workout-dur{font-size:11px;color:var(--muted);margin-top:2px;font-weight:500;}
+.bottom-nav{position:fixed;bottom:0;left:0;width:390px;background:rgba(10,10,10,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid rgba(255,255,255,.06);padding:12px 0 28px;display:flex;justify-content:space-around;}
+.nav-item{display:flex;flex-direction:column;align-items:center;gap:5px;min-width:60px;}
+.nav-item svg{width:22px;height:22px;stroke:var(--muted);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.nav-item.active svg{stroke:var(--lime);}
+.nav-label{font-size:10px;color:var(--muted);font-weight:600;letter-spacing:.3px;}
+.nav-item.active .nav-label{color:var(--lime);}
+.nav-center-btn{width:52px;height:52px;background:var(--lime);border-radius:18px;display:flex;align-items:center;justify-content:center;margin-top:-20px;box-shadow:0 8px 24px rgba(163,255,71,.35);}
+.nav-center-btn svg{width:24px;height:24px;stroke:#0A0A0A;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;}
+.spacer{height:100px;}
+</style>
+</head>
+<body>
+<div class="sb">
+  <span class="sb-time">9:41</span>
+  <div class="sb-icons">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M1 6l5.5 5.5L12 6l5.5 5.5L23 6"/></svg>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><rect x="2" y="7" width="16" height="10" rx="2"/></svg>
+  </div>
+</div>
+<div class="header">
+  <div>
+    <div class="header-greeting">Good morning &#128170;</div>
+    <div class="header-name">Alex Rivera</div>
+  </div>
+  <div class="header-right">
+    <div class="icon-btn"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></div>
+    <div class="avatar">A</div>
+  </div>
+</div>
+<div class="today-wrap">
+  <div class="today-card">
+    <div class="today-label">Today's Steps</div>
+    <div class="today-main">
+      <div class="today-num">8,427</div>
+      <div class="today-unit">steps</div>
+    </div>
+    <div class="today-sub">Goal: 12,000 steps &middot; 68% complete</div>
+    <div class="today-progress-wrap">
+      <div class="today-progress-bar"><div class="today-progress-fill"></div></div>
+      <div class="today-progress-labels"><span>0</span><span>12,000</span></div>
+    </div>
+  </div>
+</div>
+<div class="stats-row">
+  <div class="stat-card"><div class="stat-icon fire">&#128293;</div><div class="stat-val">612</div><div class="stat-label">Calories</div></div>
+  <div class="stat-card"><div class="stat-icon heart">&#10084;</div><div class="stat-val">74</div><div class="stat-label">BPM</div></div>
+  <div class="stat-card"><div class="stat-icon drop">&#128167;</div><div class="stat-val">1.8L</div><div class="stat-label">Water</div></div>
+</div>
+<div class="chart-wrap">
+  <div class="chart-card">
+    <div class="chart-header">
+      <div class="chart-title">Weekly Activity</div>
+      <div class="chart-avg">Avg: <span>9,240</span> steps</div>
+    </div>
+    <div class="chart-bars">
+      <div class="bar-col"><div class="bar-fill" style="height:55%"></div><div class="bar-day">MON</div></div>
+      <div class="bar-col"><div class="bar-fill" style="height:80%"></div><div class="bar-day">TUE</div></div>
+      <div class="bar-col"><div class="bar-fill" style="height:45%"></div><div class="bar-day">WED</div></div>
+      <div class="bar-col"><div class="bar-fill" style="height:90%"></div><div class="bar-day">THU</div></div>
+      <div class="bar-col"><div class="bar-fill" style="height:60%"></div><div class="bar-day">FRI</div></div>
+      <div class="bar-col"><div class="bar-fill active" style="height:70%"></div><div class="bar-day">SAT</div></div>
+      <div class="bar-col"><div class="bar-fill" style="height:30%"></div><div class="bar-day">SUN</div></div>
+    </div>
+  </div>
+</div>
+<div class="sec-head">
+  <div class="sec-title">Today's Workouts</div>
+  <div class="sec-link">See all</div>
+</div>
+<div class="workout-list">
+  <div class="workout-card">
+    <div class="workout-icon run">&#127939;</div>
+    <div class="workout-info"><div class="workout-name">Morning Run</div><div class="workout-meta">6:30 AM &middot; Outdoor</div></div>
+    <div class="workout-right"><div class="workout-cals">320 cal</div><div class="workout-dur">38 min</div></div>
+  </div>
+  <div class="workout-card">
+    <div class="workout-icon bike">&#128692;</div>
+    <div class="workout-info"><div class="workout-name">Cycling Session</div><div class="workout-meta">12:00 PM &middot; Indoor</div></div>
+    <div class="workout-right"><div class="workout-cals">185 cal</div><div class="workout-dur">22 min</div></div>
+  </div>
+  <div class="workout-card">
+    <div class="workout-icon swim">&#127944;</div>
+    <div class="workout-info"><div class="workout-name">Swim Laps</div><div class="workout-meta">5:30 PM &middot; Pool</div></div>
+    <div class="workout-right"><div class="workout-cals">107 cal</div><div class="workout-dur">20 min</div></div>
+  </div>
+</div>
+<div class="spacer"></div>
+<div class="bottom-nav">
+  <div class="nav-item active">
+    <svg viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+    <span class="nav-label">Home</span>
+  </div>
+  <div class="nav-item">
+    <svg viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+    <span class="nav-label">Stats</span>
+  </div>
+  <div class="nav-item">
+    <div class="nav-center-btn"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+  </div>
+  <div class="nav-item">
+    <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+    <span class="nav-label">Social</span>
+  </div>
+  <div class="nav-item">
+    <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    <span class="nav-label">Profile</span>
+  </div>
+</div>
+</body>
+</html>

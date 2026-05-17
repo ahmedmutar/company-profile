@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>NomNom — Food Delivery</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#130C06;--s1:#221507;--s2:#2E1A08;--ac:#FF6B2B;--ac2:#FF3D00;--tx:#FAF0E6;--mu:rgba(250,240,230,.45);--bd:rgba(255,255,255,.08);}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:390px;min-height:844px;font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--tx);overflow-x:hidden;}
+a{color:inherit;text-decoration:none;}
+.sb{display:flex;justify-content:space-between;align-items:center;padding:14px 22px 4px;font-size:12px;font-weight:600;}
+.sb-r{display:flex;align-items:center;gap:6px;}
+.hdr{display:flex;align-items:center;padding:10px 22px 8px;gap:10px;}
+.hdr-loc{flex:1;}
+.hdr-sup{font-size:11px;color:var(--mu);font-weight:500;margin-bottom:2px;}
+.hdr-val{font-size:15px;font-weight:800;display:flex;align-items:center;gap:5px;}
+.hdr-arr{color:var(--ac);font-size:12px;}
+.hdr-av{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--ac),var(--ac2));display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
+.hdr-bell{width:40px;height:40px;border-radius:13px;background:var(--s1);border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;font-size:17px;position:relative;flex-shrink:0;}
+.bell-dot{position:absolute;top:9px;right:9px;width:7px;height:7px;border-radius:50%;background:var(--ac);border:1.5px solid var(--bg);}
+.srch{margin:6px 22px 4px;background:var(--s1);border:1px solid var(--bd);border-radius:16px;display:flex;align-items:center;gap:10px;padding:13px 14px;}
+.srch-ph{flex:1;font-size:14px;color:var(--mu);}
+.srch-flt{width:34px;height:34px;border-radius:10px;background:var(--ac);display:flex;align-items:center;justify-content:center;font-size:14px;}
+.promo{margin:10px 22px;height:136px;border-radius:20px;background:linear-gradient(135deg,#FF6B2B 0%,#FF2D55 100%);padding:20px;position:relative;overflow:hidden;}
+.promo::before{content:'';position:absolute;top:-40px;right:-40px;width:140px;height:140px;border-radius:50%;background:rgba(255,255,255,.1);}
+.promo::after{content:'';position:absolute;bottom:-30px;right:30px;width:100px;height:100px;border-radius:50%;background:rgba(255,255,255,.06);}
+.promo-badge{background:rgba(255,255,255,.25);border-radius:20px;padding:4px 10px;font-size:10px;font-weight:700;letter-spacing:.06em;display:inline-block;margin-bottom:8px;}
+.promo-h{font-size:24px;font-weight:800;line-height:1.15;margin-bottom:4px;}
+.promo-s{font-size:12px;opacity:.8;margin-bottom:12px;}
+.promo-btn{background:#fff;color:#FF3D00;font-size:12px;font-weight:700;padding:8px 18px;border-radius:22px;display:inline-block;}
+.promo-dots{position:absolute;bottom:14px;right:14px;display:flex;gap:5px;}
+.pdot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.4);}
+.pdot.on{background:#fff;width:18px;border-radius:3px;}
+.sec-hdr{display:flex;justify-content:space-between;align-items:center;padding:14px 22px 10px;}
+.sec-t{font-size:15px;font-weight:700;}
+.sec-a{font-size:12px;color:var(--ac);font-weight:600;}
+.cats{display:flex;gap:12px;padding:0 22px;overflow-x:auto;}
+.cats::-webkit-scrollbar{display:none;}
+.cat{display:flex;flex-direction:column;align-items:center;gap:6px;flex-shrink:0;}
+.cat-ic{width:56px;height:56px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:24px;}
+.c1{background:rgba(255,107,43,.15);border:1px solid rgba(255,107,43,.28);}
+.c2{background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.22);}
+.c3{background:rgba(234,179,8,.12);border:1px solid rgba(234,179,8,.2);}
+.c4{background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.2);}
+.c5{background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.2);}
+.c6{background:rgba(236,72,153,.12);border:1px solid rgba(236,72,153,.2);}
+.cat-l{font-size:11px;font-weight:600;color:var(--mu);}
+.rlist{display:flex;flex-direction:column;gap:14px;padding:4px 22px;}
+.rcard{background:var(--s1);border:1px solid var(--bd);border-radius:18px;overflow:hidden;}
+.rimg{width:100%;height:140px;position:relative;}
+.rbadge{position:absolute;top:10px;left:10px;background:var(--ac);color:#fff;font-size:10px;font-weight:700;padding:4px 10px;border-radius:20px;}
+.rfav{position:absolute;top:10px;right:10px;width:30px;height:30px;border-radius:50%;background:rgba(0,0,0,.45);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;font-size:14px;}
+.rdis{position:absolute;bottom:10px;right:10px;background:rgba(0,0,0,.55);backdrop-filter:blur(8px);border-radius:20px;padding:4px 9px;font-size:10px;font-weight:600;}
+.rinfo{padding:13px 15px;}
+.rname{font-size:16px;font-weight:800;margin-bottom:5px;}
+.rmeta{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--mu);margin-bottom:9px;}
+.rstar{color:#FFD700;font-weight:700;}
+.rsep{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.2);}
+.rtags{display:flex;gap:6px;flex-wrap:wrap;}
+.rtag{font-size:11px;font-weight:600;background:var(--s2);border:1px solid var(--bd);padding:3px 9px;border-radius:20px;color:var(--mu);}
+.bnav{position:fixed;bottom:0;left:0;right:0;width:390px;background:var(--s1);border-top:1px solid var(--bd);display:flex;padding:10px 0 26px;}
+.bn{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:10px;font-weight:600;color:var(--mu);position:relative;}
+.bn.on{color:var(--ac);}
+.bn-i{font-size:20px;line-height:1;}
+.bn-pip{position:absolute;bottom:-6px;width:4px;height:4px;border-radius:50%;background:var(--ac);}
+</style>
+</head>
+<body>
+<div class="sb"><span>9:41</span><div class="sb-r"><svg width="16" height="11" viewBox="0 0 16 11" fill="white"><rect x="0" y="4" width="3" height="7" rx="1" opacity=".4"/><rect x="4.5" y="2.5" width="3" height="8.5" rx="1" opacity=".6"/><rect x="9" y="1" width="3" height="10" rx="1" opacity=".85"/><rect x="13.5" y="0" width="2.5" height="11" rx="1"/></svg><svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0" y="1" width="22" height="10" rx="3" stroke="white" stroke-width="1.2" opacity=".5"/><rect x="1.5" y="2.5" width="17" height="7" rx="2" fill="white"/><path d="M23 4.5v3c.8-.4 1.3-1 1.3-1.5s-.5-1.1-1.3-1.5z" fill="white" opacity=".4"/></svg></div></div>
+<div class="hdr">
+  <div class="hdr-loc"><div class="hdr-sup">Deliver to</div><div class="hdr-val">Menteng, Jakarta <span class="hdr-arr">&#9662;</span></div></div>
+  <div class="hdr-bell"><span>&#128276;</span><div class="bell-dot"></div></div>
+  <div class="hdr-av">&#128522;</div>
+</div>
+<div class="srch"><span style="font-size:16px;color:var(--mu);">&#128269;</span><span class="srch-ph">Search restaurants or food&hellip;</span><div class="srch-flt">&#9881;</div></div>
+<div class="promo">
+  <div class="promo-badge">TODAY ONLY</div>
+  <div class="promo-h">50% Off<br>First Order</div>
+  <div class="promo-s">Min. order Rp 50.000</div>
+  <div class="promo-btn">Order Now &rarr;</div>
+  <div class="promo-dots"><div class="pdot on"></div><div class="pdot"></div><div class="pdot"></div></div>
+</div>
+<div class="sec-hdr"><div class="sec-t">Categories</div><div class="sec-a">See all</div></div>
+<div class="cats">
+  <div class="cat"><div class="cat-ic c1">&#127828;</div><div class="cat-l">Burgers</div></div>
+  <div class="cat"><div class="cat-ic c2">&#127829;</div><div class="cat-l">Pizza</div></div>
+  <div class="cat"><div class="cat-ic c3">&#127836;</div><div class="cat-l">Noodles</div></div>
+  <div class="cat"><div class="cat-ic c4">&#129367;</div><div class="cat-l">Healthy</div></div>
+  <div class="cat"><div class="cat-ic c5">&#9749;</div><div class="cat-l">Coffee</div></div>
+  <div class="cat"><div class="cat-ic c6">&#127857;</div><div class="cat-l">Rice Box</div></div>
+</div>
+<div class="sec-hdr"><div class="sec-t">Popular Near You</div><div class="sec-a">See all</div></div>
+<div class="rlist">
+  <div class="rcard">
+    <div class="rimg" style="background:linear-gradient(135deg,#7B1E00,#C0392B);">
+      <div class="rbadge">Bestseller</div>
+      <div class="rfav">&#129293;</div>
+      <div class="rdis">2.1 km</div>
+    </div>
+    <div class="rinfo">
+      <div class="rname">Burger Bros Jakarta</div>
+      <div class="rmeta"><span class="rstar">&#9733; 4.9</span><div class="rsep"></div><span>20&ndash;30 min</span><div class="rsep"></div><span>Rp 5.000</span></div>
+      <div class="rtags"><div class="rtag">Burgers</div><div class="rtag">Fries</div><div class="rtag">Milkshakes</div></div>
+    </div>
+  </div>
+  <div class="rcard">
+    <div class="rimg" style="background:linear-gradient(135deg,#0D4F3C,#1A7A5E);">
+      <div class="rbadge">Healthy</div>
+      <div class="rfav">&#10084;</div>
+      <div class="rdis">0.8 km</div>
+    </div>
+    <div class="rinfo">
+      <div class="rname">Greens &amp; Grains Bowl</div>
+      <div class="rmeta"><span class="rstar">&#9733; 4.7</span><div class="rsep"></div><span>15&ndash;25 min</span><div class="rsep"></div><span>Free</span></div>
+      <div class="rtags"><div class="rtag">Salad</div><div class="rtag">Bowls</div><div class="rtag">Vegan</div></div>
+    </div>
+  </div>
+  <div class="rcard">
+    <div class="rimg" style="background:linear-gradient(135deg,#2C1654,#6B21A8);">
+      <div class="rbadge">Fast Order</div>
+      <div class="rfav">&#129293;</div>
+      <div class="rdis">1.4 km</div>
+    </div>
+    <div class="rinfo">
+      <div class="rname">Kopi Kita Specialty</div>
+      <div class="rmeta"><span class="rstar">&#9733; 4.8</span><div class="rsep"></div><span>10&ndash;20 min</span><div class="rsep"></div><span>Free</span></div>
+      <div class="rtags"><div class="rtag">Coffee</div><div class="rtag">Pastry</div><div class="rtag">Brunch</div></div>
+    </div>
+  </div>
+</div>
+<div style="height:88px;"></div>
+<div class="bnav">
+  <div class="bn on"><div class="bn-i">&#127968;</div><span>Home</span><div class="bn-pip"></div></div>
+  <div class="bn"><div class="bn-i">&#128269;</div><span>Search</span></div>
+  <div class="bn"><div class="bn-i">&#128230;</div><span>Orders</span></div>
+  <div class="bn"><div class="bn-i">&#10084;</div><span>Saved</span></div>
+  <div class="bn"><div class="bn-i">&#128100;</div><span>Profile</span></div>
+</div>
+</body>
+</html>
