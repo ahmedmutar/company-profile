@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>NOOK CAFÉ & EATERY — Good Food. Good Vibes. Every Time.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700;1,800&family=DM+Sans:wght@400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#1c1612;
+  --surface1:#2a1f17;
+  --surface2:#3b2a1f;
+  --accent:#d4845a;
+  --gold:#c9a96e;
+  --text:#f5ede4;
+  --muted:#a89080;
+  --dark:#0f0b09;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden;cursor:none;}
+@media(pointer:coarse){body{cursor:auto;}}
+a{color:inherit;text-decoration:none;}
+button{cursor:pointer;border:none;background:none;font-family:inherit;}
+section{position:relative;}
+
+/* CURSOR */
+#cursor{position:fixed;top:0;left:0;width:16px;height:16px;background:var(--accent);border-radius:50%;pointer-events:none;transform:translate(-50%,-50%);z-index:9999;transition:width .2s,height .2s;mix-blend-mode:difference;}
+#cursor.big{width:28px;height:28px;}
+@media(pointer:coarse){#cursor{display:none;}}
+
+/* LOADER */
+#loader{position:fixed;inset:0;background:var(--dark);z-index:10000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;transition:opacity .7s ease;}
+#loader.done{opacity:0;pointer-events:none;}
+.loader-svg{width:90px;height:90px;}
+.loader-liquid{clip-path:inset(100% 0 0 0);animation:fillUp 2.2s cubic-bezier(.4,0,.2,1) forwards .3s;}
+@keyframes fillUp{to{clip-path:inset(0% 0 0 0);}}
+.loader-label{font-family:'Playfair Display',serif;font-size:12px;letter-spacing:5px;color:var(--accent);opacity:0;animation:fadeIn .4s ease forwards 2.1s;}
+@keyframes fadeIn{to{opacity:1;}}
+
+/* REDUCED MOTION */
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important;transition-duration:.01ms!important;}
+}
+
+/* NOISE GRAIN */
+.grain::after{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");pointer-events:none;z-index:1;opacity:.5;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:22px 52px;display:flex;align-items:center;justify-content:space-between;transition:background .4s,backdrop-filter .4s,border-color .4s;border-bottom:1px solid transparent;}
+nav.scrolled{background:rgba(28,22,18,.72);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-color:rgba(212,132,90,.15);}
+.nav-logo{font-family:'Playfair Display',serif;font-size:20px;font-weight:800;letter-spacing:3px;}
+.nav-logo em{color:var(--accent);font-style:normal;}
+.nav-links{display:flex;gap:32px;}
+.nav-links a{font-size:13px;letter-spacing:1.5px;color:var(--muted);transition:color .2s;position:relative;}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--accent);transition:width .3s;}
+.nav-links a:hover{color:var(--text);}
+.nav-links a:hover::after{width:100%;}
+.nav-cta{background:var(--accent);color:var(--dark);padding:10px 26px;border-radius:2px;font-size:13px;font-weight:500;letter-spacing:1px;position:relative;overflow:hidden;}
+.nav-cta::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,.18);transform:scaleX(0);transform-origin:left;transition:transform .3s;}
+.nav-cta:hover::after{transform:scaleX(1);}
+.hamburger{display:none;flex-direction:column;gap:5px;width:26px;padding:4px 0;}
+.hamburger span{display:block;height:2px;background:var(--text);transition:transform .35s,opacity .35s;}
+.hamburger.open span:first-child{transform:translateY(7px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:last-child{transform:translateY(-7px) rotate(-45deg);}
+.mob-menu{position:fixed;inset:0;background:var(--dark);z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:44px;opacity:0;pointer-events:none;transition:opacity .4s;}
+.mob-menu.open{opacity:1;pointer-events:all;}
+.mob-menu a{font-family:'Playfair Display',serif;font-size:38px;font-weight:700;color:var(--text);transition:color .2s;}
+.mob-menu a:hover{color:var(--accent);}
+@media(max-width:900px){nav{padding:16px 24px;}.nav-links,.nav-cta{display:none;}.hamburger{display:flex;}}
+
+/* HERO */
+#hero{position:relative;height:100vh;min-height:600px;display:flex;align-items:flex-end;overflow:hidden;}
+#hero-canvas{position:absolute;inset:0;z-index:0;}
+.hero-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(28,22,18,.93) 0%,rgba(28,22,18,.1) 60%,transparent 100%);}
+.hero-content{position:relative;z-index:2;padding:0 52px 90px;max-width:960px;}
+.hero-hl{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(52px,9vw,110px);line-height:.9;letter-spacing:-2px;}
+.word{display:inline-block;overflow:hidden;margin-right:.2em;}
+.word span{display:inline-block;transform:translateY(110%);opacity:0;transition:transform .85s cubic-bezier(.16,1,.3,1),opacity .5s ease;}
+.word span.in{transform:translateY(0);opacity:1;}
+.hero-sub{margin-top:28px;font-size:17px;color:var(--muted);line-height:1.75;max-width:480px;opacity:0;transform:translateY(18px);transition:opacity .6s,transform .6s;}
+.hero-sub.in{opacity:1;transform:translateY(0);}
+.hero-btns{display:flex;gap:16px;margin-top:36px;flex-wrap:wrap;opacity:0;transform:translateY(18px);transition:opacity .6s .18s,transform .6s .18s;}
+.hero-btns.in{opacity:1;transform:translateY(0);}
+.btn-p{background:var(--accent);color:var(--dark);padding:15px 38px;border-radius:2px;font-size:14px;font-weight:500;letter-spacing:1px;position:relative;}
+.btn-o{border:1px solid var(--accent);color:var(--accent);padding:15px 38px;border-radius:2px;font-size:14px;font-weight:500;letter-spacing:1px;transition:background .3s,color .3s;}
+.btn-o:hover{background:var(--accent);color:var(--dark);}
+.pulse-ring{position:relative;}
+.pulse-ring::after{content:'';position:absolute;inset:-5px;border-radius:4px;border:2px solid var(--accent);animation:pRing 2s ease-out infinite;}
+@keyframes pRing{0%{transform:scale(1);opacity:.7;}100%{transform:scale(1.18);opacity:0;}}
+.scroll-hint{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;}
+.scroll-line{width:1px;height:60px;background:var(--accent);animation:breathe 2.2s ease-in-out infinite;}
+@keyframes breathe{0%,100%{transform:scaleY(1);opacity:1;}50%{transform:scaleY(.45);opacity:.3;}}
+@media(max-width:640px){.hero-content{padding:0 24px 64px;}.scroll-hint{display:none;}}
+
+/* BOTANICAL */
+.leaf{position:absolute;border-radius:50% 0/60% 40%;pointer-events:none;animation:leafF var(--dur,7s) ease-in-out infinite alternate;}
+@keyframes leafF{0%{transform:translateY(0) rotate(var(--r0,0deg));}100%{transform:translateY(10px) rotate(var(--r1,5deg));}}
+
+/* MARQUEE */
+.marquee-strip{background:var(--accent);overflow:hidden;padding:14px 0;position:relative;z-index:3;}
+.marquee-inner{display:flex;white-space:nowrap;animation:mScroll 20s linear infinite;}
+.marquee-strip:hover .marquee-inner{animation-play-state:paused;}
+.marquee-item{font-family:'Playfair Display',serif;font-style:italic;font-size:20px;letter-spacing:3px;color:var(--dark);padding:0 32px;}
+@keyframes mScroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+/* ABOUT */
+#about{padding:120px 52px;background:var(--surface1);overflow:hidden;}
+.about-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.about-left{opacity:0;transform:translateX(-60px);transition:opacity .8s,transform .8s;}
+.about-left.in{opacity:1;transform:translateX(0);}
+.about-est{font-family:'Playfair Display',serif;font-size:clamp(80px,12vw,160px);font-weight:900;line-height:1;color:var(--surface2);position:relative;}
+.about-est-label{position:absolute;top:50%;left:0;transform:translateY(-50%);font-size:16px;color:var(--accent);letter-spacing:4px;font-family:'DM Sans',sans-serif;}
+.about-right{opacity:0;transform:translateX(60px);transition:opacity .8s .15s,transform .8s .15s;}
+.about-right.in{opacity:1;transform:translateX(0);}
+.sec-label{font-size:11px;letter-spacing:4px;color:var(--accent);font-family:'DM Mono',monospace;margin-bottom:16px;opacity:0;transform:translateY(18px);transition:opacity .6s,transform .6s;}
+.sec-label.in{opacity:1;transform:translateY(0);}
+.sec-h{font-family:'Playfair Display',serif;font-size:clamp(30px,4.5vw,56px);font-weight:800;line-height:1.1;margin-bottom:48px;opacity:0;transform:translateY(18px);transition:opacity .6s .08s,transform .6s .08s;}
+.sec-h.in{opacity:1;transform:translateY(0);}
+.about-h{font-family:'Playfair Display',serif;font-size:clamp(26px,3vw,40px);font-weight:800;line-height:1.2;margin-bottom:24px;}
+.about-body{color:var(--muted);font-size:15px;line-height:1.85;margin-bottom:16px;}
+.stats-row{display:flex;gap:44px;margin-top:44px;flex-wrap:wrap;}
+.stat-num{font-family:'Playfair Display',serif;font-size:38px;font-weight:800;color:var(--accent);line-height:1;}
+.stat-lbl{font-size:12px;color:var(--muted);margin-top:5px;letter-spacing:1px;}
+@media(max-width:900px){.about-grid{grid-template-columns:1fr;gap:40px;}#about{padding:80px 24px;}}
+
+/* MENU */
+#menu{padding:120px 52px;background:var(--bg);}
+.menu-wrap{max-width:1200px;margin:0 auto;}
+.tab-bar{display:flex;position:relative;margin-bottom:48px;border-bottom:1px solid var(--surface2);overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;}
+.tab-bar::-webkit-scrollbar{display:none;}
+.tab-btn{padding:12px 28px;font-size:14px;letter-spacing:1px;color:var(--muted);background:none;border:none;font-family:'DM Sans',sans-serif;transition:color .2s;white-space:nowrap;scroll-snap-align:start;}
+.tab-btn.active{color:var(--text);}
+.tab-ind{position:absolute;bottom:0;height:2px;background:var(--accent);transition:left .3s ease,width .3s ease;}
+.tab-panel{display:none;}
+.tab-panel.active{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
+@media(max-width:640px){.tab-panel.active{grid-template-columns:1fr;}}
+
+/* FLIP CARD */
+.flip-card{perspective:1000px;height:260px;cursor:pointer;opacity:0;transform:translateY(28px);transition:opacity .5s,transform .5s;}
+.flip-card.in{opacity:1;transform:translateY(0);}
+.flip-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .65s cubic-bezier(.16,1,.3,1);}
+.flip-card.flipped .flip-inner{transform:rotateY(180deg);}
+@media(hover:hover){.flip-card:hover .flip-inner{transform:rotateY(180deg);}}
+.flip-front,.flip-back{position:absolute;inset:0;backface-visibility:hidden;border-radius:4px;padding:32px;display:flex;flex-direction:column;background:var(--surface1);border:1px solid var(--surface2);}
+.flip-back{transform:rotateY(180deg);background:var(--surface2);justify-content:space-between;}
+.flip-emoji{font-size:40px;margin-bottom:16px;}
+.flip-name{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;}
+.flip-price{font-family:'DM Mono',monospace;font-size:15px;color:var(--accent);margin-top:auto;padding-top:16px;}
+.flip-desc{font-size:14px;color:var(--muted);line-height:1.75;}
+.flip-cta{display:inline-block;margin-top:16px;background:var(--accent);color:var(--dark);padding:10px 24px;border-radius:2px;font-size:13px;font-weight:500;letter-spacing:1px;align-self:flex-start;}
+@media(max-width:640px){#menu{padding:80px 24px;}}
+
+/* GALLERY */
+#gallery{padding:120px 52px;background:var(--surface1);}
+#gallery-canvas{width:100%;height:400px;display:block;border-radius:4px;margin-bottom:40px;}
+@media(max-width:640px){#gallery-canvas{height:280px;}}
+.gal-grid{max-width:1200px;margin:0 auto;columns:3;column-gap:16px;}
+@media(max-width:1024px){.gal-grid{columns:2;}}
+@media(max-width:640px){.gal-grid{columns:1;}}
+.gal-item{break-inside:avoid;margin-bottom:16px;border-radius:4px;overflow:hidden;position:relative;cursor:pointer;opacity:0;transform:translateY(28px);transition:opacity .6s,transform .6s;}
+.gal-item.in{opacity:1;transform:translateY(0);}
+.gal-ph{width:100%;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;color:rgba(245,237,228,.25);transition:transform .4s ease;}
+.gal-item:hover .gal-ph{transform:scale(1.03);}
+.gal-overlay{position:absolute;inset:0;background:rgba(212,132,90,.28);display:flex;align-items:flex-end;padding:20px;opacity:0;transition:opacity .3s;border-radius:4px;}
+.gal-item:hover .gal-overlay{opacity:1;}
+.gal-cap{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--dark);}
+@media(max-width:640px){#gallery{padding:80px 24px;}}
+
+/* TESTIMONIALS */
+#testimonials{padding:120px 52px;background:var(--bg);text-align:center;}
+.testi-wrap{max-width:700px;margin:0 auto;}
+.testi-quote{width:48px;height:48px;margin:0 auto 28px;}
+.testi-text{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(18px,2.5vw,26px);line-height:1.55;transition:opacity .4s;}
+.testi-author{margin-top:24px;font-size:14px;color:var(--muted);transition:opacity .4s;}
+.testi-stars{color:var(--gold);letter-spacing:3px;margin-top:10px;font-size:16px;}
+.testi-type{display:inline-block;margin-top:10px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--accent);border:1px solid var(--surface2);padding:4px 14px;border-radius:2px;}
+.testi-dots{display:flex;gap:8px;justify-content:center;margin-top:44px;}
+.testi-dot{width:8px;height:8px;border-radius:50%;background:var(--surface2);cursor:pointer;transition:background .3s;}
+.testi-dot.active{background:var(--accent);}
+@media(max-width:640px){#testimonials{padding:80px 24px;}}
+
+/* RESERVATION */
+#reservation{padding:120px 52px;background:var(--surface1);}
+.res-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.res-steps{display:flex;flex-direction:column;gap:36px;}
+.step{display:flex;gap:22px;align-items:flex-start;}
+.step-num{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:2px;padding-top:3px;flex-shrink:0;}
+.step-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;margin-bottom:6px;}
+.step-desc{font-size:14px;color:var(--muted);line-height:1.75;}
+.res-card{background:var(--surface2);border-radius:4px;padding:44px;border:1px solid rgba(212,132,90,.15);}
+.form-group{margin-bottom:20px;}
+.form-lbl{display:block;font-size:11px;letter-spacing:3px;color:var(--muted);margin-bottom:8px;font-family:'DM Mono',monospace;}
+.form-input{width:100%;background:var(--surface1);border:1px solid var(--surface2);border-radius:2px;padding:12px 16px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;transition:border-color .2s,box-shadow .2s;outline:none;}
+.form-input:focus{border-color:var(--accent);box-shadow:0 0 0 2px rgba(212,132,90,.28);}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+textarea.form-input{resize:vertical;min-height:80px;}
+.sub-btn{width:100%;background:var(--accent);color:var(--dark);padding:16px;border-radius:2px;font-size:15px;font-weight:500;letter-spacing:1px;font-family:'DM Sans',sans-serif;margin-top:8px;position:relative;overflow:hidden;}
+.sub-btn::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,.18);transform:scaleX(0);transform-origin:left;transition:transform .3s;}
+.sub-btn:hover::after{transform:scaleX(1);}
+.res-success{display:none;text-align:center;padding:48px 20px;}
+.res-success.show{display:block;}
+.suc-svg{width:64px;height:64px;margin:0 auto 24px;}
+.suc-h{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;margin-bottom:12px;}
+.suc-sub{color:var(--muted);font-size:15px;}
+.form-body.hidden{display:none;}
+@media(max-width:900px){.res-grid{grid-template-columns:1fr;gap:40px;}#reservation{padding:80px 24px;}}
+
+/* CONTACT */
+#contact{padding:120px 52px;background:var(--bg);}
+.contact-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;}
+@media(max-width:900px){.contact-grid{grid-template-columns:1fr;gap:40px;}#contact{padding:80px 24px;}}
+.map-ph{background:var(--surface1);border-radius:4px;height:400px;position:relative;overflow:hidden;border:1px solid var(--surface2);}
+.map-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(212,132,90,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(212,132,90,.06) 1px,transparent 1px);background-size:40px 40px;}
+.map-pin{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:16px;height:16px;border-radius:50%;background:var(--accent);animation:pinP 2s ease-in-out infinite;}
+@keyframes pinP{0%,100%{box-shadow:0 0 0 0 rgba(212,132,90,.6);}50%{box-shadow:0 0 0 18px rgba(212,132,90,0);}}
+.map-lbl{position:absolute;bottom:20px;left:20px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--muted);}
+.contact-details{display:flex;flex-direction:column;gap:36px;}
+.cg-lbl{font-size:11px;letter-spacing:3px;color:var(--accent);font-family:'DM Mono',monospace;margin-bottom:10px;}
+.cg-val{font-size:15px;color:var(--text);margin-bottom:4px;}
+.hours-row{display:flex;justify-content:space-between;font-size:14px;padding:8px 0;border-bottom:1px solid var(--surface2);}
+.hours-row:last-child{border-bottom:none;}
+.h-days{color:var(--muted);}
+.h-time{color:var(--text);}
+.socials-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px;}
+.soc-badge{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1px;border:1px solid var(--surface2);padding:6px 14px;border-radius:2px;color:var(--muted);transition:color .2s,border-color .2s;}
+.soc-badge:hover{color:var(--accent);border-color:var(--accent);}
+
+/* FOOTER */
+footer{background:var(--dark);padding:44px 52px 24px;border-top:1px solid var(--accent);}
+.ft-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px;padding-bottom:24px;border-bottom:1px solid var(--surface2);margin-bottom:20px;}
+.ft-logo{font-family:'Playfair Display',serif;font-size:18px;font-weight:800;letter-spacing:3px;}
+.ft-logo em{color:var(--accent);font-style:normal;}
+.ft-links{display:flex;gap:24px;flex-wrap:wrap;}
+.ft-links a{font-size:13px;color:var(--muted);transition:color .2s;}
+.ft-links a:hover{color:var(--text);}
+.ft-socials{display:flex;gap:12px;}
+.ft-soc{width:36px;height:36px;border-radius:50%;border:1px solid var(--surface2);display:flex;align-items:center;justify-content:center;font-size:13px;font-family:'DM Mono',monospace;transition:border-color .2s,background .2s;}
+.ft-soc:hover{border-color:var(--accent);background:rgba(212,132,90,.1);}
+.ft-copy{text-align:center;font-size:12px;color:var(--muted);letter-spacing:1px;}
+@media(max-width:640px){footer{padding:32px 24px 20px;}.ft-row{flex-direction:column;text-align:center;}.ft-links{justify-content:center;}}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(36px);transition:opacity .7s,transform .7s;}
+.reveal.from-left{transform:translateX(-50px);}
+.reveal.from-right{transform:translateX(50px);}
+.reveal.in{opacity:1;transform:translate(0);}
+
+.gallery-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.gallery-block:hover .gallery-placeholder img {
+  transform: scale(1.04);
+}
+
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div id="cursor"></div>
+
+<!-- LOADER -->
+<div id="loader">
+  <svg class="loader-svg" viewBox="0 0 90 90" fill="none">
+    <path d="M15 22 L19 70 Q19 76 26 76 L64 76 Q71 76 71 70 L75 22 Z" stroke="#3b2a1f" stroke-width="2" fill="#1c1612"/>
+    <g class="loader-liquid">
+      <path d="M17 35 L20 70 Q20 74 26 74 L64 74 Q70 74 70 70 L73 35 Z" fill="#d4845a"/>
+    </g>
+    <path d="M15 22 L19 70 Q19 76 26 76 L64 76 Q71 76 71 70 L75 22 Z" stroke="#d4845a" stroke-width="2" fill="none"/>
+    <path d="M71 32 Q88 32 88 48 Q88 64 71 64" stroke="#d4845a" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M35 16 Q38 9 35 2" stroke="#a89080" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <path d="M45 16 Q48 9 45 2" stroke="#a89080" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <path d="M55 16 Q58 9 55 2" stroke="#a89080" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  </svg>
+  <div class="loader-label">NOOK · CAFÉ</div>
+</div>
+
+<!-- MOBILE MENU -->
+<div class="mob-menu" id="mobMenu">
+  <a href="#menu" onclick="closeMob()">Menu</a>
+  <a href="#about" onclick="closeMob()">About</a>
+  <a href="#gallery" onclick="closeMob()">Gallery</a>
+  <a href="#reservation" onclick="closeMob()">Reservation</a>
+  <a href="#contact" onclick="closeMob()">Contact</a>
+</div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <div class="nav-logo">NOOK <em>·</em> CAFÉ</div>
+  <div class="nav-links">
+    <a href="#menu">Menu</a>
+    <a href="#about">About</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#reservation">Reservation</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <a href="#reservation" class="nav-cta pulse-ring">Reserve a Table</a>
+  <button class="hamburger" id="hbg" onclick="toggleMob()"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- HERO -->
+<section id="hero" class="grain">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-overlay"></div>
+
+  <!-- Leaves hero -->
+  <div class="leaf" style="width:50px;height:50px;background:var(--accent);opacity:.14;top:22%;left:7%;--dur:7s;--r0:-18deg;--r1:4deg;"></div>
+  <div class="leaf" style="width:32px;height:32px;background:var(--gold);opacity:.12;top:42%;left:4%;--dur:9.5s;--r0:38deg;--r1:54deg;"></div>
+  <div class="leaf" style="width:60px;height:60px;background:var(--accent);opacity:.08;top:14%;right:9%;--dur:6.5s;--r0:102deg;--r1:118deg;"></div>
+  <div class="leaf" style="width:40px;height:40px;background:var(--gold);opacity:.1;top:62%;right:6%;--dur:8.2s;--r0:-44deg;--r1:-28deg;"></div>
+  <div class="leaf" style="width:26px;height:26px;background:var(--accent);opacity:.13;top:76%;left:11%;--dur:10s;--r0:68deg;--r1:84deg;"></div>
+  <div class="leaf" style="width:44px;height:44px;background:var(--gold);opacity:.09;bottom:22%;right:14%;--dur:7.8s;--r0:198deg;--r1:214deg;"></div>
+  <div class="leaf" style="width:36px;height:36px;background:var(--accent);opacity:.07;top:32%;right:19%;--dur:8.8s;--r0:-12deg;--r1:4deg;"></div>
+  <div class="leaf" style="width:22px;height:22px;background:var(--gold);opacity:.1;top:82%;left:29%;--dur:11s;--r0:28deg;--r1:44deg;"></div>
+
+  <div class="hero-content">
+    <h1 class="hero-hl">
+      <span class="word"><span>Good</span></span>
+      <span class="word"><span>Food.</span></span>
+      <br>
+      <span class="word"><span>Good</span></span>
+      <span class="word"><span>Vibes.</span></span>
+    </h1>
+    <p class="hero-sub">A neighborhood spot in South Jakarta where every meal feels like coming home. Slow mornings, long lunches, and coffee that earns its keep.</p>
+    <div class="hero-btns">
+      <a href="#menu" class="btn-p pulse-ring">View Menu</a>
+      <a href="#reservation" class="btn-o">Reserve Now</a>
+    </div>
+  </div>
+  <div class="scroll-hint"><div class="scroll-line"></div></div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-inner">
+    <span class="marquee-item">BREAKFAST · BRUNCH · LUNCH · COFFEE · PASTRY · DINNER · NOOK ·</span>
+    <span class="marquee-item">BREAKFAST · BRUNCH · LUNCH · COFFEE · PASTRY · DINNER · NOOK ·</span>
+    <span class="marquee-item">BREAKFAST · BRUNCH · LUNCH · COFFEE · PASTRY · DINNER · NOOK ·</span>
+    <span class="marquee-item">BREAKFAST · BRUNCH · LUNCH · COFFEE · PASTRY · DINNER · NOOK ·</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about" class="grain">
+  <div class="leaf" style="width:55px;height:55px;background:var(--accent);opacity:.07;top:10%;right:5%;--dur:8s;--r0:128deg;--r1:144deg;"></div>
+  <div class="leaf" style="width:36px;height:36px;background:var(--gold);opacity:.09;top:50%;left:3%;--dur:6.2s;--r0:-28deg;--r1:-12deg;"></div>
+  <div class="leaf" style="width:46px;height:46px;background:var(--accent);opacity:.06;bottom:14%;right:7%;--dur:9.4s;--r0:58deg;--r1:74deg;"></div>
+  <div class="leaf" style="width:28px;height:28px;background:var(--gold);opacity:.08;bottom:32%;left:5%;--dur:7.2s;--r0:168deg;--r1:184deg;"></div>
+  <div class="leaf" style="width:50px;height:50px;background:var(--accent);opacity:.05;top:72%;right:2%;--dur:10.5s;--r0:-58deg;--r1:-42deg;"></div>
+  <div class="about-grid">
+    <div class="about-left reveal from-left">
+      <div class="about-est">Est.<br>2022<span class="about-est-label">Our Story</span></div>
+    </div>
+    <div class="about-right reveal from-right">
+      <div class="about-h">A corner of calm in the middle of the city</div>
+      <p class="about-body">NOOK started with a simple idea: a café that doesn't try too hard. No gimmicks, no theater — just genuinely good food, coffee sourced from farms we trust, and a room that feels like it was designed for lingering.</p>
+      <p class="about-body">Every dish on our menu went through rounds of testing before it made the cut. The truffle pasta took eleven versions. The cold brew recipe hasn't changed since day one because it's never needed to.</p>
+      <p class="about-body">We're in South Jakarta, open every day, and we mean it when we say you're welcome to stay as long as you like.</p>
+      <div class="stats-row">
+        <div>
+          <div class="stat-num" data-target="500">0</div>
+          <div class="stat-lbl">Dishes / Day</div>
+        </div>
+        <div>
+          <div class="stat-num" data-target="4.9" data-dec="1">0</div>
+          <div class="stat-lbl">★ on Google</div>
+        </div>
+        <div>
+          <div class="stat-num" data-target="3">0</div>
+          <div class="stat-lbl">Years Running</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section id="menu">
+  <div class="menu-wrap">
+    <div class="sec-label reveal">/ WHAT WE SERVE</div>
+    <h2 class="sec-h reveal">The Menu</h2>
+    <div class="tab-bar" id="tabBar">
+      <button class="tab-btn active" data-tab="mains">Mains</button>
+      <button class="tab-btn" data-tab="bites">Bites</button>
+      <button class="tab-btn" data-tab="drinks">Drinks</button>
+      <button class="tab-btn" data-tab="desserts">Desserts</button>
+      <div class="tab-ind" id="tabInd"></div>
+    </div>
+
+    <div class="tab-panel active" id="tab-mains">
+      <div class="flip-card"><div class="flip-inner"><div class="flip-front"><div class="flip-emoji">🍝</div><div class="flip-name">Truffle Mushroom Pasta</div><div class="flip-price">$16</div></div><div class="flip-back"><div class="flip-desc">Fresh tagliatelle tossed with a wild mushroom ragù, black truffle oil, and aged Parmesan. Earthy, rich, and the kind of dish people order twice on the same visit.</div><a class="flip-cta">Order Now</a></div></div></div>
+      <div class="flip-card"><div class="flip-inner"><div class="flip-front"><div class="flip-emoji">🐟</div><div class="flip-name">Grilled Salmon Rice Bowl</div><div class="flip-price">$18</div></div><div class="flip-back"><div class="flip-desc">Norwegian salmon, pan-seared to a crisp skin, over warm Japanese rice with pickled cucumber, sesame dressing, and a soft-boiled egg.</div><a class="flip-cta">Order Now</a></div></div></div>
+      <div class="flip-card"><div class="flip-inner"><div class="flip-front"><div class="flip-emoji">🍔</div><div class="flip-name">Smashed Beef Burger</div><div class="flip-price">$14</div></div><div class="flip-back"><div class="flip-desc">Double smash patties, American cheese, caramelized onion, house pickles, and chipotle mayo on a brioche bun. Messy in the best way.</div><a class="flip-cta">Order Now</a></div></div></div>
+      <div class="flip-card"><div class="flip-inner"><div class="flip-front"><div class="flip-emoji">🥑</div><div class="flip-name">Avocado Toast + Egg</div><div class="flip-price">$12</div></div><div class="flip-back"><div class="flip-desc">Sourdough from our bakery partner, smashed avocado with lemon and chili, topped with two poached eggs and microgreens. A reliable morning anchor.</div><a class="flip-cta">Order Now</a></div></div></div>
+    </div>
+
+    <div class="tab-panel" id="tab-bites">
+      <div class="flip-card"><div class="flip-inner"><div class="flip-front"><div class="flip-emoji">🍠</div><div class="flip-name">Sweet Potato Fries</div><div class="flip-price">$7</div></div><div class="flip-back"><div class="flip-desc">Thick-cut, double-fried for crunch, seasoned with smoked paprika and served with garlic-herb aioli. They disappear fast — order early.</div><a class="flip-cta">Order Now</a></div></div></div>
+      <div class="flip-card"><div class="flip-inner"><div class="flip-front"><div class="flip-emoji">🍅</div><div class="flip-name">Bruschetta al Pomodoro</div><div class="flip-price">$9</div></div><div class="flip-back"><div class="flip-desc">Charred sourdough rubbed with garlic, topped with heirloom tomatoes in basil oil and flaked sea salt. Ordered daily. Sold out often.</div><a class="flip-cta">Order Now</a></div></div></div>
+      <div class="flip-card"><div class="flip-inner"><div class="flip-front"><div class="flip-emoji">🧀</div><div class="flip-name">Artisan Cheese Board</div><div class="flip-price">$18</div></div><div class="flip-back"><div class="flip-desc">Three rotating cheeses with honeycomb, pickled grapes, walnuts, and sourdough crackers. The selection changes weekly based on what's actually good right now.</div><a class="flip-cta">Order Now</a></div></div></div>
+      <div class="flip-card"><div class="flip-inner"><div class="flip-front"><div class="flip-emoji">🌿</div><div class="flip-name">Crispy Spring Rolls</div><div class="flip-price">$8</div></div><div class="flip-back"><div class="flip-desc">Thin rice paper, glass noodles, shiitake, julienned vegetables. Fried to order. Served with tamarind dipping sauce. Good alone, better with the cold brew.</div><a class="flip-cta">Order Now</a></div></div></div>
+    </div>
+
+    <div class="tab-panel" id="tab-drinks">
+      <div class="flip-card"><div class="flip-inner"><div class="flip-front"><div class="flip-emoji">☕</div><div class="flip-name">House Cold Brew</div><div class="flip-price">$6</div></div><div class="flip-back"><div class="flip-desc">18-hour cold extraction from single-origin Flores Bajawa. Low acid, smooth finish, strong enough to remember. Served over ice, no milk by default.</div><a class="flip-cta">Order Now</a></div></div></div>
+      <div class="flip-card"><div class="flip-inner"><div class="flip-front"><div class="flip-emoji">🍵</div><div class="flip-name">Matcha Latte</div><div class="flip-price">$7</div></div><div class="flip-back"><div class="flip-desc">Ceremonial-grade matcha whisked smooth with oat milk and a touch of vanilla syrup. Served hot or iced. The iced version consistently outsells the hot.</div><a class="flip-cta">Order Now</a></div></div></div>
+      <div class="flip-card"><div class="flip-inner"><div class="flip-front"><div class="flip-emoji">🥭</div><div class="flip-name">Fresh Mango Juice</div><div class="flip-price">$5</div></div><div class="flip-back"><div class="flip-desc">Indonesian Harum Manis mango, lime, a pinch of salt. Blended to order. No concentrate, no added sugar, nothing else. Seasonal availability.</div><a class="flip-cta">Order Now</a></div></div></div>
+      <div class="flip-card"><div class="flip-inner"><div class="flip-front"><div class="flip-emoji">🍋</div><div class="flip-name">House Lemonade</div><div class="flip-price">$5</div></div><div class="flip-back"><div class="flip-desc">Freshly squeezed lemon, rosemary simple syrup, sparkling water. Light, herbal, and reliable on a Jakarta afternoon. Pairs well with the cheese board.</div><a class="flip-cta">Order Now</a></div></div></div>
+    </div>
+
+    <div class="tab-panel" id="tab-desserts">
+      <div class="flip-card"><div class="flip-inner"><div class="flip-front"><div class="flip-emoji">🍫</div><div class="flip-name">Chocolate Lava Cake</div><div class="flip-price">$10</div></div><div class="flip-back"><div class="flip-desc">Dark Valrhona chocolate, molten center, baked to order in 12 minutes. Served with house-made vanilla bean ice cream. Worth the wait.</div><a class="flip-cta">Order Now</a></div></div></div>
+      <div class="flip-card"><div class="flip-inner"><div class="flip-front"><div class="flip-emoji">🔥</div><div class="flip-name">Crème Brûlée</div><div class="flip-price">$9</div></div><div class="flip-back"><div class="flip-desc">Classic vanilla custard, chilled six hours, torched table-side with demerara sugar. The crack is half the experience. Limited portions daily.</div><a class="flip-cta">Order Now</a></div></div></div>
+      <div class="flip-card"><div class="flip-inner"><div class="flip-front"><div class="flip-emoji">🍨</div><div class="flip-name">Affogato</div><div class="flip-price">$8</div></div><div class="flip-back"><div class="flip-desc">A double shot of house espresso poured hot over fior di latte gelato. Simple, perfect, and gone in under three minutes every time.</div><a class="flip-cta">Order Now</a></div></div></div>
+      <div class="flip-card"><div class="flip-inner"><div class="flip-front"><div class="flip-emoji">🍓</div><div class="flip-name">Seasonal Fruit Tart</div><div class="flip-price">$11</div></div><div class="flip-back"><div class="flip-desc">Buttery shortcrust, vanilla pastry cream, topped with whatever fruit is best this week — typically mangosteen, lychee, or stone fruit. Changes with the market.</div><a class="flip-cta">Order Now</a></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="sec-label reveal">/ ATMOSPHERE</div>
+    <h2 class="sec-h reveal">A Taste of the Atmosphere</h2>
+    <canvas id="gallery-canvas"></canvas>
+    <div class="gal-grid">
+      <div class="gal-item reveal">
+        <div class="gal-ph" style="height:280px;background:linear-gradient(135deg,#3b2a1f,rgba(212,132,90,.15));">[ PHOTO ]</div>
+        <div class="gal-overlay"><span class="gal-cap">MORNING LIGHT</span></div>
+      </div>
+      <div class="gal-item reveal">
+        <div class="gal-ph" style="height:200px;background:linear-gradient(135deg,#2a1f17,rgba(201,169,110,.15));">[ PHOTO ]</div>
+        <div class="gal-overlay"><span class="gal-cap">THE COUNTER</span></div>
+      </div>
+      <div class="gal-item reveal">
+        <div class="gal-ph" style="height:340px;background:linear-gradient(135deg,#3b2a1f,rgba(139,94,60,.2));">[ PHOTO ]</div>
+        <div class="gal-overlay"><span class="gal-cap">WEEKEND BRUNCH</span></div>
+      </div>
+      <div class="gal-item reveal">
+        <div class="gal-ph" style="height:220px;background:linear-gradient(135deg,#2a1f17,rgba(212,132,90,.2));">[ PHOTO ]</div>
+        <div class="gal-overlay"><span class="gal-cap">COLD BREW PREP</span></div>
+      </div>
+      <div class="gal-item reveal">
+        <div class="gal-ph" style="height:300px;background:linear-gradient(135deg,#3b2a1f,rgba(201,169,110,.2));">[ PHOTO ]</div>
+        <div class="gal-overlay"><span class="gal-cap">LAVA CAKE</span></div>
+      </div>
+      <div class="gal-item reveal">
+        <div class="gal-ph" style="height:180px;background:linear-gradient(135deg,#2a1f17,rgba(160,82,45,.2));">[ PHOTO ]</div>
+        <div class="gal-overlay"><span class="gal-cap">COZY CORNER</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="testi-wrap">
+    <div class="sec-label reveal" style="text-align:center;">/ GUEST REVIEWS</div>
+    <h2 class="sec-h reveal" style="text-align:center;margin-bottom:56px;">What Guests Say</h2>
+    <svg class="testi-quote" viewBox="0 0 48 48" fill="none">
+      <path d="M8 28C8 19 13 13 22 11L24 15C18 17 16 22 17 26H24V40H8V28ZM26 28C26 19 31 13 40 11L42 15C36 17 34 22 35 26H42V40H26V28Z" fill="#d4845a" opacity=".55"/>
+    </svg>
+    <div class="testi-text" id="testiText"></div>
+    <div class="testi-author" id="testiAuthor"></div>
+    <div class="testi-stars" id="testiStars"></div>
+    <div class="testi-type" id="testiType"></div>
+    <div class="testi-dots" id="testiDots"></div>
+  </div>
+</section>
+
+<!-- RESERVATION -->
+<section id="reservation">
+  <div class="res-grid">
+    <div>
+      <div class="sec-label reveal">/ BOOK A TABLE</div>
+      <h2 class="sec-h reveal">Reserve Your Spot</h2>
+      <div class="res-steps">
+        <div class="step reveal">
+          <div class="step-num">01</div>
+          <div><div class="step-title">Pick your time</div><div class="step-desc">Choose a date and time that works. We're open daily from 8 AM to 10 PM. Walk-ins welcome, but reservations get priority seating.</div></div>
+        </div>
+        <div class="step reveal">
+          <div class="step-num">02</div>
+          <div><div class="step-title">Tell us your party</div><div class="step-desc">Let us know how many are joining. For groups over 8, call us directly and we'll set up something proper.</div></div>
+        </div>
+        <div class="step reveal">
+          <div class="step-num">03</div>
+          <div><div class="step-title">Show up and eat</div><div class="step-desc">Your table will be ready. We'll confirm by phone. No deposit required — just show up.</div></div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="res-card" id="resCard">
+        <div class="form-body" id="formBody">
+          <div class="form-row">
+            <div class="form-group"><label class="form-lbl">Full Name</label><input class="form-input" type="text" placeholder="Your name"/></div>
+            <div class="form-group"><label class="form-lbl">Phone</label><input class="form-input" type="tel" placeholder="+62 …"/></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label class="form-lbl">Date</label><input class="form-input" type="date"/></div>
+            <div class="form-group"><label class="form-lbl">Time</label><input class="form-input" type="time" min="08:00" max="22:00"/></div>
+          </div>
+          <div class="form-group"><label class="form-lbl">Party Size</label><select class="form-input"><option>1 guest</option><option>2 guests</option><option>3 guests</option><option>4 guests</option><option>5–6 guests</option><option>7–8 guests</option></select></div>
+          <div class="form-group"><label class="form-lbl">Special Requests</label><textarea class="form-input" placeholder="Allergies, accessibility, occasion…"></textarea></div>
+          <button class="sub-btn pulse-ring" onclick="submitRes(event)">Confirm Reservation</button>
+        </div>
+        <div class="res-success" id="resSuccess">
+          <svg class="suc-svg" viewBox="0 0 64 64" fill="none">
+            <circle cx="32" cy="32" r="30" stroke="#d4845a" stroke-width="2"/>
+            <path d="M18 32L27 42L46 22" stroke="#d4845a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <div class="suc-h">You're all set!</div>
+          <div class="suc-sub">Your reservation is confirmed. We'll send a reminder to your phone before your visit.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-grid">
+    <div>
+      <div class="sec-label reveal">/ FIND US</div>
+      <h2 class="sec-h reveal">Come Say Hello</h2>
+      <div class="map-ph reveal">
+        <div class="map-grid"></div>
+        <div class="map-pin"></div>
+        <div class="map-lbl">NOOK CAFÉ · SOUTH JAKARTA</div>
+      </div>
+    </div>
+    <div class="contact-details">
+      <div class="reveal">
+        <div class="cg-lbl">ADDRESS</div>
+        <div class="cg-val">Jl. Kemang Raya No. 47</div>
+        <div class="cg-val">Kemang, South Jakarta 12730</div>
+      </div>
+      <div class="reveal">
+        <div class="cg-lbl">HOURS</div>
+        <div class="hours-row"><span class="h-days">Monday – Friday</span><span class="h-time">8:00 AM – 10:00 PM</span></div>
+        <div class="hours-row"><span class="h-days">Saturday</span><span class="h-time">7:00 AM – 11:00 PM</span></div>
+        <div class="hours-row"><span class="h-days">Sunday</span><span class="h-time">7:00 AM – 10:00 PM</span></div>
+      </div>
+      <div class="reveal">
+        <div class="cg-lbl">CONTACT</div>
+        <div class="cg-val">+62 21 7179 4455</div>
+        <div class="cg-val">hello@nookcafe.id</div>
+      </div>
+      <div class="reveal">
+        <div class="cg-lbl">FIND US ON</div>
+        <div class="socials-row">
+          <a href="#" class="soc-badge">Instagram</a>
+          <a href="#" class="soc-badge">GoFood</a>
+          <a href="#" class="soc-badge">GrabFood</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-row">
+    <div class="ft-logo">NOOK <em>·</em> CAFÉ</div>
+    <div class="ft-links">
+      <a href="#menu">Menu</a>
+      <a href="#about">About</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#reservation">Reservation</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="ft-socials">
+      <a href="#" class="ft-soc">IG</a>
+      <a href="#" class="ft-soc">GF</a>
+      <a href="#" class="ft-soc">GB</a>
+    </div>
+  </div>
+  <div class="ft-copy">© 2025 NOOK CAFÉ & EATERY. All rights reserved.</div>
+</footer>
+
+<script>
+const PRM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const MOBILE = window.innerWidth <= 640;
+const FINE_POINTER = window.matchMedia('(pointer: fine)').matches;
+
+// CURSOR
+const cursorEl = document.getElementById('cursor');
+if(FINE_POINTER){
+  document.addEventListener('mousemove', e => {
+    cursorEl.style.left = e.clientX + 'px';
+    cursorEl.style.top = e.clientY + 'px';
+  });
+  document.querySelectorAll('a,button,.flip-card,.gal-item').forEach(el => {
+    el.addEventListener('mouseenter', () => cursorEl.classList.add('big'));
+    el.addEventListener('mouseleave', () => cursorEl.classList.remove('big'));
+  });
+}
+
+// LOADER
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('done');
+    animateHero();
+  }, PRM ? 0 : 2500);
+});
+
+function animateHero(){
+  document.querySelectorAll('.hero-hl .word span').forEach((el, i) => {
+    setTimeout(() => el.classList.add('in'), i * 150);
+  });
+  setTimeout(() => {
+    document.querySelector('.hero-sub').classList.add('in');
+    document.querySelector('.hero-btns').classList.add('in');
+  }, 4 * 150 + 200);
+  // Show first tab cards
+  setTimeout(() => {
+    document.querySelectorAll('#tab-mains .flip-card').forEach((c, i) => {
+      c.style.transitionDelay = (i * 80) + 'ms';
+      c.classList.add('in');
+    });
+  }, 2700);
+}
+
+// NAV SCROLL
+window.addEventListener('scroll', () => {
+  document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// MOBILE MENU
+let mobOpen = false;
+function toggleMob(){
+  mobOpen = !mobOpen;
+  document.getElementById('hbg').classList.toggle('open', mobOpen);
+  document.getElementById('mobMenu').classList.toggle('open', mobOpen);
+}
+function closeMob(){ mobOpen = false; document.getElementById('hbg').classList.remove('open'); document.getElementById('mobMenu').classList.remove('open'); }
+
+// ===== HERO THREE.JS =====
+(function(){
+  if(PRM) return;
+  const canvas = document.getElementById('hero-canvas');
+  const W = window.innerWidth, H = window.innerHeight;
+  const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
+  renderer.setPixelRatio(MOBILE ? 1 : Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(W, H);
+
+  const scene = new THREE.Scene();
+  const cam = new THREE.PerspectiveCamera(60, W/H, 0.1, 100);
+  cam.position.z = 14;
+
+  const S = MOBILE ? 8 : 16;
+  const mat = new THREE.MeshBasicMaterial({color:0xd4845a, wireframe:true, transparent:true, opacity:0.55, blending:THREE.AdditiveBlending});
+
+  const cup = new THREE.Mesh(new THREE.CylinderGeometry(1.6, 1.0, 2.4, S, 1, true), mat);
+  scene.add(cup);
+
+  const rimTop = new THREE.Mesh(new THREE.TorusGeometry(1.6, 0.045, 6, S), mat);
+  rimTop.position.y = 1.2; scene.add(rimTop);
+
+  const rimBot = new THREE.Mesh(new THREE.TorusGeometry(1.0, 0.045, 6, S), mat);
+  rimBot.position.y = -1.2; scene.add(rimBot);
+
+  const handle = new THREE.Mesh(new THREE.TorusGeometry(0.72, 0.08, 6, 14, Math.PI), mat);
+  handle.position.set(1.6, 0, 0); handle.rotation.z = Math.PI/2; scene.add(handle);
+
+  const saucer = new THREE.Mesh(new THREE.CylinderGeometry(2.1, 1.9, 0.12, S), mat);
+  saucer.position.y = -1.45; scene.add(saucer);
+
+  const beanCount = MOBILE ? 4 : 8;
+  const beans = [];
+  for(let i=0;i<beanCount;i++){
+    const m = new THREE.Mesh(new THREE.SphereGeometry(0.09, 4, 4), new THREE.MeshBasicMaterial({color:0xd4845a, transparent:true, opacity:0.65, blending:THREE.AdditiveBlending}));
+    const rad = 3.2 + Math.random() * 2;
+    const ang = (i/beanCount) * Math.PI * 2;
+    const yOff = (Math.random()-.5) * 3.5;
+    const spd = (0.003 + Math.random() * 0.004) * (MOBILE ? 0.7 : 1);
+    beans.push({mesh:m, rad, ang, yOff, spd});
+    scene.add(m);
+  }
+
+  const light = new THREE.PointLight(0xd4845a, 1.5, 30);
+  light.position.set(0, 4, 0); scene.add(light);
+
+  let t = 0, scrollY = 0;
+  window.addEventListener('scroll', () => { scrollY = window.scrollY; });
+  window.addEventListener('resize', () => {
+    cam.aspect = window.innerWidth / window.innerHeight;
+    cam.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+
+  const spd = MOBILE ? 0.7 : 1;
+  function tick(){
+    requestAnimationFrame(tick);
+    t += 0.01;
+    cam.position.y = Math.sin(t * 0.002 * spd) * 0.05;
+    cam.rotation.y = Math.sin(t * 0.004 * spd) * 0.15;
+    cam.position.z = 14 + scrollY * 0.008;
+
+    [cup, rimTop, rimBot, handle, saucer].forEach(m => m.rotation.y += 0.004 * spd);
+
+    beans.forEach(b => {
+      b.ang += b.spd;
+      b.mesh.position.x = Math.cos(b.ang) * b.rad;
+      b.mesh.position.z = Math.sin(b.ang) * b.rad;
+      b.mesh.position.y = b.yOff + Math.sin(t * 0.5 + b.ang) * 0.3;
+    });
+    renderer.render(scene, cam);
+  }
+  tick();
+})();
+
+// ===== GALLERY THREE.JS =====
+(function(){
+  if(PRM) return;
+  const canvas = document.getElementById('gallery-canvas');
+  const section = document.getElementById('gallery');
+  const W = canvas.parentElement.offsetWidth;
+  const H = MOBILE ? 280 : 400;
+  const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
+  renderer.setSize(W, H);
+  renderer.setPixelRatio(MOBILE ? 1 : Math.min(window.devicePixelRatio, 2));
+
+  const scene = new THREE.Scene();
+  const cam = new THREE.PerspectiveCamera(55, W/H, 0.1, 100);
+  cam.position.z = 6;
+
+  const colors = [0xd4845a, 0xc9a96e, 0x8b5e3c, 0xa0522d, 0xcd853f, 0xb8860b];
+  const positions = [[-2.5,.8,-1],[0,1.2,0],[2.5,.6,-.5],[-2.2,-.8,.5],[.2,-1,-.3],[2.3,-.7,.8]];
+  const group = new THREE.Group();
+  const panels = [];
+  colors.forEach((col, i) => {
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(1.4, 1.0), new THREE.MeshBasicMaterial({color:col, side:THREE.DoubleSide, transparent:true, opacity:0.5}));
+    m.position.set(...positions[i]);
+    const rx = 0.003 + Math.random() * 0.005;
+    const ry = 0.003 + Math.random() * 0.005;
+    panels.push({mesh:m, rx, ry});
+    group.add(m);
+  });
+  scene.add(group);
+
+  let gx = 0, gy = 0, tgx = 0, tgy = 0;
+  section.addEventListener('mousemove', e => {
+    const r = section.getBoundingClientRect();
+    tgy = ((e.clientX - r.left - r.width/2) / (r.width/2)) * 0.3;
+    tgx = -((e.clientY - r.top - r.height/2) / (r.height/2)) * 0.2;
+  });
+  section.addEventListener('mouseleave', () => { tgx = 0; tgy = 0; });
+  if(MOBILE){
+    window.addEventListener('deviceorientation', e => {
+      if(e.gamma != null){
+        tgy = Math.max(-0.3, Math.min(0.3, e.gamma * 0.01));
+        tgx = Math.max(-0.3, Math.min(0.3, (e.beta - 45) * 0.005));
+      }
+    });
+  }
+
+  let active = false;
+  new IntersectionObserver(([e]) => { active = e.isIntersecting; }).observe(section);
+
+  const spd = MOBILE ? 0.7 : 1;
+  function tick(){
+    requestAnimationFrame(tick);
+    if(!active) return;
+    gx += (tgx - gx) * 0.06;
+    gy += (tgy - gy) * 0.06;
+    group.rotation.x = gx;
+    group.rotation.y = gy;
+    panels.forEach(p => { p.mesh.rotation.x += p.rx * spd; p.mesh.rotation.y += p.ry * spd; });
+    renderer.render(scene, cam);
+  }
+  tick();
+
+  window.addEventListener('resize', () => {
+    const nW = canvas.parentElement.offsetWidth;
+    renderer.setSize(nW, H);
+    cam.aspect = nW / H;
+    cam.updateProjectionMatrix();
+  });
+})();
+
+// ===== TABS =====
+function updateInd(btn){
+  const ind = document.getElementById('tabInd');
+  ind.style.left = btn.offsetLeft + 'px';
+  ind.style.width = btn.offsetWidth + 'px';
+}
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    updateInd(btn);
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    const panel = document.getElementById('tab-' + btn.dataset.tab);
+    panel.classList.add('active');
+    const cards = panel.querySelectorAll('.flip-card');
+    cards.forEach(c => { c.classList.remove('in'); c.style.transitionDelay = '0ms'; });
+    requestAnimationFrame(() => {
+      cards.forEach((c, i) => {
+        c.style.transitionDelay = (i * 80) + 'ms';
+        requestAnimationFrame(() => c.classList.add('in'));
+      });
+    });
+  });
+});
+window.addEventListener('load', () => {
+  const active = document.querySelector('.tab-btn.active');
+  if(active) updateInd(active);
+});
+
+// FLIP CARDS
+let flipping = false;
+document.querySelectorAll('.flip-card').forEach(card => {
+  card.addEventListener('click', () => {
+    if(flipping) return;
+    flipping = true;
+    card.classList.toggle('flipped');
+    setTimeout(() => { flipping = false; }, 700);
+  });
+});
+
+// ===== TESTIMONIALS =====
+const TESTIS = [
+  {text:"The cold brew here is the reason I rearranged my morning commute. Eleven weeks running.",author:"Sarah K.",stars:"★★★★★",type:"Regular"},
+  {text:"We came for brunch and stayed for three hours. Nobody asked us to leave. That's the test.",author:"Marco T.",stars:"★★★★★",type:"Family Brunch"},
+  {text:"The crème brûlée is made to order. You hear the torch. You wait. It is exactly as good as you hope.",author:"Priya W.",stars:"★★★★★",type:"Date Night"},
+];
+let tidx = 0, ttimer;
+
+function showTesti(i){
+  const t = TESTIS[i];
+  ['testiText','testiAuthor'].forEach(id => document.getElementById(id).style.opacity = 0);
+  setTimeout(() => {
+    document.getElementById('testiText').textContent = '\u201C' + t.text + '\u201D';
+    document.getElementById('testiAuthor').textContent = '\u2014 ' + t.author;
+    document.getElementById('testiStars').textContent = t.stars;
+    document.getElementById('testiType').textContent = t.type;
+    ['testiText','testiAuthor'].forEach(id => document.getElementById(id).style.opacity = 1);
+  }, 400);
+  document.querySelectorAll('.testi-dot').forEach((d, j) => d.classList.toggle('active', j === i));
+}
+
+(function(){
+  const dots = document.getElementById('testiDots');
+  TESTIS.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'testi-dot' + (i===0?' active':'');
+    d.onclick = () => { clearInterval(ttimer); tidx = i; showTesti(i); startTT(); };
+    dots.appendChild(d);
+  });
+  showTesti(0);
+  startTT();
+})();
+function startTT(){ ttimer = setInterval(() => { tidx = (tidx+1)%TESTIS.length; showTesti(tidx); }, 5000); }
+
+let swipeX = 0;
+document.getElementById('testimonials').addEventListener('touchstart', e => { swipeX = e.touches[0].clientX; }, {passive:true});
+document.getElementById('testimonials').addEventListener('touchend', e => {
+  const d = e.changedTouches[0].clientX - swipeX;
+  if(Math.abs(d) > 40){ clearInterval(ttimer); tidx = (tidx+(d<0?1:-1)+TESTIS.length)%TESTIS.length; showTesti(tidx); startTT(); }
+});
+
+// ===== RES CARD TILT =====
+const resCard = document.getElementById('resCard');
+let rx = 0, ry = 0, trx = 0, try_ = 0;
+if(FINE_POINTER){
+  resCard.addEventListener('mousemove', e => {
+    const r = resCard.getBoundingClientRect();
+    trx = -((e.clientY - r.top) / r.height - 0.5) * 2 * 8;
+    try_ = ((e.clientX - r.left) / r.width - 0.5) * 2 * 8;
+  });
+  resCard.addEventListener('mouseleave', () => { trx = 0; try_ = 0; });
+}
+if(MOBILE){
+  window.addEventListener('deviceorientation', e => {
+    if(e.gamma!=null){ try_ = Math.max(-6,Math.min(6,e.gamma*.2)); trx = Math.max(-6,Math.min(6,(e.beta-45)*.1)); }
+  });
+}
+(function tilt(){
+  requestAnimationFrame(tilt);
+  rx += (trx-rx)*.08; ry += (try_-ry)*.08;
+  resCard.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+})();
+
+// FORM
+function submitRes(e){
+  e.preventDefault();
+  document.getElementById('formBody').classList.add('hidden');
+  document.getElementById('resSuccess').classList.add('show');
+}
+
+// ===== SCROLL REVEAL =====
+const revObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); });
+}, {threshold:.14});
+document.querySelectorAll('.reveal, .sec-label, .sec-h, .about-left, .about-right').forEach(el => revObs.observe(el));
+
+// ===== STATS COUNTER =====
+const statObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){ animateStat(e.target); statObs.unobserve(e.target); }
+  });
+}, {threshold:.5});
+document.querySelectorAll('.stat-num').forEach(el => statObs.observe(el));
+
+function animateStat(el){
+  const tgt = parseFloat(el.dataset.target);
+  const dec = parseInt(el.dataset.dec || '0');
+  const dur = 1500, t0 = performance.now();
+  function u(now){
+    const p = Math.min((now-t0)/dur, 1);
+    const e = 1 - Math.pow(1-p, 3);
+    el.textContent = dec ? (tgt*e).toFixed(dec) : Math.round(tgt*e);
+    if(p < 1) requestAnimationFrame(u);
+    else el.textContent = dec ? tgt.toFixed(dec) : tgt;
+  }
+  requestAnimationFrame(u);
+}
+
+// IOS GYRO PERMISSION
+document.addEventListener('click', () => {
+  if(typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function'){
+    DeviceOrientationEvent.requestPermission().catch(()=>{});
+  }
+}, {once:true});
+</script>
+</body>
+</html>
