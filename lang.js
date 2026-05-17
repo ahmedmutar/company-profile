@@ -766,6 +766,16 @@ const LANG = (() => {
       id: 'Punya ide aplikasi?<br><span class="gr">Mari kita wujudkan.</span>',
     },
 
+    // ── process-automation.html ───────────────────────────────────────────────
+    'pa-hero-title': {
+      en: 'Let AI handle the work<br><span class="gr">your team shouldn\'t do</span>',
+      id: 'Biarkan AI menangani pekerjaan<br><span class="gr">yang tidak perlu dilakukan tim Anda</span>',
+    },
+    'pa-cta-title': {
+      en: 'Ready to stop doing<br><span class="gr">work that AI can handle?</span>',
+      id: 'Siap berhenti mengerjakan<br><span class="gr">hal yang bisa ditangani AI?</span>',
+    },
+
     // ── case-studies.html ────────────────────────────────────────────────────
     'cs-hero-title': {
       en: 'Not promises —<br>this is what <span class="gr">actually happened</span>',
