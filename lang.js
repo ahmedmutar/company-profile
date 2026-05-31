@@ -889,8 +889,8 @@ const LANG = (() => {
   // ── HTML translations (elements with inline markup) ───────────────────────
   const htmlMap = {
     'hero-title': {
-      en: 'Your business can run<br><span class="gr">smarter</span><br>than it does today',
-      id: 'Bisnis Anda bisa berjalan<br><span class="gr">lebih cerdas</span><br>dari sekarang',
+      en: 'Your business can run<br><span class="serif-accent">smarter</span><br>than it does today',
+      id: 'Bisnis Anda bisa berjalan<br><span class="serif-accent">lebih cerdas</span><br>dari sekarang',
     },
     'hero-trust': {
       en: 'Trusted by <strong>120+ companies</strong> worldwide',
