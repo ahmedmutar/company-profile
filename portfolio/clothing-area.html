@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clothing Area</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f5f0e8;
+  --paper2:#ede8e0;
+  --ink:#0f0f0f;
+  --ink2:#1a1a1a;
+  --muted:#6b6560;
+  --accent:#2c1810;
+  --red:#8b1a1a;
+  --border:rgba(15,15,15,.1);
+  --serif:'Cormorant',serif;
+  --sans:'DM Sans',sans-serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--paper);color:var(--ink);
+  font-family:var(--sans);overflow-x:hidden;
+}
+a{text-decoration:none;color:inherit;}
+
+/* GRAIN */
+body::after{
+  content:'';position:fixed;inset:-50%;
+  pointer-events:none;z-index:9998;opacity:.022;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  background-size:160px;
+}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  padding:24px 60px;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:all .4s;
+}
+nav.stuck{
+  padding:14px 60px;
+  background:rgba(245,240,232,.94);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{
+  font-family:var(--serif);font-size:22px;font-weight:500;
+  letter-spacing:.06em;text-transform:uppercase;
+}
+.nav-links{display:flex;gap:40px;list-style:none;}
+.nav-links a{
+  font-size:11px;font-weight:400;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);transition:color .25s;
+}
+.nav-links a:hover{color:var(--ink);}
+.nav-shop{
+  font-size:11px;font-weight:500;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--ink);
+  border-bottom:1px solid var(--ink);
+  padding-bottom:2px;transition:all .25s;
+}
+.nav-shop:hover{color:var(--red);border-color:var(--red);}
+
+/* HERO — split, type as visual */
+.hero{
+  min-height:100vh;
+  display:grid;grid-template-columns:1fr 1fr;
+}
+.hero-left{
+  padding:140px 60px 80px;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  border-right:1px solid var(--border);
+  position:relative;overflow:hidden;
+  background:var(--paper2);
+}
+/* Large background letter */
+.hero-bg-letter{
+  position:absolute;
+  bottom:-0.1em;left:-0.05em;
+  font-family:var(--serif);font-size:clamp(200px,28vw,420px);
+  font-weight:300;font-style:italic;
+  color:rgba(15,15,15,.04);
+  line-height:1;pointer-events:none;user-select:none;
+}
+.hero-season{
+  font-size:10px;font-weight:500;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--muted);
+  margin-bottom:24px;position:relative;z-index:1;
+}
+.hero-h1{
+  font-family:var(--serif);
+  font-size:clamp(56px,7vw,108px);
+  font-weight:400;font-style:italic;
+  line-height:.92;letter-spacing:-.01em;
+  margin-bottom:40px;position:relative;z-index:1;
+}
+.hero-h1 strong{
+  font-style:normal;font-weight:600;
+  display:block;
+}
+.hero-desc{
+  font-size:14px;line-height:1.8;color:var(--muted);
+  max-width:380px;margin-bottom:48px;
+  position:relative;z-index:1;
+}
+.hero-actions{display:flex;gap:24px;align-items:center;position:relative;z-index:1;}
+.btn-ink{
+  font-size:12px;font-weight:500;letter-spacing:.1em;
+  text-transform:uppercase;
+  background:var(--ink);color:var(--paper);
+  padding:15px 36px;transition:background .25s;
+}
+.btn-ink:hover{background:var(--ink2);}
+.btn-text-link{
+  font-size:12px;font-weight:400;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted);
+  border-bottom:1px solid var(--border);padding-bottom:2px;
+  transition:color .25s,border-color .25s;
+}
+.btn-text-link:hover{color:var(--ink);border-color:var(--ink);}
+
+.hero-right{
+  padding:140px 60px 80px;
+  display:flex;flex-direction:column;justify-content:space-between;
+}
+.hero-manifesto{
+  font-family:var(--serif);
+  font-size:clamp(16px,2vw,22px);
+  font-weight:300;font-style:italic;
+  line-height:1.6;color:var(--muted);
+  border-left:2px solid var(--ink);
+  padding-left:28px;margin-bottom:auto;
+  max-width:420px;
+}
+.hero-manifesto em{font-style:normal;color:var(--ink);font-weight:500;}
+.hero-stats{
+  display:grid;grid-template-columns:1fr 1fr;gap:0;
+  border:1px solid var(--border);margin-top:48px;
+}
+.h-stat{padding:24px 28px;border-right:1px solid var(--border);}
+.h-stat:nth-child(2n){border-right:none;}
+.h-stat:nth-child(n+3){border-top:1px solid var(--border);}
+.h-stat-val{
+  font-family:var(--serif);font-size:36px;font-weight:600;
+  line-height:1;margin-bottom:4px;
+}
+.h-stat-lbl{font-size:11px;color:var(--muted);letter-spacing:.04em;}
+
+/* CERTS STRIP */
+.certs-strip{
+  padding:20px 60px;
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  background:var(--ink);
+  display:flex;align-items:center;gap:0;overflow:hidden;
+}
+.cert-chip{
+  display:flex;align-items:center;gap:12px;
+  padding:0 48px;
+  border-right:1px solid rgba(255,255,255,.08);
+  flex-shrink:0;
+}
+.cert-chip:last-child{border-right:none;}
+.cert-name{
+  font-size:11px;font-weight:500;letter-spacing:.1em;
+  text-transform:uppercase;color:rgba(245,240,232,.5);
+}
+.cert-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:rgba(245,240,232,.2);flex-shrink:0;
+}
+
+/* COLLECTIONS — editorial asymmetric grid */
+.collections{padding:100px 60px;background:var(--paper);}
+.collections-header{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  margin-bottom:56px;
+  padding-bottom:32px;border-bottom:1px solid var(--border);
+}
+.collections-title{
+  font-family:var(--serif);font-size:clamp(40px,5vw,72px);
+  font-weight:400;font-style:italic;line-height:1.0;
+}
+.collections-title strong{font-style:normal;display:block;}
+.collections-desc{
+  max-width:280px;font-size:14px;color:var(--muted);
+  line-height:1.7;text-align:right;
+}
+/* Asymmetric grid */
+.coll-grid{
+  display:grid;
+  grid-template-columns:1.6fr 1fr;
+  grid-template-rows:auto auto;
+  gap:2px;
+}
+.coll-item{
+  position:relative;overflow:hidden;cursor:pointer;
+  background:var(--paper2);
+}
+.coll-item.featured{grid-row:span 2;}
+.coll-item-inner{
+  aspect-ratio:3/4;width:100%;
+  display:flex;align-items:flex-end;
+  padding:32px;
+  position:relative;
+  transition:transform .6s cubic-bezier(.25,.46,.45,.94);
+}
+.coll-item.featured .coll-item-inner{
+  aspect-ratio:auto;height:100%;min-height:500px;
+}
+.coll-item:hover .coll-item-inner{transform:scale(1.02);}
+/* Color backgrounds — not trying to look like photos */
+.coll-item:nth-child(1) .coll-item-inner{background:linear-gradient(160deg,#1a1610 0%,#0f0d0a 100%);}
+.coll-item:nth-child(2) .coll-item-inner{background:linear-gradient(160deg,#0d1218 0%,#080e14 100%);}
+.coll-item:nth-child(3) .coll-item-inner{background:linear-gradient(160deg,#14100e 0%,#0e0b09 100%);}
+/* Abstract mark — intentional, not a placeholder */
+.coll-mark{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-60%);
+  opacity:.08;
+  font-family:var(--serif);font-size:clamp(80px,12vw,180px);
+  font-weight:300;font-style:italic;
+  color:#fff;white-space:nowrap;pointer-events:none;
+  transition:opacity .4s;
+}
+.coll-item:hover .coll-mark{opacity:.14;}
+.coll-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.7) 0%,transparent 50%);
+}
+.coll-info{position:relative;z-index:1;color:#fff;}
+.coll-cat{
+  font-size:10px;font-weight:500;letter-spacing:.14em;
+  text-transform:uppercase;color:rgba(255,255,255,.5);
+  margin-bottom:6px;
+}
+.coll-name{
+  font-family:var(--serif);font-size:clamp(22px,3vw,32px);
+  font-weight:500;line-height:1.1;margin-bottom:4px;
+}
+.coll-count{font-size:12px;color:rgba(255,255,255,.4);}
+
+/* QUALITY */
+.quality{padding:100px 60px;background:var(--paper2);}
+.quality-inner{
+  display:grid;grid-template-columns:1fr 2fr;gap:80px;align-items:start;
+}
+.quality-left h2{
+  font-family:var(--serif);
+  font-size:clamp(36px,5vw,64px);
+  font-weight:400;font-style:italic;
+  line-height:1.05;margin-bottom:20px;
+}
+.quality-left h2 strong{font-style:normal;}
+.quality-left p{font-size:15px;color:var(--muted);line-height:1.8;margin-bottom:32px;}
+.quality-certs{display:flex;flex-direction:column;gap:0;}
+.qc-item{
+  display:flex;align-items:center;gap:20px;
+  padding:18px 0;border-bottom:1px solid var(--border);
+}
+.qc-item:first-child{border-top:1px solid var(--border);}
+.qc-abbr{
+  font-family:var(--serif);font-size:20px;font-weight:600;
+  min-width:100px;color:var(--accent);
+}
+.qc-name{font-size:14px;font-weight:500;margin-bottom:2px;}
+.qc-desc{font-size:12px;color:var(--muted);}
+.quality-right{
+  display:flex;flex-direction:column;gap:0;
+}
+.q-standard{
+  padding:32px 0;border-bottom:1px solid var(--border);
+}
+.q-standard:first-child{border-top:1px solid var(--border);}
+.q-std-header{
+  display:flex;align-items:baseline;gap:20px;
+  margin-bottom:10px;
+}
+.q-std-num{
+  font-family:var(--serif);font-size:13px;font-weight:400;
+  color:var(--muted);
+}
+.q-std-name{font-size:17px;font-weight:500;letter-spacing:-.01em;}
+.q-std-desc{font-size:14px;color:var(--muted);line-height:1.65;padding-left:36px;}
+
+/* PRODUCTS — horizontal scroll on mobile, grid on desktop */
+.products{padding:100px 60px;background:var(--paper);}
+.products-header{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  margin-bottom:48px;
+}
+.products-header h2{
+  font-family:var(--serif);font-size:clamp(36px,4vw,56px);
+  font-weight:400;font-style:italic;line-height:1.0;
+}
+.products-header a{
+  font-size:12px;font-weight:500;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);
+  border-bottom:1px solid var(--border);padding-bottom:2px;
+  transition:all .25s;
+}
+.products-header a:hover{color:var(--ink);border-color:var(--ink);}
+.product-list{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:2px;
+}
+.prod-item{
+  background:var(--paper2);overflow:hidden;cursor:pointer;
+  transition:background .25s;
+}
+.prod-item:hover{background:#e8e3db;}
+.prod-visual{
+  aspect-ratio:3/4;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.prod-item:nth-child(1) .prod-visual{background:#1a1610;}
+.prod-item:nth-child(2) .prod-visual{background:#0d1218;}
+.prod-item:nth-child(3) .prod-visual{background:#14100e;}
+.prod-item:nth-child(4) .prod-visual{background:#0a1412;}
+/* Abstract color block — honest abstraction */
+.prod-color-block{
+  width:60%;height:55%;
+  opacity:.25;
+  transition:opacity .4s,transform .4s;
+}
+.prod-item:hover .prod-color-block{opacity:.35;transform:scale(1.06);}
+.prod-tag-badge{
+  position:absolute;top:16px;left:16px;
+  font-size:9px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  background:var(--paper);color:var(--ink);
+  padding:5px 12px;
+}
+.prod-info{padding:16px 20px 20px;}
+.prod-name{font-family:var(--serif);font-size:18px;font-weight:500;margin-bottom:2px;}
+.prod-cat{font-size:11px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom:12px;}
+.prod-footer{display:flex;justify-content:space-between;align-items:center;}
+.prod-price{font-size:15px;font-weight:500;}
+.prod-add{
+  width:28px;height:28px;
+  border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;color:var(--muted);cursor:pointer;
+  transition:all .25s;background:transparent;
+}
+.prod-add:hover{background:var(--ink);color:var(--paper);border-color:var(--ink);}
+
+/* ORDER */
+.order{
+  padding:100px 60px;background:var(--ink);
+}
+.order-inner{
+  display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;
+}
+.order-content h2{
+  font-family:var(--serif);
+  font-size:clamp(40px,5vw,68px);
+  font-weight:400;font-style:italic;
+  color:var(--paper);line-height:1.0;margin-bottom:24px;
+}
+.order-content h2 strong{font-style:normal;}
+.order-content p{
+  font-size:15px;color:rgba(245,240,232,.5);
+  line-height:1.8;margin-bottom:40px;
+}
+.pay-row{
+  display:flex;flex-wrap:wrap;gap:8px;margin-bottom:40px;
+}
+.pay-chip{
+  font-size:11px;font-weight:500;letter-spacing:.08em;
+  text-transform:uppercase;
+  border:1px solid rgba(245,240,232,.12);
+  padding:8px 18px;color:rgba(245,240,232,.4);
+  transition:all .25s;cursor:default;
+}
+.pay-chip:hover{border-color:rgba(245,240,232,.3);color:rgba(245,240,232,.7);}
+.order-perks{display:flex;flex-direction:column;gap:12px;}
+.o-perk{
+  display:flex;align-items:flex-start;gap:14px;
+  font-size:14px;color:rgba(245,240,232,.6);line-height:1.5;
+}
+.o-perk::before{
+  content:'';display:block;width:20px;height:1px;
+  background:rgba(245,240,232,.3);flex-shrink:0;margin-top:9px;
+}
+.order-form{
+  background:var(--paper);padding:40px;
+}
+.of-title{
+  font-family:var(--serif);font-size:28px;font-weight:500;
+  font-style:italic;color:var(--ink);margin-bottom:28px;
+}
+.of-label{
+  display:block;font-size:10px;font-weight:500;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:8px;
+}
+.of-input{
+  width:100%;background:transparent;
+  border:none;border-bottom:1px solid var(--border);
+  padding:10px 0;color:var(--ink);font-family:var(--sans);font-size:14px;
+  outline:none;transition:border-color .2s;margin-bottom:20px;
+}
+.of-input:focus{border-color:var(--ink);}
+.of-input option{background:var(--paper);}
+.of-row{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+.cart-summary{
+  border-top:1px solid var(--border);padding-top:20px;margin-top:4px;
+}
+.cs-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:8px 0;font-size:13px;color:var(--muted);
+}
+.cs-row.total{
+  font-size:16px;font-weight:500;color:var(--ink);
+  border-top:1px solid var(--border);margin-top:4px;padding-top:16px;
+}
+.btn-order{
+  width:100%;background:var(--ink);color:var(--paper);
+  font-size:12px;font-weight:500;letter-spacing:.1em;
+  text-transform:uppercase;padding:16px;border:none;cursor:pointer;
+  margin-top:20px;transition:background .25s;
+}
+.btn-order:hover{background:var(--ink2);}
+
+/* FOOTER */
+footer{
+  padding:48px 60px;background:var(--paper2);
+  border-top:1px solid var(--border);
+  display:grid;grid-template-columns:1fr 1fr 1fr;gap:40px;
+}
+.footer-logo{
+  font-family:var(--serif);font-size:22px;font-weight:500;
+  letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px;
+}
+.footer-byline{font-size:12px;color:var(--muted);line-height:1.7;max-width:220px;}
+.footer-col-title{
+  font-size:10px;font-weight:500;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted);
+  margin-bottom:16px;
+}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.footer-col ul li a{font-size:13px;color:var(--muted);transition:color .2s;}
+.footer-col ul li a:hover{color:var(--ink);}
+.footer-bottom{
+  grid-column:1/-1;border-top:1px solid var(--border);
+  padding-top:24px;display:flex;justify-content:space-between;
+  font-size:12px;color:var(--muted);
+}
+
+@media(max-width:960px){
+  nav{padding:18px 24px;}
+  .hero{grid-template-columns:1fr;}
+  .hero-left{padding:100px 24px 60px;border-right:none;border-bottom:1px solid var(--border);}
+  .hero-right{padding:48px 24px 60px;}
+  .certs-strip{padding:16px 24px;overflow-x:auto;}
+  .collections,.quality,.products,.order{padding:60px 24px;}
+  .coll-grid{grid-template-columns:1fr;}
+  .coll-item.featured{grid-row:span 1;}
+  .quality-inner,.order-inner{grid-template-columns:1fr;gap:40px;}
+  .product-list{grid-template-columns:1fr 1fr;}
+  .collections-header,.products-header{flex-direction:column;gap:16px;align-items:flex-start;}
+  .collections-desc{text-align:left;}
+  footer{padding:40px 24px;grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-logo">Clothing Area</div>
+  <ul class="nav-links">
+    <li><a href="#collections">Koleksi</a></li>
+    <li><a href="#quality">Kualitas</a></li>
+    <li><a href="#products">Produk</a></li>
+    <li><a href="#order">Order</a></li>
+  </ul>
+  <a href="#order" class="nav-shop">Shop Now</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-left">
+    <div class="hero-bg-letter">C</div>
+    <div class="hero-season">Koleksi 2025 · New Arrivals</div>
+    <h1 class="hero-h1">
+      <strong>Fashion</strong>
+      tanpa<br>kompromi.
+    </h1>
+    <p class="hero-desc">
+      Pakaian berstandar internasional yang dirancang tahan lama, selalu relevan,
+      dan bisa dibeli dari mana saja — dengan jaminan kualitas yang tidak berubah.
+    </p>
+    <div class="hero-actions">
+      <a href="#products" class="btn-ink">Belanja Sekarang</a>
+      <a href="#collections" class="btn-text-link">Lihat koleksi</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-manifesto">
+      "Pakaian yang baik tidak perlu bicara keras.
+      Kualitasnya yang <em>berbicara</em> — dan tetap relevan lima tahun ke depan."
+    </div>
+    <div class="hero-stats">
+      <div class="h-stat">
+        <div class="h-stat-val">500+</div>
+        <div class="h-stat-lbl">Produk tersedia</div>
+      </div>
+      <div class="h-stat">
+        <div class="h-stat-val">ISO</div>
+        <div class="h-stat-lbl">9001:2015 Certified</div>
+      </div>
+      <div class="h-stat">
+        <div class="h-stat-val">10K+</div>
+        <div class="h-stat-lbl">Pelanggan aktif</div>
+      </div>
+      <div class="h-stat">
+        <div class="h-stat-val">4.9</div>
+        <div class="h-stat-lbl">Rating rata-rata</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTS STRIP -->
+<div class="certs-strip">
+  <div class="cert-chip"><div class="cert-dot"></div><div class="cert-name">ISO 9001:2015</div></div>
+  <div class="cert-chip"><div class="cert-dot"></div><div class="cert-name">OEKO-TEX Standard 100</div></div>
+  <div class="cert-chip"><div class="cert-dot"></div><div class="cert-name">Global Recycled Standard</div></div>
+  <div class="cert-chip"><div class="cert-dot"></div><div class="cert-name">Fair Trade Certified</div></div>
+  <div class="cert-chip"><div class="cert-dot"></div><div class="cert-name">Garansi 12 Bulan</div></div>
+</div>
+
+<!-- COLLECTIONS -->
+<section class="collections" id="collections">
+  <div class="collections-header">
+    <div class="collections-title">
+      Temukan<br>
+      <strong>Gaya Anda</strong>
+    </div>
+    <p class="collections-desc">Lima lini koleksi — dari kasual harian hingga formal premium. Setiap lini memiliki identitas visual dan material yang berbeda.</p>
+  </div>
+  <div class="coll-grid">
+    <div class="coll-item featured">
+      <div class="coll-item-inner">
+        <div class="coll-mark">E</div>
+        <div class="coll-overlay"></div>
+        <div class="coll-info">
+          <div class="coll-cat">Koleksi Utama</div>
+          <div class="coll-name">Everyday<br>Essentials</div>
+          <div class="coll-count">124 produk</div>
+        </div>
+      </div>
+    </div>
+    <div class="coll-item">
+      <div class="coll-item-inner">
+        <div class="coll-mark">F</div>
+        <div class="coll-overlay"></div>
+        <div class="coll-info">
+          <div class="coll-cat">Premium Line</div>
+          <div class="coll-name">Formal</div>
+          <div class="coll-count">68 produk</div>
+        </div>
+      </div>
+    </div>
+    <div class="coll-item">
+      <div class="coll-item-inner">
+        <div class="coll-mark">S</div>
+        <div class="coll-overlay"></div>
+        <div class="coll-info">
+          <div class="coll-cat">Urban Culture</div>
+          <div class="coll-name">Streetwear</div>
+          <div class="coll-count">96 produk</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUALITY -->
+<section class="quality" id="quality">
+  <div class="quality-inner">
+    <div class="quality-left">
+      <h2>
+        <strong>Standar</strong><br>
+        yang tidak<br>pernah turun.
+      </h2>
+      <p>Setiap produk melewati tiga tahap quality control — dari pemilihan bahan baku, proses produksi, hingga sebelum dikemas. Bersertifikat oleh empat lembaga internasional.</p>
+      <div class="quality-certs">
+        <div class="qc-item">
+          <div class="qc-abbr">ISO</div>
+          <div><div class="qc-name">ISO 9001:2015</div><div class="qc-desc">Quality Management System</div></div>
+        </div>
+        <div class="qc-item">
+          <div class="qc-abbr">OT100</div>
+          <div><div class="qc-name">OEKO-TEX Standard 100</div><div class="qc-desc">Bebas bahan kimia berbahaya</div></div>
+        </div>
+        <div class="qc-item">
+          <div class="qc-abbr">GRS</div>
+          <div><div class="qc-name">Global Recycled Standard</div><div class="qc-desc">Material daur ulang bersertifikat</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="quality-right">
+      <div class="q-standard">
+        <div class="q-std-header">
+          <span class="q-std-num">01</span>
+          <span class="q-std-name">Bahan Bersertifikat OEKO-TEX</span>
+        </div>
+        <div class="q-std-desc">Setiap kain yang kami gunakan telah diuji bebas dari lebih dari 100 zat berbahaya — termasuk pestisida, logam berat, dan formaldehyde. Aman untuk kulit sensitif sekalipun.</div>
+      </div>
+      <div class="q-standard">
+        <div class="q-std-header">
+          <span class="q-std-num">02</span>
+          <span class="q-std-name">Jahitan Double-Stitch Tahan 100+ Cuci</span>
+        </div>
+        <div class="q-std-desc">Uji ketahanan yang kami lakukan: 100 kali cuci mesin pada suhu 40°C. Hasilnya: tidak ada jahitan lepas, tidak ada perubahan dimensi yang signifikan, tidak ada degradasi warna lebih dari 5%.</div>
+      </div>
+      <div class="q-standard">
+        <div class="q-std-header">
+          <span class="q-std-num">03</span>
+          <span class="q-std-name">Pewarna Anti-Luntur Eco-Friendly</span>
+        </div>
+        <div class="q-std-desc">Teknologi reactive dyeing dengan zero-discharge process — warna stabil, tidak luntur ke pakaian lain, dan proses pewarnaan tidak menghasilkan limbah berbahaya.</div>
+      </div>
+      <div class="q-standard">
+        <div class="q-std-header">
+          <span class="q-std-num">04</span>
+          <span class="q-std-name">Garansi Produk 12 Bulan</span>
+        </div>
+        <div class="q-std-desc">Cacat produksi diganti gratis dalam 12 bulan — tanpa pertanyaan, tanpa biaya pengiriman kembali. Karena produk yang baik seharusnya tidak memerlukan garansi yang rumit.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products" id="products">
+  <div class="products-header">
+    <h2>Pilihan <em>Terlaris</em></h2>
+    <a href="#order">Lihat semua produk</a>
+  </div>
+  <div class="product-list">
+    <div class="prod-item">
+      <div class="prod-visual">
+        <div class="prod-tag-badge">Best Seller</div>
+        <div class="prod-color-block" style="background:linear-gradient(135deg,#d4af37,#8b7022);border-radius:2px;"></div>
+      </div>
+      <div class="prod-info">
+        <div class="prod-name">Classic Tee Premium</div>
+        <div class="prod-cat">Everyday Essentials</div>
+        <div class="prod-footer">
+          <div class="prod-price">Rp 249.000</div>
+          <button class="prod-add">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="prod-item">
+      <div class="prod-visual">
+        <div class="prod-tag-badge">New</div>
+        <div class="prod-color-block" style="background:linear-gradient(135deg,#2a3f5c,#1a2840);border-radius:2px;"></div>
+      </div>
+      <div class="prod-info">
+        <div class="prod-name">Oxford Formal Shirt</div>
+        <div class="prod-cat">Formal Line</div>
+        <div class="prod-footer">
+          <div class="prod-price">Rp 449.000</div>
+          <button class="prod-add">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="prod-item">
+      <div class="prod-visual">
+        <div class="prod-color-block" style="background:linear-gradient(135deg,#3d2a1e,#261510);border-radius:2px;"></div>
+      </div>
+      <div class="prod-info">
+        <div class="prod-name">Cargo Chino Pants</div>
+        <div class="prod-cat">Streetwear</div>
+        <div class="prod-footer">
+          <div class="prod-price">Rp 399.000</div>
+          <button class="prod-add">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="prod-item">
+      <div class="prod-visual">
+        <div class="prod-tag-badge">Limited</div>
+        <div class="prod-color-block" style="background:linear-gradient(135deg,#1a1a2e,#0d0d1a);border-radius:2px;"></div>
+      </div>
+      <div class="prod-info">
+        <div class="prod-name">Oversized Hoodie</div>
+        <div class="prod-cat">Limited Edition</div>
+        <div class="prod-footer">
+          <div class="prod-price">Rp 599.000</div>
+          <button class="prod-add">+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ORDER -->
+<section class="order" id="order">
+  <div class="order-inner">
+    <div class="order-content">
+      <h2><strong>Belanja</strong><br>lebih mudah.</h2>
+      <p>Pesan langsung, bayar dengan metode apa saja, terima dalam 1–3 hari kerja. Ganti ukuran gratis dalam 14 hari.</p>
+      <div class="pay-row">
+        <span class="pay-chip">Kartu Kredit</span>
+        <span class="pay-chip">GoPay</span>
+        <span class="pay-chip">OVO</span>
+        <span class="pay-chip">QRIS</span>
+        <span class="pay-chip">Transfer Bank</span>
+        <span class="pay-chip">COD</span>
+      </div>
+      <div class="order-perks">
+        <div class="o-perk">Gratis ongkir untuk pembelian di atas Rp 300.000</div>
+        <div class="o-perk">Tukar ukuran gratis dalam 14 hari tanpa syarat</div>
+        <div class="o-perk">Packaging premium — siap dijadikan hadiah</div>
+        <div class="o-perk">Poin reward untuk setiap transaksi</div>
+      </div>
+    </div>
+    <div class="order-form">
+      <div class="of-title">Buat Pesanan</div>
+      <div class="of-row">
+        <div>
+          <label class="of-label">Nama</label>
+          <input type="text" class="of-input" placeholder="Nama lengkap">
+        </div>
+        <div>
+          <label class="of-label">WhatsApp</label>
+          <input type="tel" class="of-input" placeholder="+62 8xx">
+        </div>
+      </div>
+      <label class="of-label">Alamat Pengiriman</label>
+      <input type="text" class="of-input" placeholder="Jl. Contoh No. 1">
+      <div class="of-row">
+        <div>
+          <label class="of-label">Produk</label>
+          <select class="of-input">
+            <option>Classic Tee Premium</option>
+            <option>Oxford Formal Shirt</option>
+            <option>Cargo Chino Pants</option>
+            <option>Oversized Hoodie</option>
+          </select>
+        </div>
+        <div>
+          <label class="of-label">Ukuran</label>
+          <select class="of-input">
+            <option>S</option><option>M</option><option selected>L</option>
+            <option>XL</option><option>XXL</option>
+          </select>
+        </div>
+      </div>
+      <label class="of-label">Pembayaran</label>
+      <select class="of-input">
+        <option>Transfer Bank</option><option>GoPay</option>
+        <option>OVO</option><option>QRIS</option>
+        <option>Kartu Kredit</option><option>COD</option>
+      </select>
+      <div class="cart-summary">
+        <div class="cs-row"><span>Classic Tee Premium · L</span><span>Rp 249.000</span></div>
+        <div class="cs-row"><span>Ongkos Kirim</span><span style="color:#3b6d11;">Gratis</span></div>
+        <div class="cs-row total"><span>Total</span><span>Rp 249.000</span></div>
+      </div>
+      <button class="btn-order">Pesan Sekarang</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>
+    <div class="footer-logo">Clothing Area</div>
+    <p class="footer-byline">Fashion berstandar internasional untuk gaya hidup Indonesia yang modern.</p>
+  </div>
+  <div class="footer-col">
+    <div class="footer-col-title">Koleksi</div>
+    <ul>
+      <li><a href="#collections">Everyday Essentials</a></li>
+      <li><a href="#collections">Formal Line</a></li>
+      <li><a href="#collections">Streetwear</a></li>
+      <li><a href="#collections">Limited Edition</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <div class="footer-col-title">Info</div>
+    <ul>
+      <li><a href="#quality">Kualitas & Sertifikasi</a></li>
+      <li><a href="#order">Cara Order</a></li>
+      <li><a href="#">Panduan Ukuran</a></li>
+      <li><a href="#">Kebijakan Retur</a></li>
+    </ul>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Clothing Area · clothingarea.com</span>
+    <span>+62 897 012 0687</span>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('stuck',scrollY>60);
+});
+document.querySelectorAll('.prod-add').forEach(btn=>{
+  btn.addEventListener('click',function(){
+    this.textContent='✓';this.style.background='#0f0f0f';
+    this.style.color='#f5f0e8';
+    setTimeout(()=>{this.textContent='+';this.style.background='';this.style.color='';},1500);
+  });
+});
+</script>
+</body>
+</html>

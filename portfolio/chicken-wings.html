@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chicken Wings</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,900&family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#0a0400;
+  --dark:#110700;
+  --surface:#1c0e00;
+  --red:#cc2200;
+  --orange:#e8560a;
+  --amber:#d4820a;
+  --cream:#fff4e8;
+  --muted:rgba(255,244,232,.42);
+  --border:rgba(232,86,10,.14);
+  --sans:'Barlow',sans-serif;
+  --cond:'Barlow Condensed',sans-serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--cream);font-family:var(--sans);overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+
+/* GRAIN */
+body::after{
+  content:'';position:fixed;inset:-50%;pointer-events:none;z-index:9998;opacity:.03;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  background-size:160px;
+}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:24px 52px;transition:all .4s;
+}
+nav.stuck{
+  padding:14px 52px;
+  background:rgba(10,4,0,.92);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{
+  font-family:var(--cond);font-size:20px;font-weight:900;
+  letter-spacing:.08em;text-transform:uppercase;
+}
+.nav-logo span{color:var(--orange);}
+.nav-links{display:flex;gap:36px;list-style:none;}
+.nav-links a{
+  font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);transition:color .25s;
+}
+.nav-links a:hover{color:var(--cream);}
+.nav-order{
+  font-family:var(--cond);font-size:12px;font-weight:800;
+  letter-spacing:.08em;text-transform:uppercase;
+  background:var(--red);color:var(--cream);
+  padding:11px 28px;transition:all .25s;
+}
+.nav-order:hover{background:var(--orange);}
+
+/* HERO — full-bleed type */
+.hero{
+  min-height:100vh;
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:0 52px 72px;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:linear-gradient(160deg,var(--red) 0%,#8a1500 40%,var(--black) 75%);
+  opacity:.6;
+}
+/* Big type bleeds to edge — the design IS the type */
+.hero-big-type{
+  position:absolute;
+  top:50%;left:-.03em;
+  transform:translateY(-58%);
+  font-family:var(--cond);
+  font-size:clamp(130px,20vw,280px);
+  font-weight:900;font-style:italic;
+  text-transform:uppercase;
+  letter-spacing:-.02em;
+  line-height:.88;
+  color:rgba(255,244,232,.04);
+  pointer-events:none;user-select:none;white-space:nowrap;
+}
+.hero-content{position:relative;z-index:1;}
+.hero-eyebrow{
+  font-family:var(--cond);font-size:12px;font-weight:700;
+  letter-spacing:.2em;text-transform:uppercase;
+  color:var(--orange);margin-bottom:20px;
+  display:flex;align-items:center;gap:12px;
+}
+.hero-eyebrow::before{content:'';display:block;width:32px;height:2px;background:var(--orange);}
+.hero-h1{
+  font-family:var(--cond);
+  font-size:clamp(60px,9vw,120px);
+  font-weight:900;font-style:italic;text-transform:uppercase;
+  letter-spacing:-.01em;line-height:.9;
+  margin-bottom:28px;
+}
+.hero-h1 .sub-line{
+  font-style:normal;font-weight:400;
+  font-size:.42em;letter-spacing:.04em;
+  color:var(--muted);display:block;font-family:var(--sans);
+  margin-top:8px;text-transform:none;
+}
+.hero-cta-row{
+  display:flex;gap:20px;align-items:center;margin-bottom:56px;
+}
+.btn-red{
+  font-family:var(--cond);font-size:13px;font-weight:800;
+  letter-spacing:.1em;text-transform:uppercase;
+  background:var(--red);color:var(--cream);
+  padding:15px 40px;transition:all .25s;
+}
+.btn-red:hover{background:var(--orange);}
+.btn-ghost{
+  font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);border:1px solid rgba(255,244,232,.15);
+  padding:15px 32px;transition:all .25s;
+}
+.btn-ghost:hover{color:var(--cream);border-color:rgba(255,244,232,.35);}
+.hero-stats{
+  display:flex;gap:0;border-top:1px solid var(--border);padding-top:32px;
+}
+.hs{padding-right:48px;border-right:1px solid var(--border);margin-right:48px;}
+.hs:last-child{border-right:none;margin-right:0;}
+.hs-val{
+  font-family:var(--cond);font-size:32px;font-weight:900;
+  font-style:italic;color:var(--orange);line-height:1;
+}
+.hs-lbl{font-size:11px;font-weight:600;color:var(--muted);letter-spacing:.06em;margin-top:2px;}
+
+/* MENU — takeout list, NOT cards */
+.menu-section{padding:100px 52px;background:var(--dark);}
+.menu-header{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  margin-bottom:0;padding-bottom:28px;border-bottom:2px solid var(--cream);
+}
+.menu-title{
+  font-family:var(--cond);font-size:clamp(40px,6vw,80px);
+  font-weight:900;font-style:italic;text-transform:uppercase;
+  letter-spacing:-.01em;line-height:.9;
+}
+.menu-title .sub{
+  font-style:normal;font-weight:400;font-size:.45em;
+  color:var(--muted);display:block;letter-spacing:.04em;
+  font-family:var(--sans);text-transform:none;margin-top:6px;
+}
+.menu-heat-guide{
+  display:flex;gap:16px;align-items:center;padding-bottom:8px;
+}
+.heat-pill{
+  display:flex;align-items:center;gap:8px;
+  font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--muted);
+}
+.heat-swatch{width:10px;height:10px;border-radius:50%;}
+/* Menu items — clean list like a real takeout menu */
+.menu-list{display:flex;flex-direction:column;gap:0;margin-top:0;}
+.menu-row{
+  display:grid;grid-template-columns:28px 1fr auto 120px;
+  align-items:baseline;gap:20px;
+  padding:24px 16px;border-bottom:1px solid var(--border);
+  margin:0 -16px;
+  transition:background .2s;cursor:default;
+}
+.menu-row:hover{
+  background:rgba(232,86,10,.06);
+}
+.mr-heat{
+  display:flex;align-items:center;justify-content:center;
+  padding-top:3px;
+}
+.heat-dot{
+  width:10px;height:10px;border-radius:50%;flex-shrink:0;
+}
+.mr-name{
+  font-family:var(--cond);font-size:clamp(22px,3vw,32px);
+  font-weight:800;font-style:italic;text-transform:uppercase;
+  letter-spacing:-.01em;line-height:1;
+}
+.mr-desc{
+  font-size:13px;color:var(--muted);line-height:1.4;
+  font-weight:400;margin-top:4px;
+}
+.mr-size{
+  font-family:var(--cond);font-size:12px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(255,244,232,.3);
+  white-space:nowrap;
+}
+.mr-price{
+  font-family:var(--cond);font-size:22px;font-weight:900;
+  font-style:italic;color:var(--orange);
+  text-align:right;
+}
+.mr-sub{
+  grid-column:2;font-size:11px;color:rgba(255,244,232,.3);
+  font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+  margin-top:2px;
+}
+
+/* SAUCES — visual row, no descriptions needed */
+.sauces{
+  padding:72px 52px;
+  border-top:1px solid var(--border);
+  background:var(--black);
+}
+.sauces-label{
+  font-family:var(--cond);font-size:12px;font-weight:700;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:36px;
+}
+.sauce-row{
+  display:flex;gap:0;border:1px solid var(--border);
+}
+.sauce-item{
+  flex:1;padding:28px 24px;
+  border-right:1px solid var(--border);
+  transition:background .25s;cursor:default;
+}
+.sauce-item:last-child{border-right:none;}
+.sauce-item:hover{background:rgba(232,86,10,.06);}
+.sauce-color{
+  width:40px;height:40px;border-radius:50%;
+  margin-bottom:16px;
+}
+.sauce-name{
+  font-family:var(--cond);font-size:18px;font-weight:800;
+  font-style:italic;text-transform:uppercase;
+  letter-spacing:.02em;margin-bottom:4px;
+}
+.sauce-shu{
+  font-family:var(--cond);font-size:11px;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);
+}
+
+/* ORDER — minimal, focused */
+.order-section{padding:100px 52px;background:var(--surface);}
+.order-inner{
+  display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;
+}
+.order-content h2{
+  font-family:var(--cond);font-size:clamp(40px,6vw,72px);
+  font-weight:900;font-style:italic;text-transform:uppercase;
+  letter-spacing:-.01em;line-height:.9;margin-bottom:24px;
+  color:var(--cream);
+}
+.order-content p{font-size:15px;color:var(--muted);line-height:1.75;margin-bottom:36px;}
+.pay-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:36px;
+}
+.pay-item{
+  font-family:var(--cond);font-size:11px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+  border:1px solid var(--border);padding:11px 16px;
+  color:var(--muted);transition:all .25s;cursor:default;
+}
+.pay-item:hover{border-color:var(--orange);color:var(--orange);}
+.order-perks{display:flex;flex-direction:column;gap:10px;}
+.o-perk{
+  display:flex;align-items:flex-start;gap:14px;
+  font-size:14px;color:var(--muted);line-height:1.5;
+}
+.o-perk::before{
+  content:'';display:block;width:18px;height:2px;
+  background:var(--orange);flex-shrink:0;margin-top:8px;
+}
+.order-form{background:rgba(255,244,232,.04);border:1px solid var(--border);padding:36px;}
+.of-title{
+  font-family:var(--cond);font-size:28px;font-weight:900;
+  font-style:italic;text-transform:uppercase;
+  letter-spacing:.02em;color:var(--cream);margin-bottom:28px;
+}
+.of-label{
+  display:block;font-family:var(--cond);font-size:10px;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;
+  color:rgba(255,244,232,.35);margin-bottom:8px;
+}
+.of-input{
+  width:100%;background:rgba(255,244,232,.04);
+  border:1px solid var(--border);
+  padding:12px 16px;color:var(--cream);
+  font-family:var(--sans);font-size:14px;
+  outline:none;transition:border .2s;margin-bottom:16px;
+}
+.of-input:focus{border-color:rgba(232,86,10,.5);}
+.of-input option{background:var(--surface);}
+.of-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.of-row .of-input{margin-bottom:0;}
+.order-total-row{
+  display:flex;justify-content:space-between;align-items:center;
+  border-top:1px solid var(--border);padding-top:16px;margin-top:4px;
+  margin-bottom:16px;
+}
+.ot-label{font-family:var(--cond);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);}
+.ot-val{
+  font-family:var(--cond);font-size:28px;font-weight:900;
+  font-style:italic;color:var(--orange);
+}
+.btn-order{
+  width:100%;background:var(--red);color:var(--cream);
+  font-family:var(--cond);font-size:13px;font-weight:900;
+  letter-spacing:.1em;text-transform:uppercase;
+  padding:16px;border:none;cursor:pointer;transition:background .25s;
+}
+.btn-order:hover{background:var(--orange);}
+.of-note{
+  font-family:var(--cond);font-size:10px;text-align:center;
+  color:rgba(255,244,232,.3);letter-spacing:.06em;
+  text-transform:uppercase;margin-top:10px;
+}
+
+/* FOOTER */
+footer{
+  padding:48px 52px;
+  border-top:1px solid var(--border);background:var(--dark);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;
+}
+.footer-logo{
+  font-family:var(--cond);font-size:20px;font-weight:900;
+  letter-spacing:.08em;text-transform:uppercase;
+}
+.footer-logo span{color:var(--orange);}
+.footer-nav{display:flex;gap:28px;}
+.footer-nav a{
+  font-family:var(--cond);font-size:11px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);transition:color .25s;
+}
+.footer-nav a:hover{color:var(--orange);}
+.footer-wa{
+  font-family:var(--cond);font-size:16px;font-weight:900;
+  font-style:italic;color:var(--orange);
+}
+
+@media(max-width:960px){
+  nav{padding:18px 24px;}
+  .hero{padding:0 24px 60px;}
+  .menu-section,.sauces,.order-section{padding:60px 24px;}
+  .menu-header{flex-direction:column;gap:20px;align-items:flex-start;}
+  .menu-row{grid-template-columns:20px 1fr auto;}
+  .mr-size{display:none;}
+  .sauce-row{flex-wrap:wrap;}
+  .sauce-item{min-width:33%;}
+  .order-inner{grid-template-columns:1fr;gap:40px;}
+  footer{padding:40px 24px;flex-direction:column;text-align:center;}
+  .footer-nav{flex-wrap:wrap;justify-content:center;}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-logo">Chicken <span>Wings</span></div>
+  <ul class="nav-links">
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#sauces">Saus</a></li>
+    <li><a href="#order">Order</a></li>
+  </ul>
+  <a href="#order" class="nav-order">Order</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-big-type">WINGS WINGS WINGS</div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Krispy · Juicy · On Fire</div>
+    <h1 class="hero-h1">
+      Makan<br>
+      Wings<br>
+      Serius.
+      <span class="sub-line">Bukan wings biasa-biasa. Wings yang bikin kamu order lagi sebelum selesai.</span>
+    </h1>
+    <div class="hero-cta-row">
+      <a href="#order" class="btn-red">Order Sekarang</a>
+      <a href="#menu" class="btn-ghost">Lihat Menu</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hs"><div class="hs-val">6</div><div class="hs-lbl">Pilihan menu</div></div>
+      <div class="hs"><div class="hs-val">5</div><div class="hs-lbl">Varian saus</div></div>
+      <div class="hs"><div class="hs-val">30'</div><div class="hs-lbl">Delivery max</div></div>
+      <div class="hs"><div class="hs-val">4.9</div><div class="hs-lbl">Rating GofJek</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU — list format -->
+<section class="menu-section" id="menu">
+  <div class="menu-header">
+    <div class="menu-title">
+      Menu
+      <span class="sub">Pilih, tentukan ukuran, langsung order.</span>
+    </div>
+    <div class="menu-heat-guide">
+      <div class="heat-pill"><div class="heat-swatch" style="background:#c8a84b;"></div>Mild</div>
+      <div class="heat-pill"><div class="heat-swatch" style="background:var(--orange);"></div>Hot</div>
+      <div class="heat-pill"><div class="heat-swatch" style="background:var(--red);"></div>X-Hot</div>
+    </div>
+  </div>
+  <div class="menu-list">
+    <div class="menu-row">
+      <div class="mr-heat"><div class="heat-dot" style="background:#c8a84b;"></div></div>
+      <div>
+        <div class="mr-name">Classic Butter</div>
+        <div class="mr-desc">Butter garlic rich, gurih creamy — terbaik untuk keluarga dan yang baru pertama coba.</div>
+      </div>
+      <div class="mr-size">5 / 10 / 15 pcs</div>
+      <div class="mr-price">Rp 35K</div>
+    </div>
+    <div class="menu-row">
+      <div class="mr-heat"><div class="heat-dot" style="background:#c8a84b;"></div></div>
+      <div>
+        <div class="mr-name">Honey Glazed</div>
+        <div class="mr-desc">Madu premium + soy sauce — lapisan mengkilap, manis-savory yang adiktif.</div>
+      </div>
+      <div class="mr-size">5 / 10 / 15 pcs</div>
+      <div class="mr-price">Rp 38K</div>
+    </div>
+    <div class="menu-row">
+      <div class="mr-heat"><div class="heat-dot" style="background:var(--orange);"></div></div>
+      <div>
+        <div class="mr-name">Buffalo Fire</div>
+        <div class="mr-desc">Saus buffalo klasik + cayenne — panas yang balance, sour yang pas, sangat crispy.</div>
+      </div>
+      <div class="mr-size">5 / 10 / 15 pcs</div>
+      <div class="mr-price">Rp 38K</div>
+    </div>
+    <div class="menu-row">
+      <div class="mr-heat"><div class="heat-dot" style="background:var(--orange);"></div></div>
+      <div>
+        <div class="mr-name">Korean BBQ</div>
+        <div class="mr-desc">Gochujang + sesame + brown sugar — autentik, smoky, depth rasa yang kompleks.</div>
+      </div>
+      <div class="mr-size">5 / 10 / 15 pcs</div>
+      <div class="mr-price">Rp 42K</div>
+    </div>
+    <div class="menu-row">
+      <div class="mr-heat"><div class="heat-dot" style="background:var(--red);"></div></div>
+      <div>
+        <div class="mr-name">Ghost Pepper</div>
+        <div class="mr-desc">Ghost pepper asli. 1 juta Scoville. Tanda tangan di waiver dulu. Serius.</div>
+      </div>
+      <div class="mr-size">5 / 10 pcs</div>
+      <div class="mr-price">Rp 48K</div>
+    </div>
+    <div class="menu-row">
+      <div class="mr-heat"><div class="heat-dot" style="background:#3d7a3d;"></div></div>
+      <div>
+        <div class="mr-name">Cauliflower</div>
+        <div class="mr-desc">Kembang kol dengan coating wings yang sama — vegan, crispy, tidak kalah enak.</div>
+      </div>
+      <div class="mr-size">5 / 10 / 15 pcs</div>
+      <div class="mr-price">Rp 40K</div>
+    </div>
+  </div>
+</section>
+
+<!-- SAUCES — visual, no verbose descriptions -->
+<div class="sauces" id="sauces">
+  <div class="sauces-label">5 Pilihan Saus — Dipping Extra Rp 5K</div>
+  <div class="sauce-row">
+    <div class="sauce-item">
+      <div class="sauce-color" style="background:linear-gradient(135deg,#b8860b,#8b6914);"></div>
+      <div class="sauce-name">Classic</div>
+      <div class="sauce-shu">Mild · ~0 SHU</div>
+    </div>
+    <div class="sauce-item">
+      <div class="sauce-color" style="background:linear-gradient(135deg,#d4a017,#b8860b);"></div>
+      <div class="sauce-name">Honey</div>
+      <div class="sauce-shu">Sweet · ~500 SHU</div>
+    </div>
+    <div class="sauce-item">
+      <div class="sauce-color" style="background:linear-gradient(135deg,#5c2d91,#8b1a1a);"></div>
+      <div class="sauce-name">K-BBQ</div>
+      <div class="sauce-shu">Hot · ~8K SHU</div>
+    </div>
+    <div class="sauce-item">
+      <div class="sauce-color" style="background:linear-gradient(135deg,var(--red),#8b0000);"></div>
+      <div class="sauce-name">Buffalo</div>
+      <div class="sauce-shu">Fiery · ~30K SHU</div>
+    </div>
+    <div class="sauce-item">
+      <div class="sauce-color" style="background:linear-gradient(135deg,#3d0000,#1a0000);box-shadow:0 0 12px rgba(204,34,0,.3);"></div>
+      <div class="sauce-name">Ghost</div>
+      <div class="sauce-shu">Extreme · 1M+ SHU</div>
+    </div>
+  </div>
+</div>
+
+<!-- ORDER -->
+<section class="order-section" id="order">
+  <div class="order-inner">
+    <div class="order-content">
+      <h2>Order &<br>Delivery<br>Cepat.</h2>
+      <p>Pesan sekarang, dikirim dalam 30 menit atau less. Pick-up juga tersedia — siap dalam 10 menit setelah konfirmasi.</p>
+      <div class="pay-grid">
+        <div class="pay-item">Kartu Kredit</div>
+        <div class="pay-item">GoPay</div>
+        <div class="pay-item">OVO</div>
+        <div class="pay-item">QRIS</div>
+        <div class="pay-item">Transfer Bank</div>
+        <div class="pay-item">COD</div>
+      </div>
+      <div class="order-perks">
+        <div class="o-perk">Delivery 30 menit — atau refund 50%</div>
+        <div class="o-perk">Beli 2 porsi, gratis 1 saus dipping pilihan</div>
+        <div class="o-perk">Packaging anti-bocor — wings tetap crispy saat tiba</div>
+        <div class="o-perk">Loyalty: 10 porsi, 1 porsi gratis</div>
+      </div>
+    </div>
+    <div class="order-form">
+      <div class="of-title">Order Sekarang</div>
+      <div class="of-row" style="margin-bottom:16px;">
+        <div>
+          <label class="of-label">Nama</label>
+          <input type="text" class="of-input" placeholder="Nama Anda" style="margin-bottom:0;">
+        </div>
+        <div>
+          <label class="of-label">WhatsApp</label>
+          <input type="tel" class="of-input" placeholder="+62 8xx" style="margin-bottom:0;">
+        </div>
+      </div>
+      <div class="of-row" style="margin-bottom:16px;">
+        <div>
+          <label class="of-label">Menu</label>
+          <select class="of-input" style="margin-bottom:0;cursor:pointer;">
+            <option>Classic Butter</option>
+            <option>Honey Glazed</option>
+            <option>Buffalo Fire</option>
+            <option>Korean BBQ</option>
+            <option>Ghost Pepper</option>
+            <option>Cauliflower</option>
+          </select>
+        </div>
+        <div>
+          <label class="of-label">Porsi</label>
+          <select class="of-input" style="margin-bottom:0;cursor:pointer;" onchange="updateWingsPrice(this)">
+            <option value="35">5 pcs</option>
+            <option value="65">10 pcs</option>
+            <option value="90">15 pcs</option>
+            <option value="120">20 pcs</option>
+          </select>
+        </div>
+      </div>
+      <label class="of-label">Pengiriman</label>
+      <select class="of-input" style="cursor:pointer;">
+        <option>Delivery ke Alamat Saya</option>
+        <option>Pick-up di Store (~10 menit)</option>
+      </select>
+      <label class="of-label">Alamat</label>
+      <input type="text" class="of-input" placeholder="Jl. Contoh No. 1">
+      <div class="order-total-row">
+        <div class="ot-label">Total</div>
+        <div class="ot-val" id="wings-price">Rp 35K</div>
+      </div>
+      <button class="btn-order">Order Sekarang</button>
+      <div class="of-note">Konfirmasi via WhatsApp · Delivery 30 menit</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Chicken <span>Wings</span></div>
+  <nav class="footer-nav">
+    <a href="#menu">Menu</a>
+    <a href="#sauces">Saus</a>
+    <a href="#order">Order</a>
+  </nav>
+  <div class="footer-wa">+62 897 012 0687</div>
+</footer>
+
+<script>
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('stuck',scrollY>60);
+});
+function updateWingsPrice(sel){
+  document.getElementById('wings-price').textContent='Rp '+sel.value+'K';
+}
+</script>
+</body>
+</html>

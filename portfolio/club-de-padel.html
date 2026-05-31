@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Club de Padel</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#04060e;
+  --ink2:#0a0d1a;
+  --surface:#0d1020;
+  --lime:#c8f000;
+  --lime-dim:rgba(200,240,0,.12);
+  --white:#f4f6ff;
+  --muted:rgba(244,246,255,.42);
+  --border:rgba(244,246,255,.07);
+  --mono:'Space Mono',monospace;
+  --sans:'Space Grotesk',sans-serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;font-size:16px;}
+body{background:var(--ink);color:var(--white);font-family:var(--sans);overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+
+/* GRAIN */
+body::after{
+  content:'';position:fixed;inset:-50%;pointer-events:none;z-index:9998;
+  opacity:.028;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  background-size:180px;
+}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:28px 52px;transition:all .4s;
+}
+nav.stuck{
+  padding:16px 52px;
+  background:rgba(4,6,14,.88);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.nav-wordmark{
+  font-family:var(--mono);font-size:13px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;
+}
+.nav-wordmark span{color:var(--lime);}
+.nav-links{display:flex;gap:40px;list-style:none;}
+.nav-links a{
+  font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);transition:color .25s;
+}
+.nav-links a:hover{color:var(--white);}
+.nav-book{
+  font-family:var(--mono);font-size:11px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+  background:var(--lime);color:var(--ink);
+  padding:11px 24px;
+  clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));
+  transition:box-shadow .25s;
+}
+.nav-book:hover{box-shadow:0 0 28px rgba(200,240,0,.35);}
+
+/* HERO — editorial split */
+.hero{
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  position:relative;overflow:hidden;
+}
+.hero-left{
+  padding:160px 52px 80px;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  position:relative;overflow:hidden;
+  border-right:1px solid var(--border);
+}
+.hero-bg-word{
+  position:absolute;top:50%;left:-0.05em;
+  transform:translateY(-50%);
+  font-family:var(--mono);font-size:clamp(120px,18vw,220px);
+  font-weight:700;letter-spacing:-.02em;
+  color:rgba(200,240,0,.04);
+  line-height:1;pointer-events:none;white-space:nowrap;
+  user-select:none;
+}
+.hero-cert{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--mono);font-size:10px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--lime);margin-bottom:40px;
+}
+.hero-cert::before{
+  content:'';display:block;width:24px;height:1px;background:var(--lime);
+}
+.hero-h1{
+  font-size:clamp(48px,6vw,84px);
+  font-weight:700;line-height:1.0;
+  letter-spacing:-.02em;
+  margin-bottom:32px;
+}
+.hero-h1 em{font-style:normal;color:var(--lime);}
+.hero-sub{
+  font-size:15px;color:var(--muted);line-height:1.75;
+  max-width:400px;margin-bottom:48px;font-weight:400;
+}
+.hero-cta-row{display:flex;gap:14px;align-items:center;}
+.btn-lime{
+  font-family:var(--mono);font-size:12px;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;
+  background:var(--lime);color:var(--ink);
+  padding:14px 32px;
+  clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));
+  transition:box-shadow .25s;
+}
+.btn-lime:hover{box-shadow:0 0 28px rgba(200,240,0,.35);}
+.btn-line{
+  font-size:13px;font-weight:500;letter-spacing:.04em;
+  color:var(--muted);border-bottom:1px solid var(--border);
+  padding-bottom:2px;transition:color .25s,border-color .25s;
+}
+.btn-line:hover{color:var(--white);border-color:rgba(244,246,255,.4);}
+
+.hero-right{
+  padding:160px 52px 80px;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  gap:0;
+}
+.hero-stat-stack{
+  display:flex;flex-direction:column;gap:0;
+  border:1px solid var(--border);
+}
+.hero-stat{
+  padding:28px 36px;
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:baseline;gap:16px;
+}
+.hero-stat:last-child{border-bottom:none;}
+.hs-num{
+  font-family:var(--mono);font-size:clamp(36px,4vw,52px);
+  font-weight:700;color:var(--lime);line-height:1;flex-shrink:0;
+}
+.hs-label{font-size:13px;color:var(--muted);line-height:1.4;font-weight:400;}
+.hero-badge-row{
+  display:flex;gap:8px;margin-top:24px;flex-wrap:wrap;
+}
+.hero-badge{
+  font-family:var(--mono);font-size:9px;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;
+  border:1px solid var(--border);
+  padding:7px 14px;color:var(--muted);
+  transition:all .25s;
+}
+.hero-badge:hover{border-color:var(--lime);color:var(--lime);}
+
+/* MARQUEE STRIP */
+.marquee-section{
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  overflow:hidden;padding:18px 0;
+  background:rgba(200,240,0,.03);
+}
+.marquee-track{
+  display:flex;gap:0;animation:marquee-move 24s linear infinite;
+  white-space:nowrap;
+}
+.marquee-item{
+  display:flex;align-items:center;gap:20px;
+  padding:0 40px;
+  font-family:var(--mono);font-size:11px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+  border-right:1px solid var(--border);flex-shrink:0;
+}
+.marquee-dot{
+  width:5px;height:5px;border-radius:50%;
+  background:var(--lime);flex-shrink:0;
+}
+@keyframes marquee-move{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+/* COURTS — full-width editorial */
+.courts{padding:100px 52px;background:var(--ink2);}
+.courts-header{
+  display:grid;grid-template-columns:1fr 1fr;gap:80px;
+  align-items:end;margin-bottom:64px;
+}
+.courts-num{
+  font-family:var(--mono);font-size:clamp(80px,12vw,160px);
+  font-weight:700;color:var(--lime);line-height:.85;
+  letter-spacing:-.04em;
+}
+.courts-title-side{
+  padding-bottom:8px;
+}
+.courts-title-side h2{
+  font-size:clamp(28px,3.5vw,44px);font-weight:700;
+  letter-spacing:-.02em;line-height:1.15;margin-bottom:16px;
+}
+.courts-title-side p{font-size:15px;color:var(--muted);line-height:1.7;}
+/* Court specs as horizontal list */
+.courts-specs{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+  border:1px solid var(--border);
+}
+.spec-item{
+  padding:28px 28px;border-right:1px solid var(--border);
+  transition:background .25s;
+}
+.spec-item:last-child{border-right:none;}
+.spec-item:hover{background:var(--lime-dim);}
+.spec-label{
+  font-family:var(--mono);font-size:9px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--lime);margin-bottom:10px;
+}
+.spec-val{font-size:22px;font-weight:700;letter-spacing:-.01em;margin-bottom:6px;}
+.spec-desc{font-size:12px;color:var(--muted);line-height:1.5;}
+
+/* STANDARDS — text-forward */
+.standards{padding:100px 52px;background:var(--ink);}
+.std-intro{
+  display:grid;grid-template-columns:2fr 3fr;gap:80px;
+  align-items:start;margin-bottom:72px;
+  padding-bottom:72px;border-bottom:1px solid var(--border);
+}
+.std-intro-left h2{
+  font-size:clamp(32px,4vw,52px);font-weight:700;
+  letter-spacing:-.02em;line-height:1.1;
+}
+.std-intro-left h2 em{font-style:normal;color:var(--lime);}
+.std-intro-right{
+  padding-top:8px;
+}
+.std-intro-right p{font-size:16px;color:var(--muted);line-height:1.8;margin-bottom:24px;}
+.std-tag{
+  font-family:var(--mono);font-size:10px;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:var(--lime);background:var(--lime-dim);
+  border:1px solid rgba(200,240,0,.2);
+  display:inline-block;padding:6px 14px;margin-right:8px;margin-bottom:8px;
+}
+/* Standards as numbered list */
+.std-list{display:flex;flex-direction:column;gap:0;}
+.std-row{
+  display:grid;grid-template-columns:60px 1fr 1fr;gap:32px;
+  padding:28px 52px;border-bottom:1px solid var(--border);
+  margin:0 -52px;
+  align-items:start;transition:background .2s;
+}
+.std-row:first-child{border-top:1px solid var(--border);}
+.std-row:hover{background:rgba(200,240,0,.025);}
+.std-idx{
+  font-family:var(--mono);font-size:12px;font-weight:700;
+  color:rgba(200,240,0,.4);letter-spacing:.04em;padding-top:3px;
+}
+.std-name{font-size:17px;font-weight:600;letter-spacing:-.01em;}
+.std-desc{font-size:14px;color:var(--muted);line-height:1.65;}
+
+/* COMMUNITY — asymmetric */
+.community{
+  padding:100px 52px;background:var(--ink2);
+  display:grid;grid-template-columns:3fr 2fr;gap:80px;
+  align-items:start;
+}
+.comm-left h2{
+  font-size:clamp(36px,5vw,64px);font-weight:700;
+  letter-spacing:-.03em;line-height:1.0;margin-bottom:8px;
+}
+.comm-left h2 .big-num{
+  display:block;
+  font-family:var(--mono);font-size:clamp(72px,10vw,130px);
+  color:var(--lime);line-height:.9;letter-spacing:-.04em;
+}
+.comm-left > p{font-size:15px;color:var(--muted);line-height:1.75;max-width:480px;margin:32px 0 40px;}
+.comm-tags{display:flex;flex-wrap:wrap;gap:8px;}
+.comm-tag{
+  font-family:var(--mono);font-size:10px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+  border:1px solid var(--border);padding:9px 18px;color:var(--muted);
+  transition:all .25s;cursor:default;
+}
+.comm-tag:hover{border-color:var(--lime);color:var(--lime);}
+.comm-right{padding-top:60px;}
+.comm-board{border:1px solid var(--border);}
+.board-header{
+  padding:16px 24px;border-bottom:1px solid var(--border);
+  font-family:var(--mono);font-size:9px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(200,240,0,.5);
+  display:flex;justify-content:space-between;
+}
+.board-member{
+  padding:18px 24px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:14px;
+  transition:background .2s;
+}
+.board-member:last-child{border-bottom:none;}
+.board-member:hover{background:var(--lime-dim);}
+.board-av{
+  width:36px;height:36px;border-radius:50%;
+  font-family:var(--mono);font-size:12px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;color:var(--ink);
+}
+.board-name{font-size:13px;font-weight:600;margin-bottom:2px;}
+.board-level{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.04em;}
+.board-rating{
+  margin-left:auto;font-family:var(--mono);font-size:12px;
+  font-weight:700;color:var(--lime);
+}
+
+/* BOOKING */
+.booking{padding:100px 52px;background:var(--lime);}
+.booking-inner{
+  display:grid;grid-template-columns:1fr 1fr;gap:80px;
+  align-items:start;
+}
+.booking-content h2{
+  font-size:clamp(36px,5vw,64px);font-weight:700;
+  color:var(--ink);letter-spacing:-.03em;line-height:1.0;margin-bottom:24px;
+}
+.booking-content p{font-size:16px;color:rgba(4,6,14,.6);line-height:1.7;margin-bottom:32px;}
+.booking-steps{display:flex;flex-direction:column;gap:0;}
+.bk-step{
+  display:flex;gap:20px;padding:20px 0;
+  border-top:1px solid rgba(4,6,14,.12);
+}
+.bk-num{
+  font-family:var(--mono);font-size:24px;font-weight:700;
+  color:rgba(4,6,14,.25);line-height:1;flex-shrink:0;width:32px;
+}
+.bk-body h4{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:4px;}
+.bk-body p{font-size:13px;color:rgba(4,6,14,.55);line-height:1.55;}
+.booking-form{
+  background:var(--ink);
+  padding:36px;
+}
+.bf-label{
+  font-family:var(--mono);font-size:9px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(200,240,0,.5);margin-bottom:8px;display:block;
+}
+.bf-input{
+  width:100%;background:rgba(200,240,0,.05);
+  border:1px solid var(--border);padding:13px 16px;
+  color:var(--white);font-family:var(--sans);font-size:14px;
+  outline:none;transition:border .2s;margin-bottom:14px;
+}
+.bf-input:focus{border-color:rgba(200,240,0,.4);}
+.bf-input option{background:var(--surface);}
+.bf-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.bf-row .bf-group{margin-bottom:0;}
+.bf-group{margin-bottom:14px;}
+.court-type-row{display:flex;gap:8px;margin-bottom:14px;}
+.ct-btn{
+  flex:1;padding:11px;border:1px solid var(--border);
+  font-family:var(--mono);font-size:10px;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
+  background:transparent;cursor:pointer;transition:all .25s;
+}
+.ct-btn.on{border-color:var(--lime);color:var(--lime);background:var(--lime-dim);}
+.booking-total{
+  background:var(--lime-dim);border:1px solid rgba(200,240,0,.2);
+  padding:16px;margin-bottom:16px;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.bt-label{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;}
+.bt-val{font-family:var(--mono);font-size:28px;font-weight:700;color:var(--lime);}
+.btn-book-now{
+  width:100%;background:var(--lime);color:var(--ink);
+  font-family:var(--mono);font-size:12px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+  padding:16px;border:none;cursor:pointer;
+  clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));
+  transition:box-shadow .25s;
+}
+.btn-book-now:hover{box-shadow:0 0 24px rgba(200,240,0,.5);}
+.bf-note{
+  font-family:var(--mono);font-size:10px;text-align:center;
+  color:var(--muted);letter-spacing:.04em;margin-top:10px;
+}
+
+/* PRICING */
+.pricing{padding:100px 52px;background:var(--ink);}
+.pricing-header{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  margin-bottom:56px;
+}
+.pricing-header h2{
+  font-size:clamp(32px,4vw,52px);font-weight:700;
+  letter-spacing:-.02em;line-height:1.0;
+}
+.pricing-header h2 em{font-style:normal;color:var(--lime);}
+.pricing-header p{font-size:14px;color:var(--muted);max-width:280px;text-align:right;line-height:1.55;}
+.pricing-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+  border:1px solid var(--border);
+}
+.price-card{
+  padding:36px 32px;border-right:1px solid var(--border);
+  transition:background .25s;position:relative;
+}
+.price-card:last-child{border-right:none;}
+.price-card.on{background:var(--lime-dim);}
+.price-card.on::before{
+  content:'TERPOPULER';
+  font-family:var(--mono);font-size:8px;font-weight:700;
+  letter-spacing:.2em;
+  position:absolute;top:0;left:0;right:0;
+  background:var(--lime);color:var(--ink);
+  padding:6px;text-align:center;
+}
+.price-card.on{padding-top:52px;}
+.price-name{
+  font-family:var(--mono);font-size:11px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--lime);margin-bottom:20px;
+}
+.price-val{
+  font-family:var(--mono);font-size:clamp(36px,4vw,52px);
+  font-weight:700;line-height:1;margin-bottom:4px;
+}
+.price-per{font-size:12px;color:var(--muted);margin-bottom:32px;}
+.price-features{
+  display:flex;flex-direction:column;gap:10px;
+  margin-bottom:32px;padding-top:24px;
+  border-top:1px solid var(--border);
+}
+.pf-row{
+  display:flex;align-items:flex-start;gap:10px;
+  font-size:13px;color:rgba(244,246,255,.75);line-height:1.45;
+}
+.pf-row::before{
+  content:'';display:block;width:16px;height:1px;
+  background:var(--lime);flex-shrink:0;margin-top:8px;
+}
+.btn-price{
+  width:100%;background:transparent;
+  border:1px solid var(--border);color:var(--white);
+  font-family:var(--mono);font-size:11px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+  padding:13px;cursor:pointer;transition:all .25s;
+}
+.price-card.on .btn-price{
+  background:var(--lime);color:var(--ink);border-color:var(--lime);
+}
+.btn-price:hover{border-color:var(--lime);color:var(--lime);}
+.price-card.on .btn-price:hover{box-shadow:0 0 20px rgba(200,240,0,.3);}
+
+/* FOOTER */
+footer{
+  padding:48px 52px;
+  border-top:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:24px;
+}
+.footer-wm{
+  font-family:var(--mono);font-size:14px;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;
+}
+.footer-wm span{color:var(--lime);}
+.footer-nav{display:flex;gap:32px;}
+.footer-nav a{
+  font-family:var(--mono);font-size:10px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+  transition:color .25s;
+}
+.footer-nav a:hover{color:var(--lime);}
+.footer-contact{
+  font-family:var(--mono);font-size:13px;font-weight:700;
+  color:var(--lime);
+}
+
+@media(max-width:960px){
+  nav{padding:20px 28px;}
+  .hero{grid-template-columns:1fr;}
+  .hero-left{padding:120px 28px 60px;}
+  .hero-right{padding:40px 28px 60px;}
+  .hero-left{border-right:none;border-bottom:1px solid var(--border);}
+  .courts,.standards,.booking,.pricing{padding:60px 28px;}
+  .courts-header,.std-intro,.booking-inner,.community{grid-template-columns:1fr;gap:40px;}
+  .courts-specs{grid-template-columns:1fr 1fr;}
+  .std-row{grid-template-columns:40px 1fr;}
+  .std-desc{display:none;}
+  .pricing-grid{grid-template-columns:1fr;}
+  .pricing-grid .price-card{border-right:none;border-bottom:1px solid var(--border);}
+  .pricing-header{flex-direction:column;gap:16px;align-items:flex-start;}
+  .pricing-header p{text-align:left;}
+  .community{padding:60px 28px;grid-template-columns:1fr;}
+  footer{padding:40px 28px;flex-direction:column;text-align:center;}
+  .footer-nav{flex-wrap:wrap;justify-content:center;}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-wordmark">Club de <span>Padel</span></div>
+  <ul class="nav-links">
+    <li><a href="#courts">Lapangan</a></li>
+    <li><a href="#standards">Standar</a></li>
+    <li><a href="#community">Komunitas</a></li>
+    <li><a href="#pricing">Harga</a></li>
+  </ul>
+  <a href="#booking" class="nav-book">Booking</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-left">
+    <div class="hero-bg-word">PADEL</div>
+    <div style="position:relative;z-index:1;">
+      <div class="hero-cert">Bersertifikat WPT · Standar Internasional</div>
+      <h1 class="hero-h1">
+        Lapangan<br>
+        padel di<br>
+        level <em>dunia.</em>
+      </h1>
+      <p class="hero-sub">
+        Enam lapangan berstandar World Padel Tour di jantung kota —
+        dengan komunitas aktif, fasilitas premium, dan booking dalam 60 detik.
+      </p>
+      <div class="hero-cta-row">
+        <a href="#booking" class="btn-lime">Booking Lapangan</a>
+        <a href="#courts" class="btn-line">Lihat lapangan</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-stat-stack">
+      <div class="hero-stat">
+        <div class="hs-num">6</div>
+        <div class="hs-label">Lapangan premium<br>indoor & semi-outdoor</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hs-num">2K+</div>
+        <div class="hs-label">Member aktif di<br>komunitas kami</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hs-num">99.7%</div>
+        <div class="hs-label">Uptime sistem booking<br>— 24/7 tanpa gangguan</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hs-num">4.9</div>
+        <div class="hs-label">Rating rata-rata<br>dari 800+ ulasan</div>
+      </div>
+    </div>
+    <div class="hero-badge-row">
+      <div class="hero-badge">WPT Certified</div>
+      <div class="hero-badge">LED 500 Lux</div>
+      <div class="hero-badge">Kaca Tempered 12mm</div>
+      <div class="hero-badge">Parkir 80 Kendaraan</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-section">
+  <div class="marquee-track">
+    <div class="marquee-item"><div class="marquee-dot"></div>Dimensi Resmi 10×20m</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Sertifikasi WPT</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Liga Internal Mingguan</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Booking Online 24/7</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Coaching Pro Tersedia</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Loker & Shower Premium</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Pro Shop Lengkap</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Refund 100% Jika Batal</div>
+    <!-- duplicate for loop -->
+    <div class="marquee-item"><div class="marquee-dot"></div>Dimensi Resmi 10×20m</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Sertifikasi WPT</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Liga Internal Mingguan</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Booking Online 24/7</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Coaching Pro Tersedia</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Loker & Shower Premium</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Pro Shop Lengkap</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Refund 100% Jika Batal</div>
+  </div>
+</div>
+
+<!-- COURTS -->
+<section class="courts" id="courts">
+  <div class="courts-header">
+    <div class="courts-num">06</div>
+    <div class="courts-title-side">
+      <h2>Lapangan yang dirancang untuk performa terbaik</h2>
+      <p style="color:var(--muted);font-size:15px;line-height:1.7;margin-top:12px;">
+        Setiap detail — dari kaca hingga pencahayaan — mengikuti regulasi resmi World Padel Tour.
+        Lapangan yang sama digunakan dalam turnamen profesional internasional.
+      </p>
+    </div>
+  </div>
+  <div class="courts-specs">
+    <div class="spec-item">
+      <div class="spec-label">Dimensi</div>
+      <div class="spec-val">10 × 20 m</div>
+      <div class="spec-desc">Presisi WPT, diverifikasi inspektor bersertifikat</div>
+    </div>
+    <div class="spec-item">
+      <div class="spec-label">Pencahayaan</div>
+      <div class="spec-val">500 Lux</div>
+      <div class="spec-desc">LED homogen tanpa bayangan — standar FIP</div>
+    </div>
+    <div class="spec-item">
+      <div class="spec-label">Dinding</div>
+      <div class="spec-val">12 mm</div>
+      <div class="spec-desc">Kaca tempered EN-12150 — pantulan konsisten</div>
+    </div>
+    <div class="spec-item">
+      <div class="spec-label">Permukaan</div>
+      <div class="spec-val">12 mm</div>
+      <div class="spec-desc">Artificial grass + pasir silica — grip optimal</div>
+    </div>
+  </div>
+</section>
+
+<!-- STANDARDS -->
+<section class="standards" id="standards">
+  <div class="std-intro">
+    <div class="std-intro-left">
+      <h2>Setiap detail<br>mengikuti<br><em>standar WPT.</em></h2>
+    </div>
+    <div class="std-intro-right">
+      <p>
+        Tidak ada kompromi dalam kualitas. Club de Padel adalah satu-satunya fasilitas padel
+        di Jakarta yang tersertifikasi penuh oleh World Padel Tour — standar yang digunakan
+        dalam Campeonato del Mundo hingga WPT Masters.
+      </p>
+      <span class="std-tag">World Padel Tour</span>
+      <span class="std-tag">FIP Certified</span>
+      <span class="std-tag">Rain Forest Alliance</span>
+    </div>
+  </div>
+  <div class="std-list">
+    <div class="std-row">
+      <div class="std-idx">01</div>
+      <div class="std-name">Sertifikasi WPT Resmi</div>
+      <div class="std-desc">Lapangan kami tersertifikasi oleh World Padel Tour — standar yang sama digunakan dalam semua turnamen profesional internasional.</div>
+    </div>
+    <div class="std-row">
+      <div class="std-idx">02</div>
+      <div class="std-name">Kaca Tempered EN-12150</div>
+      <div class="std-desc">12mm, aman, jernih, pantulan bola konsisten sesuai regulasi — bukan kaca biasa yang dipasang di banyak fasilitas lokal.</div>
+    </div>
+    <div class="std-row">
+      <div class="std-idx">03</div>
+      <div class="std-name">Sistem LED 500 Lux</div>
+      <div class="std-desc">Pencahayaan homogen tanpa titik gelap — sesuai standar FIP untuk pertandingan malam hari dan siaran live.</div>
+    </div>
+    <div class="std-row">
+      <div class="std-idx">04</div>
+      <div class="std-name">Permukaan Artificial Grass Resmi</div>
+      <div class="std-desc">Grass 12mm dengan infill pasir silika — traksi dan pantulan bola sesuai karakteristik standar kompetisi WPT.</div>
+    </div>
+    <div class="std-row">
+      <div class="std-idx">05</div>
+      <div class="std-name">Akustik & Peredam Suara</div>
+      <div class="std-desc">Panel akustik di sekeliling area — fokus bermain, tanpa gangguan suara dari lapangan sebelah.</div>
+    </div>
+  </div>
+</section>
+
+<!-- COMMUNITY -->
+<section class="community" id="community">
+  <div class="comm-left">
+    <h2>
+      <span class="big-num">2.000</span>
+      member aktif.
+    </h2>
+    <p>Komunitas padel paling aktif di Jakarta — dari pemula level 1.5 hingga atlet kompetitif level 5.0. Matchmaking, liga mingguan, dan turnamen bulanan tersedia untuk semua level.</p>
+    <div class="comm-tags">
+      <span class="comm-tag">Liga Internal Mingguan</span>
+      <span class="comm-tag">Turnamen Bulanan</span>
+      <span class="comm-tag">Kelas Pemula</span>
+      <span class="comm-tag">Coaching Pro</span>
+      <span class="comm-tag">Matchmaking System</span>
+      <span class="comm-tag">WhatsApp Group Aktif</span>
+    </div>
+  </div>
+  <div class="comm-right">
+    <div class="comm-board">
+      <div class="board-header">
+        <span>Member Aktif Minggu Ini</span>
+        <span>Rating</span>
+      </div>
+      <div class="board-member">
+        <div class="board-av" style="background:var(--lime);">RD</div>
+        <div>
+          <div class="board-name">Rizky Darmawan</div>
+          <div class="board-level">PRO MEMBER · LEVEL 4.5</div>
+        </div>
+        <div class="board-rating">4.9</div>
+      </div>
+      <div class="board-member">
+        <div class="board-av" style="background:#60a5fa;color:var(--ink);">SA</div>
+        <div>
+          <div class="board-name">Sari Andini</div>
+          <div class="board-level">ELITE MEMBER · LEVEL 3.5</div>
+        </div>
+        <div class="board-rating">4.8</div>
+      </div>
+      <div class="board-member">
+        <div class="board-av" style="background:#a78bfa;color:var(--ink);">BH</div>
+        <div>
+          <div class="board-name">Bima Hartono</div>
+          <div class="board-level">STANDARD · LEVEL 2.5</div>
+        </div>
+        <div class="board-rating">5.0</div>
+      </div>
+      <div class="board-member">
+        <div class="board-av" style="background:#fb923c;color:var(--ink);">DP</div>
+        <div>
+          <div class="board-name">Dewi Pratiwi</div>
+          <div class="board-level">NEW MEMBER · LEVEL 1.5</div>
+        </div>
+        <div class="board-rating">4.7</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="booking" id="booking">
+  <div class="booking-inner">
+    <div class="booking-content">
+      <h2>Booking dalam<br>60 detik.</h2>
+      <p>Pilih lapangan, tentukan waktu, bayar langsung. Tidak perlu telepon, tidak perlu tunggu konfirmasi manual — lapangan dikunci instan.</p>
+      <div class="booking-steps">
+        <div class="bk-step">
+          <div class="bk-num">01</div>
+          <div class="bk-body">
+            <h4>Pilih lapangan & slot waktu</h4>
+            <p>Indoor atau semi-outdoor, pagi atau malam — ketersediaan real-time.</p>
+          </div>
+        </div>
+        <div class="bk-step">
+          <div class="bk-num">02</div>
+          <div class="bk-body">
+            <h4>Bayar dengan metode apa saja</h4>
+            <p>Transfer, GoPay, OVO, QRIS, kartu kredit — semua diterima.</p>
+          </div>
+        </div>
+        <div class="bk-step">
+          <div class="bk-num">03</div>
+          <div class="bk-body">
+            <h4>Tunjukkan QR, langsung main</h4>
+            <p>Scan di pintu masuk — tanpa antre, tanpa tanya resepsionis.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="booking-form">
+      <div style="margin-bottom:20px;">
+        <div class="bf-label">Tipe Lapangan</div>
+        <div class="court-type-row">
+          <button class="ct-btn on" onclick="this.classList.add('on');this.nextElementSibling.classList.remove('on')">Indoor A/B</button>
+          <button class="ct-btn" onclick="this.classList.add('on');this.previousElementSibling.classList.remove('on')">Semi-Outdoor C/D</button>
+        </div>
+      </div>
+      <div class="bf-row" style="margin-bottom:14px;">
+        <div>
+          <div class="bf-label">Tanggal</div>
+          <input type="date" class="bf-input" style="color-scheme:dark;margin-bottom:0;">
+        </div>
+        <div>
+          <div class="bf-label">Durasi</div>
+          <select class="bf-input" style="margin-bottom:0;cursor:pointer;" onchange="updatePrice(this)">
+            <option value="120">1 Jam</option>
+            <option value="175" selected>1,5 Jam</option>
+            <option value="230">2 Jam</option>
+          </select>
+        </div>
+      </div>
+      <div class="bf-group">
+        <div class="bf-label">Slot Waktu</div>
+        <select class="bf-input" style="cursor:pointer;">
+          <option>07:00 – 08:30</option>
+          <option>09:00 – 10:30</option>
+          <option>16:00 – 17:30</option>
+          <option>19:00 – 20:30</option>
+          <option>20:30 – 22:00</option>
+        </select>
+      </div>
+      <div class="bf-row" style="margin-bottom:14px;">
+        <div>
+          <div class="bf-label">Nama</div>
+          <input type="text" class="bf-input" placeholder="Nama lengkap" style="margin-bottom:0;">
+        </div>
+        <div>
+          <div class="bf-label">WhatsApp</div>
+          <input type="tel" class="bf-input" placeholder="+62 8xx" style="margin-bottom:0;">
+        </div>
+      </div>
+      <div class="booking-total">
+        <div>
+          <div class="bt-label">Total Pembayaran</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:2px;font-family:var(--mono);">1.5 Jam · Indoor · Weekend</div>
+        </div>
+        <div class="bt-val" id="price-display">Rp 175K</div>
+      </div>
+      <button class="btn-book-now">Booking & Bayar Sekarang</button>
+      <div class="bf-note">Konfirmasi instan · Refund 100% jika batal 2 jam sebelum main</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="pricing-header">
+    <h2>Pilih paket<br><em>yang cocok.</em></h2>
+    <p>Dari satu sesi tanpa komitmen hingga keanggotaan korporat — ada pilihan untuk semua kebutuhan.</p>
+  </div>
+  <div class="pricing-grid">
+    <div class="price-card">
+      <div class="price-name">Walk-In</div>
+      <div class="price-val">Rp 120K</div>
+      <div class="price-per">per jam · weekday</div>
+      <div class="price-features">
+        <div class="pf-row">Akses lapangan standard</div>
+        <div class="pf-row">Loker & shower</div>
+        <div class="pf-row">Booking online</div>
+        <div class="pf-row">Tanpa komitmen</div>
+      </div>
+      <button class="btn-price">Booking Sekarang</button>
+    </div>
+    <div class="price-card on">
+      <div class="price-name">Member Bulanan</div>
+      <div class="price-val">Rp 850K</div>
+      <div class="price-per">per bulan · 8 sesi included</div>
+      <div class="price-features">
+        <div class="pf-row">8 sesi 1 jam/bulan</div>
+        <div class="pf-row">Prioritas booking</div>
+        <div class="pf-row">Diskon 20% sesi tambahan</div>
+        <div class="pf-row">Akses liga komunitas</div>
+        <div class="pf-row">1 sesi coaching gratis</div>
+      </div>
+      <button class="btn-price">Daftar Member</button>
+    </div>
+    <div class="price-card">
+      <div class="price-name">Korporat</div>
+      <div class="price-val">Custom</div>
+      <div class="price-per">untuk tim & perusahaan</div>
+      <div class="price-features">
+        <div class="pf-row">Slot eksklusif tetap</div>
+        <div class="pf-row">Invoice bulanan</div>
+        <div class="pf-row">Branding area tersedia</div>
+        <div class="pf-row">Event & turnamen privat</div>
+      </div>
+      <button class="btn-price">Hubungi Kami</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-wm">Club de <span>Padel</span></div>
+  <nav class="footer-nav">
+    <a href="#courts">Lapangan</a>
+    <a href="#standards">Standar</a>
+    <a href="#community">Komunitas</a>
+    <a href="#pricing">Harga</a>
+    <a href="#booking">Booking</a>
+  </nav>
+  <div class="footer-contact">+62 897 012 0687</div>
+</footer>
+
+<script>
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('stuck',scrollY>60);
+});
+function updatePrice(sel){
+  document.getElementById('price-display').textContent='Rp '+sel.value+'K';
+}
+</script>
+</body>
+</html>

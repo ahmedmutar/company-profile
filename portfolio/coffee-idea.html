@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coffee Idea</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#f4ede0;
+  --cream2:#ede4d4;
+  --cream3:#e5d9c4;
+  --dark:#1a1208;
+  --brown:#3d2410;
+  --accent:#7c4a1e;
+  --warm:#b87333;
+  --muted:#7a6855;
+  --border:rgba(61,36,16,.1);
+  --serif:'Lora',serif;
+  --sans:'DM Sans',sans-serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--cream);color:var(--dark);
+  font-family:var(--sans);overflow-x:hidden;
+}
+a{text-decoration:none;color:inherit;}
+
+/* GRAIN */
+body::after{
+  content:'';position:fixed;inset:-50%;pointer-events:none;z-index:9998;opacity:.025;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  background-size:170px;
+}
+
+/* NAV — centered, minimal */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  padding:28px 60px;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:all .4s;
+}
+nav.stuck{
+  padding:16px 60px;
+  background:rgba(244,237,224,.92);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{
+  font-family:var(--serif);font-size:20px;font-weight:600;
+  font-style:italic;letter-spacing:.02em;
+}
+.nav-links{display:flex;gap:40px;list-style:none;}
+.nav-links a{
+  font-size:11px;font-weight:400;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);transition:color .25s;
+}
+.nav-links a:hover{color:var(--dark);}
+.nav-cta{
+  font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--dark);color:var(--cream);
+  padding:11px 24px;border-radius:40px;transition:background .25s;
+}
+.nav-cta:hover{background:var(--brown);}
+
+/* HERO — centered editorial */
+.hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:140px 60px 80px;
+  position:relative;overflow:hidden;
+  background:var(--cream);
+}
+/* Horizontal rule decorations */
+.hero-rule{
+  display:flex;align-items:center;gap:16px;
+  font-size:10px;font-weight:500;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--muted);
+  margin-bottom:40px;
+}
+.hero-rule::before,.hero-rule::after{
+  content:'';flex:1;max-width:80px;height:1px;background:var(--border);
+}
+.hero-h1{
+  font-family:var(--serif);
+  font-size:clamp(60px,9vw,130px);
+  font-weight:600;font-style:italic;
+  line-height:.92;letter-spacing:-.02em;
+  margin-bottom:32px;color:var(--dark);
+}
+.hero-h1 .sans-word{
+  font-family:var(--sans);font-style:normal;
+  font-weight:300;color:var(--muted);display:block;
+  font-size:.58em;letter-spacing:.02em;
+  line-height:1.4;
+}
+.hero-sub{
+  font-size:16px;color:var(--muted);line-height:1.8;
+  max-width:440px;margin:0 auto 48px;font-weight:300;
+}
+.hero-actions{display:flex;gap:16px;justify-content:center;align-items:center;margin-bottom:72px;}
+.btn-dark{
+  background:var(--dark);color:var(--cream);
+  font-size:12px;font-weight:500;letter-spacing:.1em;
+  text-transform:uppercase;padding:14px 36px;border-radius:40px;
+  transition:all .25s;
+}
+.btn-dark:hover{background:var(--brown);}
+.btn-outline{
+  font-size:12px;font-weight:400;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);border:1px solid var(--border);padding:14px 36px;
+  border-radius:40px;transition:all .25s;
+}
+.btn-outline:hover{border-color:var(--dark);color:var(--dark);}
+/* Origin badges as horizontal row */
+.hero-origins{
+  display:inline-flex;gap:0;border:1px solid var(--border);border-radius:40px;
+  overflow:hidden;flex-wrap:nowrap;
+}
+.origin-chip{
+  padding:12px 28px;
+  border-right:1px solid var(--border);
+  text-align:center;flex-shrink:0;
+  white-space:nowrap;
+}
+.origin-chip:last-child{border-right:none;}
+.oc-country{font-size:13px;font-weight:500;margin-bottom:2px;}
+.oc-region{font-size:10px;color:var(--muted);letter-spacing:.06em;}
+
+/* DIVIDER */
+.divider{
+  padding:0 60px;
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:0;overflow:hidden;
+  background:var(--cream2);
+}
+.div-item{
+  display:flex;align-items:center;gap:16px;
+  padding:16px 40px;border-right:1px solid var(--border);
+  font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);flex-shrink:0;
+}
+.div-item:last-child{border-right:none;}
+.div-dot{
+  width:5px;height:5px;border-radius:50%;background:var(--warm);flex-shrink:0;
+}
+
+/* MENU — printed menu style */
+.menu-section{padding:100px 60px;background:var(--cream);}
+.menu-header{
+  display:grid;grid-template-columns:1fr 1fr;gap:60px;
+  align-items:end;margin-bottom:64px;
+  padding-bottom:40px;border-bottom:1px solid var(--border);
+}
+.menu-title{
+  font-family:var(--serif);font-size:clamp(40px,5vw,72px);
+  font-weight:600;font-style:italic;line-height:1.0;
+}
+.menu-desc{font-size:14px;color:var(--muted);line-height:1.8;max-width:360px;}
+/* Menu as a list — not cards */
+.menu-list{display:flex;flex-direction:column;gap:0;}
+.menu-category{
+  margin-bottom:48px;
+}
+.menu-cat-label{
+  font-family:var(--serif);font-size:11px;font-style:italic;
+  font-weight:400;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:20px;padding-bottom:10px;
+  border-bottom:1px solid var(--border);
+}
+.menu-item{
+  display:flex;align-items:baseline;gap:16px;
+  padding:18px 20px;border-bottom:1px solid var(--border);
+  margin:0 -20px;
+  transition:background .2s;cursor:default;
+}
+.menu-item:hover{background:var(--cream2);}
+.mi-name{
+  font-family:var(--serif);font-size:20px;font-weight:500;
+  flex-shrink:0;
+}
+.mi-dots{
+  flex:1;border-bottom:1px dotted var(--border);
+  height:0;margin-bottom:5px;min-width:20px;
+}
+.mi-price{
+  font-family:var(--sans);font-size:15px;font-weight:500;
+  color:var(--accent);flex-shrink:0;
+}
+.mi-temp{
+  font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);flex-shrink:0;width:80px;text-align:right;
+}
+.mi-desc{
+  width:100%;font-size:13px;color:var(--muted);line-height:1.55;
+  margin-top:4px;padding-left:0;font-style:italic;
+}
+.menu-item-wrap{border-bottom:1px solid var(--border);}
+.menu-item-wrap:last-child{border-bottom:none;}
+.menu-item-wrap .menu-item{border-bottom:none;padding-bottom:4px;}
+
+/* STANDARDS — big number approach */
+.standards{padding:100px 60px;background:var(--cream2);}
+.std-hero{
+  display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;
+  margin-bottom:72px;padding-bottom:72px;
+  border-bottom:1px solid var(--border);
+}
+.std-big-num{
+  font-family:var(--serif);
+  font-size:clamp(100px,16vw,200px);
+  font-weight:600;font-style:italic;
+  color:var(--cream3);line-height:.85;letter-spacing:-.03em;
+  position:relative;
+}
+.std-big-label{
+  font-size:14px;font-weight:500;color:var(--accent);
+  letter-spacing:.08em;margin-top:8px;
+}
+.std-right h2{
+  font-family:var(--serif);font-size:clamp(28px,3.5vw,44px);
+  font-weight:600;font-style:italic;line-height:1.15;margin-bottom:20px;
+}
+.std-right p{font-size:15px;color:var(--muted);line-height:1.8;margin-bottom:20px;}
+.std-tags{display:flex;flex-wrap:wrap;gap:8px;}
+.std-tag{
+  font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;
+  border:1px solid var(--border);padding:7px 18px;color:var(--muted);
+  border-radius:40px;transition:all .25s;
+}
+.std-tag:hover{border-color:var(--warm);color:var(--warm);}
+/* Standards as a clean list */
+.std-points{
+  display:grid;grid-template-columns:1fr 1fr;gap:40px;
+}
+.std-point{
+  padding:32px 0;border-top:1px solid var(--border);
+}
+.sp-num{
+  font-family:var(--serif);font-size:13px;font-style:italic;
+  color:var(--muted);margin-bottom:12px;
+}
+.sp-title{font-size:17px;font-weight:500;margin-bottom:8px;}
+.sp-desc{font-size:13px;color:var(--muted);line-height:1.65;}
+
+/* VISIT + ORDER — side by side */
+.visit-order{
+  display:grid;grid-template-columns:1fr 1fr;gap:0;
+  border-top:1px solid var(--border);
+}
+.visit-section{
+  padding:100px 60px;background:var(--dark);
+  color:var(--cream);
+}
+.vs-label{
+  font-size:10px;font-weight:500;letter-spacing:.16em;
+  text-transform:uppercase;color:rgba(244,237,224,.4);margin-bottom:20px;
+}
+.vs-title{
+  font-family:var(--serif);font-size:clamp(32px,4vw,52px);
+  font-weight:600;font-style:italic;line-height:1.1;margin-bottom:28px;
+}
+.hours-table{display:flex;flex-direction:column;gap:0;margin-bottom:40px;}
+.hr-row{
+  display:flex;justify-content:space-between;
+  padding:14px 0;border-bottom:1px solid rgba(244,237,224,.08);
+  font-size:14px;
+}
+.hr-day{color:rgba(244,237,224,.45);}
+.hr-time{font-weight:500;color:rgba(244,237,224,.85);}
+.hr-time.closed{color:rgba(244,237,224,.2);}
+.visit-perks{display:flex;flex-direction:column;gap:10px;}
+.vp{
+  display:flex;align-items:flex-start;gap:12px;
+  font-size:13px;color:rgba(244,237,224,.55);line-height:1.5;
+}
+.vp::before{
+  content:'';display:block;width:16px;height:1px;
+  background:rgba(244,237,224,.2);flex-shrink:0;margin-top:8px;
+}
+.order-section{
+  padding:100px 60px;
+  border-left:1px solid var(--border);
+  background:var(--cream);
+}
+.os-label{
+  font-size:10px;font-weight:500;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:20px;
+}
+.os-title{
+  font-family:var(--serif);font-size:clamp(32px,4vw,52px);
+  font-weight:600;font-style:italic;line-height:1.1;margin-bottom:32px;
+}
+.delivery-toggle{
+  display:flex;gap:0;border:1px solid var(--border);
+  border-radius:40px;overflow:hidden;margin-bottom:28px;
+}
+.dt-btn{
+  flex:1;padding:12px;text-align:center;
+  font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);background:transparent;border:none;cursor:pointer;
+  transition:all .25s;
+}
+.dt-btn.on{background:var(--dark);color:var(--cream);}
+.of-label{
+  font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:8px;display:block;
+}
+.of-input{
+  width:100%;background:transparent;
+  border:none;border-bottom:1px solid var(--border);
+  padding:10px 0;font-family:var(--sans);font-size:14px;
+  color:var(--dark);outline:none;transition:border .2s;
+  margin-bottom:18px;
+}
+.of-input:focus{border-color:var(--dark);}
+.of-input option{background:var(--cream);}
+.of-row{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+.order-total{
+  border-top:1px solid var(--border);padding-top:20px;margin-top:8px;
+  display:flex;justify-content:space-between;align-items:baseline;
+}
+.ot-label{font-size:12px;color:var(--muted);}
+.ot-val{
+  font-family:var(--serif);font-size:28px;font-weight:600;
+  font-style:italic;color:var(--accent);
+}
+.btn-order{
+  width:100%;background:var(--dark);color:var(--cream);
+  font-size:12px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
+  padding:15px;border:none;cursor:pointer;border-radius:40px;
+  margin-top:20px;transition:background .25s;
+}
+.btn-order:hover{background:var(--brown);}
+
+/* FOOTER */
+footer{
+  padding:48px 60px;background:var(--cream2);
+  border-top:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px;
+}
+.footer-logo{font-family:var(--serif);font-size:22px;font-weight:600;font-style:italic;}
+.footer-tagline{font-size:11px;color:var(--muted);letter-spacing:.06em;margin-top:4px;}
+.footer-links{display:flex;gap:32px;}
+.footer-links a{
+  font-size:11px;font-weight:400;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);transition:color .25s;
+}
+.footer-links a:hover{color:var(--dark);}
+.footer-contact{font-size:14px;font-weight:500;color:var(--accent);}
+
+@media(max-width:960px){
+  nav{padding:18px 24px;}
+  .hero{padding:100px 24px 60px;}
+  .hero-origins{flex-wrap:wrap;}
+  .divider{overflow-x:auto;padding:0 24px;}
+  .menu-section,.standards{padding:60px 24px;}
+  .menu-header,.std-hero,.std-points{grid-template-columns:1fr;gap:32px;}
+  .visit-order{grid-template-columns:1fr;}
+  .visit-section,.order-section{padding:60px 24px;border-left:none;}
+  .visit-section{border-bottom:1px solid var(--border);}
+  footer{padding:40px 24px;flex-direction:column;text-align:center;}
+  .footer-links{flex-wrap:wrap;justify-content:center;}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-logo">Coffee Idea</div>
+  <ul class="nav-links">
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#standards">Kualitas</a></li>
+    <li><a href="#visit">Kunjungi</a></li>
+    <li><a href="#order">Order</a></li>
+  </ul>
+  <a href="#order" class="nav-cta">Order</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-rule">Specialty Coffee · Since 2019</div>
+  <h1 class="hero-h1">
+    Setiap<br>tegukan<br>
+    <span class="sans-word">adalah cerita dari kebun.</span>
+  </h1>
+  <p class="hero-sub">
+    Biji single-origin dari Gayo, Yirgacheffe, dan Nariño —
+    diseduh dengan metode yang tepat, oleh barista bersertifikat SCA.
+  </p>
+  <div class="hero-actions">
+    <a href="#order" class="btn-dark">Order Sekarang</a>
+    <a href="#visit" class="btn-outline">Kunjungi Store</a>
+  </div>
+  <div class="hero-origins">
+    <div class="origin-chip">
+      <div class="oc-country">Indonesia</div>
+      <div class="oc-region">Gayo · Toraja</div>
+    </div>
+    <div class="origin-chip">
+      <div class="oc-country">Ethiopia</div>
+      <div class="oc-region">Yirgacheffe</div>
+    </div>
+    <div class="origin-chip">
+      <div class="oc-country">Colombia</div>
+      <div class="oc-region">Nariño · Huila</div>
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER -->
+<div class="divider">
+  <div class="div-item"><div class="div-dot"></div>SCA Certified</div>
+  <div class="div-item"><div class="div-dot"></div>Q Grader Barista</div>
+  <div class="div-item"><div class="div-dot"></div>Score 85+ Semua Biji</div>
+  <div class="div-item"><div class="div-dot"></div>Roast &lt;48 Jam</div>
+  <div class="div-item"><div class="div-dot"></div>Direct Trade</div>
+</div>
+
+<!-- MENU -->
+<section class="menu-section" id="menu">
+  <div class="menu-header">
+    <div class="menu-title">Menu</div>
+    <p class="menu-desc">
+      Setiap minuman dibuat fresh. Tidak ada yang disiapkan sebelumnya —
+      kopi dan susu steamed di momen yang tepat untuk setiap pesanan.
+    </p>
+  </div>
+  <!-- Printed menu style -->
+  <div class="menu-category">
+    <div class="menu-cat-label">Espresso Based</div>
+    <div class="menu-item-wrap">
+      <div class="menu-item">
+        <div class="mi-name">Signature Latte</div>
+        <div class="mi-dots"></div>
+        <div class="mi-temp">Hot · Iced</div>
+        <div class="mi-price">Rp 45.000</div>
+      </div>
+      <div class="mi-desc">Gayo espresso + oat milk — smooth, floral, sedikit nutty.</div>
+    </div>
+    <div class="menu-item-wrap">
+      <div class="menu-item">
+        <div class="mi-name">Flat White</div>
+        <div class="mi-dots"></div>
+        <div class="mi-temp">Hot</div>
+        <div class="mi-price">Rp 40.000</div>
+      </div>
+      <div class="mi-desc">Double ristretto + microfoam — bold dan concentrated, untuk yang suka kopi kuat.</div>
+    </div>
+    <div class="menu-item-wrap">
+      <div class="menu-item">
+        <div class="mi-name">Idea Mocha</div>
+        <div class="mi-dots"></div>
+        <div class="mi-temp">Hot · Iced</div>
+        <div class="mi-price">Rp 50.000</div>
+      </div>
+      <div class="mi-desc">Espresso Colombia + dark chocolate 70% + milk foam — indulgent tanpa terlalu manis.</div>
+    </div>
+  </div>
+  <div class="menu-category">
+    <div class="menu-cat-label">Manual Brew</div>
+    <div class="menu-item-wrap">
+      <div class="menu-item">
+        <div class="mi-name">Pour Over Ethiopia</div>
+        <div class="mi-dots"></div>
+        <div class="mi-temp">Hot</div>
+        <div class="mi-price">Rp 65.000</div>
+      </div>
+      <div class="mi-desc">V60, Yirgacheffe, jasmine & berry notes — untuk pecinta kopi murni tanpa susu.</div>
+    </div>
+    <div class="menu-item-wrap">
+      <div class="menu-item">
+        <div class="mi-name">Chemex Colombia</div>
+        <div class="mi-dots"></div>
+        <div class="mi-temp">Hot</div>
+        <div class="mi-price">Rp 70.000</div>
+      </div>
+      <div class="mi-desc">Nariño, bright acidity, caramel sweetness — clean cup dengan body medium yang elegan.</div>
+    </div>
+  </div>
+  <div class="menu-category" style="margin-bottom:0;">
+    <div class="menu-cat-label">Cold & Specialty</div>
+    <div class="menu-item-wrap">
+      <div class="menu-item">
+        <div class="mi-name">Cold Brew Tonic</div>
+        <div class="mi-dots"></div>
+        <div class="mi-temp">Iced</div>
+        <div class="mi-price">Rp 55.000</div>
+      </div>
+      <div class="mi-desc">18-hour cold brew Ethiopia + tonic water — refreshing, bright, dan kompleks.</div>
+    </div>
+    <div class="menu-item-wrap">
+      <div class="menu-item">
+        <div class="mi-name">Nitro Cold Brew</div>
+        <div class="mi-dots"></div>
+        <div class="mi-temp">Iced</div>
+        <div class="mi-price">Rp 60.000</div>
+      </div>
+      <div class="mi-desc">Cold brew + nitrogen — creamy tanpa susu, head seperti stout, refreshing luar biasa.</div>
+    </div>
+  </div>
+</section>
+
+<!-- STANDARDS -->
+<section class="standards" id="standards">
+  <div class="std-hero">
+    <div>
+      <div class="std-big-num">85+</div>
+      <div class="std-big-label">SCA Score Minimum — semua biji yang kami gunakan</div>
+    </div>
+    <div class="std-right">
+      <h2>Kualitas yang tidak pernah kami kompromikan.</h2>
+      <p>
+        Standar specialty coffee bukan sekadar kata-kata di dinding. Kami bekerja
+        langsung dengan petani (direct trade), memanggil roaster bersertifikat,
+        dan menggunakan grinder EK43 untuk ekstraksi yang konsisten setiap hari.
+      </p>
+      <div class="std-tags">
+        <span class="std-tag">SCA Certified</span>
+        <span class="std-tag">Q Grader Licensed</span>
+        <span class="std-tag">Direct Trade</span>
+        <span class="std-tag">Rain Forest Alliance</span>
+      </div>
+    </div>
+  </div>
+  <div class="std-points">
+    <div class="std-point">
+      <div class="sp-num">01</div>
+      <div class="sp-title">Biji dengan SCA Score 85+</div>
+      <div class="sp-desc">Kami tidak menggunakan biji komersial. Semua single-origin di menu kami memiliki cupping score di atas 85 — ambang batas "specialty coffee" menurut SCA.</div>
+    </div>
+    <div class="std-point">
+      <div class="sp-num">02</div>
+      <div class="sp-title">Roasting &lt;48 Jam Sebelum Saji</div>
+      <div class="sp-desc">Kopi paling baik diminum 7–21 hari setelah roasting. Kami roast fresh setiap dua hari — tidak ada stok lama di rak yang sudah kehilangan karakter.</div>
+    </div>
+    <div class="std-point">
+      <div class="sp-num">03</div>
+      <div class="sp-title">Brewing Temperature 93°C</div>
+      <div class="sp-desc">Presisi suhu adalah kunci ekstraksi. Terlalu panas = pahit. Terlalu dingin = asam dan under-extracted. Semua peralatan kami dikalibrasi ke 93°C sesuai standar SCA.</div>
+    </div>
+    <div class="std-point">
+      <div class="sp-num">04</div>
+      <div class="sp-title">Quality Control 3 Tahap</div>
+      <div class="sp-desc">Green bean tasting saat pembelian, post-roast cupping, dan espresso calibration harian. Barista kami melakukan dial-in setiap pagi — bukan hanya saat mesin baru dibeli.</div>
+    </div>
+  </div>
+</section>
+
+<!-- VISIT + ORDER -->
+<div class="visit-order" id="visit">
+  <div class="visit-section">
+    <div class="vs-label">Kunjungi Store</div>
+    <div class="vs-title">Tempat ketiga<br>yang sebenarnya.</div>
+    <div class="hours-table">
+      <div class="hr-row"><span class="hr-day">Senin – Jumat</span><span class="hr-time">07:00 – 22:00</span></div>
+      <div class="hr-row"><span class="hr-day">Sabtu</span><span class="hr-time">08:00 – 23:00</span></div>
+      <div class="hr-row"><span class="hr-day">Minggu</span><span class="hr-time">09:00 – 21:00</span></div>
+      <div class="hr-row"><span class="hr-day">Hari Libur Nasional</span><span class="hr-time closed">Tutup</span></div>
+    </div>
+    <div class="visit-perks">
+      <div class="vp">WiFi fiber 100 Mbps gratis untuk semua pelanggan</div>
+      <div class="vp">Power outlet di setiap meja — kerja seharian tanpa khawatir</div>
+      <div class="vp">Private meeting room — booking gratis untuk member</div>
+      <div class="vp">Jl. Sudirman No. 88, Jakarta Selatan 12190</div>
+    </div>
+  </div>
+  <div class="order-section" id="order">
+    <div class="os-label">Order Online</div>
+    <div class="os-title">Siap saat<br>kamu tiba.</div>
+    <div class="delivery-toggle">
+      <button class="dt-btn on" onclick="this.classList.add('on');this.nextElementSibling.classList.remove('on')">Pick-up</button>
+      <button class="dt-btn" onclick="this.classList.add('on');this.previousElementSibling.classList.remove('on')">Delivery</button>
+    </div>
+    <div class="of-row">
+      <div>
+        <label class="of-label">Nama</label>
+        <input type="text" class="of-input" placeholder="Nama Anda">
+      </div>
+      <div>
+        <label class="of-label">WhatsApp</label>
+        <input type="tel" class="of-input" placeholder="+62 8xx">
+      </div>
+    </div>
+    <div class="of-row">
+      <div>
+        <label class="of-label">Minuman</label>
+        <select class="of-input">
+          <option>Signature Latte</option>
+          <option>Flat White</option>
+          <option>Pour Over Ethiopia</option>
+          <option>Cold Brew Tonic</option>
+          <option>Idea Mocha</option>
+          <option>Nitro Cold Brew</option>
+        </select>
+      </div>
+      <div>
+        <label class="of-label">Suhu</label>
+        <select class="of-input">
+          <option>Hot</option>
+          <option>Iced</option>
+        </select>
+      </div>
+    </div>
+    <label class="of-label">Catatan (opsional)</label>
+    <input type="text" class="of-input" placeholder="Less sugar, oat milk, dll">
+    <div class="order-total">
+      <div>
+        <div class="ot-label">Total Pembayaran</div>
+      </div>
+      <div class="ot-val">Rp 45.000</div>
+    </div>
+    <button class="btn-order">Pesan & Bayar</button>
+  </div>
+</div>
+
+<footer>
+  <div>
+    <div class="footer-logo">Coffee Idea</div>
+    <div class="footer-tagline">Specialty Coffee · Berstandar SCA</div>
+  </div>
+  <div class="footer-links">
+    <a href="#menu">Menu</a>
+    <a href="#standards">Kualitas</a>
+    <a href="#visit">Store</a>
+    <a href="#order">Order</a>
+  </div>
+  <div class="footer-contact">+62 897 012 0687</div>
+</footer>
+
+<script>
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('stuck',scrollY>60);
+});
+</script>
+</body>
+</html>
