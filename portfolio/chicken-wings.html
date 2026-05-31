@@ -46,12 +46,13 @@ nav.stuck{
 .nav-logo{
   font-family:var(--cond);font-size:20px;font-weight:900;
   letter-spacing:.08em;text-transform:uppercase;
+  flex-shrink:0;white-space:nowrap;
 }
 .nav-logo span{color:var(--orange);}
-.nav-links{display:flex;gap:36px;list-style:none;}
+.nav-links{display:flex;gap:clamp(16px,2.2vw,36px);list-style:none;flex:1;justify-content:center;margin:0 20px;}
 .nav-links a{
   font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--muted);transition:color .25s;
+  color:var(--muted);transition:color .25s;white-space:nowrap;
 }
 .nav-links a:hover{color:var(--cream);}
 .nav-order{
@@ -59,8 +60,14 @@ nav.stuck{
   letter-spacing:.08em;text-transform:uppercase;
   background:var(--red);color:var(--cream);
   padding:11px 28px;transition:all .25s;
+  flex-shrink:0;white-space:nowrap;
 }
 .nav-order:hover{background:var(--orange);}
+/* cursor */
+#_dot,#_ring{position:fixed;border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);}
+#_dot{width:7px;height:7px;background:var(--orange);transition:transform .15s,opacity .15s,width .25s,height .25s;}
+#_ring{width:34px;height:34px;border:1.5px solid rgba(232,86,10,.4);transition:width .3s,height .3s,border-color .3s;}
+body{cursor:none;}a,button{cursor:none;}
 
 /* HERO — full-bleed type */
 .hero{
@@ -358,6 +365,7 @@ footer{
 </head>
 <body>
 
+<div id="_dot"></div><div id="_ring"></div>
 <nav id="nav">
   <div class="nav-logo">Chicken <span>Wings</span></div>
   <ul class="nav-links">
@@ -579,12 +587,100 @@ footer{
 </footer>
 
 <script>
+// ── SCROLL NAV ──
 window.addEventListener('scroll',()=>{
   document.getElementById('nav').classList.toggle('stuck',scrollY>60);
 });
+
+// ── WINGS PRICE ──
 function updateWingsPrice(sel){
   document.getElementById('wings-price').textContent='Rp '+sel.value+'K';
 }
+
+// ── CUSTOM CURSOR ──
+const _d=document.getElementById('_dot'),_r=document.getElementById('_ring');
+let mx=0,my=0,lx=0,ly=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;_d.style.left=mx+'px';_d.style.top=my+'px';});
+(function lp(){lx+=(mx-lx)*.1;ly+=(my-ly)*.1;_r.style.left=lx+'px';_r.style.top=ly+'px';requestAnimationFrame(lp);})();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{_d.style.transform='translate(-50%,-50%) scale(3.5)';_d.style.opacity='.3';_r.style.width='60px';_r.style.height='60px';_r.style.borderColor='rgba(232,86,10,.8)';});
+  el.addEventListener('mouseleave',()=>{_d.style.transform='translate(-50%,-50%) scale(1)';_d.style.opacity='1';_r.style.width='34px';_r.style.height='34px';_r.style.borderColor='rgba(232,86,10,.4)';});
+});
+
+// ── MAGNETIC BUTTONS ──
+document.querySelectorAll('.btn-red,.nav-order,.btn-order').forEach(btn=>{
+  btn.style.transition='transform .1s ease';
+  btn.addEventListener('mousemove',function(e){
+    const r=this.getBoundingClientRect();
+    const x=(e.clientX-r.left-r.width/2)*.3;
+    const y=(e.clientY-r.top-r.height/2)*.3;
+    this.style.transform=`translate(${x}px,${y}px)`;
+  });
+  btn.addEventListener('mouseleave',function(){
+    this.style.transition='transform .5s cubic-bezier(.34,1.56,.64,1)';
+    this.style.transform='translate(0,0)';
+    setTimeout(()=>this.style.transition='transform .1s ease',500);
+  });
+});
+
+// ── HERO PARALLAX ──
+const _hero=document.querySelector('.hero');
+if(_hero){
+  _hero.addEventListener('mousemove',function(e){
+    const r=this.getBoundingClientRect();
+    const px=(e.clientX-r.left)/r.width-.5;
+    const py=(e.clientY-r.top)/r.height-.5;
+    const bt=document.querySelector('.hero-big-type');
+    if(bt){bt.style.transform=`translateY(-58%) translate(${px*60}px,${py*25}px)`;bt.style.transition='transform .05s linear';}
+    document.querySelectorAll('.hero-eyebrow,.hero-h1').forEach((el,i)=>{
+      el.style.transform=`translate(${px*(i+1)*-9}px,${py*(i+1)*-6}px)`;
+      el.style.transition='transform .05s linear';
+    });
+    document.querySelectorAll('.hero-cta-row,.hero-stats').forEach((el,i)=>{
+      el.style.transform=`translate(${px*(i+1)*6}px,${py*(i+1)*4}px)`;
+      el.style.transition='transform .05s linear';
+    });
+  });
+  _hero.addEventListener('mouseleave',function(){
+    const bt=document.querySelector('.hero-big-type');
+    if(bt){bt.style.transition='transform .8s ease';bt.style.transform='translateY(-58%)';}
+    document.querySelectorAll('.hero-eyebrow,.hero-h1,.hero-cta-row,.hero-stats').forEach(el=>{
+      el.style.transition='transform .8s ease';el.style.transform='';
+    });
+  });
+}
+
+// ── CARD 3D TILT ──
+document.querySelectorAll('.sauce-item,.pay-item,.hs').forEach(card=>{
+  card.addEventListener('mousemove',function(e){
+    const r=this.getBoundingClientRect();
+    const x=(e.clientX-r.left)/r.width-.5;
+    const y=(e.clientY-r.top)/r.height-.5;
+    this.style.transform=`perspective(800px) rotateY(${x*14}deg) rotateX(${-y*14}deg) scale(1.04) translateZ(14px)`;
+    this.style.transition='transform .05s linear';
+  });
+  card.addEventListener('mouseleave',function(){
+    this.style.transition='transform .6s cubic-bezier(.34,1.56,.64,1)';
+    this.style.transform='';
+  });
+});
+
+// ── MENU ROW HIGHLIGHT + shake on hover ──
+document.querySelectorAll('.menu-row').forEach(row=>{
+  row.addEventListener('mouseenter',function(){
+    this.style.transition='background .2s,transform .3s cubic-bezier(.34,1.56,.64,1)';
+    this.style.transform='translateX(6px)';
+  });
+  row.addEventListener('mouseleave',function(){
+    this.style.transform='translateX(0)';
+  });
+});
+
+// ── SPOTLIGHT (fire glow) ──
+const _sp=document.createElement('div');
+_sp.style.cssText='position:fixed;pointer-events:none;z-index:1;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(232,86,10,.07) 0%,transparent 65%);transform:translate(-50%,-50%);left:-400px;top:-400px;transition:left .1s,top .1s;';
+document.body.appendChild(_sp);
+document.addEventListener('mousemove',e=>{_sp.style.left=e.clientX+'px';_sp.style.top=e.clientY+'px';});
 </script>
 </body>
 </html>
